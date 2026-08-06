@@ -31,12 +31,10 @@ custom_fields_update_request = CustomFieldsUpdateRequest(
     custom_fields=[
         None,
         CustomFields(
-            key=None,
-            value=None
+            key=None
         ),
         CustomFields(
-            key=None,
-            value=None
+            key=None
         )
     ],
     custom_fields_to_update=[

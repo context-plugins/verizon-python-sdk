@@ -43,12 +43,10 @@ move_device_request = MoveDeviceRequest(
     custom_fields=[
         None,
         CustomFields(
-            key=None,
-            value=None
+            key=None
         ),
         CustomFields(
-            key=None,
-            value=None
+            key=None
         )
     ],
     devices=[
