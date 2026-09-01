@@ -1,0 +1,16 @@
+from enum import Enum
+from typing import Annotated, TypeAlias
+
+from ...core import open_enum_validator
+
+
+class Type13(str, Enum):
+    """Indicates the type of snow."""
+
+    PACKED = "packed"
+    LOOSE = "loose"
+
+    __str__ = str.__str__
+
+
+Type13OrStr: TypeAlias = Annotated[Type13 | str, open_enum_validator(Type13)]

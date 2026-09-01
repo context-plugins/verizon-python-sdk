@@ -1,7 +1,7 @@
 [project]
-name = "api-endpoints-for-5-g-business-internet-5-g-bi"
-version = "1.0.0"
-description = "These API endpoints are for Verizon 5G Business Internet."
+name = "verizon"
+version = "v1.0"
+description = "\"The Connection Planner is a service that provides devices windows to connect to their backend APIs. The service validates device access permissions and processes valid devices asynchronously. For each batch, it retrieves device connectivity windows from the RAN KPI Data Application, and sends callbacks back to customers via UWS-Callback for both successful and failed device requests.\""
 maintainers = [
     { name = "APIMatic", email = "support@apimatic.io" },
 ]
@@ -35,6 +35,10 @@ classifiers = [
     "Topic :: Internet :: WWW/HTTP",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
+
+# Must stay below every bare [project] key -- a sub-table header captures whatever follows it.
+[project.urls]
+Documentation = "https://thingspace.verizon.com/documentation/apis/connectivity-management/working-with-verizon/about-callback-services/best-practices.html"
 
 [dependency-groups]
 dev = [
@@ -74,7 +78,7 @@ ignore = [
 
 [tool.mypy]
 python_version = "3.10"         # the supported floor, not whichever interpreter is local
-files = ["api_endpoints_for_5_g_business_internet_5_g_bi"]
+files = ["verizon"]
 strict = true
 warn_unreachable = true
 enable_error_code = ["redundant-expr", "truthy-bool", "ignore-without-code", "possibly-undefined"]

@@ -1,15 +1,15 @@
-# API Endpoints for 5G Business Internet (5G BI) SDK
+# Verizon SDK
 
 [![Built with APIMatic][apimatic-badge]][apimatic-url] [![License: MIT][license-badge]][license-url] [![Python 3.10+][python-badge]][python-url]
 
-The API Endpoints for 5G Business Internet (5G BI) SDK for Python provides access to the API Endpoints for 5G Business Internet (5G BI) REST APIs from Python applications.
+The Verizon SDK for Python provides access to the [Verizon REST APIs](https://thingspace.verizon.com/documentation/apis/connectivity-management/working-with-verizon/about-callback-services/best-practices.html) from Python applications.
 
 > [!TIP]
 > **Looking for a specific signature, model, enum, or error type?** This SDK ships a generated
 > **[SDK map](sdk-map.md)** -- a lookup index of the SDK's entire Python surface. Consult it before
 > scanning the source tree; details under [SDK map](#sdk-map).
 
-These API endpoints are for Verizon 5G Business Internet.
+"The Connection Planner is a service that provides devices windows to connect to their backend APIs. The service validates device access permissions and processes valid devices asynchronously. For each batch, it retrieves device connectivity windows from the RAN KPI Data Application, and sends callbacks back to customers via UWS-Callback for both successful and failed device requests."
 
 ---
 
@@ -18,15 +18,15 @@ These API endpoints are for Verizon 5G Business Internet.
 Install the Python SDK from PyPI, with whichever package manager your project uses:
 
 ```bash
-pip install api-endpoints-for-5-g-business-internet-5-g-bi
+pip install verizon
 ```
 
 ```bash
-uv add api-endpoints-for-5-g-business-internet-5-g-bi
+uv add verizon
 ```
 
 ```bash
-poetry add api-endpoints-for-5-g-business-internet-5-g-bi
+poetry add verizon
 ```
 
 ---
@@ -35,15 +35,17 @@ poetry add api-endpoints-for-5-g-business-internet-5-g-bi
 
 ### Synchronous client
 
-Construct `ApiEndpointsFor5GBusinessInternet5GBiClient` with keyword arguments, and call `close()` when you are done. Every argument is optional; the full list is in the [SDK map](sdk-map.md).
+Construct `VerizonClient` with keyword arguments, and call `close()` when you are done. Every argument is optional; the full list is in the [SDK map](sdk-map.md).
 
 ```python
-from api_endpoints_for_5_g_business_internet_5_g_bi import ApiEndpointsFor5GBusinessInternet5GBiClient
-from api_endpoints_for_5_g_business_internet_5_g_bi.core import ClientCredentials
+from verizon import VerizonClient
+from verizon.core import ClientCredentials
 
-client = ApiEndpointsFor5GBusinessInternet5GBiClient(
+client = VerizonClient(
     thingspace_oauth=ClientCredentials(client_id="YOUR_CLIENT_ID", client_secret="YOUR_CLIENT_SECRET"),
-    vz_m2m_session_token="YOUR_API_KEY",
+    vz_m2_m_token="YOUR_API_KEY",
+    session_token="YOUR_API_KEY",
+    thingspace_oauth1=ClientCredentials(client_id="YOUR_CLIENT_ID", client_secret="YOUR_CLIENT_SECRET"),
     environment="production",
 )
 
@@ -52,27 +54,29 @@ client = ApiEndpointsFor5GBusinessInternet5GBiClient(
 client.close()
 ```
 
-Alternatively, scope it -- `with ApiEndpointsFor5GBusinessInternet5GBiClient(...) as client:` closes the pool on exit; see [Best Practices](#best-practices).
+Alternatively, scope it -- `with VerizonClient(...) as client:` closes the pool on exit; see [Best Practices](#best-practices).
 
-`Client` is exported as an alias of `ApiEndpointsFor5GBusinessInternet5GBiClient`, so `from api_endpoints_for_5_g_business_internet_5_g_bi import Client` also works.
+`Client` is exported as an alias of `VerizonClient`, so `from verizon import Client` also works.
 
 The SDK accepts every model-typed input in two interchangeable spellings, both type-checked: the typed model, or a plain dict with the same keys -- the `OrDict` and `Model | ModelDict` unions in the [SDK map](sdk-map.md). Pick whichever suits the call site: the dict form needs no import, while the model form adds a keyword-checked constructor and editor completion.
 
 ### Asynchronous client
 
-`AsyncApiEndpointsFor5GBusinessInternet5GBiClient` mirrors `ApiEndpointsFor5GBusinessInternet5GBiClient` with **identical method names**, and every endpoint method is a coroutine. It takes the same arguments, with some differences -- for example, the transport argument is `custom_async_http_client`.
+`AsyncVerizonClient` mirrors `VerizonClient` with **identical method names**, and every endpoint method is a coroutine. It takes the same arguments, with some differences -- for example, the transport argument is `custom_async_http_client`.
 
 ```python
 from asyncio import run
 
-from api_endpoints_for_5_g_business_internet_5_g_bi import AsyncApiEndpointsFor5GBusinessInternet5GBiClient
-from api_endpoints_for_5_g_business_internet_5_g_bi.core import ClientCredentials
+from verizon import AsyncVerizonClient
+from verizon.core import ClientCredentials
 
 
 async def main() -> None:
-    client = AsyncApiEndpointsFor5GBusinessInternet5GBiClient(
+    client = AsyncVerizonClient(
         thingspace_oauth=ClientCredentials(client_id="YOUR_CLIENT_ID", client_secret="YOUR_CLIENT_SECRET"),
-        vz_m2m_session_token="YOUR_API_KEY",
+        vz_m2_m_token="YOUR_API_KEY",
+        session_token="YOUR_API_KEY",
+        thingspace_oauth1=ClientCredentials(client_id="YOUR_CLIENT_ID", client_secret="YOUR_CLIENT_SECRET"),
         environment="production",
     )
     # TODO: call endpoints here, awaiting each -- see api-reference.md
@@ -82,7 +86,7 @@ async def main() -> None:
 run(main())
 ```
 
-Alternatively, scope it -- `async with AsyncApiEndpointsFor5GBusinessInternet5GBiClient(...) as client:` closes the pool on exit. Only the async spelling is `aclose`, matching httpx; see [Best Practices](#best-practices).
+Alternatively, scope it -- `async with AsyncVerizonClient(...) as client:` closes the pool on exit. Only the async spelling is `aclose`, matching httpx; see [Best Practices](#best-practices).
 
 `AsyncClient` is the exported alias. Each client accepts **only** its own transport argument; passing the other's is a `TypeError` at runtime and an error under mypy.
 
@@ -97,7 +101,7 @@ Two generated references cover the SDK; each answers a different question:
 | **[API Reference](api-reference.md)** | Usage guidance for a single **parsed** operation: `client.<group>.<operation>(...)` returns the typed payload and raises `ApiError` on any non-2xx, with `.error` the typed error body, or `RawError` for a status the operation does not document. |
 | **[Raw API Reference](raw-api-reference.md)** | The same for the **raw** variant: `client.<group>.with_raw_response.<operation>(...)` returns `ApiResult[T, E]` and never raises for an API error. |
 
-Both API references carry every one of the 3 operations, with a sync and an async sample and a parameter table each.
+Both API references carry every one of the 314 operations, with a sync and an async sample and a parameter table each.
 
 ## SDK map
 
@@ -108,11 +112,11 @@ Consult the map before scanning or grepping the source: it answers call-level co
 ## Best Practices
 
 > [!TIP]
-> Use a **single `ApiEndpointsFor5GBusinessInternet5GBiClient` instance** for the lifetime of your application and reuse it across
+> Use a **single `VerizonClient` instance** for the lifetime of your application and reuse it across
 > all requests. Each instance owns its own connection pool, so an instance per request forfeits
 > connection reuse and leaks pools that are never closed.
 
-Match the disposal to the client's lifetime: an application-lifetime client is closed once at shutdown with `close()` / `aclose()`; where the lifetime fits a block, `with ApiEndpointsFor5GBusinessInternet5GBiClient() as client:` / `async with AsyncApiEndpointsFor5GBusinessInternet5GBiClient() as client:` releases it automatically. Both are idempotent, but a closed client is not reusable: the next call raises. The client closes **whatever transport it holds**, including one you supplied via `custom_http_client` / `custom_async_http_client`; if you intend to reuse your own transport across clients, don't hand its lifetime to a `with` block.
+Match the disposal to the client's lifetime: an application-lifetime client is closed once at shutdown with `close()` / `aclose()`; where the lifetime fits a block, `with VerizonClient() as client:` / `async with AsyncVerizonClient() as client:` releases it automatically. Both are idempotent, but a closed client is not reusable: the next call raises. The client closes **whatever transport it holds**, including one you supplied via `custom_http_client` / `custom_async_http_client`; if you intend to reuse your own transport across clients, don't hand its lifetime to a `with` block.
 
 ## License
 
