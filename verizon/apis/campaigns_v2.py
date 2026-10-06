@@ -11,6 +11,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -59,7 +60,8 @@ class CampaignsV2:
         Args:
             account: Account identifier.
             campaign_id: Unique identifier of campaign.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Return cancellation status.
@@ -76,7 +78,8 @@ class CampaignsV2:
         Args:
             account: Account identifier.
             campaign_id: Software upgrade identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Return software upgrade information.
@@ -94,7 +97,8 @@ class CampaignsV2:
 
         Args:
             account: Account identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Return software upgrade information.
@@ -117,7 +121,8 @@ class CampaignsV2:
         Args:
             acc: Account identifier.
             body: Device logging information.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful responses.
@@ -139,7 +144,8 @@ class CampaignsV2:
         Args:
             acc: Account identifier.
             body: Device logging information.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful responses.
@@ -159,7 +165,8 @@ class CampaignsV2:
         Args:
             account: Account identifier.
             campaign_id: Software upgrade information.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Updated campaign information.
@@ -178,7 +185,8 @@ class CampaignsV2:
         Args:
             account: Account identifier.
             campaign_id: Software upgrade information.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Result of adding or removing devices to existing software upgrade information.
@@ -207,7 +215,8 @@ class AsyncCampaignsV2:
         Args:
             account: Account identifier.
             campaign_id: Unique identifier of campaign.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Return cancellation status.
@@ -226,7 +235,8 @@ class AsyncCampaignsV2:
         Args:
             account: Account identifier.
             campaign_id: Software upgrade identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Return software upgrade information.
@@ -246,7 +256,8 @@ class AsyncCampaignsV2:
 
         Args:
             account: Account identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Return software upgrade information.
@@ -269,7 +280,8 @@ class AsyncCampaignsV2:
         Args:
             acc: Account identifier.
             body: Device logging information.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful responses.
@@ -293,7 +305,8 @@ class AsyncCampaignsV2:
         Args:
             acc: Account identifier.
             body: Device logging information.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful responses.
@@ -313,7 +326,8 @@ class AsyncCampaignsV2:
         Args:
             account: Account identifier.
             campaign_id: Software upgrade information.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Updated campaign information.
@@ -332,7 +346,8 @@ class AsyncCampaignsV2:
         Args:
             account: Account identifier.
             campaign_id: Software upgrade information.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Result of adding or removing devices to existing software upgrade information.
@@ -360,7 +375,8 @@ class CampaignsV2WithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchem
         Args:
             account: Account identifier.
             campaign_id: Unique identifier of campaign.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -383,7 +399,8 @@ class CampaignsV2WithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchem
         Args:
             account: Account identifier.
             campaign_id: Software upgrade identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -404,7 +421,8 @@ class CampaignsV2WithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchem
 
         Args:
             account: Account identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -431,7 +449,8 @@ class CampaignsV2WithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchem
         Args:
             acc: Account identifier.
             body: Device logging information.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -460,7 +479,8 @@ class CampaignsV2WithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchem
         Args:
             acc: Account identifier.
             body: Device logging information.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -485,7 +505,8 @@ class CampaignsV2WithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchem
         Args:
             account: Account identifier.
             campaign_id: Software upgrade information.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -508,7 +529,8 @@ class CampaignsV2WithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchem
         Args:
             account: Account identifier.
             campaign_id: Software upgrade information.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -534,7 +556,8 @@ class AsyncCampaignsV2WithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
         Args:
             account: Account identifier.
             campaign_id: Unique identifier of campaign.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -544,7 +567,7 @@ class AsyncCampaignsV2WithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
             path_params=[param[str]("account", account), param[str]("campaignId", campaign_id)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[FotaV2SuccessResult],
+            decoder=async_json_decoder[FotaV2SuccessResult],
             error_mapper=cancel_campaign_error_mapper,
             request_options=request_options,
         )
@@ -557,7 +580,8 @@ class AsyncCampaignsV2WithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
         Args:
             account: Account identifier.
             campaign_id: Software upgrade identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -566,7 +590,7 @@ class AsyncCampaignsV2WithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
             url_template=self._server.software_management_v2("/campaigns/{account}/{campaignId}"),
             path_params=[param[str]("account", account), param[str]("campaignId", campaign_id)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[CampaignSoftware],
+            decoder=async_json_decoder[CampaignSoftware],
             error_mapper=get_campaign_information_error_mapper,
             request_options=request_options,
         )
@@ -578,7 +602,8 @@ class AsyncCampaignsV2WithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
 
         Args:
             account: Account identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -588,7 +613,7 @@ class AsyncCampaignsV2WithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
             path_params=[param[str]("account", account)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[CampaignSoftware],
+            decoder=async_json_decoder[CampaignSoftware],
             error_mapper=schedule_campaign_firmware_upgrade_error_mapper,
             request_options=request_options,
         )
@@ -605,7 +630,8 @@ class AsyncCampaignsV2WithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
         Args:
             acc: Account identifier.
             body: Device logging information.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -616,7 +642,7 @@ class AsyncCampaignsV2WithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[UploadAndScheduleFileRequest | UploadAndScheduleFileRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[UploadAndScheduleFileResponse],
+            decoder=async_json_decoder[UploadAndScheduleFileResponse],
             error_mapper=schedule_file_upgrade_error_mapper,
             request_options=request_options,
         )
@@ -634,7 +660,8 @@ class AsyncCampaignsV2WithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
         Args:
             acc: Account identifier.
             body: Device logging information.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -645,7 +672,7 @@ class AsyncCampaignsV2WithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[SchedulesSoftwareUpgradeRequest | SchedulesSoftwareUpgradeRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[UploadAndScheduleFileResponse],
+            decoder=async_json_decoder[UploadAndScheduleFileResponse],
             error_mapper=schedule_swupgrade_http_devices_error_mapper,
             request_options=request_options,
         )
@@ -659,7 +686,8 @@ class AsyncCampaignsV2WithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
         Args:
             account: Account identifier.
             campaign_id: Software upgrade information.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -669,7 +697,7 @@ class AsyncCampaignsV2WithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
             path_params=[param[str]("account", account), param[str]("campaignId", campaign_id)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[CampaignSoftware],
+            decoder=async_json_decoder[CampaignSoftware],
             error_mapper=update_campaign_dates_error_mapper,
             request_options=request_options,
         )
@@ -682,7 +710,8 @@ class AsyncCampaignsV2WithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
         Args:
             account: Account identifier.
             campaign_id: Software upgrade information.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -692,7 +721,7 @@ class AsyncCampaignsV2WithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
             path_params=[param[str]("account", account), param[str]("campaignId", campaign_id)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[V2AddOrRemoveDeviceResult],
+            decoder=async_json_decoder[V2AddOrRemoveDeviceResult],
             error_mapper=update_campaign_firmware_devices_error_mapper,
             request_options=request_options,
         )

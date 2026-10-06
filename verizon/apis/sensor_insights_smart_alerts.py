@@ -11,6 +11,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -45,7 +46,8 @@ class SensorInsightsSmartAlerts:
 
         Args:
             body: Bulk update smart alerts
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -66,7 +68,8 @@ class SensorInsightsSmartAlerts:
 
         Args:
             body: Retrieve a smart alert
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -89,7 +92,8 @@ class SensorInsightsSmartAlerts:
 
         Args:
             body: Partially update a smart alert
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -118,7 +122,8 @@ class AsyncSensorInsightsSmartAlerts:
 
         Args:
             body: Bulk update smart alerts
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -141,7 +146,8 @@ class AsyncSensorInsightsSmartAlerts:
 
         Args:
             body: Retrieve a smart alert
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -166,7 +172,8 @@ class AsyncSensorInsightsSmartAlerts:
 
         Args:
             body: Partially update a smart alert
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -194,13 +201,14 @@ class SensorInsightsSmartAlertsWithRawResponse(SecuredRawResponse[RawClient, Ser
 
         Args:
             body: Bulk update smart alerts
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/smartAlerts/actions/bulkupdate"),
+            url_template=self._server.thingspace("/dm/v1/smartAlerts/actions/bulkupdate"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoBulkUpdate | DtoBulkUpdateDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -219,13 +227,14 @@ class SensorInsightsSmartAlertsWithRawResponse(SecuredRawResponse[RawClient, Ser
 
         Args:
             body: Retrieve a smart alert
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/smartAlerts/actions/query"),
+            url_template=self._server.thingspace("/dm/v1/smartAlerts/actions/query"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoListSmartAlertsRequest | DtoListSmartAlertsRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -244,13 +253,14 @@ class SensorInsightsSmartAlertsWithRawResponse(SecuredRawResponse[RawClient, Ser
 
         Args:
             body: Partially update a smart alert
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="PATCH",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/smartAlerts"),
+            url_template=self._server.thingspace("/dm/v1/smartAlerts"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoPatchSmartAlertRequest | DtoPatchSmartAlertRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -268,17 +278,18 @@ class AsyncSensorInsightsSmartAlertsWithRawResponse(SecuredRawResponse[AsyncRawC
 
         Args:
             body: Bulk update smart alerts
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/smartAlerts/actions/bulkupdate"),
+            url_template=self._server.thingspace("/dm/v1/smartAlerts/actions/bulkupdate"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoBulkUpdate | DtoBulkUpdateDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[UserSmartAlert],
+            decoder=async_json_decoder[UserSmartAlert],
             error_mapper=sensor_insights_bulk_update_error_mapper,
             request_options=request_options,
         )
@@ -293,17 +304,18 @@ class AsyncSensorInsightsSmartAlertsWithRawResponse(SecuredRawResponse[AsyncRawC
 
         Args:
             body: Retrieve a smart alert
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/smartAlerts/actions/query"),
+            url_template=self._server.thingspace("/dm/v1/smartAlerts/actions/query"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoListSmartAlertsRequest | DtoListSmartAlertsRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[list[UserSmartAlert]],
+            decoder=async_json_decoder[list[UserSmartAlert]],
             error_mapper=sensor_insights_list_smart_alerts_request_error_mapper,
             request_options=request_options,
         )
@@ -318,17 +330,18 @@ class AsyncSensorInsightsSmartAlertsWithRawResponse(SecuredRawResponse[AsyncRawC
 
         Args:
             body: Partially update a smart alert
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="PATCH",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/smartAlerts"),
+            url_template=self._server.thingspace("/dm/v1/smartAlerts"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoPatchSmartAlertRequest | DtoPatchSmartAlertRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[UserSmartAlert],
+            decoder=async_json_decoder[UserSmartAlert],
             error_mapper=sensor_insights_patch_smart_alert_request_error_mapper,
             request_options=request_options,
         )

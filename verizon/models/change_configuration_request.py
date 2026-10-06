@@ -22,6 +22,6 @@ class ChangeConfigurationRequest(SdkBaseModel):
 
 
 class ChangeConfigurationRequestDict(TypedDict):
-    accountidentifier: NotRequired[AccountIdentifier | AccountIdentifierDict]
-    resourceidentifier: NotRequired[ResourceIdentifier | ResourceIdentifierDict]
-    configuration: NotRequired[Configuration | ConfigurationDict]
+    accountidentifier: NotRequired[AccountIdentifierDict]
+    resourceidentifier: NotRequired[ResourceIdentifierDict]
+    configuration: NotRequired[ConfigurationDict]

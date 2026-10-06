@@ -11,6 +11,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -44,7 +45,8 @@ class SimSecureForIoTLicenses:
         Args:
             body: Request to assign license to devices.
             x_request_id: Transaction Id.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Success response.
@@ -63,7 +65,8 @@ class SimSecureForIoTLicenses:
 
         Args:
             x_request_id: Transaction Id.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Success response.
@@ -96,7 +99,8 @@ class AsyncSimSecureForIoTLicenses:
         Args:
             body: Request to assign license to devices.
             x_request_id: Transaction Id.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Success response.
@@ -117,7 +121,8 @@ class AsyncSimSecureForIoTLicenses:
 
         Args:
             x_request_id: Transaction Id.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Success response.
@@ -147,7 +152,8 @@ class SimSecureForIoTLicensesWithRawResponse(SecuredRawResponse[RawClient, Serve
         Args:
             body: Request to assign license to devices.
             x_request_id: Transaction Id.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -169,7 +175,8 @@ class SimSecureForIoTLicensesWithRawResponse(SecuredRawResponse[RawClient, Serve
 
         Args:
             x_request_id: Transaction Id.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -197,7 +204,8 @@ class AsyncSimSecureForIoTLicensesWithRawResponse(SecuredRawResponse[AsyncRawCli
         Args:
             body: Request to assign license to devices.
             x_request_id: Transaction Id.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -207,7 +215,7 @@ class AsyncSimSecureForIoTLicensesWithRawResponse(SecuredRawResponse[AsyncRawCli
             headers=[param[str | None]("X-Request-ID", x_request_id), param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[AssignLicenseRequest | AssignLicenseRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[SecuritySuccessResult],
+            decoder=async_json_decoder[SecuritySuccessResult],
             error_mapper=assign_license_to_devices_error_mapper,
             request_options=request_options,
         )
@@ -219,7 +227,8 @@ class AsyncSimSecureForIoTLicensesWithRawResponse(SecuredRawResponse[AsyncRawCli
 
         Args:
             x_request_id: Transaction Id.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -228,7 +237,7 @@ class AsyncSimSecureForIoTLicensesWithRawResponse(SecuredRawResponse[AsyncRawCli
             url_template=self._server.m2_m("/v1/devices/license/actions/assign"),
             headers=[param[str]("X-Request-ID", x_request_id), param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[SecuritySuccessResult],
+            decoder=async_json_decoder[SecuritySuccessResult],
             error_mapper=unassign_license_to_devices_error_mapper,
             request_options=request_options,
         )

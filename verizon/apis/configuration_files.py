@@ -7,10 +7,14 @@ from ..core import (
     AllSchemes,
     ApiResult,
     AsyncAllSchemes,
+    AsyncFileInput,
     AsyncRawClient,
+    FileInput,
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
+    file_part,
     json_decoder,
     multipart_body,
     param,
@@ -34,7 +38,8 @@ class ConfigurationFiles:
         Args:
             acc: Account identifier.
             distribution_type: Filter the distributionType to only retrieve files for a specific distribution type.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful responses.
@@ -49,11 +54,11 @@ class ConfigurationFiles:
         self,
         acc: str,
         *,
+        fileupload: FileInput | None = None,
         file_version: str | None = None,
         make: str | None = None,
         model: str | None = None,
         local_target_path: str | None = None,
-        fileupload: bytes | None = None,
         request_options: RequestOptionsOrDict | None = None,
     ) -> UploadConfigurationFilesResponse:
         """Uploads a configuration/supplementary file for an account. ThingSpace generates a fileName after the upload
@@ -61,12 +66,13 @@ class ConfigurationFiles:
 
         Args:
             acc: Account identifier.
+            fileupload: The file to upload.
             file_version: Version of the file.
             make: The software-applicable device make.
             model: The software-applicable device model.
             local_target_path: Local target path on the device.
-            fileupload: The file to upload.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful responses.
@@ -75,11 +81,11 @@ class ConfigurationFiles:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
         return self._with_raw_response.upload_config_file(
             acc,
+            fileupload=fileupload,
             file_version=file_version,
             make=make,
             model=model,
             local_target_path=local_target_path,
-            fileupload=fileupload,
             request_options=request_options,
         ).unwrap()
 
@@ -100,7 +106,8 @@ class AsyncConfigurationFiles:
         Args:
             acc: Account identifier.
             distribution_type: Filter the distributionType to only retrieve files for a specific distribution type.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful responses.
@@ -115,11 +122,11 @@ class AsyncConfigurationFiles:
         self,
         acc: str,
         *,
+        fileupload: AsyncFileInput | None = None,
         file_version: str | None = None,
         make: str | None = None,
         model: str | None = None,
         local_target_path: str | None = None,
-        fileupload: bytes | None = None,
         request_options: RequestOptionsOrDict | None = None,
     ) -> UploadConfigurationFilesResponse:
         """Uploads a configuration/supplementary file for an account. ThingSpace generates a fileName after the upload
@@ -127,12 +134,13 @@ class AsyncConfigurationFiles:
 
         Args:
             acc: Account identifier.
+            fileupload: The file to upload.
             file_version: Version of the file.
             make: The software-applicable device make.
             model: The software-applicable device model.
             local_target_path: Local target path on the device.
-            fileupload: The file to upload.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful responses.
@@ -142,11 +150,11 @@ class AsyncConfigurationFiles:
         return (
             await self._with_raw_response.upload_config_file(
                 acc,
+                fileupload=fileupload,
                 file_version=file_version,
                 make=make,
                 model=model,
                 local_target_path=local_target_path,
-                fileupload=fileupload,
                 request_options=request_options,
             )
         ).unwrap()
@@ -165,7 +173,8 @@ class ConfigurationFilesWithRawResponse(SecuredRawResponse[RawClient, Server, Au
         Args:
             acc: Account identifier.
             distribution_type: Filter the distributionType to only retrieve files for a specific distribution type.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -184,11 +193,11 @@ class ConfigurationFilesWithRawResponse(SecuredRawResponse[RawClient, Server, Au
         self,
         acc: str,
         *,
+        fileupload: FileInput | None = None,
         file_version: str | None = None,
         make: str | None = None,
         model: str | None = None,
         local_target_path: str | None = None,
-        fileupload: bytes | None = None,
         request_options: RequestOptionsOrDict | None = None,
     ) -> ApiResult[UploadConfigurationFilesResponse, UploadConfigFileErrorBody]:
         """Uploads a configuration/supplementary file for an account. ThingSpace generates a fileName after the upload
@@ -196,12 +205,13 @@ class ConfigurationFilesWithRawResponse(SecuredRawResponse[RawClient, Server, Au
 
         Args:
             acc: Account identifier.
+            fileupload: The file to upload.
             file_version: Version of the file.
             make: The software-applicable device make.
             model: The software-applicable device model.
             local_target_path: Local target path on the device.
-            fileupload: The file to upload.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -211,13 +221,11 @@ class ConfigurationFilesWithRawResponse(SecuredRawResponse[RawClient, Server, Au
             path_params=[param[str]("acc", acc)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=multipart_body(
-                [
-                    param[str | None]("fileVersion", file_version),
-                    param[str | None]("make", make),
-                    param[str | None]("model", model),
-                    param[str | None]("localTargetPath", local_target_path),
-                ],
-                {"fileupload": fileupload},
+                file_part("fileupload", fileupload) if fileupload is not None else None,
+                param[str | None]("fileVersion", file_version),
+                param[str | None]("make", make),
+                param[str | None]("model", model),
+                param[str | None]("localTargetPath", local_target_path),
             ),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
             decoder=json_decoder[UploadConfigurationFilesResponse],
@@ -235,7 +243,8 @@ class AsyncConfigurationFilesWithRawResponse(SecuredRawResponse[AsyncRawClient, 
         Args:
             acc: Account identifier.
             distribution_type: Filter the distributionType to only retrieve files for a specific distribution type.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -245,7 +254,7 @@ class AsyncConfigurationFilesWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             path_params=[param[str]("acc", acc)],
             query_params=[param[str]("distributionType", distribution_type)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[RetrievesAvailableFilesResponseList],
+            decoder=async_json_decoder[RetrievesAvailableFilesResponseList],
             error_mapper=get_list_of_files_error_mapper,
             request_options=request_options,
         )
@@ -254,11 +263,11 @@ class AsyncConfigurationFilesWithRawResponse(SecuredRawResponse[AsyncRawClient, 
         self,
         acc: str,
         *,
+        fileupload: AsyncFileInput | None = None,
         file_version: str | None = None,
         make: str | None = None,
         model: str | None = None,
         local_target_path: str | None = None,
-        fileupload: bytes | None = None,
         request_options: RequestOptionsOrDict | None = None,
     ) -> ApiResult[UploadConfigurationFilesResponse, UploadConfigFileErrorBody]:
         """Uploads a configuration/supplementary file for an account. ThingSpace generates a fileName after the upload
@@ -266,12 +275,13 @@ class AsyncConfigurationFilesWithRawResponse(SecuredRawResponse[AsyncRawClient, 
 
         Args:
             acc: Account identifier.
+            fileupload: The file to upload.
             file_version: Version of the file.
             make: The software-applicable device make.
             model: The software-applicable device model.
             local_target_path: Local target path on the device.
-            fileupload: The file to upload.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -281,16 +291,14 @@ class AsyncConfigurationFilesWithRawResponse(SecuredRawResponse[AsyncRawClient, 
             path_params=[param[str]("acc", acc)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=multipart_body(
-                [
-                    param[str | None]("fileVersion", file_version),
-                    param[str | None]("make", make),
-                    param[str | None]("model", model),
-                    param[str | None]("localTargetPath", local_target_path),
-                ],
-                {"fileupload": fileupload},
+                file_part("fileupload", fileupload) if fileupload is not None else None,
+                param[str | None]("fileVersion", file_version),
+                param[str | None]("make", make),
+                param[str | None]("model", model),
+                param[str | None]("localTargetPath", local_target_path),
             ),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[UploadConfigurationFilesResponse],
+            decoder=async_json_decoder[UploadConfigurationFilesResponse],
             error_mapper=upload_config_file_error_mapper,
             request_options=request_options,
         )

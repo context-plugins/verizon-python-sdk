@@ -4,11 +4,11 @@ from pydantic import Field
 from typing_extensions import NotRequired, TypedDict
 
 from ..core import UNSET, Optional, SdkBaseModel
-from .extended_attribute import ExtendedAttribute, ExtendedAttributeDict
 from .gbi_carrier_information5 import GbiCarrierInformation5, GbiCarrierInformation5Dict
 from .group_name import GroupName, GroupNameDict
 from .unions.custom_field import CustomField, CustomFieldDict
 from .unions.device_id11 import DeviceId11, DeviceId11Dict
+from .unions.extended_attribute1 import ExtendedAttribute1, ExtendedAttribute1Dict
 
 
 class GbiaccountNameobject5(SdkBaseModel):
@@ -19,7 +19,7 @@ class GbiaccountNameobject5(SdkBaseModel):
     created_at: Optional[str] = Field(default=UNSET, alias="createdAt")
     custom_fields: Optional[list[CustomField]] = Field(default=UNSET, alias="customFields")
     device_ids: Optional[list[DeviceId11]] = Field(default=UNSET, alias="deviceIds")
-    extended_attributes: Optional[list[ExtendedAttribute]] = Field(default=UNSET, alias="extendedAttributes")
+    extended_attributes: Optional[list[ExtendedAttribute1]] = Field(default=UNSET, alias="extendedAttributes")
     group_names: Optional[list[GroupName]] = Field(default=UNSET, alias="groupNames")
     ip_address: Optional[str] = Field(default=UNSET, alias="ipAddress")
     last_activation_by: Optional[str] = Field(default=UNSET, alias="lastActivationBy")
@@ -29,13 +29,13 @@ class GbiaccountNameobject5(SdkBaseModel):
 class GbiaccountNameobject5Dict(TypedDict):
     account_name: NotRequired[str]
     billing_cycle_end_date: NotRequired[str]
-    carrier_information: NotRequired[list[GbiCarrierInformation5 | GbiCarrierInformation5Dict]]
+    carrier_information: NotRequired[list[GbiCarrierInformation5Dict]]
     connected: NotRequired[bool]
     created_at: NotRequired[str]
-    custom_fields: NotRequired[list[CustomField | CustomFieldDict]]
-    device_ids: NotRequired[list[DeviceId11 | DeviceId11Dict]]
-    extended_attributes: NotRequired[list[ExtendedAttribute | ExtendedAttributeDict]]
-    group_names: NotRequired[list[GroupName | GroupNameDict]]
+    custom_fields: NotRequired[list[CustomFieldDict]]
+    device_ids: NotRequired[list[DeviceId11Dict]]
+    extended_attributes: NotRequired[list[ExtendedAttribute1Dict]]
+    group_names: NotRequired[list[GroupNameDict]]
     ip_address: NotRequired[str]
     last_activation_by: NotRequired[str]
     last_activation_date: NotRequired[str]

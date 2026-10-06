@@ -55,7 +55,7 @@ class SearchDeviceResponseDict(TypedDict):
     action: NotRequired[str]
     createdon: NotRequired[str]
     deviceid: NotRequired[str]
-    fields: NotRequired[Fields2 | Fields2Dict]
+    fields: NotRequired[Fields2Dict]
     id: NotRequired[str]
     kind: NotRequired[str]
     lastupdated: NotRequired[str]

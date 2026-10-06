@@ -15,5 +15,5 @@ class AccountLabels(SdkBaseModel):
 
 
 class AccountLabelsDict(TypedDict):
-    devices: list[DeviceList | DeviceListDict]
-    label: NotRequired[list[DeviceLabels | DeviceLabelsDict]]
+    devices: list[DeviceListDict]
+    label: NotRequired[list[DeviceLabelsDict]]

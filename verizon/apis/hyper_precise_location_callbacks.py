@@ -11,6 +11,8 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
@@ -41,7 +43,8 @@ class HyperPreciseLocationCallbacks:
             account_number: The numeric ID of the account and must include leading zeroes. This value is indentical to
                 ``accountName``.
             service: The name of the callback service that will be deleted.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful response (no content).
@@ -62,7 +65,8 @@ class HyperPreciseLocationCallbacks:
         Args:
             account_number: The numeric ID of the account and must include leading zeroes. This value is indentical to
                 ``accountName``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A successful response will display the billing account number (``accountName``), the name of the callback
@@ -90,7 +94,8 @@ class HyperPreciseLocationCallbacks:
         Args:
             account_number: A unique identifier for an account.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A successful response will display the billing account number (``accountName``), the name of the callback
@@ -122,7 +127,8 @@ class AsyncHyperPreciseLocationCallbacks:
             account_number: The numeric ID of the account and must include leading zeroes. This value is indentical to
                 ``accountName``.
             service: The name of the callback service that will be deleted.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful response (no content).
@@ -143,7 +149,8 @@ class AsyncHyperPreciseLocationCallbacks:
         Args:
             account_number: The numeric ID of the account and must include leading zeroes. This value is indentical to
                 ``accountName``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A successful response will display the billing account number (``accountName``), the name of the callback
@@ -171,7 +178,8 @@ class AsyncHyperPreciseLocationCallbacks:
         Args:
             account_number: A unique identifier for an account.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A successful response will display the billing account number (``accountName``), the name of the callback
@@ -200,7 +208,8 @@ class HyperPreciseLocationCallbacksWithRawResponse(SecuredRawResponse[RawClient,
             account_number: The numeric ID of the account and must include leading zeroes. This value is indentical to
                 ``accountName``.
             service: The name of the callback service that will be deleted.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -223,7 +232,8 @@ class HyperPreciseLocationCallbacksWithRawResponse(SecuredRawResponse[RawClient,
         Args:
             account_number: The numeric ID of the account and must include leading zeroes. This value is indentical to
                 ``accountName``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -251,7 +261,8 @@ class HyperPreciseLocationCallbacksWithRawResponse(SecuredRawResponse[RawClient,
         Args:
             account_number: A unique identifier for an account.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -278,7 +289,8 @@ class AsyncHyperPreciseLocationCallbacksWithRawResponse(SecuredRawResponse[Async
             account_number: The numeric ID of the account and must include leading zeroes. This value is indentical to
                 ``accountName``.
             service: The name of the callback service that will be deleted.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -288,7 +300,7 @@ class AsyncHyperPreciseLocationCallbacksWithRawResponse(SecuredRawResponse[Async
             query_params=[param[str]("accountNumber", account_number), param[str]("service", service)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=deregister_callback6_error_mapper,
             request_options=request_options,
         )
@@ -301,7 +313,8 @@ class AsyncHyperPreciseLocationCallbacksWithRawResponse(SecuredRawResponse[Async
         Args:
             account_number: The numeric ID of the account and must include leading zeroes. This value is indentical to
                 ``accountName``.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -310,7 +323,7 @@ class AsyncHyperPreciseLocationCallbacksWithRawResponse(SecuredRawResponse[Async
             url_template=self._server.hyper_precise_location("/callbacks"),
             query_params=[param[str]("accountNumber", account_number)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[list[CallbackCreated]],
+            decoder=async_json_decoder[list[CallbackCreated]],
             error_mapper=list_registered_callbacks6_error_mapper,
             request_options=request_options,
         )
@@ -329,7 +342,8 @@ class AsyncHyperPreciseLocationCallbacksWithRawResponse(SecuredRawResponse[Async
         Args:
             account_number: A unique identifier for an account.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -340,7 +354,7 @@ class AsyncHyperPreciseLocationCallbacksWithRawResponse(SecuredRawResponse[Async
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[HyperPreciseLocationCallback | HyperPreciseLocationCallbackDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[CallbackRegistered],
+            decoder=async_json_decoder[CallbackRegistered],
             error_mapper=register_callback6_error_mapper,
             request_options=request_options,
         )

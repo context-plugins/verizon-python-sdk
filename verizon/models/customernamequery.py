@@ -12,4 +12,4 @@ class Customernamequery(SdkBaseModel):
 
 
 class CustomernamequeryDict(TypedDict):
-    customer_name: NotRequired[list[CustomerName | CustomerNameDict]]
+    customer_name: NotRequired[list[CustomerNameDict]]

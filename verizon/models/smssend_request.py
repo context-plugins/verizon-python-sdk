@@ -41,9 +41,9 @@ class SmssendRequest(SdkBaseModel):
 class SmssendRequestDict(TypedDict):
     account_name: str
     sms_message: str
-    custom_fields: NotRequired[list[CustomFields | CustomFieldsDict]]
+    custom_fields: NotRequired[list[CustomFieldsDict]]
     data_encoding: NotRequired[str]
-    device_ids: NotRequired[list[DeviceId | DeviceIdDict]]
+    device_ids: NotRequired[list[DeviceIdDict]]
     group_name: NotRequired[str]
     service_plan: NotRequired[str]
     time_to_live: NotRequired[str]

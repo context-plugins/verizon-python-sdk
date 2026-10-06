@@ -10,7 +10,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `DELETE /m2m/v1/callbacks/{aname}/name/{sname}`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def deregister_callback(aname: str, sname: str, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `aname`, `sname`
 - **Params**: `aname` — path · `sname` — path
@@ -29,7 +29,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /m2m/v1/callbacks/{aname}`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def list_registered_callbacks(aname: str, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `aname`
 - **Params**: `aname` — path
@@ -48,7 +48,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `POST /m2m/v1/callbacks/{aname}`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def register_callback(aname: str, body: RegisterCallbackRequest | RegisterCallbackRequestDict, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `aname`, `body`
 - **Params**: `aname` — path · `body` — JSON body

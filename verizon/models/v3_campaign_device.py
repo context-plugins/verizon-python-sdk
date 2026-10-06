@@ -31,4 +31,4 @@ class V3CampaignDeviceDict(TypedDict):
     has_more_data: bool
     last_seen_device_id: NotRequired[str]
     max_page_size: int
-    device_list: list[V3DeviceStatus | V3DeviceStatusDict]
+    device_list: list[V3DeviceStatusDict]

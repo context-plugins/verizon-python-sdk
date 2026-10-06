@@ -19,4 +19,4 @@ class AccountLeadsResult(SdkBaseModel):
 
 class AccountLeadsResultDict(TypedDict):
     has_more_data: NotRequired[bool]
-    leads: NotRequired[list[AccountLead | AccountLeadDict]]
+    leads: NotRequired[list[AccountLeadDict]]

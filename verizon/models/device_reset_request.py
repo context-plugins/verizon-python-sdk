@@ -23,4 +23,4 @@ class DeviceResetRequest(SdkBaseModel):
 class DeviceResetRequestDict(TypedDict):
     account_name: NotRequired[str]
     action: NotRequired[str]
-    devices: NotRequired[list[Device | DeviceDict]]
+    devices: NotRequired[list[DeviceDict]]

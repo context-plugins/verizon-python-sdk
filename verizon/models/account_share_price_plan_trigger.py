@@ -23,7 +23,7 @@ class AccountSharePricePlanTrigger(SdkBaseModel):
 
 
 class AccountSharePricePlanTriggerDict(TypedDict):
-    account_share: NotRequired[AccountShareFilterCriteria | AccountShareFilterCriteriaDict]
-    condition: NotRequired[AccountSharePricePlanTriggerCondition | AccountSharePricePlanTriggerConditionDict]
+    account_share: NotRequired[AccountShareFilterCriteriaDict]
+    condition: NotRequired[AccountSharePricePlanTriggerConditionDict]
     change_plan: NotRequired[bool]
-    change_plan_details: NotRequired[ChangePlanDetails | ChangePlanDetailsDict]
+    change_plan_details: NotRequired[ChangePlanDetailsDict]

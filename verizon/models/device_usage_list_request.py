@@ -26,5 +26,5 @@ class DeviceUsageListRequest(SdkBaseModel):
 class DeviceUsageListRequestDict(TypedDict):
     earliest: str
     latest: str
-    device_id: NotRequired[DeviceId | DeviceIdDict]
-    label: NotRequired[Label | LabelDict]
+    device_id: NotRequired[DeviceIdDict]
+    label: NotRequired[LabelDict]

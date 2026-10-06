@@ -13,4 +13,4 @@ class Rateplan(SdkBaseModel):
 
 
 class RateplanDict(TypedDict):
-    rate_plan_group: NotRequired[list[RatePlanGroup | RatePlanGroupDict]]
+    rate_plan_group: NotRequired[list[RatePlanGroupDict]]

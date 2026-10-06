@@ -19,4 +19,4 @@ class HeadingItem(SdkBaseModel):
 
 
 class HeadingItemDict(TypedDict):
-    heading: HeadingRange | HeadingRangeDict | None
+    heading: HeadingRangeDict | None

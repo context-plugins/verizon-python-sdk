@@ -9,6 +9,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_decoder,
     param,
 )
@@ -39,7 +40,8 @@ class SoftwareManagementSubscriptionsV1:
             start_index: The zero-based number of the first record to return. Set startIndex=0 for the first request. If
                 there are more than 1,000 devices in the response, set startIndex=1000 for the second request, 2000 for
                 the third request, etc.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Account license information.
@@ -57,7 +59,8 @@ class SoftwareManagementSubscriptionsV1:
 
         Args:
             account: Account identifier in "##########-#####".
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Account subscription information.
@@ -87,7 +90,8 @@ class AsyncSoftwareManagementSubscriptionsV1:
             start_index: The zero-based number of the first record to return. Set startIndex=0 for the first request. If
                 there are more than 1,000 devices in the response, set startIndex=1000 for the second request, 2000 for
                 the third request, etc.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Account license information.
@@ -107,7 +111,8 @@ class AsyncSoftwareManagementSubscriptionsV1:
 
         Args:
             account: Account identifier in "##########-#####".
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Account subscription information.
@@ -134,7 +139,8 @@ class SoftwareManagementSubscriptionsV1WithRawResponse(SecuredRawResponse[RawCli
             start_index: The zero-based number of the first record to return. Set startIndex=0 for the first request. If
                 there are more than 1,000 devices in the response, set startIndex=1000 for the second request, 2000 for
                 the third request, etc.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -155,7 +161,8 @@ class SoftwareManagementSubscriptionsV1WithRawResponse(SecuredRawResponse[RawCli
 
         Args:
             account: Account identifier in "##########-#####".
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -183,7 +190,8 @@ class AsyncSoftwareManagementSubscriptionsV1WithRawResponse(
             start_index: The zero-based number of the first record to return. Set startIndex=0 for the first request. If
                 there are more than 1,000 devices in the response, set startIndex=1000 for the second request, 2000 for
                 the third request, etc.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -192,7 +200,7 @@ class AsyncSoftwareManagementSubscriptionsV1WithRawResponse(
             url_template=self._server.software_management_v1("/licenses/{account}/index/{startIndex}"),
             path_params=[param[str]("account", account), param[str]("startIndex", start_index)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[AccountLicenseInfo],
+            decoder=async_json_decoder[AccountLicenseInfo],
             error_mapper=get_account_license_status_error_mapper,
             request_options=request_options,
         )
@@ -204,7 +212,8 @@ class AsyncSoftwareManagementSubscriptionsV1WithRawResponse(
 
         Args:
             account: Account identifier in "##########-#####".
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -213,7 +222,7 @@ class AsyncSoftwareManagementSubscriptionsV1WithRawResponse(
             url_template=self._server.software_management_v1("/subscriptions/{account}"),
             path_params=[param[str]("account", account)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[V1AccountSubscription],
+            decoder=async_json_decoder[V1AccountSubscription],
             error_mapper=get_account_subscription_status_error_mapper,
             request_options=request_options,
         )

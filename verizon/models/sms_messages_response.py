@@ -13,5 +13,5 @@ class SmsMessagesResponse(SdkBaseModel):
 
 
 class SmsMessagesResponseDict(TypedDict):
-    messages: NotRequired[list[GiosmsMessage | GiosmsMessageDict]]
+    messages: NotRequired[list[GiosmsMessageDict]]
     has_more_data: NotRequired[bool]

@@ -12,4 +12,4 @@ class DescriptionOfRoadSurfaceSnow(SdkBaseModel):
 
 
 class DescriptionOfRoadSurfaceSnowDict(TypedDict):
-    snow: Snow | SnowDict
+    snow: SnowDict

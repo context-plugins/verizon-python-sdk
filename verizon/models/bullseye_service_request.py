@@ -18,5 +18,5 @@ class BullseyeServiceRequest(SdkBaseModel):
 
 
 class BullseyeServiceRequestDict(TypedDict):
-    device_list: list[DeviceServiceRequest | DeviceServiceRequestDict]
+    device_list: list[DeviceServiceRequestDict]
     account_number: str

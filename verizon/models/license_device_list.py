@@ -17,5 +17,5 @@ class LicenseDeviceList(SdkBaseModel):
 
 
 class LicenseDeviceListDict(TypedDict):
-    device_ids: NotRequired[list[LicenseDeviceId | LicenseDeviceIdDict]]
+    device_ids: NotRequired[list[LicenseDeviceIdDict]]
     ip_address: NotRequired[str]

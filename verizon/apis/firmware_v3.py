@@ -11,6 +11,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -26,7 +27,7 @@ from ..errors.synchronize_device_firmware_error import (
 )
 from ..models.device_firmware_list import DeviceFirmwareList
 from ..models.device_firmware_version_update_result import DeviceFirmwareVersionUpdateResult
-from ..models.enums.firmware_protocol import FirmwareProtocolOrStr
+from ..models.enums.firmware_protocol import FirmwareProtocol, FirmwareProtocolOrStr
 from ..models.firmware_imei import FirmwareImei, FirmwareImeiDict
 from ..models.firmware_package import FirmwarePackage
 from ..server.server import Server
@@ -37,21 +38,28 @@ class FirmwareV3:
         self._with_raw_response = FirmwareV3WithRawResponse(client, server, auth)
 
     def list_available_firmware2(
-        self, acc: str, protocol: FirmwareProtocolOrStr, *, request_options: RequestOptionsOrDict | None = None
+        self,
+        acc: str,
+        *,
+        protocol: FirmwareProtocolOrStr = FirmwareProtocol.LWM2_M,
+        request_options: RequestOptionsOrDict | None = None,
     ) -> list[FirmwarePackage]:
         """This endpoint allows user to list the firmware of an account.
 
         Args:
             acc: Account identifier.
             protocol: Filter to retrieve a specific protocol type used.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Returns an array of firmware objects.
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV3Result | RawError``."""
-        return self._with_raw_response.list_available_firmware2(acc, protocol, request_options=request_options).unwrap()
+        return self._with_raw_response.list_available_firmware2(
+            acc, protocol=protocol, request_options=request_options
+        ).unwrap()
 
     def report_device_firmware(
         self, acc: str, device_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -61,7 +69,8 @@ class FirmwareV3:
         Args:
             acc: Account identifier.
             device_id: Device identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Device firmware version update request.
@@ -78,7 +87,8 @@ class FirmwareV3:
         Args:
             acc: Account identifier.
             body: DeviceIds to get firmware info synchronously.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Returns device firmware information.
@@ -97,14 +107,19 @@ class AsyncFirmwareV3:
         self._with_raw_response = AsyncFirmwareV3WithRawResponse(client, server, auth)
 
     async def list_available_firmware2(
-        self, acc: str, protocol: FirmwareProtocolOrStr, *, request_options: RequestOptionsOrDict | None = None
+        self,
+        acc: str,
+        *,
+        protocol: FirmwareProtocolOrStr = FirmwareProtocol.LWM2_M,
+        request_options: RequestOptionsOrDict | None = None,
     ) -> list[FirmwarePackage]:
         """This endpoint allows user to list the firmware of an account.
 
         Args:
             acc: Account identifier.
             protocol: Filter to retrieve a specific protocol type used.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Returns an array of firmware objects.
@@ -112,7 +127,9 @@ class AsyncFirmwareV3:
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV3Result | RawError``."""
         return (
-            await self._with_raw_response.list_available_firmware2(acc, protocol, request_options=request_options)
+            await self._with_raw_response.list_available_firmware2(
+                acc, protocol=protocol, request_options=request_options
+            )
         ).unwrap()
 
     async def report_device_firmware(
@@ -123,7 +140,8 @@ class AsyncFirmwareV3:
         Args:
             acc: Account identifier.
             device_id: Device identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Device firmware version update request.
@@ -142,7 +160,8 @@ class AsyncFirmwareV3:
         Args:
             acc: Account identifier.
             body: DeviceIds to get firmware info synchronously.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Returns device firmware information.
@@ -160,14 +179,19 @@ class AsyncFirmwareV3:
 
 class FirmwareV3WithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes]):
     def list_available_firmware2(
-        self, acc: str, protocol: FirmwareProtocolOrStr, *, request_options: RequestOptionsOrDict | None = None
+        self,
+        acc: str,
+        *,
+        protocol: FirmwareProtocolOrStr = FirmwareProtocol.LWM2_M,
+        request_options: RequestOptionsOrDict | None = None,
     ) -> ApiResult[list[FirmwarePackage], ListAvailableFirmware2ErrorBody]:
         """This endpoint allows user to list the firmware of an account.
 
         Args:
             acc: Account identifier.
             protocol: Filter to retrieve a specific protocol type used.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -190,7 +214,8 @@ class FirmwareV3WithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
         Args:
             acc: Account identifier.
             device_id: Device identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -213,7 +238,8 @@ class FirmwareV3WithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
         Args:
             acc: Account identifier.
             body: DeviceIds to get firmware info synchronously.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -232,14 +258,19 @@ class FirmwareV3WithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
 
 class AsyncFirmwareV3WithRawResponse(SecuredRawResponse[AsyncRawClient, Server, AsyncAuthSchemes]):
     async def list_available_firmware2(
-        self, acc: str, protocol: FirmwareProtocolOrStr, *, request_options: RequestOptionsOrDict | None = None
+        self,
+        acc: str,
+        *,
+        protocol: FirmwareProtocolOrStr = FirmwareProtocol.LWM2_M,
+        request_options: RequestOptionsOrDict | None = None,
     ) -> ApiResult[list[FirmwarePackage], ListAvailableFirmware2ErrorBody]:
         """This endpoint allows user to list the firmware of an account.
 
         Args:
             acc: Account identifier.
             protocol: Filter to retrieve a specific protocol type used.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -249,7 +280,7 @@ class AsyncFirmwareV3WithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
             path_params=[param[str]("acc", acc)],
             query_params=[param[FirmwareProtocolOrStr]("protocol", protocol)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[list[FirmwarePackage]],
+            decoder=async_json_decoder[list[FirmwarePackage]],
             error_mapper=list_available_firmware2_error_mapper,
             request_options=request_options,
         )
@@ -262,7 +293,8 @@ class AsyncFirmwareV3WithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
         Args:
             acc: Account identifier.
             device_id: Device identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -272,7 +304,7 @@ class AsyncFirmwareV3WithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
             path_params=[param[str]("acc", acc), param[str]("deviceId", device_id)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceFirmwareVersionUpdateResult],
+            decoder=async_json_decoder[DeviceFirmwareVersionUpdateResult],
             error_mapper=report_device_firmware_error_mapper,
             request_options=request_options,
         )
@@ -285,7 +317,8 @@ class AsyncFirmwareV3WithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
         Args:
             acc: Account identifier.
             body: DeviceIds to get firmware info synchronously.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -296,7 +329,7 @@ class AsyncFirmwareV3WithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[FirmwareImei | FirmwareImeiDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceFirmwareList],
+            decoder=async_json_decoder[DeviceFirmwareList],
             error_mapper=synchronize_device_firmware_error_mapper,
             request_options=request_options,
         )

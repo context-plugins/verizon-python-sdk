@@ -28,6 +28,6 @@ class ContactInfoUpdateRequest(SdkBaseModel):
 
 
 class ContactInfoUpdateRequestDict(TypedDict):
-    primary_place_of_use: PlaceOfUse | PlaceOfUseDict
+    primary_place_of_use: PlaceOfUseDict
     account_name: NotRequired[str]
-    devices: NotRequired[list[AccountDeviceList | AccountDeviceListDict]]
+    devices: NotRequired[list[AccountDeviceListDict]]

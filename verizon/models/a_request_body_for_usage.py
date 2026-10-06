@@ -14,6 +14,6 @@ class ARequestBodyForUsage(SdkBaseModel):
 
 
 class ARequestBodyForUsageDict(TypedDict):
-    device_id: NotRequired[list[ReadySimDeviceId | ReadySimDeviceIdDict]]
+    device_id: NotRequired[list[ReadySimDeviceIdDict]]
     start_time: NotRequired[RFC3339DateTime]
     end_time: NotRequired[RFC3339DateTime]

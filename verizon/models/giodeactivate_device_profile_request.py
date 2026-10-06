@@ -11,12 +11,12 @@ class GiodeactivateDeviceProfileRequest(SdkBaseModel):
     devices: Optional[list[GiodeviceList]] = UNSET
     account_name: Optional[str] = Field(default=UNSET, alias="accountName")
     service_plan: Optional[str] = Field(default=UNSET, alias="servicePlan")
-    etf_waiver: Optional[bool] = Field(default=UNSET, alias="etfWaiver")
+    etf_waiver: bool = Field(default=False, alias="etfWaiver")
     reason_code: Optional[str] = Field(default=UNSET, alias="reasonCode")
 
 
 class GiodeactivateDeviceProfileRequestDict(TypedDict):
-    devices: NotRequired[list[GiodeviceList | GiodeviceListDict]]
+    devices: NotRequired[list[GiodeviceListDict]]
     account_name: NotRequired[str]
     service_plan: NotRequired[str]
     etf_waiver: NotRequired[bool]

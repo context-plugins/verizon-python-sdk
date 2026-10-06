@@ -4,7 +4,7 @@ from pydantic import Field
 from typing_extensions import TypedDict
 
 from ..core import RFC3339DateTime, SdkBaseModel
-from .enums.campaign_meta_info_protocol import CampaignMetaInfoProtocolOrStr
+from .enums.campaign_meta_info_protocol import CampaignMetaInfoProtocol, CampaignMetaInfoProtocolOrStr
 
 
 class FirmwarePackage(SdkBaseModel):
@@ -31,7 +31,7 @@ class FirmwarePackage(SdkBaseModel):
     make: str
     """Firmware applicable device make."""
 
-    protocol: CampaignMetaInfoProtocolOrStr
+    protocol: CampaignMetaInfoProtocolOrStr = CampaignMetaInfoProtocol.LWM2_M
     """Firmware protocol. Valid values include: LWM2M, OMD-DM."""
 
 

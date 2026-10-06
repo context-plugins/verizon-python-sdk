@@ -11,4 +11,4 @@ class AccountGroupShareAction(SdkBaseModel):
 
 
 class AccountGroupShareActionDict(TypedDict):
-    notify: NotRequired[Notify | NotifyDict]
+    notify: NotRequired[NotifyDict]

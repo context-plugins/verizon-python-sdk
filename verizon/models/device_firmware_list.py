@@ -21,4 +21,4 @@ class DeviceFirmwareList(SdkBaseModel):
 
 class DeviceFirmwareListDict(TypedDict):
     account_name: str
-    device_firmwar_version_list: NotRequired[list[DeviceFirmwareVersion | DeviceFirmwareVersionDict]]
+    device_firmwar_version_list: NotRequired[list[DeviceFirmwareVersionDict]]

@@ -20,6 +20,6 @@ class BilledusageListRequest(SdkBaseModel):
 
 class BilledusageListRequestDict(TypedDict):
     account_name: str
-    labels: NotRequired[LabelsList | LabelsListDict]
-    device_ids: NotRequired[list[DeviceList | DeviceListDict]]
-    billing_cycle: NotRequired[BillingCycle | BillingCycleDict]
+    labels: NotRequired[LabelsListDict]
+    device_ids: NotRequired[list[DeviceListDict]]
+    billing_cycle: NotRequired[BillingCycleDict]

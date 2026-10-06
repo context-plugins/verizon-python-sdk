@@ -14,4 +14,4 @@ class Carriercode1(SdkBaseModel):
 
 class Carriercode1Dict(TypedDict):
     carrier_code: NotRequired[str]
-    percentage: NotRequired[AllowanceThreshold | AllowanceThresholdDict]
+    percentage: NotRequired[AllowanceThresholdDict]

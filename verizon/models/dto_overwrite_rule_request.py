@@ -17,5 +17,5 @@ class DtoOverwriteRuleRequest(SdkBaseModel):
 
 class DtoOverwriteRuleRequestDict(TypedDict):
     accountname: NotRequired[str]
-    resourceidentifier: NotRequired[DtoResourceidentifier | DtoResourceidentifierDict]
-    rule: NotRequired[ResourceRule | ResourceRuleDict]
+    resourceidentifier: NotRequired[DtoResourceidentifierDict]
+    rule: NotRequired[ResourceRuleDict]

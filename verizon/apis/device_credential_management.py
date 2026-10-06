@@ -11,6 +11,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -37,7 +38,8 @@ class DeviceCredentialManagement:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Credentials dropped successfully
@@ -53,7 +55,8 @@ class DeviceCredentialManagement:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Credentials generated successfully
@@ -69,7 +72,8 @@ class DeviceCredentialManagement:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Credentials reset successfully
@@ -85,7 +89,8 @@ class DeviceCredentialManagement:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful retrieval
@@ -110,7 +115,8 @@ class AsyncDeviceCredentialManagement:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Credentials dropped successfully
@@ -126,7 +132,8 @@ class AsyncDeviceCredentialManagement:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Credentials generated successfully
@@ -142,7 +149,8 @@ class AsyncDeviceCredentialManagement:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Credentials reset successfully
@@ -158,7 +166,8 @@ class AsyncDeviceCredentialManagement:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful retrieval
@@ -180,7 +189,8 @@ class DeviceCredentialManagementWithRawResponse(SecuredRawResponse[RawClient, Se
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -202,7 +212,8 @@ class DeviceCredentialManagementWithRawResponse(SecuredRawResponse[RawClient, Se
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -224,7 +235,8 @@ class DeviceCredentialManagementWithRawResponse(SecuredRawResponse[RawClient, Se
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -246,7 +258,8 @@ class DeviceCredentialManagementWithRawResponse(SecuredRawResponse[RawClient, Se
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -270,7 +283,8 @@ class AsyncDeviceCredentialManagementWithRawResponse(SecuredRawResponse[AsyncRaw
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -280,7 +294,7 @@ class AsyncDeviceCredentialManagementWithRawResponse(SecuredRawResponse[AsyncRaw
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[CredentialsRequest | CredentialsRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DropResponse],
+            decoder=async_json_decoder[DropResponse],
             error_mapper=drop_credentials_error_mapper,
             request_options=request_options,
         )
@@ -292,7 +306,8 @@ class AsyncDeviceCredentialManagementWithRawResponse(SecuredRawResponse[AsyncRaw
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -302,7 +317,7 @@ class AsyncDeviceCredentialManagementWithRawResponse(SecuredRawResponse[AsyncRaw
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[CredentialsRequest | CredentialsRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[GenerateResponse],
+            decoder=async_json_decoder[GenerateResponse],
             error_mapper=generate_credentials_error_mapper,
             request_options=request_options,
         )
@@ -314,7 +329,8 @@ class AsyncDeviceCredentialManagementWithRawResponse(SecuredRawResponse[AsyncRaw
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -324,7 +340,7 @@ class AsyncDeviceCredentialManagementWithRawResponse(SecuredRawResponse[AsyncRaw
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[CredentialsRequest | CredentialsRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[GenerateResponse],
+            decoder=async_json_decoder[GenerateResponse],
             error_mapper=reset_credentials_error_mapper,
             request_options=request_options,
         )
@@ -336,7 +352,8 @@ class AsyncDeviceCredentialManagementWithRawResponse(SecuredRawResponse[AsyncRaw
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -346,7 +363,7 @@ class AsyncDeviceCredentialManagementWithRawResponse(SecuredRawResponse[AsyncRaw
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[CredentialsRequest | CredentialsRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[RetrieveResponse],
+            decoder=async_json_decoder[RetrieveResponse],
             error_mapper=retrieve_credentials_error_mapper,
             request_options=request_options,
         )

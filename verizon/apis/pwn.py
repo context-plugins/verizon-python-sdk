@@ -12,6 +12,7 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -53,7 +54,8 @@ class Pwn:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -72,7 +74,8 @@ class Pwn:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -91,7 +94,8 @@ class Pwn:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -110,7 +114,8 @@ class Pwn:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -128,7 +133,8 @@ class Pwn:
 
         Args:
             aname: Account name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             consent received on a successful response.
@@ -142,7 +148,8 @@ class Pwn:
 
         Args:
             aname: Account name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             PWN profiles list received on a successful response.
@@ -156,7 +163,8 @@ class Pwn:
 
         Args:
             aname: Account name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Kpi list received on a successful response.
@@ -184,7 +192,8 @@ class AsyncPwn:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -205,7 +214,8 @@ class AsyncPwn:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -224,7 +234,8 @@ class AsyncPwn:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -245,7 +256,8 @@ class AsyncPwn:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -263,7 +275,8 @@ class AsyncPwn:
 
         Args:
             aname: Account name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             consent received on a successful response.
@@ -281,7 +294,8 @@ class AsyncPwn:
 
         Args:
             aname: Account name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             PWN profiles list received on a successful response.
@@ -295,7 +309,8 @@ class AsyncPwn:
 
         Args:
             aname: Account name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Kpi list received on a successful response.
@@ -320,13 +335,14 @@ class PwnWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes]):
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="PUT",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/pwn/actions/ipaddress"),
+            url_template=self._server.thingspace("/m2m/v1/devices/pwn/actions/ipaddress"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ChangePwndeviceIpaddressRequest | ChangePwndeviceIpaddressRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -345,13 +361,14 @@ class PwnWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes]):
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/pwn/actions/profile"),
+            url_template=self._server.thingspace("/m2m/v1/devices/pwn/actions/profile"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ChangePwndeviceProfileRequest | ChangePwndeviceProfileRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -370,13 +387,14 @@ class PwnWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes]):
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/pwn/actions/state/activate"),
+            url_template=self._server.thingspace("/m2m/v1/devices/pwn/actions/state/activate"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ChangePwndeviceStateActivateRequest | ChangePwndeviceStateActivateRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -395,13 +413,14 @@ class PwnWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes]):
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/pwn/actions/state/deactivate"),
+            url_template=self._server.thingspace("/m2m/v1/devices/pwn/actions/state/deactivate"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ChangePwndeviceStateDeactivateRequest | ChangePwndeviceStateDeactivateRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -417,13 +436,14 @@ class PwnWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes]):
 
         Args:
             aname: Account name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/pwn/performance/consent/{aname}"),
+            url_template=self._server.thingspace("/m2m/v1/devices/pwn/performance/consent/{aname}"),
             path_params=[param[str]("aname", aname)],
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
             decoder=json_decoder[GetPwnperformanceConsentResponse],
@@ -438,13 +458,14 @@ class PwnWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes]):
 
         Args:
             aname: Account name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/pwn/profiles/list/{aname}"),
+            url_template=self._server.thingspace("/m2m/v1/devices/pwn/profiles/list/{aname}"),
             path_params=[param[str]("aname", aname)],
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
             decoder=json_decoder[PwnprofileList],
@@ -459,13 +480,14 @@ class PwnWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes]):
 
         Args:
             aname: Account name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/pwn/kpi/list/{aname}"),
+            url_template=self._server.thingspace("/m2m/v1/devices/pwn/kpi/list/{aname}"),
             path_params=[param[str]("aname", aname)],
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
             decoder=json_decoder[KpiinfoList],
@@ -485,17 +507,18 @@ class AsyncPwnWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, AsyncAu
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="PUT",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/pwn/actions/ipaddress"),
+            url_template=self._server.thingspace("/m2m/v1/devices/pwn/actions/ipaddress"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ChangePwndeviceIpaddressRequest | ChangePwndeviceIpaddressRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[ChangePwndeviceIpaddressResponse],
+            decoder=async_json_decoder[ChangePwndeviceIpaddressResponse],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -510,17 +533,18 @@ class AsyncPwnWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, AsyncAu
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/pwn/actions/profile"),
+            url_template=self._server.thingspace("/m2m/v1/devices/pwn/actions/profile"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ChangePwndeviceProfileRequest | ChangePwndeviceProfileRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[ChangePwndeviceProfileResponse],
+            decoder=async_json_decoder[ChangePwndeviceProfileResponse],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -535,17 +559,18 @@ class AsyncPwnWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, AsyncAu
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/pwn/actions/state/activate"),
+            url_template=self._server.thingspace("/m2m/v1/devices/pwn/actions/state/activate"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ChangePwndeviceStateActivateRequest | ChangePwndeviceStateActivateRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[ChangePwndeviceStateResponse],
+            decoder=async_json_decoder[ChangePwndeviceStateResponse],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -560,17 +585,18 @@ class AsyncPwnWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, AsyncAu
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/pwn/actions/state/deactivate"),
+            url_template=self._server.thingspace("/m2m/v1/devices/pwn/actions/state/deactivate"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ChangePwndeviceStateDeactivateRequest | ChangePwndeviceStateDeactivateRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[ChangePwndeviceStateResponse],
+            decoder=async_json_decoder[ChangePwndeviceStateResponse],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -582,16 +608,17 @@ class AsyncPwnWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, AsyncAu
 
         Args:
             aname: Account name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/pwn/performance/consent/{aname}"),
+            url_template=self._server.thingspace("/m2m/v1/devices/pwn/performance/consent/{aname}"),
             path_params=[param[str]("aname", aname)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[GetPwnperformanceConsentResponse],
+            decoder=async_json_decoder[GetPwnperformanceConsentResponse],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -603,16 +630,17 @@ class AsyncPwnWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, AsyncAu
 
         Args:
             aname: Account name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/pwn/profiles/list/{aname}"),
+            url_template=self._server.thingspace("/m2m/v1/devices/pwn/profiles/list/{aname}"),
             path_params=[param[str]("aname", aname)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[PwnprofileList],
+            decoder=async_json_decoder[PwnprofileList],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -624,16 +652,17 @@ class AsyncPwnWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, AsyncAu
 
         Args:
             aname: Account name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/pwn/kpi/list/{aname}"),
+            url_template=self._server.thingspace("/m2m/v1/devices/pwn/kpi/list/{aname}"),
             path_params=[param[str]("aname", aname)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[KpiinfoList],
+            decoder=async_json_decoder[KpiinfoList],
             error_mapper=raw_error_response,
             request_options=request_options,
         )

@@ -12,6 +12,8 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
@@ -51,7 +53,7 @@ class Etxregistration:
 
     def get_etx_client_certificate(
         self,
-        id: EtxclientIdlookup | EtxclientIdlookupDict,
+        id_: EtxclientIdlookup | EtxclientIdlookupDict,
         vendor_id: str,
         *,
         x_transaction_id: UUID | None = None,
@@ -64,13 +66,14 @@ class Etxregistration:
         tokens in order to call this API.
 
         Args:
-            id: One of the following IDs is required- DeviceID, IMEI, ICCID, IMSI. If more than one ID is provided, the
+            id_: One of the following IDs is required- DeviceID, IMEI, ICCID, IMSI. If more than one ID is provided, the
                 API will return the certificate for the first ID found. The IDs are evaluated in the following order:
                 DeviceID, IMEI, ICCID, IMSI. If the first provided ID is not found, the API will return an error.
             vendor_id: The VendorID set during the Vendor registration call.
             x_transaction_id: Optional transaction identifier for tracing requests. If not provided, the application
                 will generate one.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful retrieval
@@ -79,7 +82,7 @@ class Etxregistration:
             ApiError: Invalid request Unauthorized Forbidden Request Not Found Too Many Requests Internal server Error
                 ``error`` is ``EtxrespondingError | RawError``."""
         return self._with_raw_response.get_etx_client_certificate(
-            id, vendor_id, x_transaction_id=x_transaction_id, request_options=request_options
+            id_, vendor_id, x_transaction_id=x_transaction_id, request_options=request_options
         ).unwrap()
 
     def get_etx_connection_url(
@@ -103,7 +106,8 @@ class Etxregistration:
             body: The request body.
             x_transaction_id: Optional transaction identifier for tracing requests. If not provided, the application
                 will generate one.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful retrieval
@@ -139,7 +143,8 @@ class Etxregistration:
             body: The request body.
             x_transaction_id: Optional transaction identifier for tracing requests. If not provided, the application
                 will generate one.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful retrieval
@@ -165,7 +170,8 @@ class Etxregistration:
             body: The request body.
             x_transaction_id: Optional transaction identifier for tracing requests. If not provided, the application
                 will generate one.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful retrieval of devices
@@ -201,7 +207,8 @@ class Etxregistration:
             body: The request body.
             x_transaction_id: Optional transaction identifier for tracing requests. If not provided, the application
                 will generate one.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful Registration
@@ -241,7 +248,8 @@ class Etxregistration:
             x_transaction_id: Optional transaction identifier for tracing requests. If not provided, the application
                 will generate one.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful Registration
@@ -272,7 +280,8 @@ class Etxregistration:
             vendor_id: The VendorID set during the Vendor registration call.
             x_transaction_id: Optional transaction identifier for tracing requests. If not provided, the application
                 will generate one.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful Deletion
@@ -295,7 +304,7 @@ class AsyncEtxregistration:
 
     async def get_etx_client_certificate(
         self,
-        id: EtxclientIdlookup | EtxclientIdlookupDict,
+        id_: EtxclientIdlookup | EtxclientIdlookupDict,
         vendor_id: str,
         *,
         x_transaction_id: UUID | None = None,
@@ -308,13 +317,14 @@ class AsyncEtxregistration:
         tokens in order to call this API.
 
         Args:
-            id: One of the following IDs is required- DeviceID, IMEI, ICCID, IMSI. If more than one ID is provided, the
+            id_: One of the following IDs is required- DeviceID, IMEI, ICCID, IMSI. If more than one ID is provided, the
                 API will return the certificate for the first ID found. The IDs are evaluated in the following order:
                 DeviceID, IMEI, ICCID, IMSI. If the first provided ID is not found, the API will return an error.
             vendor_id: The VendorID set during the Vendor registration call.
             x_transaction_id: Optional transaction identifier for tracing requests. If not provided, the application
                 will generate one.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful retrieval
@@ -324,7 +334,7 @@ class AsyncEtxregistration:
                 ``error`` is ``EtxrespondingError | RawError``."""
         return (
             await self._with_raw_response.get_etx_client_certificate(
-                id, vendor_id, x_transaction_id=x_transaction_id, request_options=request_options
+                id_, vendor_id, x_transaction_id=x_transaction_id, request_options=request_options
             )
         ).unwrap()
 
@@ -349,7 +359,8 @@ class AsyncEtxregistration:
             body: The request body.
             x_transaction_id: Optional transaction identifier for tracing requests. If not provided, the application
                 will generate one.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful retrieval
@@ -387,7 +398,8 @@ class AsyncEtxregistration:
             body: The request body.
             x_transaction_id: Optional transaction identifier for tracing requests. If not provided, the application
                 will generate one.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful retrieval
@@ -415,7 +427,8 @@ class AsyncEtxregistration:
             body: The request body.
             x_transaction_id: Optional transaction identifier for tracing requests. If not provided, the application
                 will generate one.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful retrieval of devices
@@ -453,7 +466,8 @@ class AsyncEtxregistration:
             body: The request body.
             x_transaction_id: Optional transaction identifier for tracing requests. If not provided, the application
                 will generate one.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful Registration
@@ -495,7 +509,8 @@ class AsyncEtxregistration:
             x_transaction_id: Optional transaction identifier for tracing requests. If not provided, the application
                 will generate one.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful Registration
@@ -528,7 +543,8 @@ class AsyncEtxregistration:
             vendor_id: The VendorID set during the Vendor registration call.
             x_transaction_id: Optional transaction identifier for tracing requests. If not provided, the application
                 will generate one.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful Deletion
@@ -550,7 +566,7 @@ class AsyncEtxregistration:
 class EtxregistrationWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes]):
     def get_etx_client_certificate(
         self,
-        id: EtxclientIdlookup | EtxclientIdlookupDict,
+        id_: EtxclientIdlookup | EtxclientIdlookupDict,
         vendor_id: str,
         *,
         x_transaction_id: UUID | None = None,
@@ -563,20 +579,21 @@ class EtxregistrationWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
         tokens in order to call this API.
 
         Args:
-            id: One of the following IDs is required- DeviceID, IMEI, ICCID, IMSI. If more than one ID is provided, the
+            id_: One of the following IDs is required- DeviceID, IMEI, ICCID, IMSI. If more than one ID is provided, the
                 API will return the certificate for the first ID found. The IDs are evaluated in the following order:
                 DeviceID, IMEI, ICCID, IMSI. If the first provided ID is not found, the API will return an error.
             vendor_id: The VendorID set during the Vendor registration call.
             x_transaction_id: Optional transaction identifier for tracing requests. If not provided, the application
                 will generate one.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="GET",
             url_template=self._server.imp_server("/api/v2/clients/registration"),
-            query_params=[param[EtxclientIdlookup | EtxclientIdlookupDict]("ID", id)],
+            query_params=[param[EtxclientIdlookup | EtxclientIdlookupDict]("ID", id_)],
             headers=[param[str]("VendorID", vendor_id), param[UUID | None]("X-Transaction-Id", x_transaction_id)],
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.session_token),
             decoder=json_decoder[ClientPersistenceResponse],
@@ -605,7 +622,8 @@ class EtxregistrationWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
             body: The request body.
             x_transaction_id: Optional transaction identifier for tracing requests. If not provided, the application
                 will generate one.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -648,7 +666,8 @@ class EtxregistrationWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
             body: The request body.
             x_transaction_id: Optional transaction identifier for tracing requests. If not provided, the application
                 will generate one.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -681,7 +700,8 @@ class EtxregistrationWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
             body: The request body.
             x_transaction_id: Optional transaction identifier for tracing requests. If not provided, the application
                 will generate one.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -720,7 +740,8 @@ class EtxregistrationWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
             body: The request body.
             x_transaction_id: Optional transaction identifier for tracing requests. If not provided, the application
                 will generate one.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -763,7 +784,8 @@ class EtxregistrationWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
             x_transaction_id: Optional transaction identifier for tracing requests. If not provided, the application
                 will generate one.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -802,7 +824,8 @@ class EtxregistrationWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
             vendor_id: The VendorID set during the Vendor registration call.
             x_transaction_id: Optional transaction identifier for tracing requests. If not provided, the application
                 will generate one.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -825,7 +848,7 @@ class EtxregistrationWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
 class AsyncEtxregistrationWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, AsyncAuthSchemes]):
     async def get_etx_client_certificate(
         self,
-        id: EtxclientIdlookup | EtxclientIdlookupDict,
+        id_: EtxclientIdlookup | EtxclientIdlookupDict,
         vendor_id: str,
         *,
         x_transaction_id: UUID | None = None,
@@ -838,23 +861,24 @@ class AsyncEtxregistrationWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
         tokens in order to call this API.
 
         Args:
-            id: One of the following IDs is required- DeviceID, IMEI, ICCID, IMSI. If more than one ID is provided, the
+            id_: One of the following IDs is required- DeviceID, IMEI, ICCID, IMSI. If more than one ID is provided, the
                 API will return the certificate for the first ID found. The IDs are evaluated in the following order:
                 DeviceID, IMEI, ICCID, IMSI. If the first provided ID is not found, the API will return an error.
             vendor_id: The VendorID set during the Vendor registration call.
             x_transaction_id: Optional transaction identifier for tracing requests. If not provided, the application
                 will generate one.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="GET",
             url_template=self._server.imp_server("/api/v2/clients/registration"),
-            query_params=[param[EtxclientIdlookup | EtxclientIdlookupDict]("ID", id)],
+            query_params=[param[EtxclientIdlookup | EtxclientIdlookupDict]("ID", id_)],
             headers=[param[str]("VendorID", vendor_id), param[UUID | None]("X-Transaction-Id", x_transaction_id)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.session_token),
-            decoder=json_decoder[ClientPersistenceResponse],
+            decoder=async_json_decoder[ClientPersistenceResponse],
             error_mapper=get_etxclient_certificate_error_mapper,
             request_options=request_options,
         )
@@ -880,7 +904,8 @@ class AsyncEtxregistrationWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             body: The request body.
             x_transaction_id: Optional transaction identifier for tracing requests. If not provided, the application
                 will generate one.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -894,7 +919,7 @@ class AsyncEtxregistrationWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             ],
             body=json_body[ConnectionRequest | ConnectionRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.session_token),
-            decoder=json_decoder[ConnectionResponse],
+            decoder=async_json_decoder[ConnectionResponse],
             error_mapper=get_etxconnection_url_error_mapper,
             request_options=request_options,
         )
@@ -923,7 +948,8 @@ class AsyncEtxregistrationWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             body: The request body.
             x_transaction_id: Optional transaction identifier for tracing requests. If not provided, the application
                 will generate one.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -937,7 +963,7 @@ class AsyncEtxregistrationWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             ],
             body=json_body[ConnectionRequest | ConnectionRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.session_token),
-            decoder=json_decoder[ConnectionResponseV3],
+            decoder=async_json_decoder[ConnectionResponseV3],
             error_mapper=get_etxconnection_url_multi_mec_error_mapper,
             request_options=request_options,
         )
@@ -956,7 +982,8 @@ class AsyncEtxregistrationWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             body: The request body.
             x_transaction_id: Optional transaction identifier for tracing requests. If not provided, the application
                 will generate one.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -966,7 +993,7 @@ class AsyncEtxregistrationWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             headers=[param[UUID | None]("X-Transaction-Id", x_transaction_id), param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DevicesRequest | DevicesRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.session_token),
-            decoder=json_decoder[list[DevicesResponse]],
+            decoder=async_json_decoder[list[DevicesResponse]],
             error_mapper=query_etxdevices_error_mapper,
             request_options=request_options,
         )
@@ -995,7 +1022,8 @@ class AsyncEtxregistrationWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             body: The request body.
             x_transaction_id: Optional transaction identifier for tracing requests. If not provided, the application
                 will generate one.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1005,7 +1033,7 @@ class AsyncEtxregistrationWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             headers=[param[UUID | None]("X-Transaction-Id", x_transaction_id), param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ClientRegistrationRequestV2 | ClientRegistrationRequestV2Dict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.session_token),
-            decoder=json_decoder[ClientRegistrationResponse],
+            decoder=async_json_decoder[ClientRegistrationResponse],
             error_mapper=register_etxclient_error_mapper,
             request_options=request_options,
         )
@@ -1038,7 +1066,8 @@ class AsyncEtxregistrationWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             x_transaction_id: Optional transaction identifier for tracing requests. If not provided, the application
                 will generate one.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1053,7 +1082,7 @@ class AsyncEtxregistrationWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             ],
             body=json_body[Any | None](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.session_token),
-            decoder=json_decoder[ClientRegistrationResponse],
+            decoder=async_json_decoder[ClientRegistrationResponse],
             error_mapper=renew_etxclient_certificate_error_mapper,
             request_options=request_options,
         )
@@ -1077,7 +1106,8 @@ class AsyncEtxregistrationWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
             vendor_id: The VendorID set during the Vendor registration call.
             x_transaction_id: Optional transaction identifier for tracing requests. If not provided, the application
                 will generate one.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -1091,7 +1121,7 @@ class AsyncEtxregistrationWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
                 param[UUID]("Idempotency-Key", uuid4()),
             ],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.session_token),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=unregister_etxclients_error_mapper,
             request_options=request_options,
         )

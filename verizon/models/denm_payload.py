@@ -19,5 +19,5 @@ class DenmPayload(SdkBaseModel):
 
 
 class DenmPayloadDict(TypedDict):
-    management: Management | ManagementDict
-    situation: NotRequired[Situation | SituationDict]
+    management: ManagementDict
+    situation: NotRequired[SituationDict]

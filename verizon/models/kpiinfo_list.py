@@ -12,4 +12,4 @@ class KpiinfoList(SdkBaseModel):
 
 
 class KpiinfoListDict(TypedDict):
-    kpi_info_list: NotRequired[list[Kpiinfo | KpiinfoDict]]
+    kpi_info_list: NotRequired[list[KpiinfoDict]]

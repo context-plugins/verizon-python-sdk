@@ -10,7 +10,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `POST /m2m/v1/intelligence/anomaly/settings`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def activate_anomaly_detection(body: AnomalyDetectionRequest | AnomalyDetectionRequestDict, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `body`
 - **Params**: `body` — JSON body
@@ -28,7 +28,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /m2m/v1/intelligence/{accountName}/anomaly/settings`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def list_anomaly_detection_settings(account_name: str, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `account_name`
 - **Params**: `account_name` — path `accountName`
@@ -44,7 +44,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `PUT /m2m/v1/intelligence/{accountName}/anomaly/settings/reset`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def reset_anomaly_detection_parameters(account_name: str, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `account_name`
 - **Params**: `account_name` — path `accountName`

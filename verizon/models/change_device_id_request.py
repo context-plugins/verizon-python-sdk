@@ -44,8 +44,8 @@ class ChangeDeviceIdRequest(SdkBaseModel):
 class ChangeDeviceIdRequestDict(TypedDict):
     assign_non_geo_mdn: NotRequired[bool]
     change4g_option: NotRequired[str]
-    device_ids: list[DeviceId | DeviceIdDict]
-    device_ids_to: NotRequired[list[DeviceId | DeviceIdDict]]
+    device_ids: list[DeviceIdDict]
+    device_ids_to: NotRequired[list[DeviceIdDict]]
     npa_nxx: NotRequired[str]
     service_plan: NotRequired[str]
     zip_code: NotRequired[str]

@@ -14,4 +14,4 @@ class GenerateExternalIdrequest(SdkBaseModel):
 
 
 class GenerateExternalIdrequestDict(TypedDict):
-    accountidentifier: NotRequired[AccountIdentifier | AccountIdentifierDict]
+    accountidentifier: NotRequired[AccountIdentifierDict]

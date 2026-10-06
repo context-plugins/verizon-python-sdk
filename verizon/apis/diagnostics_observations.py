@@ -12,6 +12,7 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_decoder,
     param,
     raw_error_response,
@@ -30,7 +31,8 @@ class DiagnosticsObservations:
         """This endpoint allows the user to start or change observe diagnostics.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Diagnostics observation result.
@@ -47,7 +49,8 @@ class DiagnosticsObservations:
         Args:
             transaction_id: The ID value associated with the transaction.
             account_name: The numeric account name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Diagnostics observation result.
@@ -73,7 +76,8 @@ class AsyncDiagnosticsObservations:
         """This endpoint allows the user to start or change observe diagnostics.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Diagnostics observation result.
@@ -90,7 +94,8 @@ class AsyncDiagnosticsObservations:
         Args:
             transaction_id: The ID value associated with the transaction.
             account_name: The numeric account name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Diagnostics observation result.
@@ -115,7 +120,8 @@ class DiagnosticsObservationsWithRawResponse(SecuredRawResponse[RawClient, Serve
         """This endpoint allows the user to start or change observe diagnostics.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -137,7 +143,8 @@ class DiagnosticsObservationsWithRawResponse(SecuredRawResponse[RawClient, Serve
         Args:
             transaction_id: The ID value associated with the transaction.
             account_name: The numeric account name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -160,7 +167,8 @@ class AsyncDiagnosticsObservationsWithRawResponse(SecuredRawResponse[AsyncRawCli
         """This endpoint allows the user to start or change observe diagnostics.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -169,7 +177,7 @@ class AsyncDiagnosticsObservationsWithRawResponse(SecuredRawResponse[AsyncRawCli
             url_template=self._server.device_diagnostics("/devices/attributes/actions/observe"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DiagnosticsObservationResult],
+            decoder=async_json_decoder[DiagnosticsObservationResult],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -182,7 +190,8 @@ class AsyncDiagnosticsObservationsWithRawResponse(SecuredRawResponse[AsyncRawCli
         Args:
             transaction_id: The ID value associated with the transaction.
             account_name: The numeric account name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -192,7 +201,7 @@ class AsyncDiagnosticsObservationsWithRawResponse(SecuredRawResponse[AsyncRawCli
             query_params=[param[str]("transactionId", transaction_id), param[str]("accountName", account_name)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DiagnosticsObservationResult],
+            decoder=async_json_decoder[DiagnosticsObservationResult],
             error_mapper=raw_error_response,
             request_options=request_options,
         )

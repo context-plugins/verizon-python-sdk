@@ -12,6 +12,7 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -39,7 +40,8 @@ class AnomalyTriggersV2:
 
         Args:
             body: Request to create an anomaly trigger.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Result of request to create a trigger for anomaly detection.
@@ -57,7 +59,8 @@ class AnomalyTriggersV2:
 
         Args:
             trigger_id: The trigger ID of a specific trigger.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Anomaly detection trigger details.
@@ -78,7 +81,8 @@ class AnomalyTriggersV2:
 
         Args:
             body: Request to update existing trigger.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Success response.
@@ -108,7 +112,8 @@ class AsyncAnomalyTriggersV2:
 
         Args:
             body: Request to create an anomaly trigger.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Result of request to create a trigger for anomaly detection.
@@ -126,7 +131,8 @@ class AsyncAnomalyTriggersV2:
 
         Args:
             trigger_id: The trigger ID of a specific trigger.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Anomaly detection trigger details.
@@ -149,7 +155,8 @@ class AsyncAnomalyTriggersV2:
 
         Args:
             body: Request to update existing trigger.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Success response.
@@ -176,13 +183,14 @@ class AnomalyTriggersV2WithRawResponse(SecuredRawResponse[RawClient, Server, Aut
 
         Args:
             body: Request to create an anomaly trigger.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v2/triggers"),
+            url_template=self._server.thingspace("/m2m/v2/triggers"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[list[CreateTriggerRequestOptions | CreateTriggerRequestOptionsDict]](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -198,13 +206,14 @@ class AnomalyTriggersV2WithRawResponse(SecuredRawResponse[RawClient, Server, Aut
 
         Args:
             trigger_id: The trigger ID of a specific trigger.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/m2m/v2/triggers/{triggerId}"),
+            url_template=self._server.thingspace("/m2m/v2/triggers/{triggerId}"),
             path_params=[param[str]("triggerId", trigger_id)],
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
             decoder=json_decoder[AnomalyTriggerResult],
@@ -222,13 +231,14 @@ class AnomalyTriggersV2WithRawResponse(SecuredRawResponse[RawClient, Server, Aut
 
         Args:
             body: Request to update existing trigger.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="PUT",
-            url_template=self._server.hyper_precise_credentials("/m2m/v2/triggers"),
+            url_template=self._server.thingspace("/m2m/v2/triggers"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[list[UpdateTriggerRequestOptions | UpdateTriggerRequestOptionsDict]](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -249,17 +259,18 @@ class AsyncAnomalyTriggersV2WithRawResponse(SecuredRawResponse[AsyncRawClient, S
 
         Args:
             body: Request to create an anomaly trigger.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v2/triggers"),
+            url_template=self._server.thingspace("/m2m/v2/triggers"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[list[CreateTriggerRequestOptions | CreateTriggerRequestOptionsDict]](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[AnomalyDetectionTrigger],
+            decoder=async_json_decoder[AnomalyDetectionTrigger],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -271,16 +282,17 @@ class AsyncAnomalyTriggersV2WithRawResponse(SecuredRawResponse[AsyncRawClient, S
 
         Args:
             trigger_id: The trigger ID of a specific trigger.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/m2m/v2/triggers/{triggerId}"),
+            url_template=self._server.thingspace("/m2m/v2/triggers/{triggerId}"),
             path_params=[param[str]("triggerId", trigger_id)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[AnomalyTriggerResult],
+            decoder=async_json_decoder[AnomalyTriggerResult],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -295,17 +307,18 @@ class AsyncAnomalyTriggersV2WithRawResponse(SecuredRawResponse[AsyncRawClient, S
 
         Args:
             body: Request to update existing trigger.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="PUT",
-            url_template=self._server.hyper_precise_credentials("/m2m/v2/triggers"),
+            url_template=self._server.thingspace("/m2m/v2/triggers"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[list[UpdateTriggerRequestOptions | UpdateTriggerRequestOptionsDict]](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[IntelligenceSuccessResult],
+            decoder=async_json_decoder[IntelligenceSuccessResult],
             error_mapper=raw_error_response,
             request_options=request_options,
         )

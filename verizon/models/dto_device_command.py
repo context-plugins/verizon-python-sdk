@@ -18,5 +18,5 @@ class DtoDeviceCommand(SdkBaseModel):
 
 class DtoDeviceCommandDict(TypedDict):
     account_name: NotRequired[str]
-    configuration: NotRequired[Rbstiltconfig | RbstiltconfigDict]
-    resourceidentifier: NotRequired[DtoResourceidentifier | DtoResourceidentifierDict]
+    configuration: NotRequired[RbstiltconfigDict]
+    resourceidentifier: NotRequired[DtoResourceidentifierDict]

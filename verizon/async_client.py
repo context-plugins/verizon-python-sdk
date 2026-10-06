@@ -101,12 +101,13 @@ from .core import (
     ApiKeyHeaderScheme,
     AsyncClientCredentialsTokenSource,
     AsyncHttpClient,
-    AsyncHttpxClient,
+    AsyncHttpx2Client,
     AsyncOAuth2Scheme,
     AsyncRawClient,
     AsyncTokenSource,
     ClientCredentials,
     ClientCredentialsOrDict,
+    RetryOptionsOrDict,
     client_secret_basic,
     no_auth,
     param,
@@ -122,6 +123,7 @@ class AsyncVerizonClient(BaseVerizonClient[AsyncRawClient]):
         environment: Environment = "production",
         timeout: float = DEFAULT_TIMEOUT,
         server_config: ServerConfigOrDict | None = None,
+        retry_options: int | RetryOptionsOrDict | None = None,
         custom_async_http_client: AsyncHttpClient | None = None,
         thingspace_oauth: ClientCredentialsOrDict | None = None,
         thingspace_oauth_token_source: AsyncTokenSource[ClientCredentials] | None = None,
@@ -130,11 +132,14 @@ class AsyncVerizonClient(BaseVerizonClient[AsyncRawClient]):
         thingspace_oauth1: ClientCredentialsOrDict | None = None,
         thingspace_oauth1_token_source: AsyncTokenSource[ClientCredentials] | None = None,
     ) -> None:
-        super().__init__(environment=environment, timeout=timeout, server_config=server_config)
+        super().__init__(
+            environment=environment, timeout=timeout, server_config=server_config, retry_options=retry_options
+        )
         self._raw_client = AsyncRawClient(
             http_client=(
-                custom_async_http_client if custom_async_http_client is not None else AsyncHttpxClient(timeout=timeout)
+                custom_async_http_client if custom_async_http_client is not None else AsyncHttpx2Client(timeout=timeout)
             ),
+            retry_options=self._retry_options,
             global_headers=[
                 param[str]("User-Agent", "VerizonClient/v1.0 Python"),
                 param[str]("X-APIMatic-Lang", "Python"),

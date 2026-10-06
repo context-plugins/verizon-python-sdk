@@ -28,7 +28,7 @@ class Campaign(SdkBaseModel):
     firmware_to: Optional[str] = Field(default=UNSET, alias="firmwareTo")
     """New firmware version."""
 
-    protocol: str
+    protocol: str = "LWM2M"
     """The protocol of the firmware distribution. Default: LWM2M."""
 
     make: str
@@ -71,7 +71,7 @@ class CampaignDict(TypedDict):
     model: str
     start_date: Date
     end_date: Date
-    campaign_time_window_list: NotRequired[list[V3TimeWindow | V3TimeWindowDict]]
+    campaign_time_window_list: NotRequired[list[V3TimeWindowDict]]
     status: str
     auto_assign_license_flag: bool
     auto_add_devices_flag: bool

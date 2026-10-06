@@ -12,4 +12,4 @@ class PayAsYouGoFilterCriteria(SdkBaseModel):
 
 
 class PayAsYouGoFilterCriteriaDict(TypedDict):
-    filter_criteria: NotRequired[PayAsYouGoFilterCriteria1 | PayAsYouGoFilterCriteria1Dict]
+    filter_criteria: NotRequired[PayAsYouGoFilterCriteria1Dict]

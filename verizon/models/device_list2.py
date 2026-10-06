@@ -11,4 +11,4 @@ class DeviceList2(SdkBaseModel):
 
 
 class DeviceList2Dict(TypedDict):
-    ids: NotRequired[list[Id1 | Id1Dict]]
+    ids: NotRequired[list[Id1Dict]]

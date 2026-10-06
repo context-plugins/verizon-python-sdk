@@ -11,4 +11,4 @@ class DtoSensorOnBoardingStatusResponse(SdkBaseModel):
 
 
 class DtoSensorOnBoardingStatusResponseDict(TypedDict):
-    events: NotRequired[list[DtoSensorBoardingEvent | DtoSensorBoardingEventDict]]
+    events: NotRequired[list[DtoSensorBoardingEventDict]]

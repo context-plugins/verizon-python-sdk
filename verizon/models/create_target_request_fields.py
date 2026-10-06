@@ -13,5 +13,5 @@ class CreateTargetRequestFields(SdkBaseModel):
 
 
 class CreateTargetRequestFieldsDict(TypedDict):
-    httpheaders: NotRequired[FieldsHttpHeaders | FieldsHttpHeadersDict]
+    httpheaders: NotRequired[FieldsHttpHeadersDict]
     devicetypes: NotRequired[list[str]]

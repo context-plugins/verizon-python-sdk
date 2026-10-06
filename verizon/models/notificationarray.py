@@ -30,6 +30,6 @@ class NotificationarrayDict(TypedDict):
     notification_frequency_interval: NotRequired[str]
     external_email_recipients: NotRequired[str]
     sms_notification: NotRequired[bool]
-    sms_numbers: NotRequired[list[SmsNumberModel | SmsNumberModelDict]]
+    sms_numbers: NotRequired[list[SmsNumberModelDict]]
     reminder: NotRequired[bool]
     severity: NotRequired[str]

@@ -26,6 +26,6 @@ class DeviceGroupDevicesData(SdkBaseModel):
 
 class DeviceGroupDevicesDataDict(TypedDict):
     description: NotRequired[str]
-    devices: NotRequired[list[AccountDeviceList | AccountDeviceListDict]]
+    devices: NotRequired[list[AccountDeviceListDict]]
     has_more_data: NotRequired[bool]
     name: NotRequired[str]

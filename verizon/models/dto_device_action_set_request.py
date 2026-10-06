@@ -18,5 +18,5 @@ class DtoDeviceActionSetRequest(SdkBaseModel):
 
 class DtoDeviceActionSetRequestDict(TypedDict):
     accountname: NotRequired[str]
-    configuration: NotRequired[DtoDeviceActionSetConfiguration | DtoDeviceActionSetConfigurationDict]
-    resourceidentifier: NotRequired[DtoDeviceResourceIdentifier | DtoDeviceResourceIdentifierDict]
+    configuration: NotRequired[DtoDeviceActionSetConfigurationDict]
+    resourceidentifier: NotRequired[DtoDeviceResourceIdentifierDict]

@@ -12,6 +12,9 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
+    async_text_decoder,
     empty_response,
     json_body,
     json_decoder,
@@ -22,7 +25,7 @@ from ..errors.delete_map_message_error import DeleteMapMessageErrorBody, delete_
 from ..errors.download_mapmessages_error import DownloadMapmessagesErrorBody, download_mapmessages_error_mapper
 from ..errors.ingest_mapmessages_error import IngestMapmessagesErrorBody, ingest_mapmessages_error_mapper
 from ..errors.query_map_messages_error import QueryMapMessagesErrorBody, query_map_messages_error_mapper
-from ..models.enums.etxmessage_standard_enum import EtxmessageStandardEnumOrStr
+from ..models.enums.etxmessage_standard_enum import EtxmessageStandardEnum, EtxmessageStandardEnumOrStr
 from ..models.etx_map_data_ingest_request import EtxMapDataIngestRequest, EtxMapDataIngestRequestDict
 from ..models.geofence_polygon import GeofencePolygon, GeofencePolygonDict
 from ..models.unions.map_data_query_request import MapDataQueryRequest, MapDataQueryRequestDict
@@ -41,7 +44,8 @@ class MapMessageController:
         Args:
             region_id: Region ID to filter the map messages.
             i10nid: Intersection ID to filter the map messages.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Deleted successfully (No Content)
@@ -72,7 +76,8 @@ class MapMessageController:
         Args:
             geofence: GeoJSON Polygon defining the area to retrieve MAP messages for.
             vendor_id: The VendorID set during the Vendor registration call.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Line separated ASN.1 UPER J2735/ETSI base64 encoded MapData messages
@@ -87,9 +92,9 @@ class MapMessageController:
     def ingest_map_messages(
         self,
         vendor_id: str,
-        map_data_message_standard: EtxmessageStandardEnumOrStr,
         body: EtxMapDataIngestRequest | EtxMapDataIngestRequestDict,
         *,
+        map_data_message_standard: EtxmessageStandardEnumOrStr = EtxmessageStandardEnum.SAE,
         request_options: RequestOptionsOrDict | None = None,
     ) -> str:
         """This endpoint allows the user to upload map messages in ASN.1 UPER base64 encoded format or JER (JSON)
@@ -106,12 +111,13 @@ class MapMessageController:
 
         Args:
             vendor_id: The VendorID set during the Vendor registration call.
+            body: UPER/ASN.1 J2735/ETSI base64 encoded MapData message or JSON representation of the MapData message.
             map_data_message_standard: Select which V2X messaging standard will be used for the message generation. The
                 following options are supported: - "etsi": The message will be generated using the ETSI (European)
                 standard (e.g. MAPEM). - "sae": The message will be generated using the SAE J2735 (North American)
                 standard (e.g. MAP). - if not sent while POST, defaults to "sae"
-            body: UPER/ASN.1 J2735/ETSI base64 encoded MapData message or JSON representation of the MapData message.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Map message/s successfully uploaded
@@ -120,7 +126,7 @@ class MapMessageController:
             ApiError: Bad Request Unauthorized Forbidden Method not allowed Too many requests Internal server error
                 ``error`` is ``MdmErrorResponse | RawError``."""
         return self._with_raw_response.ingest_map_messages(
-            vendor_id, map_data_message_standard, body, request_options=request_options
+            vendor_id, body, map_data_message_standard=map_data_message_standard, request_options=request_options
         ).unwrap()
 
     def query_map_messages(
@@ -139,7 +145,8 @@ class MapMessageController:
         Args:
             vendor_id: The VendorID set during the Vendor registration call.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successfully retrieved MAP messages. Returns a JSON array where each element contains either a base64 string
@@ -167,7 +174,8 @@ class AsyncMapMessageController:
         Args:
             region_id: Region ID to filter the map messages.
             i10nid: Intersection ID to filter the map messages.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Deleted successfully (No Content)
@@ -200,7 +208,8 @@ class AsyncMapMessageController:
         Args:
             geofence: GeoJSON Polygon defining the area to retrieve MAP messages for.
             vendor_id: The VendorID set during the Vendor registration call.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Line separated ASN.1 UPER J2735/ETSI base64 encoded MapData messages
@@ -215,9 +224,9 @@ class AsyncMapMessageController:
     async def ingest_map_messages(
         self,
         vendor_id: str,
-        map_data_message_standard: EtxmessageStandardEnumOrStr,
         body: EtxMapDataIngestRequest | EtxMapDataIngestRequestDict,
         *,
+        map_data_message_standard: EtxmessageStandardEnumOrStr = EtxmessageStandardEnum.SAE,
         request_options: RequestOptionsOrDict | None = None,
     ) -> str:
         """This endpoint allows the user to upload map messages in ASN.1 UPER base64 encoded format or JER (JSON)
@@ -234,12 +243,13 @@ class AsyncMapMessageController:
 
         Args:
             vendor_id: The VendorID set during the Vendor registration call.
+            body: UPER/ASN.1 J2735/ETSI base64 encoded MapData message or JSON representation of the MapData message.
             map_data_message_standard: Select which V2X messaging standard will be used for the message generation. The
                 following options are supported: - "etsi": The message will be generated using the ETSI (European)
                 standard (e.g. MAPEM). - "sae": The message will be generated using the SAE J2735 (North American)
                 standard (e.g. MAP). - if not sent while POST, defaults to "sae"
-            body: UPER/ASN.1 J2735/ETSI base64 encoded MapData message or JSON representation of the MapData message.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Map message/s successfully uploaded
@@ -249,7 +259,7 @@ class AsyncMapMessageController:
                 ``error`` is ``MdmErrorResponse | RawError``."""
         return (
             await self._with_raw_response.ingest_map_messages(
-                vendor_id, map_data_message_standard, body, request_options=request_options
+                vendor_id, body, map_data_message_standard=map_data_message_standard, request_options=request_options
             )
         ).unwrap()
 
@@ -269,7 +279,8 @@ class AsyncMapMessageController:
         Args:
             vendor_id: The VendorID set during the Vendor registration call.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successfully retrieved MAP messages. Returns a JSON array where each element contains either a base64 string
@@ -296,7 +307,8 @@ class MapMessageControllerWithRawResponse(SecuredRawResponse[RawClient, Server, 
         Args:
             region_id: Region ID to filter the map messages.
             i10nid: Intersection ID to filter the map messages.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -332,7 +344,8 @@ class MapMessageControllerWithRawResponse(SecuredRawResponse[RawClient, Server, 
         Args:
             geofence: GeoJSON Polygon defining the area to retrieve MAP messages for.
             vendor_id: The VendorID set during the Vendor registration call.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -350,9 +363,9 @@ class MapMessageControllerWithRawResponse(SecuredRawResponse[RawClient, Server, 
     def ingest_map_messages(
         self,
         vendor_id: str,
-        map_data_message_standard: EtxmessageStandardEnumOrStr,
         body: EtxMapDataIngestRequest | EtxMapDataIngestRequestDict,
         *,
+        map_data_message_standard: EtxmessageStandardEnumOrStr = EtxmessageStandardEnum.SAE,
         request_options: RequestOptionsOrDict | None = None,
     ) -> ApiResult[str, IngestMapmessagesErrorBody]:
         """This endpoint allows the user to upload map messages in ASN.1 UPER base64 encoded format or JER (JSON)
@@ -369,12 +382,13 @@ class MapMessageControllerWithRawResponse(SecuredRawResponse[RawClient, Server, 
 
         Args:
             vendor_id: The VendorID set during the Vendor registration call.
+            body: UPER/ASN.1 J2735/ETSI base64 encoded MapData message or JSON representation of the MapData message.
             map_data_message_standard: Select which V2X messaging standard will be used for the message generation. The
                 following options are supported: - "etsi": The message will be generated using the ETSI (European)
                 standard (e.g. MAPEM). - "sae": The message will be generated using the SAE J2735 (North American)
                 standard (e.g. MAP). - if not sent while POST, defaults to "sae"
-            body: UPER/ASN.1 J2735/ETSI base64 encoded MapData message or JSON representation of the MapData message.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -409,7 +423,8 @@ class MapMessageControllerWithRawResponse(SecuredRawResponse[RawClient, Server, 
         Args:
             vendor_id: The VendorID set during the Vendor registration call.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -434,7 +449,8 @@ class AsyncMapMessageControllerWithRawResponse(SecuredRawResponse[AsyncRawClient
         Args:
             region_id: Region ID to filter the map messages.
             i10nid: Intersection ID to filter the map messages.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -444,7 +460,7 @@ class AsyncMapMessageControllerWithRawResponse(SecuredRawResponse[AsyncRawClient
             path_params=[param[str]("regionId", region_id), param[str]("i10nid", i10nid)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.session_token),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_map_message_error_mapper,
             request_options=request_options,
         )
@@ -470,7 +486,8 @@ class AsyncMapMessageControllerWithRawResponse(SecuredRawResponse[AsyncRawClient
         Args:
             geofence: GeoJSON Polygon defining the area to retrieve MAP messages for.
             vendor_id: The VendorID set during the Vendor registration call.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -480,7 +497,7 @@ class AsyncMapMessageControllerWithRawResponse(SecuredRawResponse[AsyncRawClient
             query_params=[param[GeofencePolygon | GeofencePolygonDict]("Geofence", geofence)],
             headers=[param[str]("VendorID", vendor_id)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.session_token),
-            decoder=text_decoder[str],
+            decoder=async_text_decoder[str],
             error_mapper=download_mapmessages_error_mapper,
             request_options=request_options,
         )
@@ -488,9 +505,9 @@ class AsyncMapMessageControllerWithRawResponse(SecuredRawResponse[AsyncRawClient
     async def ingest_map_messages(
         self,
         vendor_id: str,
-        map_data_message_standard: EtxmessageStandardEnumOrStr,
         body: EtxMapDataIngestRequest | EtxMapDataIngestRequestDict,
         *,
+        map_data_message_standard: EtxmessageStandardEnumOrStr = EtxmessageStandardEnum.SAE,
         request_options: RequestOptionsOrDict | None = None,
     ) -> ApiResult[str, IngestMapmessagesErrorBody]:
         """This endpoint allows the user to upload map messages in ASN.1 UPER base64 encoded format or JER (JSON)
@@ -507,12 +524,13 @@ class AsyncMapMessageControllerWithRawResponse(SecuredRawResponse[AsyncRawClient
 
         Args:
             vendor_id: The VendorID set during the Vendor registration call.
+            body: UPER/ASN.1 J2735/ETSI base64 encoded MapData message or JSON representation of the MapData message.
             map_data_message_standard: Select which V2X messaging standard will be used for the message generation. The
                 following options are supported: - "etsi": The message will be generated using the ETSI (European)
                 standard (e.g. MAPEM). - "sae": The message will be generated using the SAE J2735 (North American)
                 standard (e.g. MAP). - if not sent while POST, defaults to "sae"
-            body: UPER/ASN.1 J2735/ETSI base64 encoded MapData message or JSON representation of the MapData message.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -526,7 +544,7 @@ class AsyncMapMessageControllerWithRawResponse(SecuredRawResponse[AsyncRawClient
             ],
             body=json_body[EtxMapDataIngestRequest | EtxMapDataIngestRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.session_token),
-            decoder=text_decoder[str],
+            decoder=async_text_decoder[str],
             error_mapper=ingest_mapmessages_error_mapper,
             request_options=request_options,
         )
@@ -547,7 +565,8 @@ class AsyncMapMessageControllerWithRawResponse(SecuredRawResponse[AsyncRawClient
         Args:
             vendor_id: The VendorID set during the Vendor registration call.
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -557,7 +576,7 @@ class AsyncMapMessageControllerWithRawResponse(SecuredRawResponse[AsyncRawClient
             headers=[param[str]("VendorID", vendor_id), param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[MapDataQueryRequest | MapDataQueryRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.session_token),
-            decoder=json_decoder[list[Any]],
+            decoder=async_json_decoder[list[Any]],
             error_mapper=query_map_messages_error_mapper,
             request_options=request_options,
         )

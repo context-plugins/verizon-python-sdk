@@ -23,4 +23,4 @@ class DeviceFilterWithoutAccount(SdkBaseModel):
 class DeviceFilterWithoutAccountDict(TypedDict):
     group_name: NotRequired[str]
     service_plan: NotRequired[str]
-    custom_fields: NotRequired[list[CustomFields | CustomFieldsDict]]
+    custom_fields: NotRequired[list[CustomFieldsDict]]

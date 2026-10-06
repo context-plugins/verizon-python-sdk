@@ -10,7 +10,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `POST /m2m/v1/intelligence/device-experience/history/30-days`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def device_experience30days_history(body: GetDeviceExperienceScoreHistoryRequest | GetDeviceExperienceScoreHistoryRequestDict, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `body`
 - **Params**: `body` — JSON body
@@ -28,7 +28,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `POST /m2m/v1/intelligence/device-experience/bulk/latest`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def device_experience_bulk_latest(body: GetDeviceExperienceScoreBulkRequest | GetDeviceExperienceScoreBulkRequestDict, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `body`
 - **Params**: `body` — JSON body
@@ -46,7 +46,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `POST /m2m/v1/intelligence/wireless-coverage`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def domestic4_g_and5_g_nationwide_network_coverage(body: M2MV1IntelligenceWirelessCoverageRequest | M2MV1IntelligenceWirelessCoverageRequestDict, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `body`
 - **Params**: `body` — JSON body
@@ -64,7 +64,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `POST /m2m/v1/intelligence/network-conditions`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def near_real_time_network_conditions(body: GetNetworkConditionsRequest | GetNetworkConditionsRequestDict, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `body`
 - **Params**: `body` — JSON body
@@ -82,7 +82,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `POST /m2m/v1/intelligence/site-proximity/action/list`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def site_proximity(body: GetNetworkConditionsRequest | GetNetworkConditionsRequestDict, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `body`
 - **Params**: `body` — JSON body

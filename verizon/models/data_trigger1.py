@@ -39,12 +39,12 @@ class DataTrigger1(SdkBaseModel):
 
 
 class DataTrigger1Dict(TypedDict):
-    filter_criteria: NotRequired[AccountLevelFilter | AccountLevelFilterDict]
-    condition: NotRequired[AccountLevelObjectcondition | AccountLevelObjectconditionDict]
+    filter_criteria: NotRequired[AccountLevelFilterDict]
+    condition: NotRequired[AccountLevelObjectconditionDict]
     action: NotRequired[AccountLevelActionOrStr]
     condition_type: NotRequired[ConditionTypeOrStr]
     comparitor: NotRequired[ComparitorOrStr]
     threshold: NotRequired[int]
     threshold_unit: NotRequired[ThresholdUnitOrStr]
     cycle_type: NotRequired[RulesCycleTypeOrStr]
-    allowance_threshold: NotRequired[AllowanceThreshold | AllowanceThresholdDict]
+    allowance_threshold: NotRequired[AllowanceThresholdDict]

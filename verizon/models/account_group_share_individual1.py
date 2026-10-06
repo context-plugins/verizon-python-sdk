@@ -14,4 +14,4 @@ class AccountGroupShareIndividual1(SdkBaseModel):
 
 
 class AccountGroupShareIndividual1Dict(TypedDict):
-    account_group_share_individual: NotRequired[AccountGroupShareFilterCriteria | AccountGroupShareFilterCriteriaDict]
+    account_group_share_individual: NotRequired[AccountGroupShareFilterCriteriaDict]

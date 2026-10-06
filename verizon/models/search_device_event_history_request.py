@@ -30,8 +30,8 @@ class SearchDeviceEventHistoryRequest(SdkBaseModel):
 
 
 class SearchDeviceEventHistoryRequestDict(TypedDict):
-    accountidentifier: AccountIdentifier | AccountIdentifierDict
+    accountidentifier: AccountIdentifierDict
     selection: NotRequired[dict[str, str]]
-    resourceidentifier: ResourceIdentifier | ResourceIdentifierDict
+    resourceidentifier: ResourceIdentifierDict
     limitnumber: NotRequired[int]
     page: NotRequired[str]

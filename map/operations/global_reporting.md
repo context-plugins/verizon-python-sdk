@@ -10,7 +10,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `POST /m2m/v2/devices/actions/list`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def retrieve_global_list(body: ESimglobalDeviceList | ESimglobalDeviceListDict, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `body`
 - **Params**: `body` — JSON body
@@ -31,7 +31,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `POST /m2m/v2/devices/history/actions/list`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def deviceprovhistory_using_post(body: ESimprovhistoryRequest | ESimprovhistoryRequestDict, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `body`
 - **Params**: `body` — JSON body

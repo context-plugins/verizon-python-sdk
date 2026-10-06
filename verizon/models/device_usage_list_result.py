@@ -20,4 +20,4 @@ class DeviceUsageListResult(SdkBaseModel):
 
 class DeviceUsageListResultDict(TypedDict):
     has_more_data: NotRequired[bool]
-    usage_history: NotRequired[list[Usage | UsageDict]]
+    usage_history: NotRequired[list[UsageDict]]

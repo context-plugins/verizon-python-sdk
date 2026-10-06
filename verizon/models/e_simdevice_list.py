@@ -4,12 +4,12 @@ from pydantic import Field
 from typing_extensions import NotRequired, TypedDict
 
 from ..core import UNSET, Optional, SdkBaseModel
-from .device_id import DeviceId, DeviceIdDict
+from .unions.device_id1 import DeviceId1, DeviceId1Dict
 
 
 class ESimdeviceList(SdkBaseModel):
-    device_ids: Optional[list[DeviceId]] = Field(default=UNSET, alias="deviceIds")
+    device_ids: Optional[list[DeviceId1]] = Field(default=UNSET, alias="deviceIds")
 
 
 class ESimdeviceListDict(TypedDict):
-    device_ids: NotRequired[list[DeviceId | DeviceIdDict]]
+    device_ids: NotRequired[list[DeviceId1Dict]]

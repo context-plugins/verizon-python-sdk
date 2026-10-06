@@ -49,8 +49,8 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 - **Route**: `POST /api/v2/mapdata`
 - **Auth**: `thingspace_oauth` AND `session_token`
 - **Server**: `imp_server`
-- **Signature**: `def ingest_map_messages(vendor_id: str, map_data_message_standard: EtxmessageStandardEnumOrStr, body: EtxMapDataIngestRequest | EtxMapDataIngestRequestDict, *, request_options: RequestOptionsOrDict | None = None)`
-  - required, positional: `vendor_id`, `map_data_message_standard`, `body`
+- **Signature**: `def ingest_map_messages(vendor_id: str, body: EtxMapDataIngestRequest | EtxMapDataIngestRequestDict, *, map_data_message_standard: EtxmessageStandardEnumOrStr = EtxmessageStandardEnum.SAE, request_options: RequestOptionsOrDict | None = None)`
+  - required, positional: `vendor_id`, `body`
 - **Params**: `vendor_id` — header `VendorID` · `map_data_message_standard` — header `MessageStandard` · `body` — JSON body
 - **Returns (parsed)**: `str`
 - **Returns (raw)**: `ApiResult[str, IngestMapmessagesErrorBody]`
@@ -59,9 +59,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `EtxmessageStandardEnumOrStr` | `verizon/models/enums/etxmessage_standard_enum.py` |
 | `EtxMapDataIngestRequest` | `verizon/models/etx_map_data_ingest_request.py` |
 | `EtxMapDataIngestRequestDict` | `verizon/models/etx_map_data_ingest_request.py` |
+| `EtxmessageStandardEnumOrStr` | `verizon/models/enums/etxmessage_standard_enum.py` |
 | `IngestMapmessagesErrorBody` | `verizon/errors/ingest_mapmessages_error.py` |
 | `MdmErrorResponse` | `verizon/models/mdm_error_response.py` |
 

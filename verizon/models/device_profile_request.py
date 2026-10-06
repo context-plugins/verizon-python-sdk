@@ -14,6 +14,6 @@ class DeviceProfileRequest(SdkBaseModel):
 
 
 class DeviceProfileRequestDict(TypedDict):
-    devices: NotRequired[list[GiodeviceList | GiodeviceListDict]]
+    devices: NotRequired[list[GiodeviceListDict]]
     account_name: NotRequired[str]
     service_plan: NotRequired[str]

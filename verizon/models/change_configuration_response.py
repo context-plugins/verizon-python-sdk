@@ -51,7 +51,7 @@ class ChangeConfigurationResponseDict(TypedDict):
     action: NotRequired[str]
     createdon: NotRequired[str]
     deviceid: NotRequired[str]
-    fields: NotRequired[Fields | FieldsDict]
+    fields: NotRequired[FieldsDict]
     foreignid: NotRequired[str]
     id: NotRequired[str]
     kind: NotRequired[str]

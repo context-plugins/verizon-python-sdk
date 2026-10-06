@@ -19,5 +19,5 @@ class DailyUsageResponse(SdkBaseModel):
 
 class DailyUsageResponseDict(TypedDict):
     has_more_data: NotRequired[bool]
-    device_id: NotRequired[GiodeviceId | GiodeviceIdDict]
-    usage_history: NotRequired[list[DailyUsageHistory | DailyUsageHistoryDict]]
+    device_id: NotRequired[GiodeviceIdDict]
+    usage_history: NotRequired[list[DailyUsageHistoryDict]]

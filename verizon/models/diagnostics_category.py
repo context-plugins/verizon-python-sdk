@@ -20,4 +20,4 @@ class DiagnosticsCategory(SdkBaseModel):
 
 class DiagnosticsCategoryDict(TypedDict):
     category_name: NotRequired[str]
-    extended_attributes: NotRequired[list[CustomFields | CustomFieldsDict]]
+    extended_attributes: NotRequired[list[CustomFieldsDict]]

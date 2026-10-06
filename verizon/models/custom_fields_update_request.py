@@ -33,8 +33,8 @@ class CustomFieldsUpdateRequest(SdkBaseModel):
 
 class CustomFieldsUpdateRequestDict(TypedDict):
     account_name: NotRequired[str]
-    custom_fields: NotRequired[list[CustomFields | CustomFieldsDict]]
-    custom_fields_to_update: NotRequired[list[CustomFields | CustomFieldsDict]]
-    devices: NotRequired[list[AccountDeviceList | AccountDeviceListDict]]
+    custom_fields: NotRequired[list[CustomFieldsDict]]
+    custom_fields_to_update: NotRequired[list[CustomFieldsDict]]
+    devices: NotRequired[list[AccountDeviceListDict]]
     group_name: NotRequired[str]
     service_plan: NotRequired[str]

@@ -36,4 +36,4 @@ class AttributeSettingDict(TypedDict):
     created_on: NotRequired[RFC3339DateTime]
     is_observable: NotRequired[bool]
     is_observing: NotRequired[bool]
-    frequency: NotRequired[NumericalData | NumericalDataDict]
+    frequency: NotRequired[NumericalDataDict]

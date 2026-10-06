@@ -17,5 +17,5 @@ class AccountDeviceList(SdkBaseModel):
 
 
 class AccountDeviceListDict(TypedDict):
-    device_ids: list[DeviceId | DeviceIdDict]
+    device_ids: list[DeviceIdDict]
     ip_address: NotRequired[str]

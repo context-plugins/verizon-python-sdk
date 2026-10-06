@@ -26,11 +26,11 @@ class CreateTriggerRequest(SdkBaseModel):
 
 class CreateTriggerRequestDict(TypedDict):
     account_name: NotRequired[str]
-    anomaly_trigger_request: NotRequired[AnomalyTriggerRequest | AnomalyTriggerRequestDict]
-    data_trigger_request: NotRequired[DataTriggerRequest | DataTriggerRequestDict]
+    anomaly_trigger_request: NotRequired[AnomalyTriggerRequestDict]
+    data_trigger_request: NotRequired[DataTriggerRequestDict]
     group_name: NotRequired[str]
     name: NotRequired[str]
-    session_trigger_request: NotRequired[SessionTriggerRequest | SessionTriggerRequestDict]
-    sms_trigger_request: NotRequired[SmstriggerRequest | SmstriggerRequestDict]
+    session_trigger_request: NotRequired[SessionTriggerRequestDict]
+    sms_trigger_request: NotRequired[SmstriggerRequestDict]
     trigger_category: NotRequired[str]
     trigger_cycle: NotRequired[str]

@@ -21,6 +21,6 @@ class DeviceConnectionListRequest(SdkBaseModel):
 
 
 class DeviceConnectionListRequestDict(TypedDict):
-    device_id: DeviceId | DeviceIdDict
+    device_id: DeviceIdDict
     earliest: str
     latest: str

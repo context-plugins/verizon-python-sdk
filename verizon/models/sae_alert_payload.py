@@ -9,7 +9,7 @@ from ..core import UNSET, Optional, SdkBaseModel
 class SaeAlertPayload(SdkBaseModel):
     """Road Side Alert (RSA) message payload as defined in SAE J2735."""
 
-    msg_cnt: Optional[int] = Field(default=UNSET, alias="msgCnt")
+    msg_cnt: int = Field(default=0, alias="msgCnt")
     """It is used to provide a sequence number within a stream of messages with the same DSRCmsgID (here RoadSideAlert)
     and from the same sender."""
 

@@ -15,4 +15,4 @@ class ExitServiceContent(SdkBaseModel):
 
 
 class ExitServiceContentDict(TypedDict):
-    exit_service: list[TextPhraseOrItis | TextPhraseOrItisDict]
+    exit_service: list[TextPhraseOrItisDict]

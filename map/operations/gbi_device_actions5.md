@@ -10,7 +10,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `PUT /actions/plan`
 - **Auth**: `thingspace_oauth` OR `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def business_internet_serviceplanchange(body: GbichangeRequest5 | GbichangeRequest5Dict, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `body`
 - **Params**: `body` — JSON body
@@ -28,7 +28,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `POST /actions/activate`
 - **Auth**: `thingspace_oauth` OR `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def business_internetactivate_using_post(body: GbiactivateRequest5 | GbiactivateRequest5Dict, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `body`
 - **Params**: `body` — JSON body
@@ -46,7 +46,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `POST /actions/list`
 - **Auth**: `thingspace_oauth` OR `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def business_internetlist_device_information(body: GbideviceId5 | GbideviceId5Dict, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `body`
 - **Params**: `body` — JSON body

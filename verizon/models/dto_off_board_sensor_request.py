@@ -16,4 +16,4 @@ class DtoOffBoardSensorRequest(SdkBaseModel):
 
 class DtoOffBoardSensorRequestDict(TypedDict):
     accountname: NotRequired[str]
-    configuration: NotRequired[Sensorinsightsconfig | SensorinsightsconfigDict]
+    configuration: NotRequired[SensorinsightsconfigDict]

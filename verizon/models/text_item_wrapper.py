@@ -14,4 +14,4 @@ class TextItemWrapper(SdkBaseModel):
 
 
 class TextItemWrapperDict(TypedDict):
-    item: TextItemContent | TextItemContentDict
+    item: TextItemContentDict

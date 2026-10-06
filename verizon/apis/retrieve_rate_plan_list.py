@@ -10,6 +10,7 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_decoder,
     param,
     raw_error_response,
@@ -27,7 +28,8 @@ class RetrieveRatePlanList:
 
         Args:
             ecpd_id: The Enterprise Customer Profile Database ID. This is the same as the accountName value
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             This is a syncronous response showing the rate plans associated.
@@ -52,7 +54,8 @@ class AsyncRetrieveRatePlanList:
 
         Args:
             ecpd_id: The Enterprise Customer Profile Database ID. This is the same as the accountName value
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             This is a syncronous response showing the rate plans associated.
@@ -74,13 +77,14 @@ class RetrieveRatePlanListWithRawResponse(SecuredRawResponse[RawClient, Server, 
 
         Args:
             ecpd_id: The Enterprise Customer Profile Database ID. This is the same as the accountName value
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/v2/triggers/rateplanlist/{ecpdId}"),
+            url_template=self._server.thingspace("/v2/triggers/rateplanlist/{ecpdId}"),
             path_params=[param[str]("ecpdId", ecpd_id)],
             auth_scheme=AnySchemes(self._auth.thingspace_oauth1, self._auth.vz_m2_m_token),
             decoder=json_decoder[Rateplan],
@@ -97,16 +101,17 @@ class AsyncRetrieveRatePlanListWithRawResponse(SecuredRawResponse[AsyncRawClient
 
         Args:
             ecpd_id: The Enterprise Customer Profile Database ID. This is the same as the accountName value
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/v2/triggers/rateplanlist/{ecpdId}"),
+            url_template=self._server.thingspace("/v2/triggers/rateplanlist/{ecpdId}"),
             path_params=[param[str]("ecpdId", ecpd_id)],
             auth_scheme=AsyncAnySchemes(self._auth.thingspace_oauth1, self._auth.vz_m2_m_token),
-            decoder=json_decoder[Rateplan],
+            decoder=async_json_decoder[Rateplan],
             error_mapper=raw_error_response,
             request_options=request_options,
         )

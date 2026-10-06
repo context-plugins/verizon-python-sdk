@@ -28,5 +28,5 @@ class GetWirelessCoverageRequestFwaDict(TypedDict):
     account_name: str
     request_type: str
     location_type: str
-    locations: Locations | LocationsDict
-    network_types_list: list[NetworkTypeObject | NetworkTypeObjectDict]
+    locations: LocationsDict
+    network_types_list: list[NetworkTypeObjectDict]

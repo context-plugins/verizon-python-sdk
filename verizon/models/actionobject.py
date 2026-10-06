@@ -20,6 +20,6 @@ class Actionobject(SdkBaseModel):
 
 class ActionobjectDict(TypedDict):
     suspend: NotRequired[bool]
-    suspend_details: NotRequired[Suspenddetailsobject | SuspenddetailsobjectDict]
+    suspend_details: NotRequired[SuspenddetailsobjectDict]
     change_plan: NotRequired[bool]
-    change_plan_details: NotRequired[ChangePlanDetails | ChangePlanDetailsDict]
+    change_plan_details: NotRequired[ChangePlanDetailsDict]

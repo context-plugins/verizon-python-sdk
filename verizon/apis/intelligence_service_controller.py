@@ -11,6 +11,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -47,7 +48,8 @@ class IntelligenceServiceController:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The asynchronous request status.
@@ -68,7 +70,8 @@ class IntelligenceServiceController:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Success
@@ -98,7 +101,8 @@ class AsyncIntelligenceServiceController:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The asynchronous request status.
@@ -121,7 +125,8 @@ class AsyncIntelligenceServiceController:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Success
@@ -150,13 +155,14 @@ class IntelligenceServiceControllerWithRawResponse(SecuredRawResponse[RawClient,
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/v1/intelligence/device/connection-planner"),
+            url_template=self._server.thingspace("/v1/intelligence/device/connection-planner"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[GetDevicesWindowsRequestforplanner | GetDevicesWindowsRequestforplannerDict | None](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -175,13 +181,14 @@ class IntelligenceServiceControllerWithRawResponse(SecuredRawResponse[RawClient,
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/v1/intelligence/device/connection-planner/status"),
+            url_template=self._server.thingspace("/v1/intelligence/device/connection-planner/status"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[GetDeviceStatusesRequestforplanner | GetDeviceStatusesRequestforplannerDict | None](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -202,17 +209,18 @@ class AsyncIntelligenceServiceControllerWithRawResponse(SecuredRawResponse[Async
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/v1/intelligence/device/connection-planner"),
+            url_template=self._server.thingspace("/v1/intelligence/device/connection-planner"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[GetDevicesWindowsRequestforplanner | GetDevicesWindowsRequestforplannerDict | None](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[AsynchronousRequestResultforplanner],
+            decoder=async_json_decoder[AsynchronousRequestResultforplanner],
             error_mapper=set_connection_planner_error_mapper,
             request_options=request_options,
         )
@@ -227,17 +235,18 @@ class AsyncIntelligenceServiceControllerWithRawResponse(SecuredRawResponse[Async
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/v1/intelligence/device/connection-planner/status"),
+            url_template=self._server.thingspace("/v1/intelligence/device/connection-planner/status"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[GetDeviceStatusesRequestforplanner | GetDeviceStatusesRequestforplannerDict | None](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[GetDeviceStatusesResponseforplanner],
+            decoder=async_json_decoder[GetDeviceStatusesResponseforplanner],
             error_mapper=status_connection_planner_error_mapper,
             request_options=request_options,
         )

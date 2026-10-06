@@ -26,4 +26,4 @@ class ClientRegistrationResponse(SdkBaseModel):
 
 class ClientRegistrationResponseDict(TypedDict):
     device_id: UUID
-    certificate: Certificate | CertificateDict
+    certificate: CertificateDict

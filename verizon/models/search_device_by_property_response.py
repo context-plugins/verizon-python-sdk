@@ -55,7 +55,7 @@ class SearchDeviceByPropertyResponseDict(TypedDict):
     billingaccountid: NotRequired[str]
     createdon: NotRequired[str]
     eventretention: NotRequired[str]
-    fields: NotRequired[Fields1 | Fields1Dict]
+    fields: NotRequired[Fields1Dict]
     iccid: NotRequired[str]
     id: NotRequired[str]
     imei: NotRequired[str]

@@ -15,6 +15,6 @@ class QosdeviceInfo(SdkBaseModel):
 
 
 class QosdeviceInfoDict(TypedDict):
-    device_id: QosdeviceId | QosdeviceIdDict
+    device_id: QosdeviceIdDict
     device_i_pv6_addr: NotRequired[str]
-    flow_info: list[FlowInfo | FlowInfoDict]
+    flow_info: list[FlowInfoDict]

@@ -11,6 +11,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -47,7 +48,8 @@ class EUiccDeviceProfileManagement:
 
         Args:
             body: Update state
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -66,7 +68,8 @@ class EUiccDeviceProfileManagement:
 
         Args:
             body: Update state
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -85,7 +88,8 @@ class EUiccDeviceProfileManagement:
 
         Args:
             body: Device Profile Query
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -104,7 +108,8 @@ class EUiccDeviceProfileManagement:
 
         Args:
             body: Device Profile Query
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -123,7 +128,8 @@ class EUiccDeviceProfileManagement:
 
         Args:
             body: Update state
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -152,7 +158,8 @@ class AsyncEUiccDeviceProfileManagement:
 
         Args:
             body: Update state
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -171,7 +178,8 @@ class AsyncEUiccDeviceProfileManagement:
 
         Args:
             body: Update state
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -190,7 +198,8 @@ class AsyncEUiccDeviceProfileManagement:
 
         Args:
             body: Device Profile Query
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -211,7 +220,8 @@ class AsyncEUiccDeviceProfileManagement:
 
         Args:
             body: Device Profile Query
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -232,7 +242,8 @@ class AsyncEUiccDeviceProfileManagement:
 
         Args:
             body: Update state
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -258,13 +269,14 @@ class EUiccDeviceProfileManagementWithRawResponse(SecuredRawResponse[RawClient, 
 
         Args:
             body: Update state
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/profile/actions/delete"),
+            url_template=self._server.thingspace("/m2m/v1/devices/profile/actions/delete"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ProfileChangeStateRequest | ProfileChangeStateRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -283,13 +295,14 @@ class EUiccDeviceProfileManagementWithRawResponse(SecuredRawResponse[RawClient, 
 
         Args:
             body: Update state
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/profile/actions/disable"),
+            url_template=self._server.thingspace("/m2m/v1/devices/profile/actions/disable"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ProfileChangeStateRequest | ProfileChangeStateRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -308,13 +321,14 @@ class EUiccDeviceProfileManagementWithRawResponse(SecuredRawResponse[RawClient, 
 
         Args:
             body: Device Profile Query
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/profile/actions/download_disable"),
+            url_template=self._server.thingspace("/m2m/v1/devices/profile/actions/download_disable"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ProfileChangeStateRequest | ProfileChangeStateRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -333,13 +347,14 @@ class EUiccDeviceProfileManagementWithRawResponse(SecuredRawResponse[RawClient, 
 
         Args:
             body: Device Profile Query
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/profile/actions/download_enable"),
+            url_template=self._server.thingspace("/m2m/v1/devices/profile/actions/download_enable"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ProfileChangeStateRequest | ProfileChangeStateRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -358,13 +373,14 @@ class EUiccDeviceProfileManagementWithRawResponse(SecuredRawResponse[RawClient, 
 
         Args:
             body: Update state
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/profile/actions/enable"),
+            url_template=self._server.thingspace("/m2m/v1/devices/profile/actions/enable"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ProfileChangeStateRequest | ProfileChangeStateRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -386,17 +402,18 @@ class AsyncEUiccDeviceProfileManagementWithRawResponse(SecuredRawResponse[AsyncR
 
         Args:
             body: Update state
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/profile/actions/delete"),
+            url_template=self._server.thingspace("/m2m/v1/devices/profile/actions/delete"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ProfileChangeStateRequest | ProfileChangeStateRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[RequestResponse],
+            decoder=async_json_decoder[RequestResponse],
             error_mapper=delete_local_profile_error_mapper,
             request_options=request_options,
         )
@@ -411,17 +428,18 @@ class AsyncEUiccDeviceProfileManagementWithRawResponse(SecuredRawResponse[AsyncR
 
         Args:
             body: Update state
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/profile/actions/disable"),
+            url_template=self._server.thingspace("/m2m/v1/devices/profile/actions/disable"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ProfileChangeStateRequest | ProfileChangeStateRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[RequestResponse],
+            decoder=async_json_decoder[RequestResponse],
             error_mapper=disable_local_profile_error_mapper,
             request_options=request_options,
         )
@@ -436,17 +454,18 @@ class AsyncEUiccDeviceProfileManagementWithRawResponse(SecuredRawResponse[AsyncR
 
         Args:
             body: Device Profile Query
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/profile/actions/download_disable"),
+            url_template=self._server.thingspace("/m2m/v1/devices/profile/actions/download_disable"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ProfileChangeStateRequest | ProfileChangeStateRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceManagementResult],
+            decoder=async_json_decoder[DeviceManagementResult],
             error_mapper=download_local_profile_to_disable_error_mapper,
             request_options=request_options,
         )
@@ -461,17 +480,18 @@ class AsyncEUiccDeviceProfileManagementWithRawResponse(SecuredRawResponse[AsyncR
 
         Args:
             body: Device Profile Query
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/profile/actions/download_enable"),
+            url_template=self._server.thingspace("/m2m/v1/devices/profile/actions/download_enable"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ProfileChangeStateRequest | ProfileChangeStateRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceManagementResult],
+            decoder=async_json_decoder[DeviceManagementResult],
             error_mapper=download_local_profile_to_enable_error_mapper,
             request_options=request_options,
         )
@@ -486,17 +506,18 @@ class AsyncEUiccDeviceProfileManagementWithRawResponse(SecuredRawResponse[AsyncR
 
         Args:
             body: Update state
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/profile/actions/enable"),
+            url_template=self._server.thingspace("/m2m/v1/devices/profile/actions/enable"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ProfileChangeStateRequest | ProfileChangeStateRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[RequestResponse],
+            decoder=async_json_decoder[RequestResponse],
             error_mapper=enable_local_profile_error_mapper,
             request_options=request_options,
         )

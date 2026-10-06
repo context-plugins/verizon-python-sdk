@@ -12,4 +12,4 @@ class GiodeviceList(SdkBaseModel):
 
 
 class GiodeviceListDict(TypedDict):
-    device_ids: NotRequired[list[GiodeviceId | GiodeviceIdDict]]
+    device_ids: NotRequired[list[GiodeviceIdDict]]

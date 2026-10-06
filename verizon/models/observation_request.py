@@ -31,7 +31,7 @@ class ObservationRequest(SdkBaseModel):
 
 class ObservationRequestDict(TypedDict):
     account_name: str
-    devices: list[Device | DeviceDict]
-    attributes: list[ObservationRequestAttribute | ObservationRequestAttributeDict]
-    frequency: NotRequired[NumericalData | NumericalDataDict]
-    duration: NotRequired[NumericalData | NumericalDataDict]
+    devices: list[DeviceDict]
+    attributes: list[ObservationRequestAttributeDict]
+    frequency: NotRequired[NumericalDataDict]
+    duration: NotRequired[NumericalDataDict]

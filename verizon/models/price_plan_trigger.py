@@ -16,6 +16,6 @@ class PricePlanTrigger(SdkBaseModel):
 
 
 class PricePlanTriggerDict(TypedDict):
-    stand_alone: NotRequired[FiltercriteriaObjectCall | FiltercriteriaObjectCallDict]
-    condition: NotRequired[PricePlanTriggerCondition | PricePlanTriggerConditionDict]
-    action: NotRequired[Actionobject | ActionobjectDict]
+    stand_alone: NotRequired[FiltercriteriaObjectCallDict]
+    condition: NotRequired[PricePlanTriggerConditionDict]
+    action: NotRequired[ActionobjectDict]

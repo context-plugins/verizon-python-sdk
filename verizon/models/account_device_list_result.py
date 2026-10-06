@@ -19,5 +19,5 @@ class AccountDeviceListResult(SdkBaseModel):
 
 
 class AccountDeviceListResultDict(TypedDict):
-    devices: NotRequired[list[ThingspaceDevice | ThingspaceDeviceDict]]
+    devices: NotRequired[list[ThingspaceDeviceDict]]
     has_more_data: NotRequired[bool]

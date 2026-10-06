@@ -16,5 +16,5 @@ class ChangePwndeviceStateActivateRequest(SdkBaseModel):
 
 class ChangePwndeviceStateActivateRequestDict(TypedDict):
     account_name: str
-    device_list: list[PwndeviceList | PwndeviceListDict]
-    activate: Activate | ActivateDict
+    device_list: list[PwndeviceListDict]
+    activate: ActivateDict

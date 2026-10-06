@@ -36,4 +36,4 @@ class AccountLicenseInfoDict(TypedDict):
     assigned_licenses: NotRequired[int]
     has_more_data: NotRequired[bool]
     last_seen_device_id: NotRequired[int]
-    device_list: NotRequired[list[AccountLicenseDeviceListItem | AccountLicenseDeviceListItemDict]]
+    device_list: NotRequired[list[AccountLicenseDeviceListItemDict]]

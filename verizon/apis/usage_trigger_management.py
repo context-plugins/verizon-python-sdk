@@ -11,6 +11,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -40,7 +41,8 @@ class UsageTriggerManagement:
 
         Args:
             body: License assignment.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Usage trigger Add result
@@ -57,7 +59,8 @@ class UsageTriggerManagement:
         Args:
             account_name: Account name
             trigger_id: Usage trigger ID
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Delete result
@@ -80,7 +83,8 @@ class UsageTriggerManagement:
         Args:
             trigger_id: Usage trigger ID
             body: New trigger values
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Usage trigger Modify result
@@ -109,7 +113,8 @@ class AsyncUsageTriggerManagement:
 
         Args:
             body: License assignment.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Usage trigger Add result
@@ -126,7 +131,8 @@ class AsyncUsageTriggerManagement:
         Args:
             account_name: Account name
             trigger_id: Usage trigger ID
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Delete result
@@ -149,7 +155,8 @@ class AsyncUsageTriggerManagement:
         Args:
             trigger_id: Usage trigger ID
             body: New trigger values
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Usage trigger Modify result
@@ -177,7 +184,8 @@ class UsageTriggerManagementWithRawResponse(SecuredRawResponse[RawClient, Server
 
         Args:
             body: License assignment.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -200,7 +208,8 @@ class UsageTriggerManagementWithRawResponse(SecuredRawResponse[RawClient, Server
         Args:
             account_name: Account name
             trigger_id: Usage trigger ID
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -227,7 +236,8 @@ class UsageTriggerManagementWithRawResponse(SecuredRawResponse[RawClient, Server
         Args:
             trigger_id: Usage trigger ID
             body: New trigger values
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -256,7 +266,8 @@ class AsyncUsageTriggerManagementWithRawResponse(SecuredRawResponse[AsyncRawClie
 
         Args:
             body: License assignment.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -266,7 +277,7 @@ class AsyncUsageTriggerManagementWithRawResponse(SecuredRawResponse[AsyncRawClie
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[UsageTriggerAddRequest | UsageTriggerAddRequestDict | None](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[UsageTriggerResponse],
+            decoder=async_json_decoder[UsageTriggerResponse],
             error_mapper=create_new_trigger_error_mapper,
             request_options=request_options,
         )
@@ -279,7 +290,8 @@ class AsyncUsageTriggerManagementWithRawResponse(SecuredRawResponse[AsyncRawClie
         Args:
             account_name: Account name
             trigger_id: Usage trigger ID
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -289,7 +301,7 @@ class AsyncUsageTriggerManagementWithRawResponse(SecuredRawResponse[AsyncRawClie
             path_params=[param[str]("accountName", account_name), param[str]("triggerId", trigger_id)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceLocationSuccessResult],
+            decoder=async_json_decoder[DeviceLocationSuccessResult],
             error_mapper=delete_trigger_error_mapper,
             request_options=request_options,
         )
@@ -306,7 +318,8 @@ class AsyncUsageTriggerManagementWithRawResponse(SecuredRawResponse[AsyncRawClie
         Args:
             trigger_id: Usage trigger ID
             body: New trigger values
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -317,7 +330,7 @@ class AsyncUsageTriggerManagementWithRawResponse(SecuredRawResponse[AsyncRawClie
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[UsageTriggerUpdateRequest | UsageTriggerUpdateRequestDict | None](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[UsageTriggerResponse],
+            decoder=async_json_decoder[UsageTriggerResponse],
             error_mapper=update_trigger_error_mapper,
             request_options=request_options,
         )

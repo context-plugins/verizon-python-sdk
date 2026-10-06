@@ -13,4 +13,4 @@ class GenerateResponseItem(SdkBaseModel):
 
 class GenerateResponseItemDict(TypedDict):
     imei: NotRequired[str]
-    credential: NotRequired[GenerateResponseItemCredential | GenerateResponseItemCredentialDict]
+    credential: NotRequired[GenerateResponseItemCredentialDict]

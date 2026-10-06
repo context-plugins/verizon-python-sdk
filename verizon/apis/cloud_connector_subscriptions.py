@@ -12,6 +12,8 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
@@ -40,7 +42,8 @@ class CloudConnectorSubscriptions:
 
         Args:
             body: The request body provides the details of the subscription that you want to create.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Returns full subscription resource definition.
@@ -59,7 +62,8 @@ class CloudConnectorSubscriptions:
 
         Args:
             body: The request body identifies the subscription to delete.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Subscription deleted successfully.
@@ -78,7 +82,8 @@ class CloudConnectorSubscriptions:
 
         Args:
             body: The request body specifies fields and values to match.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Returns an array of all matching subscriptions. Each subscription includes the full subscription resource
@@ -108,7 +113,8 @@ class AsyncCloudConnectorSubscriptions:
 
         Args:
             body: The request body provides the details of the subscription that you want to create.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Returns full subscription resource definition.
@@ -127,7 +133,8 @@ class AsyncCloudConnectorSubscriptions:
 
         Args:
             body: The request body identifies the subscription to delete.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Subscription deleted successfully.
@@ -146,7 +153,8 @@ class AsyncCloudConnectorSubscriptions:
 
         Args:
             body: The request body specifies fields and values to match.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Returns an array of all matching subscriptions. Each subscription includes the full subscription resource
@@ -173,7 +181,8 @@ class CloudConnectorSubscriptionsWithRawResponse(SecuredRawResponse[RawClient, S
 
         Args:
             body: The request body provides the details of the subscription that you want to create.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -198,7 +207,8 @@ class CloudConnectorSubscriptionsWithRawResponse(SecuredRawResponse[RawClient, S
 
         Args:
             body: The request body identifies the subscription to delete.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -223,7 +233,8 @@ class CloudConnectorSubscriptionsWithRawResponse(SecuredRawResponse[RawClient, S
 
         Args:
             body: The request body specifies fields and values to match.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -251,7 +262,8 @@ class AsyncCloudConnectorSubscriptionsWithRawResponse(SecuredRawResponse[AsyncRa
 
         Args:
             body: The request body provides the details of the subscription that you want to create.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -261,7 +273,7 @@ class AsyncCloudConnectorSubscriptionsWithRawResponse(SecuredRawResponse[AsyncRa
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[CreateSubscriptionRequest | CreateSubscriptionRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[Subscription],
+            decoder=async_json_decoder[Subscription],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -276,7 +288,8 @@ class AsyncCloudConnectorSubscriptionsWithRawResponse(SecuredRawResponse[AsyncRa
 
         Args:
             body: The request body identifies the subscription to delete.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -286,7 +299,7 @@ class AsyncCloudConnectorSubscriptionsWithRawResponse(SecuredRawResponse[AsyncRa
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DeleteSubscriptionRequest | DeleteSubscriptionRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -301,7 +314,8 @@ class AsyncCloudConnectorSubscriptionsWithRawResponse(SecuredRawResponse[AsyncRa
 
         Args:
             body: The request body specifies fields and values to match.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -311,7 +325,7 @@ class AsyncCloudConnectorSubscriptionsWithRawResponse(SecuredRawResponse[AsyncRa
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[QuerySubscriptionRequest | QuerySubscriptionRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[list[Subscription]],
+            decoder=async_json_decoder[list[Subscription]],
             error_mapper=raw_error_response,
             request_options=request_options,
         )

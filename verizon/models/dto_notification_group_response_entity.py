@@ -44,6 +44,6 @@ class DtoNotificationGroupResponseEntityDict(TypedDict):
     id: NotRequired[str]
     lastupdated: NotRequired[RFC3339DateTime]
     name: NotRequired[str]
-    users: NotRequired[list[DtoUserDto | DtoUserDtoDict]]
+    users: NotRequired[list[DtoUserDtoDict]]
     version: NotRequired[str]
     versionid: NotRequired[str]

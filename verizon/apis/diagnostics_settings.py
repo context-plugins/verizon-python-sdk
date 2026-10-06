@@ -10,6 +10,7 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_decoder,
     param,
     raw_error_response,
@@ -30,7 +31,8 @@ class DiagnosticsSettings:
         Args:
             account_name: Account identifier.
             devices: Devices list formatted as "id, kind"
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Diagnostic settings.
@@ -58,7 +60,8 @@ class AsyncDiagnosticsSettings:
         Args:
             account_name: Account identifier.
             devices: Devices list formatted as "id, kind"
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Diagnostic settings.
@@ -85,7 +88,8 @@ class DiagnosticsSettingsWithRawResponse(SecuredRawResponse[RawClient, Server, A
         Args:
             account_name: Account identifier.
             devices: Devices list formatted as "id, kind"
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -109,7 +113,8 @@ class AsyncDiagnosticsSettingsWithRawResponse(SecuredRawResponse[AsyncRawClient,
         Args:
             account_name: Account identifier.
             devices: Devices list formatted as "id, kind"
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -118,7 +123,7 @@ class AsyncDiagnosticsSettingsWithRawResponse(SecuredRawResponse[AsyncRawClient,
             url_template=self._server.device_diagnostics("/devices/settings"),
             query_params=[param[str]("accountName", account_name), param[str]("devices", devices)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[list[DiagnosticObservationSetting]],
+            decoder=async_json_decoder[list[DiagnosticObservationSetting]],
             error_mapper=raw_error_response,
             request_options=request_options,
         )

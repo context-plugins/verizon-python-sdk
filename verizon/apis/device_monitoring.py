@@ -11,6 +11,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -40,7 +41,8 @@ class DeviceMonitoring:
 
         Args:
             body: Create Reachability Report Request
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -59,7 +61,8 @@ class DeviceMonitoring:
 
         Args:
             stopreachabilitypayload: Payload for the Stop Device Reachability monitors request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -89,7 +92,8 @@ class AsyncDeviceMonitoring:
 
         Args:
             body: Create Reachability Report Request
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -108,7 +112,8 @@ class AsyncDeviceMonitoring:
 
         Args:
             stopreachabilitypayload: Payload for the Stop Device Reachability monitors request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -137,13 +142,14 @@ class DeviceMonitoringWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
 
         Args:
             body: Create Reachability Report Request
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/diagnostics/basic/devicereachability"),
+            url_template=self._server.thingspace("/m2m/v1/diagnostics/basic/devicereachability"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[NotificationReportRequest | NotificationReportRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -162,13 +168,14 @@ class DeviceMonitoringWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
 
         Args:
             stopreachabilitypayload: Payload for the Stop Device Reachability monitors request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="DELETE",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/diagnostics/basic/devicereachability"),
+            url_template=self._server.thingspace("/m2m/v1/diagnostics/basic/devicereachability"),
             query_params=[
                 param[StopMonitorRequest | StopMonitorRequestDict]("stopreachabilitypayload", stopreachabilitypayload)
             ],
@@ -191,17 +198,18 @@ class AsyncDeviceMonitoringWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
 
         Args:
             body: Create Reachability Report Request
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/diagnostics/basic/devicereachability"),
+            url_template=self._server.thingspace("/m2m/v1/diagnostics/basic/devicereachability"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[NotificationReportRequest | NotificationReportRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[RequestResponse],
+            decoder=async_json_decoder[RequestResponse],
             error_mapper=device_reachability_error_mapper,
             request_options=request_options,
         )
@@ -216,19 +224,20 @@ class AsyncDeviceMonitoringWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
 
         Args:
             stopreachabilitypayload: Payload for the Stop Device Reachability monitors request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="DELETE",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/diagnostics/basic/devicereachability"),
+            url_template=self._server.thingspace("/m2m/v1/diagnostics/basic/devicereachability"),
             query_params=[
                 param[StopMonitorRequest | StopMonitorRequestDict]("stopreachabilitypayload", stopreachabilitypayload)
             ],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[RequestResponse],
+            decoder=async_json_decoder[RequestResponse],
             error_mapper=stop_device_reachability_error_mapper,
             request_options=request_options,
         )

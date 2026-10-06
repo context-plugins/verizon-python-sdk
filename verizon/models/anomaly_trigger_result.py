@@ -14,4 +14,4 @@ class AnomalyTriggerResult(SdkBaseModel):
 
 
 class AnomalyTriggerResultDict(TypedDict):
-    triggers: NotRequired[list[TriggersListOptions | TriggersListOptionsDict]]
+    triggers: NotRequired[list[TriggersListOptionsDict]]

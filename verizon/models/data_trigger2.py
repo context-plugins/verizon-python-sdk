@@ -35,11 +35,11 @@ class DataTrigger2(SdkBaseModel):
 
 
 class DataTrigger2Dict(TypedDict):
-    device_group: NotRequired[DeviceGroupFilterCriteria | DeviceGroupFilterCriteriaDict]
+    device_group: NotRequired[DeviceGroupFilterCriteriaDict]
     condition_type: NotRequired[ConditionTypeOrStr]
     comparitor: NotRequired[ComparitorOrStr]
     threshold: NotRequired[int]
     threshold_unit: NotRequired[ThresholdUnitOrStr]
     cycle_type: NotRequired[RulesCycleTypeOrStr]
-    allowance_threshold: NotRequired[AllowanceThreshold | AllowanceThresholdDict]
-    action: NotRequired[Actionobject | ActionobjectDict]
+    allowance_threshold: NotRequired[AllowanceThresholdDict]
+    action: NotRequired[ActionobjectDict]

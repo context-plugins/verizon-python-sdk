@@ -27,4 +27,4 @@ class V1LicensesAssignedRemovedResultDict(TypedDict):
     account_name: NotRequired[str]
     lic_count: NotRequired[int]
     lic_used_count: NotRequired[int]
-    device_list: NotRequired[list[V1DeviceListItem | V1DeviceListItemDict]]
+    device_list: NotRequired[list[V1DeviceListItemDict]]

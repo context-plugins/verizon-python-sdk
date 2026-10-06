@@ -14,6 +14,6 @@ class SmseventHistoryRequest(SdkBaseModel):
 
 
 class SmseventHistoryRequestDict(TypedDict):
-    device_id: GiodeviceId | GiodeviceIdDict
+    device_id: GiodeviceIdDict
     earliest: NotRequired[RFC3339DateTime]
     latest: NotRequired[RFC3339DateTime]

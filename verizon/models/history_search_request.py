@@ -28,7 +28,7 @@ class HistorySearchRequest(SdkBaseModel):
 
 
 class HistorySearchRequestDict(TypedDict):
-    filter: HistorySearchFilter | HistorySearchFilterDict
+    filter: HistorySearchFilterDict
     limit_number: NotRequired[int]
-    limit_time: NotRequired[HistorySearchLimitTime | HistorySearchLimitTimeDict]
+    limit_time: NotRequired[HistorySearchLimitTimeDict]
     page: NotRequired[str]

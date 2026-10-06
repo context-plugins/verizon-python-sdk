@@ -28,5 +28,5 @@ class TargetAuthenticationBodyDict(TypedDict):
     grant_type: NotRequired[str]
     refresh_token: NotRequired[str]
     scope: NotRequired[str]
-    headers: NotRequired[TargetAuthenticationBodyHeaders | TargetAuthenticationBodyHeadersDict]
-    host: NotRequired[TargetAuthenticationBodyHost | TargetAuthenticationBodyHostDict]
+    headers: NotRequired[TargetAuthenticationBodyHeadersDict]
+    host: NotRequired[TargetAuthenticationBodyHostDict]

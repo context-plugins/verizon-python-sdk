@@ -3,7 +3,7 @@ from __future__ import annotations
 from pydantic import Field
 from typing_extensions import NotRequired, TypedDict
 
-from ..core import UNSET, Optional, OptionalNullable, SdkBaseModel
+from ..core import UNSET, Optional, SdkBaseModel
 from .carrier_information import CarrierInformation, CarrierInformationDict
 from .custom_fields import CustomFields, CustomFieldsDict
 from .device_id import DeviceId, DeviceIdDict
@@ -37,7 +37,7 @@ class ThingspaceDevice(SdkBaseModel):
     """Any extended attributes for the device, as Key and Value pairs. The pairs listed below are returned as part of
     the response for a single device, but are not included if the request was for information about multiple devices."""
 
-    group_names: OptionalNullable[list[str]] = Field(default=UNSET, alias="groupNames")
+    group_names: Optional[list[str | None]] = Field(default=UNSET, alias="groupNames")
     """The device groups that the device belongs to."""
 
     ip_address: Optional[str] = Field(default=UNSET, alias="ipAddress")
@@ -56,13 +56,13 @@ class ThingspaceDevice(SdkBaseModel):
 class ThingspaceDeviceDict(TypedDict):
     account_name: NotRequired[str]
     billing_cycle_end_date: NotRequired[str]
-    carrier_informations: NotRequired[list[CarrierInformation | CarrierInformationDict]]
+    carrier_informations: NotRequired[list[CarrierInformationDict]]
     connected: NotRequired[bool]
     created_at: NotRequired[str]
-    custom_fields: NotRequired[list[CustomFields | CustomFieldsDict]]
-    device_ids: NotRequired[list[DeviceId | DeviceIdDict]]
-    extended_attributes: NotRequired[list[CustomFields | CustomFieldsDict]]
-    group_names: NotRequired[list[str] | None]
+    custom_fields: NotRequired[list[CustomFieldsDict]]
+    device_ids: NotRequired[list[DeviceIdDict]]
+    extended_attributes: NotRequired[list[CustomFieldsDict]]
+    group_names: NotRequired[list[str | None]]
     ip_address: NotRequired[str]
     last_activation_by: NotRequired[str]
     last_activation_date: NotRequired[str]

@@ -11,6 +11,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -52,7 +53,8 @@ class FirmwareV1:
         Args:
             account_name: Account identifier in "##########-#####".
             upgrade_id: The UUID of the scheduled upgrade that you want to cancel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Upgrade canceled.
@@ -70,7 +72,8 @@ class FirmwareV1:
 
         Args:
             account: Account identifier in "##########-#####".
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of available firmware.
@@ -88,7 +91,8 @@ class FirmwareV1:
         Args:
             account_name: Account identifier in "##########-#####".
             upgrade_id: The UUID of the upgrade, returned by POST /upgrades when the upgrade was scheduled.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Firmware upgrade information.
@@ -109,7 +113,8 @@ class FirmwareV1:
 
         Args:
             body: Details of the firmware upgrade request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Confirmation of successful firmware upgrade.
@@ -126,7 +131,8 @@ class FirmwareV1:
         Args:
             account_name: Account identifier in "##########-#####".
             upgrade_id: The UUID of the upgrade, returned by POST /upgrades when the upgrade was scheduled.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Upgrade information.
@@ -154,7 +160,8 @@ class AsyncFirmwareV1:
         Args:
             account_name: Account identifier in "##########-#####".
             upgrade_id: The UUID of the scheduled upgrade that you want to cancel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Upgrade canceled.
@@ -174,7 +181,8 @@ class AsyncFirmwareV1:
 
         Args:
             account: Account identifier in "##########-#####".
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of available firmware.
@@ -194,7 +202,8 @@ class AsyncFirmwareV1:
         Args:
             account_name: Account identifier in "##########-#####".
             upgrade_id: The UUID of the upgrade, returned by POST /upgrades when the upgrade was scheduled.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Firmware upgrade information.
@@ -217,7 +226,8 @@ class AsyncFirmwareV1:
 
         Args:
             body: Details of the firmware upgrade request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Confirmation of successful firmware upgrade.
@@ -234,7 +244,8 @@ class AsyncFirmwareV1:
         Args:
             account_name: Account identifier in "##########-#####".
             upgrade_id: The UUID of the upgrade, returned by POST /upgrades when the upgrade was scheduled.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Upgrade information.
@@ -261,7 +272,8 @@ class FirmwareV1WithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
         Args:
             account_name: Account identifier in "##########-#####".
             upgrade_id: The UUID of the scheduled upgrade that you want to cancel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -283,7 +295,8 @@ class FirmwareV1WithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
 
         Args:
             account: Account identifier in "##########-#####".
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -306,7 +319,8 @@ class FirmwareV1WithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
         Args:
             account_name: Account identifier in "##########-#####".
             upgrade_id: The UUID of the upgrade, returned by POST /upgrades when the upgrade was scheduled.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -330,7 +344,8 @@ class FirmwareV1WithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
 
         Args:
             body: Details of the firmware upgrade request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -353,7 +368,8 @@ class FirmwareV1WithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
         Args:
             account_name: Account identifier in "##########-#####".
             upgrade_id: The UUID of the upgrade, returned by POST /upgrades when the upgrade was scheduled.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -378,7 +394,8 @@ class AsyncFirmwareV1WithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
         Args:
             account_name: Account identifier in "##########-#####".
             upgrade_id: The UUID of the scheduled upgrade that you want to cancel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -388,7 +405,7 @@ class AsyncFirmwareV1WithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
             path_params=[param[str]("accountName", account_name), param[str]("upgradeId", upgrade_id)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[FotaV1SuccessResult],
+            decoder=async_json_decoder[FotaV1SuccessResult],
             error_mapper=cancel_scheduled_firmware_upgrade_error_mapper,
             request_options=request_options,
         )
@@ -400,7 +417,8 @@ class AsyncFirmwareV1WithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
 
         Args:
             account: Account identifier in "##########-#####".
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -409,7 +427,7 @@ class AsyncFirmwareV1WithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
             url_template=self._server.software_management_v1("/firmware/{account}"),
             path_params=[param[str]("account", account)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[list[Firmware]],
+            decoder=async_json_decoder[list[Firmware]],
             error_mapper=list_available_firmware_error_mapper,
             request_options=request_options,
         )
@@ -423,7 +441,8 @@ class AsyncFirmwareV1WithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
         Args:
             account_name: Account identifier in "##########-#####".
             upgrade_id: The UUID of the upgrade, returned by POST /upgrades when the upgrade was scheduled.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -432,7 +451,7 @@ class AsyncFirmwareV1WithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
             url_template=self._server.software_management_v1("/upgrades/{accountName}/upgrade/{upgradeId}"),
             path_params=[param[str]("accountName", account_name), param[str]("upgradeId", upgrade_id)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[FirmwareUpgrade],
+            decoder=async_json_decoder[FirmwareUpgrade],
             error_mapper=list_firmware_upgrade_details_error_mapper,
             request_options=request_options,
         )
@@ -447,7 +466,8 @@ class AsyncFirmwareV1WithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
 
         Args:
             body: Details of the firmware upgrade request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -457,7 +477,7 @@ class AsyncFirmwareV1WithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[FirmwareUpgradeRequest | FirmwareUpgradeRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[FirmwareUpgrade],
+            decoder=async_json_decoder[FirmwareUpgrade],
             error_mapper=schedule_firmware_upgrade_error_mapper,
             request_options=request_options,
         )
@@ -470,7 +490,8 @@ class AsyncFirmwareV1WithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
         Args:
             account_name: Account identifier in "##########-#####".
             upgrade_id: The UUID of the upgrade, returned by POST /upgrades when the upgrade was scheduled.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -480,7 +501,7 @@ class AsyncFirmwareV1WithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
             path_params=[param[str]("accountName", account_name), param[str]("upgradeId", upgrade_id)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[FirmwareUpgradeChangeResult],
+            decoder=async_json_decoder[FirmwareUpgradeChangeResult],
             error_mapper=update_firmware_upgrade_devices_error_mapper,
             request_options=request_options,
         )

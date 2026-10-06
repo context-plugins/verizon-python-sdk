@@ -24,6 +24,6 @@ class QueryTargetRequest(SdkBaseModel):
 
 
 class QueryTargetRequestDict(TypedDict):
-    accountidentifier: NotRequired[AccountIdentifier | AccountIdentifierDict]
+    accountidentifier: NotRequired[AccountIdentifierDict]
     selection: NotRequired[dict[str, str]]
-    resourceidentifier: NotRequired[ResourceIdentifier | ResourceIdentifierDict]
+    resourceidentifier: NotRequired[ResourceIdentifierDict]

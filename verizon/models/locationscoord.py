@@ -14,4 +14,4 @@ class Locationscoord(SdkBaseModel):
 
 
 class LocationscoordDict(TypedDict):
-    coordinates_list: NotRequired[list[Coordinates | CoordinatesDict]]
+    coordinates_list: NotRequired[list[CoordinatesDict]]

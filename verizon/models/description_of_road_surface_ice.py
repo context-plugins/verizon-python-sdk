@@ -12,4 +12,4 @@ class DescriptionOfRoadSurfaceIce(SdkBaseModel):
 
 
 class DescriptionOfRoadSurfaceIceDict(TypedDict):
-    ice: Ice | IceDict
+    ice: IceDict

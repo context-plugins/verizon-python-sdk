@@ -14,7 +14,7 @@ from .unions.msg_id import MsgId, MsgIdDict
 class DataFrame(SdkBaseModel):
     """The data frame allows sending various advisory and road sign types of information to equipped devices."""
 
-    do_not_use1: Optional[int] = Field(default=UNSET, alias="doNotUse1")
+    do_not_use1: int = Field(default=0, alias="doNotUse1")
     """Always set to 0 and carries no meaning. Legacy field maintained for backward compatibility."""
 
     frame_type: FrameTypeOrStr = Field(alias="frameType")
@@ -41,7 +41,7 @@ class DataFrame(SdkBaseModel):
     priority: int
     """The relative importance of the sign, on a scale from zero (least important) to seven (most important)."""
 
-    do_not_use2: Optional[int] = Field(default=UNSET, alias="doNotUse2")
+    do_not_use2: int = Field(default=0, alias="doNotUse2")
     """Always set to 0 and carries no meaning. Legacy field maintained for backward compatibility."""
 
     regions: list[GeographicalPath]
@@ -50,10 +50,10 @@ class DataFrame(SdkBaseModel):
     data frame can describe a complex path or region of arbitrary size using either one of the two supported node offset
     methods (XY offsets or LL offsets) or using simple geometric projections."""
 
-    do_not_use3: Optional[int] = Field(default=UNSET, alias="doNotUse3")
+    do_not_use3: int = Field(default=0, alias="doNotUse3")
     """Always set to 0 and carries no meaning. Legacy field maintained for backward compatibility."""
 
-    do_not_use4: Optional[int] = Field(default=UNSET, alias="doNotUse4")
+    do_not_use4: int = Field(default=0, alias="doNotUse4")
     """Always set to 0 and carries no meaning. Legacy field maintained for backward compatibility."""
 
     content: Content
@@ -65,14 +65,14 @@ class DataFrame(SdkBaseModel):
 class DataFrameDict(TypedDict):
     do_not_use1: NotRequired[int]
     frame_type: FrameTypeOrStr
-    msg_id: MsgId | MsgIdDict
+    msg_id: MsgIdDict
     start_year: NotRequired[int]
     start_time: int
     duration_time: int
     priority: int
     do_not_use2: NotRequired[int]
-    regions: list[GeographicalPath | GeographicalPathDict]
+    regions: list[GeographicalPathDict]
     do_not_use3: NotRequired[int]
     do_not_use4: NotRequired[int]
-    content: Content | ContentDict
-    content_new: NotRequired[ContentFrictionInfo | ContentFrictionInfoDict]
+    content: ContentDict
+    content_new: NotRequired[ContentFrictionInfoDict]

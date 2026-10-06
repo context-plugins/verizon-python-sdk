@@ -43,7 +43,7 @@ class Message2Dict(TypedDict):
     is_private: bool
     road_user_type: list[RoadUserTypesOrStr]
     trigger_conditions: list[TriggerConditionOrStr]
-    limits: NotRequired[list[Limit | LimitDict]]
+    limits: NotRequired[list[LimitDict]]
     distribution_type: NotRequired[list[DistributionTypesOrStr]]
-    distribution_schedule: NotRequired[DistributionSchedule | DistributionScheduleDict]
-    sae_info: SaeInfoPayload | SaeInfoPayloadDict
+    distribution_schedule: NotRequired[DistributionScheduleDict]
+    sae_info: SaeInfoPayloadDict

@@ -52,7 +52,7 @@ class ClientPersistenceResponse(SdkBaseModel):
 
 class ClientPersistenceResponseDict(TypedDict):
     device_id: NotRequired[UUID]
-    certificate: NotRequired[Certificate | CertificateDict]
+    certificate: NotRequired[CertificateDict]
     client_type: NotRequired[EtxClientTypeOrStr]
     client_subtype: NotRequired[ClientSubtypeOrStr]
     vendor_id: NotRequired[str]

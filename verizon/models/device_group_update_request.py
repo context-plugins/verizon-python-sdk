@@ -27,7 +27,7 @@ class DeviceGroupUpdateRequest(SdkBaseModel):
 
 
 class DeviceGroupUpdateRequestDict(TypedDict):
-    devices_to_add: NotRequired[list[DeviceId | DeviceIdDict]]
-    devices_to_remove: NotRequired[list[DeviceId | DeviceIdDict]]
+    devices_to_add: NotRequired[list[DeviceIdDict]]
+    devices_to_remove: NotRequired[list[DeviceIdDict]]
     new_group_description: NotRequired[str]
     new_group_name: NotRequired[str]

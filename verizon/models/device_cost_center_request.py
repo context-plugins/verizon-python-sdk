@@ -47,8 +47,8 @@ class DeviceCostCenterRequest(SdkBaseModel):
 class DeviceCostCenterRequestDict(TypedDict):
     account_name: NotRequired[str]
     cost_center: NotRequired[str]
-    custom_fields: NotRequired[list[CustomFields | CustomFieldsDict]]
-    devices: NotRequired[list[AccountDeviceList | AccountDeviceListDict]]
+    custom_fields: NotRequired[list[CustomFieldsDict]]
+    devices: NotRequired[list[AccountDeviceListDict]]
     group_name: NotRequired[str]
     primary_place_of_use: NotRequired[Any]
     remove_cost_center: NotRequired[bool]

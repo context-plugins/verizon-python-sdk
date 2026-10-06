@@ -11,6 +11,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -39,7 +40,8 @@ class ConnectivityCallbacks:
         Args:
             aname: Account name.
             sname: Service name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Response for a request to deregister a callback.
@@ -55,7 +57,8 @@ class ConnectivityCallbacks:
 
         Args:
             aname: Account name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A list of callback listeners.
@@ -76,7 +79,8 @@ class ConnectivityCallbacks:
         Args:
             aname: Account name.
             body: Request to register a callback.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A success response for registering a callback.
@@ -102,7 +106,8 @@ class AsyncConnectivityCallbacks:
         Args:
             aname: Account name.
             sname: Service name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Response for a request to deregister a callback.
@@ -120,7 +125,8 @@ class AsyncConnectivityCallbacks:
 
         Args:
             aname: Account name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A list of callback listeners.
@@ -143,7 +149,8 @@ class AsyncConnectivityCallbacks:
         Args:
             aname: Account name.
             body: Request to register a callback.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A success response for registering a callback.
@@ -166,13 +173,14 @@ class ConnectivityCallbacksWithRawResponse(SecuredRawResponse[RawClient, Server,
         Args:
             aname: Account name.
             sname: Service name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="DELETE",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/callbacks/{aname}/name/{sname}"),
+            url_template=self._server.thingspace("/m2m/v1/callbacks/{aname}/name/{sname}"),
             path_params=[param[str]("aname", aname), param[str]("sname", sname)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -188,13 +196,14 @@ class ConnectivityCallbacksWithRawResponse(SecuredRawResponse[RawClient, Server,
 
         Args:
             aname: Account name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/callbacks/{aname}"),
+            url_template=self._server.thingspace("/m2m/v1/callbacks/{aname}"),
             path_params=[param[str]("aname", aname)],
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
             decoder=json_decoder[list[ConnectivityManagementCallback]],
@@ -214,13 +223,14 @@ class ConnectivityCallbacksWithRawResponse(SecuredRawResponse[RawClient, Server,
         Args:
             aname: Account name.
             body: Request to register a callback.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/callbacks/{aname}"),
+            url_template=self._server.thingspace("/m2m/v1/callbacks/{aname}"),
             path_params=[param[str]("aname", aname)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[RegisterCallbackRequest | RegisterCallbackRequestDict](body),
@@ -240,17 +250,18 @@ class AsyncConnectivityCallbacksWithRawResponse(SecuredRawResponse[AsyncRawClien
         Args:
             aname: Account name.
             sname: Service name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="DELETE",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/callbacks/{aname}/name/{sname}"),
+            url_template=self._server.thingspace("/m2m/v1/callbacks/{aname}/name/{sname}"),
             path_params=[param[str]("aname", aname), param[str]("sname", sname)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[CallbackActionResult],
+            decoder=async_json_decoder[CallbackActionResult],
             error_mapper=deregister_callback_error_mapper,
             request_options=request_options,
         )
@@ -262,16 +273,17 @@ class AsyncConnectivityCallbacksWithRawResponse(SecuredRawResponse[AsyncRawClien
 
         Args:
             aname: Account name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/callbacks/{aname}"),
+            url_template=self._server.thingspace("/m2m/v1/callbacks/{aname}"),
             path_params=[param[str]("aname", aname)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[list[ConnectivityManagementCallback]],
+            decoder=async_json_decoder[list[ConnectivityManagementCallback]],
             error_mapper=list_registered_callbacks_error_mapper,
             request_options=request_options,
         )
@@ -288,18 +300,19 @@ class AsyncConnectivityCallbacksWithRawResponse(SecuredRawResponse[AsyncRawClien
         Args:
             aname: Account name.
             body: Request to register a callback.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/callbacks/{aname}"),
+            url_template=self._server.thingspace("/m2m/v1/callbacks/{aname}"),
             path_params=[param[str]("aname", aname)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[RegisterCallbackRequest | RegisterCallbackRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[CallbackActionResult],
+            decoder=async_json_decoder[CallbackActionResult],
             error_mapper=register_callback_error_mapper,
             request_options=request_options,
         )

@@ -11,4 +11,4 @@ class RetrieveResponse(SdkBaseModel):
 
 
 class RetrieveResponseDict(TypedDict):
-    items: NotRequired[list[RetrieveResponseItem | RetrieveResponseItemDict]]
+    items: NotRequired[list[RetrieveResponseItemDict]]

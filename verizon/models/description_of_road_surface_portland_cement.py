@@ -13,4 +13,4 @@ class DescriptionOfRoadSurfacePortlandCement(SdkBaseModel):
 
 
 class DescriptionOfRoadSurfacePortlandCementDict(TypedDict):
-    portland_cement: PortlandCement | PortlandCementDict
+    portland_cement: PortlandCementDict

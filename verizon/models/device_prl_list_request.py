@@ -32,8 +32,8 @@ class DevicePrlListRequest(SdkBaseModel):
 
 
 class DevicePrlListRequestDict(TypedDict):
-    device_ids: NotRequired[list[DeviceId | DeviceIdDict]]
+    device_ids: NotRequired[list[DeviceIdDict]]
     account_name: NotRequired[str]
-    custom_fields: NotRequired[list[CustomFields | CustomFieldsDict]]
+    custom_fields: NotRequired[list[CustomFieldsDict]]
     group_name: NotRequired[str]
     service_plan: NotRequired[str]

@@ -19,7 +19,7 @@ class GioprofileRequest(SdkBaseModel):
 
 
 class GioprofileRequestDict(TypedDict):
-    devices: list[GiodeviceList | GiodeviceListDict]
+    devices: list[GiodeviceListDict]
     account_name: str
     smrs_oid: NotRequired[str]
     mdn_zip_code: NotRequired[str]

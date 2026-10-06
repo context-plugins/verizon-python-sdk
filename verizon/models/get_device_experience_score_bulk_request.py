@@ -18,4 +18,4 @@ class GetDeviceExperienceScoreBulkRequest(SdkBaseModel):
 
 class GetDeviceExperienceScoreBulkRequestDict(TypedDict):
     account_name: str
-    device_list: list[DeviceIdentifier | DeviceIdentifierDict]
+    device_list: list[DeviceIdentifierDict]

@@ -12,4 +12,4 @@ class AccountShareFilterCriteria(SdkBaseModel):
 
 
 class AccountShareFilterCriteriaDict(TypedDict):
-    filter_criteria: NotRequired[AccountShareFilterCriteria1 | AccountShareFilterCriteria1Dict]
+    filter_criteria: NotRequired[AccountShareFilterCriteria1Dict]

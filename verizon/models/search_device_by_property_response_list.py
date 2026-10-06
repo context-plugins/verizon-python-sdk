@@ -14,4 +14,4 @@ class SearchDeviceByPropertyResponseList(SdkBaseModel):
 
 
 class SearchDeviceByPropertyResponseListDict(TypedDict):
-    device_property: NotRequired[list[SearchDeviceByPropertyResponse | SearchDeviceByPropertyResponseDict]]
+    device_property: NotRequired[list[SearchDeviceByPropertyResponseDict]]

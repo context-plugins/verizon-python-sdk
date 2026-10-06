@@ -28,7 +28,7 @@ class FirmwareCampaign(SdkBaseModel):
     firmware_to: str = Field(alias="firmwareTo")
     """New firmware version (for firmware upgrade only)."""
 
-    protocol: str
+    protocol: str = "LWM2M"
     """Available values: LWM2M."""
 
     make: str
@@ -58,5 +58,5 @@ class FirmwareCampaignDict(TypedDict):
     model: str
     start_date: Date
     end_date: Date
-    campaign_time_window_list: NotRequired[list[V3TimeWindow | V3TimeWindowDict]]
+    campaign_time_window_list: NotRequired[list[V3TimeWindowDict]]
     status: str

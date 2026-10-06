@@ -11,6 +11,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -41,7 +42,8 @@ class SensorInsightsDeviceProfile:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -61,7 +63,8 @@ class SensorInsightsDeviceProfile:
 
         Args:
             deleterequest: payload for the delete request
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -81,7 +84,8 @@ class SensorInsightsDeviceProfile:
 
         Args:
             body: body
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -101,7 +105,8 @@ class SensorInsightsDeviceProfile:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -130,7 +135,8 @@ class AsyncSensorInsightsDeviceProfile:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -150,7 +156,8 @@ class AsyncSensorInsightsDeviceProfile:
 
         Args:
             deleterequest: payload for the delete request
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -170,7 +177,8 @@ class AsyncSensorInsightsDeviceProfile:
 
         Args:
             body: body
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -190,7 +198,8 @@ class AsyncSensorInsightsDeviceProfile:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -216,13 +225,14 @@ class SensorInsightsDeviceProfileWithRawResponse(SecuredRawResponse[RawClient, S
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/deviceConfigurationProfiles"),
+            url_template=self._server.thingspace("/dm/v1/deviceConfigurationProfiles"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoConfigurationProfile | DtoConfigurationProfileDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -241,13 +251,14 @@ class SensorInsightsDeviceProfileWithRawResponse(SecuredRawResponse[RawClient, S
 
         Args:
             deleterequest: payload for the delete request
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="DELETE",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/deviceConfigurationProfiles"),
+            url_template=self._server.thingspace("/dm/v1/deviceConfigurationProfiles"),
             headers=[
                 param[DtoConfigurationProfileDelete | DtoConfigurationProfileDeleteDict](
                     "deleterequest", deleterequest
@@ -270,13 +281,14 @@ class SensorInsightsDeviceProfileWithRawResponse(SecuredRawResponse[RawClient, S
 
         Args:
             body: body
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/deviceConfigurationProfiles/actions/query"),
+            url_template=self._server.thingspace("/dm/v1/deviceConfigurationProfiles/actions/query"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ResourceResourceQuery | ResourceResourceQueryDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -295,13 +307,14 @@ class SensorInsightsDeviceProfileWithRawResponse(SecuredRawResponse[RawClient, S
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="PATCH",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/deviceConfigurationProfiles"),
+            url_template=self._server.thingspace("/dm/v1/deviceConfigurationProfiles"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoConfigurationProfilePath | DtoConfigurationProfilePathDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -322,17 +335,18 @@ class AsyncSensorInsightsDeviceProfileWithRawResponse(SecuredRawResponse[AsyncRa
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/deviceConfigurationProfiles"),
+            url_template=self._server.thingspace("/dm/v1/deviceConfigurationProfiles"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoConfigurationProfile | DtoConfigurationProfileDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[list[DtoProfileResponse]],
+            decoder=async_json_decoder[list[DtoProfileResponse]],
             error_mapper=create_aprofile_error_mapper,
             request_options=request_options,
         )
@@ -347,13 +361,14 @@ class AsyncSensorInsightsDeviceProfileWithRawResponse(SecuredRawResponse[AsyncRa
 
         Args:
             deleterequest: payload for the delete request
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="DELETE",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/deviceConfigurationProfiles"),
+            url_template=self._server.thingspace("/dm/v1/deviceConfigurationProfiles"),
             headers=[
                 param[DtoConfigurationProfileDelete | DtoConfigurationProfileDeleteDict](
                     "deleterequest", deleterequest
@@ -361,7 +376,7 @@ class AsyncSensorInsightsDeviceProfileWithRawResponse(SecuredRawResponse[AsyncRa
                 param[UUID]("Idempotency-Key", uuid4()),
             ],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[list[DtoProfileResponse]],
+            decoder=async_json_decoder[list[DtoProfileResponse]],
             error_mapper=delete_aprofile_error_mapper,
             request_options=request_options,
         )
@@ -376,17 +391,18 @@ class AsyncSensorInsightsDeviceProfileWithRawResponse(SecuredRawResponse[AsyncRa
 
         Args:
             body: body
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/deviceConfigurationProfiles/actions/query"),
+            url_template=self._server.thingspace("/dm/v1/deviceConfigurationProfiles/actions/query"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ResourceResourceQuery | ResourceResourceQueryDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[list[DtoProfileResponse]],
+            decoder=async_json_decoder[list[DtoProfileResponse]],
             error_mapper=query_aprofile_error_mapper,
             request_options=request_options,
         )
@@ -401,17 +417,18 @@ class AsyncSensorInsightsDeviceProfileWithRawResponse(SecuredRawResponse[AsyncRa
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="PATCH",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/deviceConfigurationProfiles"),
+            url_template=self._server.thingspace("/dm/v1/deviceConfigurationProfiles"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoConfigurationProfilePath | DtoConfigurationProfilePathDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[list[DtoProfileResponse]],
+            decoder=async_json_decoder[list[DtoProfileResponse]],
             error_mapper=update_aprofile_error_mapper,
             request_options=request_options,
         )

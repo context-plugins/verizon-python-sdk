@@ -15,5 +15,5 @@ class ChangePwndeviceProfileRequest(SdkBaseModel):
 
 class ChangePwndeviceProfileRequestDict(TypedDict):
     account_name: str
-    device_list: list[PwndeviceList | PwndeviceListDict]
+    device_list: list[PwndeviceListDict]
     new_profile: str

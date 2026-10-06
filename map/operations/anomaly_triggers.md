@@ -10,7 +10,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `POST /m2m/v1/triggers`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def create_anomaly_detection_trigger(body: CreateTriggerRequest | CreateTriggerRequestDict, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `body`
 - **Params**: `body` — JSON body
@@ -31,7 +31,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `DELETE /m2m/v1/triggers/{triggerId}`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def delete_anomaly_detection_trigger(trigger_id: str, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `trigger_id`
 - **Params**: `trigger_id` — path `triggerId`
@@ -47,7 +47,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /m2m/v1/triggers/{triggerId}`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def list_anomaly_detection_trigger_settings(trigger_id: str, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `trigger_id`
 - **Params**: `trigger_id` — path `triggerId`
@@ -66,7 +66,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /m2m/v1/triggers`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def list_anomaly_detection_triggers(*, request_options: RequestOptionsOrDict | None = None)`
 - **Returns (parsed)**: `list[GetTriggerResponseList]`
 - **Returns (raw)**: `ApiResult[list[GetTriggerResponseList], ListAnomalyDetectionTriggersErrorBody]`
@@ -83,7 +83,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `PUT /m2m/v1/triggers`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def update_anomaly_detection_trigger(body: UpdateTriggerRequest | UpdateTriggerRequestDict, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `body`
 - **Params**: `body` — JSON body

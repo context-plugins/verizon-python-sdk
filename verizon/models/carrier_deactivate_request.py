@@ -39,9 +39,9 @@ class CarrierDeactivateRequest(SdkBaseModel):
 
 class CarrierDeactivateRequestDict(TypedDict):
     account_name: str
-    devices: list[AccountDeviceList | AccountDeviceListDict]
+    devices: list[AccountDeviceListDict]
     reason_code: str
-    custom_fields: NotRequired[list[CustomFields | CustomFieldsDict]]
+    custom_fields: NotRequired[list[CustomFieldsDict]]
     etf_waiver: NotRequired[bool]
     group_name: NotRequired[str]
     service_plan: NotRequired[str]

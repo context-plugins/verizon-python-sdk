@@ -11,6 +11,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -46,7 +47,8 @@ class DeviceGroups:
 
         Args:
             body: A request to create a new device group.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful response, Creates a new device group.
@@ -64,7 +66,8 @@ class DeviceGroups:
         Args:
             aname: Account name.
             gname: Group name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful response.
@@ -74,7 +77,7 @@ class DeviceGroups:
         return self._with_raw_response.delete_device_group(aname, gname, request_options=request_options).unwrap()
 
     def get_device_group_information(
-        self, aname: str, gname: str, *, next: int | None = None, request_options: RequestOptionsOrDict | None = None
+        self, aname: str, gname: str, *, next_: int | None = None, request_options: RequestOptionsOrDict | None = None
     ) -> DeviceGroupDevicesData:
         """When HTTP status is 202, a URL will be returned in the Location header of the form
         /groups/{aname}/name/{gname}/?next={token}. This URL can be used to request the next set of groups.
@@ -82,8 +85,9 @@ class DeviceGroups:
         Args:
             aname: Account name.
             gname: Group name.
-            next: Continue the previous query from the pageUrl pagetoken.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            next_: Continue the previous query from the pageUrl pagetoken.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful response.
@@ -91,7 +95,7 @@ class DeviceGroups:
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
         return self._with_raw_response.get_device_group_information(
-            aname, gname, next=next, request_options=request_options
+            aname, gname, next_=next_, request_options=request_options
         ).unwrap()
 
     def list_device_groups(
@@ -101,7 +105,8 @@ class DeviceGroups:
 
         Args:
             aname: Account name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The list of device groups in the account.
@@ -124,7 +129,8 @@ class DeviceGroups:
             aname: Account name.
             gname: Group name.
             body: Request to update device group.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful response.
@@ -153,7 +159,8 @@ class AsyncDeviceGroups:
 
         Args:
             body: A request to create a new device group.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful response, Creates a new device group.
@@ -171,7 +178,8 @@ class AsyncDeviceGroups:
         Args:
             aname: Account name.
             gname: Group name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful response.
@@ -183,7 +191,7 @@ class AsyncDeviceGroups:
         ).unwrap()
 
     async def get_device_group_information(
-        self, aname: str, gname: str, *, next: int | None = None, request_options: RequestOptionsOrDict | None = None
+        self, aname: str, gname: str, *, next_: int | None = None, request_options: RequestOptionsOrDict | None = None
     ) -> DeviceGroupDevicesData:
         """When HTTP status is 202, a URL will be returned in the Location header of the form
         /groups/{aname}/name/{gname}/?next={token}. This URL can be used to request the next set of groups.
@@ -191,8 +199,9 @@ class AsyncDeviceGroups:
         Args:
             aname: Account name.
             gname: Group name.
-            next: Continue the previous query from the pageUrl pagetoken.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            next_: Continue the previous query from the pageUrl pagetoken.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful response.
@@ -201,7 +210,7 @@ class AsyncDeviceGroups:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
         return (
             await self._with_raw_response.get_device_group_information(
-                aname, gname, next=next, request_options=request_options
+                aname, gname, next_=next_, request_options=request_options
             )
         ).unwrap()
 
@@ -212,7 +221,8 @@ class AsyncDeviceGroups:
 
         Args:
             aname: Account name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The list of device groups in the account.
@@ -235,7 +245,8 @@ class AsyncDeviceGroups:
             aname: Account name.
             gname: Group name.
             body: Request to update device group.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful response.
@@ -263,13 +274,14 @@ class DeviceGroupsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
 
         Args:
             body: A request to create a new device group.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/groups"),
+            url_template=self._server.thingspace("/m2m/v1/groups"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[CreateDeviceGroupRequest | CreateDeviceGroupRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -287,13 +299,14 @@ class DeviceGroupsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
         Args:
             aname: Account name.
             gname: Group name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="DELETE",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/groups/{aname}/name/{gname}"),
+            url_template=self._server.thingspace("/m2m/v1/groups/{aname}/name/{gname}"),
             path_params=[param[str]("aname", aname), param[str]("gname", gname)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -303,7 +316,7 @@ class DeviceGroupsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
         )
 
     def get_device_group_information(
-        self, aname: str, gname: str, *, next: int | None = None, request_options: RequestOptionsOrDict | None = None
+        self, aname: str, gname: str, *, next_: int | None = None, request_options: RequestOptionsOrDict | None = None
     ) -> ApiResult[DeviceGroupDevicesData, GetDeviceGroupInformationErrorBody]:
         """When HTTP status is 202, a URL will be returned in the Location header of the form
         /groups/{aname}/name/{gname}/?next={token}. This URL can be used to request the next set of groups.
@@ -311,16 +324,17 @@ class DeviceGroupsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
         Args:
             aname: Account name.
             gname: Group name.
-            next: Continue the previous query from the pageUrl pagetoken.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            next_: Continue the previous query from the pageUrl pagetoken.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/groups/{aname}/name/{gname}"),
+            url_template=self._server.thingspace("/m2m/v1/groups/{aname}/name/{gname}"),
             path_params=[param[str]("aname", aname), param[str]("gname", gname)],
-            query_params=[param[int | None]("next", next)],
+            query_params=[param[int | None]("next", next_)],
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
             decoder=json_decoder[DeviceGroupDevicesData],
             error_mapper=get_device_group_information_error_mapper,
@@ -334,13 +348,14 @@ class DeviceGroupsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
 
         Args:
             aname: Account name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/groups/{aname}"),
+            url_template=self._server.thingspace("/m2m/v1/groups/{aname}"),
             path_params=[param[str]("aname", aname)],
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
             decoder=json_decoder[list[DeviceGroup]],
@@ -362,13 +377,14 @@ class DeviceGroupsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
             aname: Account name.
             gname: Group name.
             body: Request to update device group.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="PUT",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/groups/{aname}/name/{gname}"),
+            url_template=self._server.thingspace("/m2m/v1/groups/{aname}/name/{gname}"),
             path_params=[param[str]("aname", aname), param[str]("gname", gname)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DeviceGroupUpdateRequest | DeviceGroupUpdateRequestDict](body),
@@ -391,17 +407,18 @@ class AsyncDeviceGroupsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
 
         Args:
             body: A request to create a new device group.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/groups"),
+            url_template=self._server.thingspace("/m2m/v1/groups"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[CreateDeviceGroupRequest | CreateDeviceGroupRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[ConnectivityManagementSuccessResult],
+            decoder=async_json_decoder[ConnectivityManagementSuccessResult],
             error_mapper=create_device_group_error_mapper,
             request_options=request_options,
         )
@@ -415,23 +432,24 @@ class AsyncDeviceGroupsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
         Args:
             aname: Account name.
             gname: Group name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="DELETE",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/groups/{aname}/name/{gname}"),
+            url_template=self._server.thingspace("/m2m/v1/groups/{aname}/name/{gname}"),
             path_params=[param[str]("aname", aname), param[str]("gname", gname)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[ConnectivityManagementSuccessResult],
+            decoder=async_json_decoder[ConnectivityManagementSuccessResult],
             error_mapper=delete_device_group_error_mapper,
             request_options=request_options,
         )
 
     async def get_device_group_information(
-        self, aname: str, gname: str, *, next: int | None = None, request_options: RequestOptionsOrDict | None = None
+        self, aname: str, gname: str, *, next_: int | None = None, request_options: RequestOptionsOrDict | None = None
     ) -> ApiResult[DeviceGroupDevicesData, GetDeviceGroupInformationErrorBody]:
         """When HTTP status is 202, a URL will be returned in the Location header of the form
         /groups/{aname}/name/{gname}/?next={token}. This URL can be used to request the next set of groups.
@@ -439,18 +457,19 @@ class AsyncDeviceGroupsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
         Args:
             aname: Account name.
             gname: Group name.
-            next: Continue the previous query from the pageUrl pagetoken.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            next_: Continue the previous query from the pageUrl pagetoken.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/groups/{aname}/name/{gname}"),
+            url_template=self._server.thingspace("/m2m/v1/groups/{aname}/name/{gname}"),
             path_params=[param[str]("aname", aname), param[str]("gname", gname)],
-            query_params=[param[int | None]("next", next)],
+            query_params=[param[int | None]("next", next_)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceGroupDevicesData],
+            decoder=async_json_decoder[DeviceGroupDevicesData],
             error_mapper=get_device_group_information_error_mapper,
             request_options=request_options,
         )
@@ -462,16 +481,17 @@ class AsyncDeviceGroupsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
 
         Args:
             aname: Account name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/groups/{aname}"),
+            url_template=self._server.thingspace("/m2m/v1/groups/{aname}"),
             path_params=[param[str]("aname", aname)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[list[DeviceGroup]],
+            decoder=async_json_decoder[list[DeviceGroup]],
             error_mapper=list_device_groups_error_mapper,
             request_options=request_options,
         )
@@ -490,18 +510,19 @@ class AsyncDeviceGroupsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
             aname: Account name.
             gname: Group name.
             body: Request to update device group.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="PUT",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/groups/{aname}/name/{gname}"),
+            url_template=self._server.thingspace("/m2m/v1/groups/{aname}/name/{gname}"),
             path_params=[param[str]("aname", aname), param[str]("gname", gname)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DeviceGroupUpdateRequest | DeviceGroupUpdateRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[ConnectivityManagementSuccessResult],
+            decoder=async_json_decoder[ConnectivityManagementSuccessResult],
             error_mapper=update_device_group_error_mapper,
             request_options=request_options,
         )

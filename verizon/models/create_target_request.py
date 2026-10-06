@@ -49,15 +49,15 @@ class CreateTargetRequest(SdkBaseModel):
 
 
 class CreateTargetRequestDict(TypedDict):
-    accountidentifier: NotRequired[AccountIdentifier | AccountIdentifierDict]
+    accountidentifier: NotRequired[AccountIdentifierDict]
     billingaccountid: NotRequired[str]
     kind: NotRequired[str]
     address: NotRequired[str]
     addressscheme: NotRequired[str]
-    fields: NotRequired[CreateTargetRequestFields | CreateTargetRequestFieldsDict]
+    fields: NotRequired[CreateTargetRequestFieldsDict]
     description: NotRequired[str]
     externalid: NotRequired[str]
     name: NotRequired[str]
     region: NotRequired[str]
     key1: NotRequired[str]
-    oauth: NotRequired[TargetAuthentication | TargetAuthenticationDict]
+    oauth: NotRequired[TargetAuthenticationDict]

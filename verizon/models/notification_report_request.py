@@ -17,5 +17,5 @@ class NotificationReportRequest(SdkBaseModel):
 class NotificationReportRequestDict(TypedDict):
     account_name: str
     request_type: str
-    devices: list[DeviceList | DeviceListDict]
+    devices: list[DeviceListDict]
     monitor_expiration_time: str

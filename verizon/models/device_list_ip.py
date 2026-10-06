@@ -13,5 +13,5 @@ class DeviceListIp(SdkBaseModel):
 
 
 class DeviceListIpDict(TypedDict):
-    device_ids: list[PwndeviceId | PwndeviceIdDict]
+    device_ids: list[PwndeviceIdDict]
     ip_address: str

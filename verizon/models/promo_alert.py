@@ -15,6 +15,6 @@ class PromoAlert(SdkBaseModel):
 
 
 class PromoAlertDict(TypedDict):
-    filter_criteria: NotRequired[list[ReadySimServicePlan | ReadySimServicePlanDict]]
-    condition: NotRequired[list[Keyschunk2 | Keyschunk2Dict]]
+    filter_criteria: NotRequired[list[ReadySimServicePlanDict]]
+    condition: NotRequired[list[Keyschunk2Dict]]
     enable_promo_exp: NotRequired[bool]

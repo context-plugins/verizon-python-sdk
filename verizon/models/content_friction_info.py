@@ -12,4 +12,4 @@ class ContentFrictionInfo(SdkBaseModel):
 
 
 class ContentFrictionInfoDict(TypedDict):
-    friction_info: FrictionInformation | FrictionInformationDict
+    friction_info: FrictionInformationDict

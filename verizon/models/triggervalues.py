@@ -24,6 +24,6 @@ class TriggervaluesDict(TypedDict):
     account_name: NotRequired[str]
     organization_name: NotRequired[str]
     trigger_category: NotRequired[str]
-    trigger_attributes: NotRequired[list[KeysChunk | KeysChunkDict]]
+    trigger_attributes: NotRequired[list[KeysChunkDict]]
     created_at: NotRequired[RFC3339DateTime]
     modified_at: NotRequired[RFC3339DateTime]

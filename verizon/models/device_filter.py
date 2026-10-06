@@ -27,4 +27,4 @@ class DeviceFilterDict(TypedDict):
     account: NotRequired[str]
     group_name: NotRequired[str]
     service_plan: NotRequired[str]
-    custom_fields: NotRequired[list[CustomFields | CustomFieldsDict]]
+    custom_fields: NotRequired[list[CustomFieldsDict]]

@@ -14,6 +14,6 @@ class ProfileChangeStateRequest(SdkBaseModel):
 
 
 class ProfileChangeStateRequestDict(TypedDict):
-    devices: list[DeviceList | DeviceListDict]
+    devices: list[DeviceListDict]
     account_name: str
     smsr_oid: str

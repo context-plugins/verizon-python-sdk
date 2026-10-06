@@ -15,7 +15,7 @@ class ESimprofileRequest2(SdkBaseModel):
 
 
 class ESimprofileRequest2Dict(TypedDict):
-    devices: NotRequired[list[ESimdeviceList | ESimdeviceListDict]]
+    devices: NotRequired[list[ESimdeviceListDict]]
     account_name: NotRequired[str]
     service_plan: NotRequired[str]
     mdn_zip_code: NotRequired[str]

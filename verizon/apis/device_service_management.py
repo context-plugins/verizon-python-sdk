@@ -11,6 +11,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -40,7 +41,8 @@ class DeviceServiceManagement:
         Args:
             imei: The International Mobile Equipment Identifier of the device.
             account_number: The numeric name of the account and must include leading zeroes.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Returns the status of Hyper Precise Location on the device.
@@ -63,7 +65,8 @@ class DeviceServiceManagement:
 
         Args:
             body: List of devices and hyper-precise required statuses.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful response.
@@ -93,7 +96,8 @@ class AsyncDeviceServiceManagement:
         Args:
             imei: The International Mobile Equipment Identifier of the device.
             account_number: The numeric name of the account and must include leading zeroes.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Returns the status of Hyper Precise Location on the device.
@@ -118,7 +122,8 @@ class AsyncDeviceServiceManagement:
 
         Args:
             body: List of devices and hyper-precise required statuses.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful response.
@@ -145,7 +150,8 @@ class DeviceServiceManagementWithRawResponse(SecuredRawResponse[RawClient, Serve
         Args:
             imei: The International Mobile Equipment Identifier of the device.
             account_number: The numeric name of the account and must include leading zeroes.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -169,7 +175,8 @@ class DeviceServiceManagementWithRawResponse(SecuredRawResponse[RawClient, Serve
 
         Args:
             body: List of devices and hyper-precise required statuses.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -194,7 +201,8 @@ class AsyncDeviceServiceManagementWithRawResponse(SecuredRawResponse[AsyncRawCli
         Args:
             imei: The International Mobile Equipment Identifier of the device.
             account_number: The numeric name of the account and must include leading zeroes.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -203,7 +211,7 @@ class AsyncDeviceServiceManagementWithRawResponse(SecuredRawResponse[AsyncRawCli
             url_template=self._server.hyper_precise_location("/devices/services"),
             query_params=[param[str]("imei", imei), param[str]("accountNumber", account_number)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[BullseyeServiceResult],
+            decoder=async_json_decoder[BullseyeServiceResult],
             error_mapper=get_device_hyper_precise_status_error_mapper,
             request_options=request_options,
         )
@@ -218,7 +226,8 @@ class AsyncDeviceServiceManagementWithRawResponse(SecuredRawResponse[AsyncRawCli
 
         Args:
             body: List of devices and hyper-precise required statuses.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -228,7 +237,7 @@ class AsyncDeviceServiceManagementWithRawResponse(SecuredRawResponse[AsyncRawCli
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[BullseyeServiceRequest | BullseyeServiceRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[BullseyeServiceResult],
+            decoder=async_json_decoder[BullseyeServiceResult],
             error_mapper=update_device_hyper_precise_status_error_mapper,
             request_options=request_options,
         )

@@ -17,5 +17,5 @@ class DtoBulkUpdate(SdkBaseModel):
 
 class DtoBulkUpdateDict(TypedDict):
     accountname: NotRequired[str]
-    resourceidentifiers: NotRequired[list[TheIdresourceandDeviceId | TheIdresourceandDeviceIdDict]]
-    smartalert: NotRequired[BulkUpdateSmartalert | BulkUpdateSmartalertDict]
+    resourceidentifiers: NotRequired[list[TheIdresourceandDeviceIdDict]]
+    smartalert: NotRequired[BulkUpdateSmartalertDict]

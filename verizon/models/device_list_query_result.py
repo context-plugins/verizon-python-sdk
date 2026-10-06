@@ -27,4 +27,4 @@ class DeviceListQueryResultDict(TypedDict):
     account_name: NotRequired[str]
     has_more_data: NotRequired[bool]
     last_seen_device_id: NotRequired[int]
-    device_list: NotRequired[list[DeviceListQueryItem | DeviceListQueryItemDict]]
+    device_list: NotRequired[list[DeviceListQueryItemDict]]

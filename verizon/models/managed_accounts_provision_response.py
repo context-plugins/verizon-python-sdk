@@ -4,7 +4,7 @@ from pydantic import Field
 from typing_extensions import NotRequired, TypedDict
 
 from ..core import UNSET, Optional, SdkBaseModel
-from .enums.service_name import ServiceNameOrStr
+from .enums.service_name import ServiceName, ServiceNameOrStr
 
 
 class ManagedAccountsProvisionResponse(SdkBaseModel):
@@ -17,7 +17,7 @@ class ManagedAccountsProvisionResponse(SdkBaseModel):
     paccount_name: Optional[str] = Field(default=UNSET, alias="paccountName")
     """Primary Account identifier"""
 
-    service_name: Optional[ServiceNameOrStr] = Field(default=UNSET, alias="serviceName")
+    service_name: ServiceNameOrStr = Field(default=ServiceName.LOCATION, alias="serviceName")
     """Service name"""
 
     status: Optional[str] = UNSET

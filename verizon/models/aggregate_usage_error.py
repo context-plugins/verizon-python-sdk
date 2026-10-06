@@ -23,4 +23,4 @@ class AggregateUsageError(SdkBaseModel):
 class AggregateUsageErrorDict(TypedDict):
     imei: NotRequired[str]
     error_message: NotRequired[str]
-    error_response: NotRequired[IerrorMessage | IerrorMessageDict]
+    error_response: NotRequired[IerrorMessageDict]

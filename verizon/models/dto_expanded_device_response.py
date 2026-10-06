@@ -125,7 +125,7 @@ class DtoExpandedDeviceResponseDict(TypedDict):
     customdata: NotRequired[dict[str, Any]]
     description: NotRequired[str]
     esn: NotRequired[int]
-    fields: NotRequired[DtoFields | DtoFieldsDict]
+    fields: NotRequired[DtoFieldsDict]
     foreignid: str
     hardwareversion: NotRequired[str]
     iccid: NotRequired[str]

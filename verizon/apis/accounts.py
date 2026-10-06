@@ -9,6 +9,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_decoder,
     param,
 )
@@ -33,7 +34,8 @@ class Accounts:
 
         Args:
             aname: Account name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The account information.
@@ -43,22 +45,23 @@ class Accounts:
         return self._with_raw_response.get_account_information(aname, request_options=request_options).unwrap()
 
     def list_account_leads(
-        self, aname: str, *, next: int | None = None, request_options: RequestOptionsOrDict | None = None
+        self, aname: str, *, next_: int | None = None, request_options: RequestOptionsOrDict | None = None
     ) -> AccountLeadsResult:
         """When HTTP status is 202, a URL will be returned in the Location header of the form
         /leads/{aname}?next={token}. This URL can be used to request the next set of leads.
 
         Args:
             aname: Account name.
-            next: Continue the previous query from the pageUrl in Location Header.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            next_: Continue the previous query from the pageUrl in Location Header.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The list of leads associated with the account.
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.list_account_leads(aname, next=next, request_options=request_options).unwrap()
+        return self._with_raw_response.list_account_leads(aname, next_=next_, request_options=request_options).unwrap()
 
     def list_account_states_and_services(
         self, aname: str, *, request_options: RequestOptionsOrDict | None = None
@@ -67,7 +70,8 @@ class Accounts:
 
         Args:
             aname: Account name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The account's engagements, services, and states.
@@ -92,7 +96,8 @@ class AsyncAccounts:
 
         Args:
             aname: Account name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The account information.
@@ -102,15 +107,16 @@ class AsyncAccounts:
         return (await self._with_raw_response.get_account_information(aname, request_options=request_options)).unwrap()
 
     async def list_account_leads(
-        self, aname: str, *, next: int | None = None, request_options: RequestOptionsOrDict | None = None
+        self, aname: str, *, next_: int | None = None, request_options: RequestOptionsOrDict | None = None
     ) -> AccountLeadsResult:
         """When HTTP status is 202, a URL will be returned in the Location header of the form
         /leads/{aname}?next={token}. This URL can be used to request the next set of leads.
 
         Args:
             aname: Account name.
-            next: Continue the previous query from the pageUrl in Location Header.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            next_: Continue the previous query from the pageUrl in Location Header.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The list of leads associated with the account.
@@ -118,7 +124,7 @@ class AsyncAccounts:
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
         return (
-            await self._with_raw_response.list_account_leads(aname, next=next, request_options=request_options)
+            await self._with_raw_response.list_account_leads(aname, next_=next_, request_options=request_options)
         ).unwrap()
 
     async def list_account_states_and_services(
@@ -128,7 +134,8 @@ class AsyncAccounts:
 
         Args:
             aname: Account name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The account's engagements, services, and states.
@@ -152,13 +159,14 @@ class AccountsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes]
 
         Args:
             aname: Account name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/accounts/{aname}"),
+            url_template=self._server.thingspace("/m2m/v1/accounts/{aname}"),
             path_params=[param[str]("aname", aname)],
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
             decoder=json_decoder[Account],
@@ -167,23 +175,24 @@ class AccountsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes]
         )
 
     def list_account_leads(
-        self, aname: str, *, next: int | None = None, request_options: RequestOptionsOrDict | None = None
+        self, aname: str, *, next_: int | None = None, request_options: RequestOptionsOrDict | None = None
     ) -> ApiResult[AccountLeadsResult, ListAccountLeadsErrorBody]:
         """When HTTP status is 202, a URL will be returned in the Location header of the form
         /leads/{aname}?next={token}. This URL can be used to request the next set of leads.
 
         Args:
             aname: Account name.
-            next: Continue the previous query from the pageUrl in Location Header.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            next_: Continue the previous query from the pageUrl in Location Header.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/leads/{aname}"),
+            url_template=self._server.thingspace("/m2m/v1/leads/{aname}"),
             path_params=[param[str]("aname", aname)],
-            query_params=[param[int | None]("next", next)],
+            query_params=[param[int | None]("next", next_)],
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
             decoder=json_decoder[AccountLeadsResult],
             error_mapper=list_account_leads_error_mapper,
@@ -197,13 +206,14 @@ class AccountsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes]
 
         Args:
             aname: Account name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/accounts/{aname}/statesandservices"),
+            url_template=self._server.thingspace("/m2m/v1/accounts/{aname}/statesandservices"),
             path_params=[param[str]("aname", aname)],
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
             decoder=json_decoder[AccountStatesAndServices],
@@ -220,40 +230,42 @@ class AsyncAccountsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, As
 
         Args:
             aname: Account name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/accounts/{aname}"),
+            url_template=self._server.thingspace("/m2m/v1/accounts/{aname}"),
             path_params=[param[str]("aname", aname)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[Account],
+            decoder=async_json_decoder[Account],
             error_mapper=get_account_information_error_mapper,
             request_options=request_options,
         )
 
     async def list_account_leads(
-        self, aname: str, *, next: int | None = None, request_options: RequestOptionsOrDict | None = None
+        self, aname: str, *, next_: int | None = None, request_options: RequestOptionsOrDict | None = None
     ) -> ApiResult[AccountLeadsResult, ListAccountLeadsErrorBody]:
         """When HTTP status is 202, a URL will be returned in the Location header of the form
         /leads/{aname}?next={token}. This URL can be used to request the next set of leads.
 
         Args:
             aname: Account name.
-            next: Continue the previous query from the pageUrl in Location Header.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            next_: Continue the previous query from the pageUrl in Location Header.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/leads/{aname}"),
+            url_template=self._server.thingspace("/m2m/v1/leads/{aname}"),
             path_params=[param[str]("aname", aname)],
-            query_params=[param[int | None]("next", next)],
+            query_params=[param[int | None]("next", next_)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[AccountLeadsResult],
+            decoder=async_json_decoder[AccountLeadsResult],
             error_mapper=list_account_leads_error_mapper,
             request_options=request_options,
         )
@@ -265,16 +277,17 @@ class AsyncAccountsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, As
 
         Args:
             aname: Account name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/accounts/{aname}/statesandservices"),
+            url_template=self._server.thingspace("/m2m/v1/accounts/{aname}/statesandservices"),
             path_params=[param[str]("aname", aname)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[AccountStatesAndServices],
+            decoder=async_json_decoder[AccountStatesAndServices],
             error_mapper=list_account_states_and_services_error_mapper,
             request_options=request_options,
         )

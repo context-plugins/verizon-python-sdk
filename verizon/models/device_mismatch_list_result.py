@@ -15,4 +15,4 @@ class DeviceMismatchListResult(SdkBaseModel):
 
 
 class DeviceMismatchListResultDict(TypedDict):
-    devices: NotRequired[list[MismatchedDevice | MismatchedDeviceDict]]
+    devices: NotRequired[list[MismatchedDeviceDict]]

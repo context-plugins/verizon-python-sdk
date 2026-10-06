@@ -11,6 +11,8 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
@@ -52,7 +54,8 @@ class EtxappConfiguration:
         Args:
             vendor_id: The vendor's identifier
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Configuration created
@@ -62,7 +65,7 @@ class EtxappConfiguration:
         return self._with_raw_response.create_configuration(vendor_id, body, request_options=request_options).unwrap()
 
     def delete_configuration(
-        self, id: str, vendor_id: str, *, request_options: RequestOptionsOrDict | None = None
+        self, id_: str, vendor_id: str, *, request_options: RequestOptionsOrDict | None = None
     ) -> None:
         """This endpoint deletes a specific configuration from the system. It requires the configuration ID parameter,
         which was provided by the POST (create) operation.
@@ -71,19 +74,20 @@ class EtxappConfiguration:
         tokens in order to call this API.
 
         Args:
-            id: The configuration identifier
+            id_: The configuration identifier
             vendor_id: The vendor's identifier
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Configuration deleted
 
         Raises:
             ApiError: Forbidden Too many requests ``error`` is ``ResponseError | RawError``."""
-        return self._with_raw_response.delete_configuration(id, vendor_id, request_options=request_options).unwrap()
+        return self._with_raw_response.delete_configuration(id_, vendor_id, request_options=request_options).unwrap()
 
     def get_configuration(
-        self, id: str, vendor_id: str, *, request_options: RequestOptionsOrDict | None = None
+        self, id_: str, vendor_id: str, *, request_options: RequestOptionsOrDict | None = None
     ) -> GeoFenceConfigurationResponse:
         """This endpoint fetches and returns a specific configuration's details. The configuration ID parameter, which
         was provided when the configuration was created through the POST request, is need to retrieve the configuration
@@ -93,16 +97,17 @@ class EtxappConfiguration:
         tokens in order to call this API.
 
         Args:
-            id: The configuration identifier
+            id_: The configuration identifier
             vendor_id: The vendor's identifier
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Configuration found
 
         Raises:
             ApiError: Forbidden Configuration not found Too many requests ``error`` is ``ResponseError | RawError``."""
-        return self._with_raw_response.get_configuration(id, vendor_id, request_options=request_options).unwrap()
+        return self._with_raw_response.get_configuration(id_, vendor_id, request_options=request_options).unwrap()
 
     def get_configuration_list(
         self, vendor_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -116,7 +121,8 @@ class EtxappConfiguration:
 
         Args:
             vendor_id: The vendor's identifier
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Configuration list was queried successfully
@@ -127,7 +133,7 @@ class EtxappConfiguration:
 
     def update_configuration(
         self,
-        id: str,
+        id_: str,
         vendor_id: str,
         body: GeoFenceConfigurationUpdateRequest | GeoFenceConfigurationUpdateRequestDict,
         *,
@@ -141,10 +147,11 @@ class EtxappConfiguration:
         tokens in order to call this API.
 
         Args:
-            id: The configuration identifier
+            id_: The configuration identifier
             vendor_id: The vendor's identifier
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Configuration applied
@@ -153,7 +160,7 @@ class EtxappConfiguration:
             ApiError: Invalid configuration Forbidden Configuration not found Too many requests ``error`` is
                 ``ResponseError | RawError``."""
         return self._with_raw_response.update_configuration(
-            id, vendor_id, body, request_options=request_options
+            id_, vendor_id, body, request_options=request_options
         ).unwrap()
 
     @property
@@ -182,7 +189,8 @@ class AsyncEtxappConfiguration:
         Args:
             vendor_id: The vendor's identifier
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Configuration created
@@ -194,7 +202,7 @@ class AsyncEtxappConfiguration:
         ).unwrap()
 
     async def delete_configuration(
-        self, id: str, vendor_id: str, *, request_options: RequestOptionsOrDict | None = None
+        self, id_: str, vendor_id: str, *, request_options: RequestOptionsOrDict | None = None
     ) -> None:
         """This endpoint deletes a specific configuration from the system. It requires the configuration ID parameter,
         which was provided by the POST (create) operation.
@@ -203,9 +211,10 @@ class AsyncEtxappConfiguration:
         tokens in order to call this API.
 
         Args:
-            id: The configuration identifier
+            id_: The configuration identifier
             vendor_id: The vendor's identifier
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Configuration deleted
@@ -213,11 +222,11 @@ class AsyncEtxappConfiguration:
         Raises:
             ApiError: Forbidden Too many requests ``error`` is ``ResponseError | RawError``."""
         return (
-            await self._with_raw_response.delete_configuration(id, vendor_id, request_options=request_options)
+            await self._with_raw_response.delete_configuration(id_, vendor_id, request_options=request_options)
         ).unwrap()
 
     async def get_configuration(
-        self, id: str, vendor_id: str, *, request_options: RequestOptionsOrDict | None = None
+        self, id_: str, vendor_id: str, *, request_options: RequestOptionsOrDict | None = None
     ) -> GeoFenceConfigurationResponse:
         """This endpoint fetches and returns a specific configuration's details. The configuration ID parameter, which
         was provided when the configuration was created through the POST request, is need to retrieve the configuration
@@ -227,9 +236,10 @@ class AsyncEtxappConfiguration:
         tokens in order to call this API.
 
         Args:
-            id: The configuration identifier
+            id_: The configuration identifier
             vendor_id: The vendor's identifier
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Configuration found
@@ -237,7 +247,7 @@ class AsyncEtxappConfiguration:
         Raises:
             ApiError: Forbidden Configuration not found Too many requests ``error`` is ``ResponseError | RawError``."""
         return (
-            await self._with_raw_response.get_configuration(id, vendor_id, request_options=request_options)
+            await self._with_raw_response.get_configuration(id_, vendor_id, request_options=request_options)
         ).unwrap()
 
     async def get_configuration_list(
@@ -252,7 +262,8 @@ class AsyncEtxappConfiguration:
 
         Args:
             vendor_id: The vendor's identifier
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Configuration list was queried successfully
@@ -265,7 +276,7 @@ class AsyncEtxappConfiguration:
 
     async def update_configuration(
         self,
-        id: str,
+        id_: str,
         vendor_id: str,
         body: GeoFenceConfigurationUpdateRequest | GeoFenceConfigurationUpdateRequestDict,
         *,
@@ -279,10 +290,11 @@ class AsyncEtxappConfiguration:
         tokens in order to call this API.
 
         Args:
-            id: The configuration identifier
+            id_: The configuration identifier
             vendor_id: The vendor's identifier
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Configuration applied
@@ -291,7 +303,7 @@ class AsyncEtxappConfiguration:
             ApiError: Invalid configuration Forbidden Configuration not found Too many requests ``error`` is
                 ``ResponseError | RawError``."""
         return (
-            await self._with_raw_response.update_configuration(id, vendor_id, body, request_options=request_options)
+            await self._with_raw_response.update_configuration(id_, vendor_id, body, request_options=request_options)
         ).unwrap()
 
     @property
@@ -317,7 +329,8 @@ class EtxappConfigurationWithRawResponse(SecuredRawResponse[RawClient, Server, A
         Args:
             vendor_id: The vendor's identifier
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -333,7 +346,7 @@ class EtxappConfigurationWithRawResponse(SecuredRawResponse[RawClient, Server, A
         )
 
     def delete_configuration(
-        self, id: str, vendor_id: str, *, request_options: RequestOptionsOrDict | None = None
+        self, id_: str, vendor_id: str, *, request_options: RequestOptionsOrDict | None = None
     ) -> ApiResult[None, DeleteConfigurationErrorBody]:
         """This endpoint deletes a specific configuration from the system. It requires the configuration ID parameter,
         which was provided by the POST (create) operation.
@@ -342,16 +355,17 @@ class EtxappConfigurationWithRawResponse(SecuredRawResponse[RawClient, Server, A
         tokens in order to call this API.
 
         Args:
-            id: The configuration identifier
+            id_: The configuration identifier
             vendor_id: The vendor's identifier
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="DELETE",
             url_template=self._server.imp_server("/api/v1/application/configurations/geofence"),
-            query_params=[param[str]("id", id)],
+            query_params=[param[str]("id", id_)],
             headers=[param[str]("VendorID", vendor_id), param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.session_token),
             decoder=empty_response,
@@ -360,7 +374,7 @@ class EtxappConfigurationWithRawResponse(SecuredRawResponse[RawClient, Server, A
         )
 
     def get_configuration(
-        self, id: str, vendor_id: str, *, request_options: RequestOptionsOrDict | None = None
+        self, id_: str, vendor_id: str, *, request_options: RequestOptionsOrDict | None = None
     ) -> ApiResult[GeoFenceConfigurationResponse, GetConfigurationErrorBody]:
         """This endpoint fetches and returns a specific configuration's details. The configuration ID parameter, which
         was provided when the configuration was created through the POST request, is need to retrieve the configuration
@@ -370,16 +384,17 @@ class EtxappConfigurationWithRawResponse(SecuredRawResponse[RawClient, Server, A
         tokens in order to call this API.
 
         Args:
-            id: The configuration identifier
+            id_: The configuration identifier
             vendor_id: The vendor's identifier
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="GET",
             url_template=self._server.imp_server("/api/v1/application/configurations/geofence"),
-            query_params=[param[str]("id", id)],
+            query_params=[param[str]("id", id_)],
             headers=[param[str]("VendorID", vendor_id)],
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.session_token),
             decoder=json_decoder[GeoFenceConfigurationResponse],
@@ -399,7 +414,8 @@ class EtxappConfigurationWithRawResponse(SecuredRawResponse[RawClient, Server, A
 
         Args:
             vendor_id: The vendor's identifier
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -415,7 +431,7 @@ class EtxappConfigurationWithRawResponse(SecuredRawResponse[RawClient, Server, A
 
     def update_configuration(
         self,
-        id: str,
+        id_: str,
         vendor_id: str,
         body: GeoFenceConfigurationUpdateRequest | GeoFenceConfigurationUpdateRequestDict,
         *,
@@ -429,17 +445,18 @@ class EtxappConfigurationWithRawResponse(SecuredRawResponse[RawClient, Server, A
         tokens in order to call this API.
 
         Args:
-            id: The configuration identifier
+            id_: The configuration identifier
             vendor_id: The vendor's identifier
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="PUT",
             url_template=self._server.imp_server("/api/v1/application/configurations/geofence"),
-            query_params=[param[str]("id", id)],
+            query_params=[param[str]("id", id_)],
             headers=[param[str]("VendorID", vendor_id), param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[GeoFenceConfigurationUpdateRequest | GeoFenceConfigurationUpdateRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.session_token),
@@ -467,7 +484,8 @@ class AsyncEtxappConfigurationWithRawResponse(SecuredRawResponse[AsyncRawClient,
         Args:
             vendor_id: The vendor's identifier
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -477,13 +495,13 @@ class AsyncEtxappConfigurationWithRawResponse(SecuredRawResponse[AsyncRawClient,
             headers=[param[str]("VendorID", vendor_id), param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[GeoFenceConfigurationRequest | GeoFenceConfigurationRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.session_token),
-            decoder=json_decoder[GeoFenceConfigurationResponse],
+            decoder=async_json_decoder[GeoFenceConfigurationResponse],
             error_mapper=create_configuration_error_mapper,
             request_options=request_options,
         )
 
     async def delete_configuration(
-        self, id: str, vendor_id: str, *, request_options: RequestOptionsOrDict | None = None
+        self, id_: str, vendor_id: str, *, request_options: RequestOptionsOrDict | None = None
     ) -> ApiResult[None, DeleteConfigurationErrorBody]:
         """This endpoint deletes a specific configuration from the system. It requires the configuration ID parameter,
         which was provided by the POST (create) operation.
@@ -492,25 +510,26 @@ class AsyncEtxappConfigurationWithRawResponse(SecuredRawResponse[AsyncRawClient,
         tokens in order to call this API.
 
         Args:
-            id: The configuration identifier
+            id_: The configuration identifier
             vendor_id: The vendor's identifier
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="DELETE",
             url_template=self._server.imp_server("/api/v1/application/configurations/geofence"),
-            query_params=[param[str]("id", id)],
+            query_params=[param[str]("id", id_)],
             headers=[param[str]("VendorID", vendor_id), param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.session_token),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_configuration_error_mapper,
             request_options=request_options,
         )
 
     async def get_configuration(
-        self, id: str, vendor_id: str, *, request_options: RequestOptionsOrDict | None = None
+        self, id_: str, vendor_id: str, *, request_options: RequestOptionsOrDict | None = None
     ) -> ApiResult[GeoFenceConfigurationResponse, GetConfigurationErrorBody]:
         """This endpoint fetches and returns a specific configuration's details. The configuration ID parameter, which
         was provided when the configuration was created through the POST request, is need to retrieve the configuration
@@ -520,19 +539,20 @@ class AsyncEtxappConfigurationWithRawResponse(SecuredRawResponse[AsyncRawClient,
         tokens in order to call this API.
 
         Args:
-            id: The configuration identifier
+            id_: The configuration identifier
             vendor_id: The vendor's identifier
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="GET",
             url_template=self._server.imp_server("/api/v1/application/configurations/geofence"),
-            query_params=[param[str]("id", id)],
+            query_params=[param[str]("id", id_)],
             headers=[param[str]("VendorID", vendor_id)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.session_token),
-            decoder=json_decoder[GeoFenceConfigurationResponse],
+            decoder=async_json_decoder[GeoFenceConfigurationResponse],
             error_mapper=get_configuration_error_mapper,
             request_options=request_options,
         )
@@ -549,7 +569,8 @@ class AsyncEtxappConfigurationWithRawResponse(SecuredRawResponse[AsyncRawClient,
 
         Args:
             vendor_id: The vendor's identifier
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -558,14 +579,14 @@ class AsyncEtxappConfigurationWithRawResponse(SecuredRawResponse[AsyncRawClient,
             url_template=self._server.imp_server("/api/v1/application/configurations/geofence/ids"),
             headers=[param[str]("VendorID", vendor_id)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.session_token),
-            decoder=json_decoder[list[ConfigurationListItem]],
+            decoder=async_json_decoder[list[ConfigurationListItem]],
             error_mapper=get_configuration_list_error_mapper,
             request_options=request_options,
         )
 
     async def update_configuration(
         self,
-        id: str,
+        id_: str,
         vendor_id: str,
         body: GeoFenceConfigurationUpdateRequest | GeoFenceConfigurationUpdateRequestDict,
         *,
@@ -579,21 +600,22 @@ class AsyncEtxappConfigurationWithRawResponse(SecuredRawResponse[AsyncRawClient,
         tokens in order to call this API.
 
         Args:
-            id: The configuration identifier
+            id_: The configuration identifier
             vendor_id: The vendor's identifier
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="PUT",
             url_template=self._server.imp_server("/api/v1/application/configurations/geofence"),
-            query_params=[param[str]("id", id)],
+            query_params=[param[str]("id", id_)],
             headers=[param[str]("VendorID", vendor_id), param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[GeoFenceConfigurationUpdateRequest | GeoFenceConfigurationUpdateRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.session_token),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=update_configuration_error_mapper,
             request_options=request_options,
         )

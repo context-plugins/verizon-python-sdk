@@ -16,4 +16,4 @@ class SaeInfoMessage(SdkBaseModel):
 
 
 class SaeInfoMessageDict(TypedDict):
-    sae_info: SaeInfoPayload | SaeInfoPayloadDict
+    sae_info: SaeInfoPayloadDict

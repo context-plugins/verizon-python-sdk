@@ -10,10 +10,10 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /m2m/v1/sms/{accountName}/history`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
-- **Signature**: `def get_sms_messages(account_name: str, *, next: str | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Server**: `thingspace`
+- **Signature**: `def get_sms_messages(account_name: str, *, next_: str | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `account_name`
-- **Params**: `account_name` — path `accountName` · `next` — query
+- **Params**: `account_name` — path `accountName` · `next_` — query `next`
 - **Returns (parsed)**: `SmsMessagesResponse`
 - **Returns (raw)**: `ApiResult[SmsMessagesResponse, RawError]`
 - **Error**: `RawError` — **Case B**
@@ -26,7 +26,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `POST /m2m/v1/devices/sms/history/actions/list`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def list_sms_message_history(body: SmseventHistoryRequest | SmseventHistoryRequestDict, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `body`
 - **Params**: `body` — JSON body
@@ -44,7 +44,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `POST /m2m/v1/sms`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def send_an_sms_message(body: GiosmssendRequest | GiosmssendRequestDict, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `body`
 - **Params**: `body` — JSON body
@@ -62,7 +62,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `PUT /m2m/v1/sms/{accountName}/startCallbacks`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def start_sms_message_delivery(account_name: str, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `account_name`
 - **Params**: `account_name` — path `accountName`

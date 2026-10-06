@@ -19,4 +19,4 @@ class DeviceServiceRequest(SdkBaseModel):
 
 class DeviceServiceRequestDict(TypedDict):
     imei: str
-    bullseye_enable: HplBullseyeEnable | HplBullseyeEnableDict
+    bullseye_enable: HplBullseyeEnableDict

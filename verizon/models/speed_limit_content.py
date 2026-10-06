@@ -15,4 +15,4 @@ class SpeedLimitContent(SdkBaseModel):
 
 
 class SpeedLimitContentDict(TypedDict):
-    speed_limit: list[TextPhraseOrItis | TextPhraseOrItisDict]
+    speed_limit: list[TextPhraseOrItisDict]

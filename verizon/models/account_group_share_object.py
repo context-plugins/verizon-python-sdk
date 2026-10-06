@@ -12,4 +12,4 @@ class AccountGroupShareObject(SdkBaseModel):
 
 
 class AccountGroupShareObjectDict(TypedDict):
-    account_group_share: NotRequired[AccountGroupShareIndividual1 | AccountGroupShareIndividual1Dict]
+    account_group_share: NotRequired[AccountGroupShareIndividual1Dict]

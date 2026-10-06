@@ -15,4 +15,4 @@ class FindDeviceByPropertyResponseList(SdkBaseModel):
 
 
 class FindDeviceByPropertyResponseListDict(TypedDict):
-    device_property: NotRequired[list[FindDeviceByPropertyResponse | FindDeviceByPropertyResponseDict]]
+    device_property: NotRequired[list[FindDeviceByPropertyResponseDict]]

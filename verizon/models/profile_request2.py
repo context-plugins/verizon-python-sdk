@@ -12,12 +12,12 @@ class ProfileRequest2(SdkBaseModel):
     account_name: Optional[str] = Field(default=UNSET, alias="accountName")
     carrier_name: Optional[str] = Field(default=UNSET, alias="carrierName")
     reason_code: Optional[str] = Field(default=UNSET, alias="reasonCode")
-    etf_waiver: Optional[bool] = Field(default=UNSET, alias="etfWaiver")
-    check_fallback_profile: Optional[bool] = Field(default=UNSET, alias="checkFallbackProfile")
+    etf_waiver: bool = Field(default=True, alias="etfWaiver")
+    check_fallback_profile: bool = Field(default=False, alias="checkFallbackProfile")
 
 
 class ProfileRequest2Dict(TypedDict):
-    devices: NotRequired[list[DeviceList2 | DeviceList2Dict]]
+    devices: NotRequired[list[DeviceList2Dict]]
     account_name: NotRequired[str]
     carrier_name: NotRequired[str]
     reason_code: NotRequired[str]

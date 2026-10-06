@@ -15,4 +15,4 @@ class DtoConfigurationProfile(SdkBaseModel):
 
 class DtoConfigurationProfileDict(TypedDict):
     accountname: NotRequired[str]
-    profiles: NotRequired[list[DtoProfile | DtoProfileDict]]
+    profiles: NotRequired[list[DtoProfileDict]]

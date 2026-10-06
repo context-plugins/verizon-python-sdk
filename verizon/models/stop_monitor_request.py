@@ -14,4 +14,4 @@ class StopMonitorRequest(SdkBaseModel):
 
 class StopMonitorRequestDict(TypedDict):
     account_name: str
-    devices: list[DeviceList | DeviceListDict]
+    devices: list[DeviceListDict]

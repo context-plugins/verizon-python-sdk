@@ -37,8 +37,8 @@ class ServicePlanUpdateRequestDict(TypedDict):
     service_plan: str
     account_name: NotRequired[str]
     current_service_plan: NotRequired[str]
-    custom_fields: NotRequired[list[CustomFields | CustomFieldsDict]]
-    devices: NotRequired[list[AccountDeviceList | AccountDeviceListDict]]
+    custom_fields: NotRequired[list[CustomFieldsDict]]
+    devices: NotRequired[list[AccountDeviceListDict]]
     group_name: NotRequired[str]
     carrier_ip_pool_name: NotRequired[str]
     take_effect: NotRequired[RFC3339DateTime]

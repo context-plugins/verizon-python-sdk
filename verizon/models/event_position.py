@@ -22,5 +22,5 @@ class EventPosition(SdkBaseModel):
 class EventPositionDict(TypedDict):
     latitude: int
     longitude: int
-    position_confidence_ellipse: PosConfidenceEllipse | PosConfidenceEllipseDict
-    altitude: Altitude | AltitudeDict
+    position_confidence_ellipse: PosConfidenceEllipseDict
+    altitude: AltitudeDict

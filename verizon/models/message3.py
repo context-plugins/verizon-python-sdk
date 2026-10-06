@@ -43,7 +43,7 @@ class Message3Dict(TypedDict):
     is_private: bool
     road_user_type: list[RoadUserTypesOrStr]
     trigger_conditions: list[TriggerConditionOrStr]
-    limits: NotRequired[list[Limit | LimitDict]]
+    limits: NotRequired[list[LimitDict]]
     distribution_type: NotRequired[list[DistributionTypesOrStr]]
-    distribution_schedule: NotRequired[DistributionSchedule | DistributionScheduleDict]
-    etsi_alert: EtsiAlertPayload | EtsiAlertPayloadDict
+    distribution_schedule: NotRequired[DistributionScheduleDict]
+    etsi_alert: EtsiAlertPayloadDict

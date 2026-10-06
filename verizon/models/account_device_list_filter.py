@@ -15,4 +15,4 @@ class AccountDeviceListFilter(SdkBaseModel):
 
 
 class AccountDeviceListFilterDict(TypedDict):
-    device_identifier_filters: list[DeviceIdSearch | DeviceIdSearchDict]
+    device_identifier_filters: list[DeviceIdSearchDict]

@@ -10,6 +10,7 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_decoder,
     param,
     raw_error_response,
@@ -29,7 +30,8 @@ class RetrieveTheTriggers:
         """Retrieves all of the available triggers for pseudo-MDN.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Status of Request
@@ -45,7 +47,8 @@ class RetrieveTheTriggers:
 
         Args:
             account_name: The account name
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Status of Request
@@ -62,7 +65,8 @@ class RetrieveTheTriggers:
         """Retrieves all of the triggers for the specified account associated with the PromoAlert category
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request response
@@ -78,7 +82,8 @@ class RetrieveTheTriggers:
 
         Args:
             trigger_id: The ID of a specific trigger
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request response
@@ -102,7 +107,8 @@ class AsyncRetrieveTheTriggers:
         """Retrieves all of the available triggers for pseudo-MDN.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Status of Request
@@ -118,7 +124,8 @@ class AsyncRetrieveTheTriggers:
 
         Args:
             account_name: The account name
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Status of Request
@@ -137,7 +144,8 @@ class AsyncRetrieveTheTriggers:
         """Retrieves all of the triggers for the specified account associated with the PromoAlert category
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request response
@@ -155,7 +163,8 @@ class AsyncRetrieveTheTriggers:
 
         Args:
             trigger_id: The ID of a specific trigger
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request response
@@ -176,13 +185,14 @@ class RetrieveTheTriggersWithRawResponse(SecuredRawResponse[RawClient, Server, A
         """Retrieves all of the available triggers for pseudo-MDN.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/m2m/v2/triggers"),
+            url_template=self._server.thingspace("/m2m/v2/triggers"),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
             decoder=json_decoder[TriggerValueResponse],
             error_mapper=raw_error_response,
@@ -196,13 +206,14 @@ class RetrieveTheTriggersWithRawResponse(SecuredRawResponse[RawClient, Server, A
 
         Args:
             account_name: The account name
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/m2m/v2/triggers/accounts/{accountName}"),
+            url_template=self._server.thingspace("/m2m/v2/triggers/accounts/{accountName}"),
             path_params=[param[str]("accountName", account_name)],
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
             decoder=json_decoder[TriggerValueResponse],
@@ -216,13 +227,14 @@ class RetrieveTheTriggersWithRawResponse(SecuredRawResponse[RawClient, Server, A
         """Retrieves all of the triggers for the specified account associated with the PromoAlert category
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/m2m/v2/triggers/categories/PromoAlerts"),
+            url_template=self._server.thingspace("/m2m/v2/triggers/categories/PromoAlerts"),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
             decoder=json_decoder[TriggerValueResponse2],
             error_mapper=raw_error_response,
@@ -236,13 +248,14 @@ class RetrieveTheTriggersWithRawResponse(SecuredRawResponse[RawClient, Server, A
 
         Args:
             trigger_id: The ID of a specific trigger
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/m2m/v2/triggers/{triggerId}"),
+            url_template=self._server.thingspace("/m2m/v2/triggers/{triggerId}"),
             path_params=[param[str]("triggerId", trigger_id)],
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
             decoder=json_decoder[TriggerValueResponse2],
@@ -258,15 +271,16 @@ class AsyncRetrieveTheTriggersWithRawResponse(SecuredRawResponse[AsyncRawClient,
         """Retrieves all of the available triggers for pseudo-MDN.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/m2m/v2/triggers"),
+            url_template=self._server.thingspace("/m2m/v2/triggers"),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[TriggerValueResponse],
+            decoder=async_json_decoder[TriggerValueResponse],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -278,16 +292,17 @@ class AsyncRetrieveTheTriggersWithRawResponse(SecuredRawResponse[AsyncRawClient,
 
         Args:
             account_name: The account name
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/m2m/v2/triggers/accounts/{accountName}"),
+            url_template=self._server.thingspace("/m2m/v2/triggers/accounts/{accountName}"),
             path_params=[param[str]("accountName", account_name)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[TriggerValueResponse],
+            decoder=async_json_decoder[TriggerValueResponse],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -298,15 +313,16 @@ class AsyncRetrieveTheTriggersWithRawResponse(SecuredRawResponse[AsyncRawClient,
         """Retrieves all of the triggers for the specified account associated with the PromoAlert category
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/m2m/v2/triggers/categories/PromoAlerts"),
+            url_template=self._server.thingspace("/m2m/v2/triggers/categories/PromoAlerts"),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[TriggerValueResponse2],
+            decoder=async_json_decoder[TriggerValueResponse2],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -318,16 +334,17 @@ class AsyncRetrieveTheTriggersWithRawResponse(SecuredRawResponse[AsyncRawClient,
 
         Args:
             trigger_id: The ID of a specific trigger
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/m2m/v2/triggers/{triggerId}"),
+            url_template=self._server.thingspace("/m2m/v2/triggers/{triggerId}"),
             path_params=[param[str]("triggerId", trigger_id)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[TriggerValueResponse2],
+            decoder=async_json_decoder[TriggerValueResponse2],
             error_mapper=raw_error_response,
             request_options=request_options,
         )

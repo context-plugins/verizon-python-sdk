@@ -24,4 +24,4 @@ class HyperPreciseLocationResultError(SdkBaseModel):
 class HyperPreciseLocationResultErrorDict(TypedDict):
     response_code: NotRequired[ErrorResponseCodeOrStr]
     message: NotRequired[str]
-    fault: NotRequired[HyperPreciseLocationFault | HyperPreciseLocationFaultDict]
+    fault: NotRequired[HyperPreciseLocationFaultDict]

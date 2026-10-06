@@ -15,4 +15,4 @@ class DtoListNotificationGroupRequest(SdkBaseModel):
 
 class DtoListNotificationGroupRequestDict(TypedDict):
     accountname: NotRequired[str]
-    filter: NotRequired[DtoFilter | DtoFilterDict]
+    filter: NotRequired[DtoFilterDict]

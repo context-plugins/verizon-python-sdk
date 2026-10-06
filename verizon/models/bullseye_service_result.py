@@ -23,5 +23,5 @@ class BullseyeServiceResult(SdkBaseModel):
 
 class BullseyeServiceResultDict(TypedDict):
     account_number: NotRequired[str]
-    device_list: NotRequired[list[DeviceServiceInformation | DeviceServiceInformationDict]]
-    response_type: NotRequired[ApiResponseCode | ApiResponseCodeDict]
+    device_list: NotRequired[list[DeviceServiceInformationDict]]
+    response_type: NotRequired[ApiResponseCodeDict]

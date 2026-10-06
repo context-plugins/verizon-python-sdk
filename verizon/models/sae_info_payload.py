@@ -10,7 +10,7 @@ from .data_frame import DataFrame, DataFrameDict
 class SaeInfoPayload(SdkBaseModel):
     """Traveler Information Message (TIM) payload as defined in SAE J2735."""
 
-    msg_cnt: Optional[int] = Field(default=UNSET, alias="msgCnt")
+    msg_cnt: int = Field(default=0, alias="msgCnt")
     """It is used to provide a sequence number within a stream of messages with the same DSRCmsgID (here RoadSideAlert)
     and from the same sender."""
 
@@ -37,4 +37,4 @@ class SaeInfoPayloadDict(TypedDict):
     time_stamp: NotRequired[int]
     packet_id: NotRequired[str]
     url_b: NotRequired[str]
-    data_frames: list[DataFrame | DataFrameDict]
+    data_frames: list[DataFrameDict]

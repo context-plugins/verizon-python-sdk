@@ -66,8 +66,8 @@ class V3AccountDeviceDict(TypedDict):
     status: str
     license_assigned: bool
     protocol: str
-    software_list: list[V3SoftwareInfo | V3SoftwareInfoDict]
-    file_list: NotRequired[list[V3SoftwareInfo | V3SoftwareInfoDict]]
+    software_list: list[V3SoftwareInfoDict]
+    file_list: NotRequired[list[V3SoftwareInfoDict]]
     create_time: NotRequired[str]
     upgrade_time: NotRequired[str]
     update_time: NotRequired[str]

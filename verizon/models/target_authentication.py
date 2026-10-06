@@ -14,5 +14,5 @@ class TargetAuthentication(SdkBaseModel):
 
 
 class TargetAuthenticationDict(TypedDict):
-    body: NotRequired[TargetAuthenticationBody | TargetAuthenticationBodyDict]
+    body: NotRequired[TargetAuthenticationBodyDict]
     version: NotRequired[str]

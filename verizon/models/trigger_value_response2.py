@@ -11,4 +11,4 @@ class TriggerValueResponse2(SdkBaseModel):
 
 
 class TriggerValueResponse2Dict(TypedDict):
-    triggers: NotRequired[list[Triggervalues2 | Triggervalues2Dict]]
+    triggers: NotRequired[list[Triggervalues2Dict]]

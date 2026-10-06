@@ -30,6 +30,6 @@ class DeviceLevelCreateTriggerRequestDict(TypedDict):
     trigger_name: NotRequired[str]
     ecpd_id: NotRequired[str]
     trigger_category: NotRequired[TriggerCategoryOrStr]
-    data_trigger: NotRequired[DataTrigger2 | DataTrigger2Dict]
-    notification: NotRequired[Notificationarray | NotificationarrayDict]
+    data_trigger: NotRequired[DataTrigger2Dict]
+    notification: NotRequired[NotificationarrayDict]
     active: NotRequired[ActiveOrStr]

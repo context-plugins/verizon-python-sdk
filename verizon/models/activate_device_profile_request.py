@@ -15,7 +15,7 @@ class ActivateDeviceProfileRequest(SdkBaseModel):
 
 
 class ActivateDeviceProfileRequestDict(TypedDict):
-    devices: list[DeviceList | DeviceListDict]
+    devices: list[DeviceListDict]
     account_name: str
     service_plan: NotRequired[str]
     mdn_zip_code: NotRequired[str]

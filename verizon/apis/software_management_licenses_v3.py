@@ -11,6 +11,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -45,7 +46,8 @@ class SoftwareManagementLicensesV3:
         Args:
             acc: Account identifier.
             body: License assignment.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             License assignment result.
@@ -62,7 +64,8 @@ class SoftwareManagementLicensesV3:
         Args:
             acc: Account identifier.
             last_seen_device_id: Last seen device identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Summary of license assignment.
@@ -81,7 +84,8 @@ class SoftwareManagementLicensesV3:
         Args:
             acc: Account identifier.
             body: License removal.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             License removal result.
@@ -109,7 +113,8 @@ class AsyncSoftwareManagementLicensesV3:
         Args:
             acc: Account identifier.
             body: License assignment.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             License assignment result.
@@ -128,7 +133,8 @@ class AsyncSoftwareManagementLicensesV3:
         Args:
             acc: Account identifier.
             last_seen_device_id: Last seen device identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Summary of license assignment.
@@ -149,7 +155,8 @@ class AsyncSoftwareManagementLicensesV3:
         Args:
             acc: Account identifier.
             body: License removal.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             License removal result.
@@ -174,7 +181,8 @@ class SoftwareManagementLicensesV3WithRawResponse(SecuredRawResponse[RawClient, 
         Args:
             acc: Account identifier.
             body: License assignment.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -198,7 +206,8 @@ class SoftwareManagementLicensesV3WithRawResponse(SecuredRawResponse[RawClient, 
         Args:
             acc: Account identifier.
             last_seen_device_id: Last seen device identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -221,7 +230,8 @@ class SoftwareManagementLicensesV3WithRawResponse(SecuredRawResponse[RawClient, 
         Args:
             acc: Account identifier.
             body: License removal.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -247,7 +257,8 @@ class AsyncSoftwareManagementLicensesV3WithRawResponse(SecuredRawResponse[AsyncR
         Args:
             acc: Account identifier.
             body: License assignment.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -258,7 +269,7 @@ class AsyncSoftwareManagementLicensesV3WithRawResponse(SecuredRawResponse[AsyncR
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[V3LicenseImei | V3LicenseImeiDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[V3LicenseAssignedRemovedResult],
+            decoder=async_json_decoder[V3LicenseAssignedRemovedResult],
             error_mapper=assign_licenses_to_devices3_error_mapper,
             request_options=request_options,
         )
@@ -271,7 +282,8 @@ class AsyncSoftwareManagementLicensesV3WithRawResponse(SecuredRawResponse[AsyncR
         Args:
             acc: Account identifier.
             last_seen_device_id: Last seen device identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -281,7 +293,7 @@ class AsyncSoftwareManagementLicensesV3WithRawResponse(SecuredRawResponse[AsyncR
             path_params=[param[str]("acc", acc)],
             query_params=[param[str | None]("lastSeenDeviceId", last_seen_device_id)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[V3LicenseSummary],
+            decoder=async_json_decoder[V3LicenseSummary],
             error_mapper=get_account_licenses_status_error_mapper,
             request_options=request_options,
         )
@@ -294,7 +306,8 @@ class AsyncSoftwareManagementLicensesV3WithRawResponse(SecuredRawResponse[AsyncR
         Args:
             acc: Account identifier.
             body: License removal.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -305,7 +318,7 @@ class AsyncSoftwareManagementLicensesV3WithRawResponse(SecuredRawResponse[AsyncR
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[V3LicenseImei | V3LicenseImeiDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[V3LicenseAssignedRemovedResult],
+            decoder=async_json_decoder[V3LicenseAssignedRemovedResult],
             error_mapper=remove_licenses_from_devices3_error_mapper,
             request_options=request_options,
         )

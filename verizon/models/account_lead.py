@@ -22,6 +22,6 @@ class AccountLead(SdkBaseModel):
 
 
 class AccountLeadDict(TypedDict):
-    address: NotRequired[Address | AddressDict]
+    address: NotRequired[AddressDict]
     lead_id: NotRequired[str]
     lead_state: NotRequired[str]

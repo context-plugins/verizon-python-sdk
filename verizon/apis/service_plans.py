@@ -9,6 +9,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_decoder,
     param,
 )
@@ -33,7 +34,8 @@ class ServicePlans:
 
         Args:
             aname: Account name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The list of service plans associated with the account.
@@ -60,7 +62,8 @@ class AsyncServicePlans:
 
         Args:
             aname: Account name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The list of service plans associated with the account.
@@ -86,13 +89,14 @@ class ServicePlansWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSche
 
         Args:
             aname: Account name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/plans/{aname}"),
+            url_template=self._server.thingspace("/m2m/v1/plans/{aname}"),
             path_params=[param[str]("aname", aname)],
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
             decoder=json_decoder[list[ServicePlan]],
@@ -111,16 +115,17 @@ class AsyncServicePlansWithRawResponse(SecuredRawResponse[AsyncRawClient, Server
 
         Args:
             aname: Account name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/plans/{aname}"),
+            url_template=self._server.thingspace("/m2m/v1/plans/{aname}"),
             path_params=[param[str]("aname", aname)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[list[ServicePlan]],
+            decoder=async_json_decoder[list[ServicePlan]],
             error_mapper=list_account_service_plans_error_mapper,
             request_options=request_options,
         )

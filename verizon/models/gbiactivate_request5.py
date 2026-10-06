@@ -22,9 +22,7 @@ class GbiactivateRequest5(SdkBaseModel):
 class GbiactivateRequest5Dict(TypedDict):
     account_name: NotRequired[str]
     service_plan: NotRequired[str]
-    device_list_with_service_address: NotRequired[
-        list[DeviceListWithServiceAddress1 | DeviceListWithServiceAddress1Dict]
-    ]
+    device_list_with_service_address: NotRequired[list[DeviceListWithServiceAddress1Dict]]
     sku_number: NotRequired[str]
     public_ip_restriction: NotRequired[str]
     carrier_name: NotRequired[str]

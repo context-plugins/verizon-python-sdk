@@ -43,4 +43,4 @@ class ProvisioningHistoryDict(TypedDict):
     mdn: NotRequired[str]
     msisdn: NotRequired[str]
     service_plan: NotRequired[str]
-    extended_attributes: NotRequired[list[CustomFields | CustomFieldsDict]]
+    extended_attributes: NotRequired[list[CustomFieldsDict]]

@@ -23,4 +23,4 @@ class CheckOrderStatusRequest(SdkBaseModel):
 class CheckOrderStatusRequestDict(TypedDict):
     account_name: str
     order_request_id: NotRequired[str]
-    devices: list[DeviceList | DeviceListDict]
+    devices: list[DeviceListDict]

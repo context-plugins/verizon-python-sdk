@@ -32,9 +32,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 - **Route**: `DELETE /api/v1/application/configurations/geofence`
 - **Auth**: `thingspace_oauth` AND `session_token`
 - **Server**: `imp_server`
-- **Signature**: `def delete_configuration(id: str, vendor_id: str, *, request_options: RequestOptionsOrDict | None = None)`
-  - required, positional: `id`, `vendor_id`
-- **Params**: `id` — query · `vendor_id` — header `VendorID`
+- **Signature**: `def delete_configuration(id_: str, vendor_id: str, *, request_options: RequestOptionsOrDict | None = None)`
+  - required, positional: `id_`, `vendor_id`
+- **Params**: `id_` — query `id` · `vendor_id` — header `VendorID`
 - **Returns (parsed)**: `None`
 - **Returns (raw)**: `ApiResult[None, DeleteConfigurationErrorBody]`
 - **Error**: `DeleteConfigurationErrorBody` — **Case A (typed)**
@@ -50,9 +50,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 - **Route**: `GET /api/v1/application/configurations/geofence`
 - **Auth**: `thingspace_oauth` AND `session_token`
 - **Server**: `imp_server`
-- **Signature**: `def get_configuration(id: str, vendor_id: str, *, request_options: RequestOptionsOrDict | None = None)`
-  - required, positional: `id`, `vendor_id`
-- **Params**: `id` — query · `vendor_id` — header `VendorID`
+- **Signature**: `def get_configuration(id_: str, vendor_id: str, *, request_options: RequestOptionsOrDict | None = None)`
+  - required, positional: `id_`, `vendor_id`
+- **Params**: `id_` — query `id` · `vendor_id` — header `VendorID`
 - **Returns (parsed)**: `GeoFenceConfigurationResponse`
 - **Returns (raw)**: `ApiResult[GeoFenceConfigurationResponse, GetConfigurationErrorBody]`
 - **Error**: `GetConfigurationErrorBody` — **Case A (typed)**
@@ -88,9 +88,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 - **Route**: `PUT /api/v1/application/configurations/geofence`
 - **Auth**: `thingspace_oauth` AND `session_token`
 - **Server**: `imp_server`
-- **Signature**: `def update_configuration(id: str, vendor_id: str, body: GeoFenceConfigurationUpdateRequest | GeoFenceConfigurationUpdateRequestDict, *, request_options: RequestOptionsOrDict | None = None)`
-  - required, positional: `id`, `vendor_id`, `body`
-- **Params**: `id` — query · `vendor_id` — header `VendorID` · `body` — JSON body
+- **Signature**: `def update_configuration(id_: str, vendor_id: str, body: GeoFenceConfigurationUpdateRequest | GeoFenceConfigurationUpdateRequestDict, *, request_options: RequestOptionsOrDict | None = None)`
+  - required, positional: `id_`, `vendor_id`, `body`
+- **Params**: `id_` — query `id` · `vendor_id` — header `VendorID` · `body` — JSON body
 - **Returns (parsed)**: `None`
 - **Returns (raw)**: `ApiResult[None, UpdateConfigurationErrorBody]`
 - **Error**: `UpdateConfigurationErrorBody` — **Case A (typed)**

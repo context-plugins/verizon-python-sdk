@@ -11,6 +11,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -41,7 +42,8 @@ class AccountSubscriptions:
         Args:
             body: Request for account subscription.
             x_request_id: Transaction Id.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Security subscription result.
@@ -75,7 +77,8 @@ class AsyncAccountSubscriptions:
         Args:
             body: Request for account subscription.
             x_request_id: Transaction Id.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Security subscription result.
@@ -108,7 +111,8 @@ class AccountSubscriptionsWithRawResponse(SecuredRawResponse[RawClient, Server, 
         Args:
             body: Request for account subscription.
             x_request_id: Transaction Id.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -138,7 +142,8 @@ class AsyncAccountSubscriptionsWithRawResponse(SecuredRawResponse[AsyncRawClient
         Args:
             body: Request for account subscription.
             x_request_id: Transaction Id.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -148,7 +153,7 @@ class AsyncAccountSubscriptionsWithRawResponse(SecuredRawResponse[AsyncRawClient
             headers=[param[str | None]("X-Request-ID", x_request_id), param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[SecuritySubscriptionRequest | SecuritySubscriptionRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[SecuritySubscriptionResult],
+            decoder=async_json_decoder[SecuritySubscriptionResult],
             error_mapper=list_account_subscriptions_error_mapper,
             request_options=request_options,
         )

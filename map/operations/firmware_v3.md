@@ -11,8 +11,8 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 - **Route**: `GET /firmware/{acc}`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
 - **Server**: `software_management_v3`
-- **Signature**: `def list_available_firmware2(acc: str, protocol: FirmwareProtocolOrStr, *, request_options: RequestOptionsOrDict | None = None)`
-  - required, positional: `acc`, `protocol`
+- **Signature**: `def list_available_firmware2(acc: str, *, protocol: FirmwareProtocolOrStr = FirmwareProtocol.LWM2_M, request_options: RequestOptionsOrDict | None = None)`
+  - required, positional: `acc`
 - **Params**: `acc` — path · `protocol` — query
 - **Returns (parsed)**: `list[FirmwarePackage]`
 - **Returns (raw)**: `ApiResult[list[FirmwarePackage], ListAvailableFirmware2ErrorBody]`

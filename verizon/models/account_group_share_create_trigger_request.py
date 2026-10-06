@@ -30,6 +30,6 @@ class AccountGroupShareCreateTriggerRequestDict(TypedDict):
     trigger_name: NotRequired[str]
     account_name: NotRequired[str]
     trigger_category: NotRequired[TriggerCategoryOrStr]
-    price_plan_trigger: NotRequired[AccountGroupShareObject | AccountGroupShareObjectDict]
-    notification: NotRequired[Notificationarray | NotificationarrayDict]
+    price_plan_trigger: NotRequired[AccountGroupShareObjectDict]
+    notification: NotRequired[NotificationarrayDict]
     active: NotRequired[ActiveOrStr]

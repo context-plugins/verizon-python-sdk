@@ -18,5 +18,5 @@ class TriggerType2(SdkBaseModel):
 
 
 class TriggerType2Dict(TypedDict):
-    anomalyattributes: NotRequired[UsageAnomalyAttributes | UsageAnomalyAttributesDict]
-    notification: NotRequired[TriggerNotification | TriggerNotificationDict]
+    anomalyattributes: NotRequired[UsageAnomalyAttributesDict]
+    notification: NotRequired[TriggerNotificationDict]

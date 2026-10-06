@@ -29,4 +29,4 @@ class CreateDeviceGroupRequestDict(TypedDict):
     account_name: str
     group_description: str
     group_name: str
-    devices_to_add: NotRequired[list[DeviceId | DeviceIdDict]]
+    devices_to_add: NotRequired[list[DeviceIdDict]]

@@ -16,4 +16,4 @@ class ManagedAccountsAddResponse(SdkBaseModel):
 
 class ManagedAccountsAddResponseDict(TypedDict):
     tx_id: NotRequired[str]
-    status_list: NotRequired[list[StatusList | StatusListDict]]
+    status_list: NotRequired[list[StatusListDict]]

@@ -16,11 +16,11 @@ class V3CampaignHistory(SdkBaseModel):
     last_seen_campaign_id: Optional[str] = Field(default=UNSET, alias="lastSeenCampaignId")
     """Campaign identifier."""
 
-    campaign_list: list[V3CampaignMetaInfo | None] = Field(alias="campaignList")
+    campaign_list: list[V3CampaignMetaInfo] | None = Field(alias="campaignList")
     """Firmware upgrade list."""
 
 
 class V3CampaignHistoryDict(TypedDict):
     has_more_data: bool
     last_seen_campaign_id: NotRequired[str]
-    campaign_list: list[V3CampaignMetaInfo | V3CampaignMetaInfoDict | None]
+    campaign_list: list[V3CampaignMetaInfoDict] | None

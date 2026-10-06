@@ -15,4 +15,4 @@ class EventType(SdkBaseModel):
 
 
 class EventTypeDict(TypedDict):
-    cc_and_scc: NotRequired[CauseCodeChoice | CauseCodeChoiceDict]
+    cc_and_scc: NotRequired[CauseCodeChoiceDict]

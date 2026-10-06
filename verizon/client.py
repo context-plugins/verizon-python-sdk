@@ -103,9 +103,10 @@ from .core import (
     ClientCredentialsOrDict,
     ClientCredentialsTokenSource,
     HttpClient,
-    HttpxClient,
+    Httpx2Client,
     OAuth2Scheme,
     RawClient,
+    RetryOptionsOrDict,
     TokenSource,
     client_secret_basic,
     no_auth,
@@ -122,6 +123,7 @@ class VerizonClient(BaseVerizonClient[RawClient]):
         environment: Environment = "production",
         timeout: float = DEFAULT_TIMEOUT,
         server_config: ServerConfigOrDict | None = None,
+        retry_options: int | RetryOptionsOrDict | None = None,
         custom_http_client: HttpClient | None = None,
         thingspace_oauth: ClientCredentialsOrDict | None = None,
         thingspace_oauth_token_source: TokenSource[ClientCredentials] | None = None,
@@ -130,9 +132,12 @@ class VerizonClient(BaseVerizonClient[RawClient]):
         thingspace_oauth1: ClientCredentialsOrDict | None = None,
         thingspace_oauth1_token_source: TokenSource[ClientCredentials] | None = None,
     ) -> None:
-        super().__init__(environment=environment, timeout=timeout, server_config=server_config)
+        super().__init__(
+            environment=environment, timeout=timeout, server_config=server_config, retry_options=retry_options
+        )
         self._raw_client = RawClient(
-            http_client=custom_http_client if custom_http_client is not None else HttpxClient(timeout=timeout),
+            http_client=custom_http_client if custom_http_client is not None else Httpx2Client(timeout=timeout),
+            retry_options=self._retry_options,
             global_headers=[
                 param[str]("User-Agent", "VerizonClient/v1.0 Python"),
                 param[str]("X-APIMatic-Lang", "Python"),

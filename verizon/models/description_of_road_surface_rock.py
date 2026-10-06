@@ -12,4 +12,4 @@ class DescriptionOfRoadSurfaceRock(SdkBaseModel):
 
 
 class DescriptionOfRoadSurfaceRockDict(TypedDict):
-    rock: Rock | RockDict
+    rock: RockDict

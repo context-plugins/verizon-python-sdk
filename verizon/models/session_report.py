@@ -24,4 +24,4 @@ class SessionReport(SdkBaseModel):
 class SessionReportDict(TypedDict):
     id: str
     txid: str
-    sessions: NotRequired[list[DailyUsageItem | DailyUsageItemDict]]
+    sessions: NotRequired[list[DailyUsageItemDict]]

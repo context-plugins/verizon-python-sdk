@@ -12,4 +12,4 @@ class GbideviceIdarray25(SdkBaseModel):
 
 
 class GbideviceIdarray25Dict(TypedDict):
-    device_id: NotRequired[list[GbideviceId15 | GbideviceId15Dict]]
+    device_id: NotRequired[list[GbideviceId15Dict]]

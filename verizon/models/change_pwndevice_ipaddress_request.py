@@ -14,4 +14,4 @@ class ChangePwndeviceIpaddressRequest(SdkBaseModel):
 
 class ChangePwndeviceIpaddressRequestDict(TypedDict):
     account_name: str
-    device_list: list[DeviceListIp | DeviceListIpDict]
+    device_list: list[DeviceListIpDict]

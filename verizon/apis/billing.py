@@ -11,6 +11,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -49,7 +50,8 @@ class Billing:
 
         Args:
             body: Service name and list of accounts to add
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Add managed accounts response
@@ -68,7 +70,8 @@ class Billing:
 
         Args:
             body: Service name and list of accounts to add
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Managed account cancel response
@@ -85,7 +88,8 @@ class Billing:
         Args:
             account_name: Primary account identifier
             service_name: Service name
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of managed accounts
@@ -106,7 +110,8 @@ class Billing:
 
         Args:
             body: Service name and list of accounts to add
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Managed account provision response
@@ -134,7 +139,8 @@ class AsyncBilling:
 
         Args:
             body: Service name and list of accounts to add
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Add managed accounts response
@@ -153,7 +159,8 @@ class AsyncBilling:
 
         Args:
             body: Service name and list of accounts to add
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Managed account cancel response
@@ -172,7 +179,8 @@ class AsyncBilling:
         Args:
             account_name: Primary account identifier
             service_name: Service name
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of managed accounts
@@ -195,7 +203,8 @@ class AsyncBilling:
 
         Args:
             body: Service name and list of accounts to add
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Managed account provision response
@@ -220,7 +229,8 @@ class BillingWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes])
 
         Args:
             body: Service name and list of accounts to add
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -245,7 +255,8 @@ class BillingWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes])
 
         Args:
             body: Service name and list of accounts to add
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -268,7 +279,8 @@ class BillingWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes])
         Args:
             account_name: Primary account identifier
             service_name: Service name
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -292,7 +304,8 @@ class BillingWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes])
 
         Args:
             body: Service name and list of accounts to add
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -319,7 +332,8 @@ class AsyncBillingWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, Asy
 
         Args:
             body: Service name and list of accounts to add
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -329,7 +343,7 @@ class AsyncBillingWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, Asy
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ManagedAccountsAddRequest | ManagedAccountsAddRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[ManagedAccountsAddResponse],
+            decoder=async_json_decoder[ManagedAccountsAddResponse],
             error_mapper=add_account_error_mapper,
             request_options=request_options,
         )
@@ -344,7 +358,8 @@ class AsyncBillingWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, Asy
 
         Args:
             body: Service name and list of accounts to add
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -354,7 +369,7 @@ class AsyncBillingWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, Asy
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ManagedAccountCancelRequest | ManagedAccountCancelRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[ManagedAccountCancelResponse],
+            decoder=async_json_decoder[ManagedAccountCancelResponse],
             error_mapper=cancel_managed_account_action_error_mapper,
             request_options=request_options,
         )
@@ -367,7 +382,8 @@ class AsyncBillingWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, Asy
         Args:
             account_name: Primary account identifier
             service_name: Service name
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -376,7 +392,7 @@ class AsyncBillingWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, Asy
             url_template=self._server.subscription_server("/managedaccounts/{accountName}/service/{serviceName}"),
             path_params=[param[str]("accountName", account_name), param[str]("serviceName", service_name)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[ManagedAccountsGetAllResponse],
+            decoder=async_json_decoder[ManagedAccountsGetAllResponse],
             error_mapper=list_managed_account_error_mapper,
             request_options=request_options,
         )
@@ -391,7 +407,8 @@ class AsyncBillingWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, Asy
 
         Args:
             body: Service name and list of accounts to add
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -401,7 +418,7 @@ class AsyncBillingWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, Asy
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ManagedAccountsProvisionRequest | ManagedAccountsProvisionRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[ManagedAccountsProvisionResponse],
+            decoder=async_json_decoder[ManagedAccountsProvisionResponse],
             error_mapper=managed_account_action_error_mapper,
             request_options=request_options,
         )

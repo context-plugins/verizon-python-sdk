@@ -24,5 +24,5 @@ class AggregateSessionReport(SdkBaseModel):
 
 class AggregateSessionReportDict(TypedDict):
     txid: NotRequired[str]
-    usage: NotRequired[list[AggregateUsageItem | AggregateUsageItemDict]]
-    errors: NotRequired[list[AggregateUsageError | AggregateUsageErrorDict]]
+    usage: NotRequired[list[AggregateUsageItemDict]]
+    errors: NotRequired[list[AggregateUsageErrorDict]]

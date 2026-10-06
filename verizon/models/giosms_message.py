@@ -14,6 +14,6 @@ class GiosmsMessage(SdkBaseModel):
 
 
 class GiosmsMessageDict(TypedDict):
-    device_ids: NotRequired[list[GiodeviceId | GiodeviceIdDict]]
+    device_ids: NotRequired[list[GiodeviceIdDict]]
     message: NotRequired[str]
     timestamp: NotRequired[RFC3339DateTime]

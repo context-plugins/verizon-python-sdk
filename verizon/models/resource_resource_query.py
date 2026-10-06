@@ -11,4 +11,4 @@ class ResourceResourceQuery(SdkBaseModel):
 
 
 class ResourceResourceQueryDict(TypedDict):
-    filter: NotRequired[Devicepropertyfilter | DevicepropertyfilterDict]
+    filter: NotRequired[DevicepropertyfilterDict]

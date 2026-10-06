@@ -19,4 +19,4 @@ class DevicesRequest(SdkBaseModel):
 
 class DevicesRequestDict(TypedDict):
     vendor_id: str
-    filter: NotRequired[Filter | FilterDict]
+    filter: NotRequired[FilterDict]

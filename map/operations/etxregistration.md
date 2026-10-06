@@ -11,9 +11,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 - **Route**: `GET /api/v2/clients/registration`
 - **Auth**: `thingspace_oauth` AND `session_token`
 - **Server**: `imp_server`
-- **Signature**: `def get_etx_client_certificate(id: EtxclientIdlookup | EtxclientIdlookupDict, vendor_id: str, *, x_transaction_id: UUID | None = None, request_options: RequestOptionsOrDict | None = None)`
-  - required, positional: `id`, `vendor_id`
-- **Params**: `id` — query `ID` · `vendor_id` — header `VendorID` · `x_transaction_id` — header `X-Transaction-Id`
+- **Signature**: `def get_etx_client_certificate(id_: EtxclientIdlookup | EtxclientIdlookupDict, vendor_id: str, *, x_transaction_id: UUID | None = None, request_options: RequestOptionsOrDict | None = None)`
+  - required, positional: `id_`, `vendor_id`
+- **Params**: `id_` — query `ID` · `vendor_id` — header `VendorID` · `x_transaction_id` — header `X-Transaction-Id`
 - **Returns (parsed)**: `ClientPersistenceResponse`
 - **Returns (raw)**: `ApiResult[ClientPersistenceResponse, GetEtxclientCertificateErrorBody]`
 - **Error**: `GetEtxclientCertificateErrorBody` — **Case A (typed)**

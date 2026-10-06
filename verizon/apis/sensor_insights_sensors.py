@@ -11,6 +11,8 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
@@ -64,7 +66,8 @@ class SensorInsightsSensors:
 
         Args:
             body: List details of the sensors
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -87,7 +90,8 @@ class SensorInsightsSensors:
 
         Args:
             body: Offboard a sensor
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             No Content
@@ -109,7 +113,8 @@ class SensorInsightsSensors:
 
         Args:
             body: Onboarding a sensor
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -132,7 +137,8 @@ class SensorInsightsSensors:
 
         Args:
             body: Get a sensor's offboarding status
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -155,7 +161,8 @@ class SensorInsightsSensors:
 
         Args:
             body: Get the sensor's onboarding status
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -187,7 +194,8 @@ class AsyncSensorInsightsSensors:
 
         Args:
             body: List details of the sensors
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -212,7 +220,8 @@ class AsyncSensorInsightsSensors:
 
         Args:
             body: Offboard a sensor
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             No Content
@@ -236,7 +245,8 @@ class AsyncSensorInsightsSensors:
 
         Args:
             body: Onboarding a sensor
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -259,7 +269,8 @@ class AsyncSensorInsightsSensors:
 
         Args:
             body: Get a sensor's offboarding status
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -284,7 +295,8 @@ class AsyncSensorInsightsSensors:
 
         Args:
             body: Get the sensor's onboarding status
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -315,13 +327,14 @@ class SensorInsightsSensorsWithRawResponse(SecuredRawResponse[RawClient, Server,
 
         Args:
             body: List details of the sensors
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/devices/sensors/actions/query"),
+            url_template=self._server.thingspace("/dm/v1/devices/sensors/actions/query"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoListSensorDevicesRequest | DtoListSensorDevicesRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -340,13 +353,14 @@ class SensorInsightsSensorsWithRawResponse(SecuredRawResponse[RawClient, Server,
 
         Args:
             body: Offboard a sensor
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/devices/sensors/offboard"),
+            url_template=self._server.thingspace("/dm/v1/devices/sensors/offboard"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoOffBoardSensorRequest | DtoOffBoardSensorRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -365,13 +379,14 @@ class SensorInsightsSensorsWithRawResponse(SecuredRawResponse[RawClient, Server,
 
         Args:
             body: Onboarding a sensor
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/devices/sensors/onboard"),
+            url_template=self._server.thingspace("/dm/v1/devices/sensors/onboard"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoOnBoardSensorRequest | DtoOnBoardSensorRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -390,13 +405,14 @@ class SensorInsightsSensorsWithRawResponse(SecuredRawResponse[RawClient, Server,
 
         Args:
             body: Get a sensor's offboarding status
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/devices/sensors/offboard/status/actions/query"),
+            url_template=self._server.thingspace("/dm/v1/devices/sensors/offboard/status/actions/query"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoSensorOffBoardStatusRequest | DtoSensorOffBoardStatusRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -415,13 +431,14 @@ class SensorInsightsSensorsWithRawResponse(SecuredRawResponse[RawClient, Server,
 
         Args:
             body: Get the sensor's onboarding status
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/devices/sensors/onboard/status/actions/query"),
+            url_template=self._server.thingspace("/dm/v1/devices/sensors/onboard/status/actions/query"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoSensorOnBoardStatusRequest | DtoSensorOnBoardStatusRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -442,17 +459,18 @@ class AsyncSensorInsightsSensorsWithRawResponse(SecuredRawResponse[AsyncRawClien
 
         Args:
             body: List details of the sensors
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/devices/sensors/actions/query"),
+            url_template=self._server.thingspace("/dm/v1/devices/sensors/actions/query"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoListSensorDevicesRequest | DtoListSensorDevicesRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[list[ResourceDevice]],
+            decoder=async_json_decoder[list[ResourceDevice]],
             error_mapper=sensor_insights_list_sensor_devices_request_error_mapper,
             request_options=request_options,
         )
@@ -467,17 +485,18 @@ class AsyncSensorInsightsSensorsWithRawResponse(SecuredRawResponse[AsyncRawClien
 
         Args:
             body: Offboard a sensor
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/devices/sensors/offboard"),
+            url_template=self._server.thingspace("/dm/v1/devices/sensors/offboard"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoOffBoardSensorRequest | DtoOffBoardSensorRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=sensor_insights_off_board_sensor_request_error_mapper,
             request_options=request_options,
         )
@@ -492,17 +511,18 @@ class AsyncSensorInsightsSensorsWithRawResponse(SecuredRawResponse[AsyncRawClien
 
         Args:
             body: Onboarding a sensor
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/devices/sensors/onboard"),
+            url_template=self._server.thingspace("/dm/v1/devices/sensors/onboard"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoOnBoardSensorRequest | DtoOnBoardSensorRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=sensor_insights_on_board_sensor_request_error_mapper,
             request_options=request_options,
         )
@@ -517,17 +537,18 @@ class AsyncSensorInsightsSensorsWithRawResponse(SecuredRawResponse[AsyncRawClien
 
         Args:
             body: Get a sensor's offboarding status
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/devices/sensors/offboard/status/actions/query"),
+            url_template=self._server.thingspace("/dm/v1/devices/sensors/offboard/status/actions/query"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoSensorOffBoardStatusRequest | DtoSensorOffBoardStatusRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DtoSensorOffBoardingStatusResponse],
+            decoder=async_json_decoder[DtoSensorOffBoardingStatusResponse],
             error_mapper=sensor_insights_sensor_off_boarding_status_request_error_mapper,
             request_options=request_options,
         )
@@ -542,17 +563,18 @@ class AsyncSensorInsightsSensorsWithRawResponse(SecuredRawResponse[AsyncRawClien
 
         Args:
             body: Get the sensor's onboarding status
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/devices/sensors/onboard/status/actions/query"),
+            url_template=self._server.thingspace("/dm/v1/devices/sensors/onboard/status/actions/query"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoSensorOnBoardStatusRequest | DtoSensorOnBoardStatusRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DtoSensorOnBoardingStatusResponse],
+            decoder=async_json_decoder[DtoSensorOnBoardingStatusResponse],
             error_mapper=sensor_insights_sensor_on_board_status_request_error_mapper,
             request_options=request_options,
         )

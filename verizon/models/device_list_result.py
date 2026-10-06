@@ -23,4 +23,4 @@ class DeviceListResult(SdkBaseModel):
 class DeviceListResultDict(TypedDict):
     account_name: str
     device_count: int
-    device_list: list[V3Device | V3DeviceDict]
+    device_list: list[V3DeviceDict]

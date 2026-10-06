@@ -17,4 +17,4 @@ class AssociateLabelRequest(SdkBaseModel):
 
 class AssociateLabelRequestDict(TypedDict):
     account_name: str
-    labels: AccountLabels | AccountLabelsDict
+    labels: AccountLabelsDict

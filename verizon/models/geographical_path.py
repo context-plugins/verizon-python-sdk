@@ -19,5 +19,5 @@ class GeographicalPath(SdkBaseModel):
 
 
 class GeographicalPathDict(TypedDict):
-    description: NotRequired[GeographicalPathDescription | GeographicalPathDescriptionDict]
+    description: NotRequired[GeographicalPathDescriptionDict]
     direction: NotRequired[str]

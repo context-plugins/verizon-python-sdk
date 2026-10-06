@@ -17,5 +17,5 @@ class DtoListRulesRequest(SdkBaseModel):
 
 class DtoListRulesRequestDict(TypedDict):
     accountname: NotRequired[str]
-    filter: NotRequired[DtoFilter | DtoFilterDict]
-    resourceidentifier: NotRequired[DtoResourceidentifier | DtoResourceidentifierDict]
+    filter: NotRequired[DtoFilterDict]
+    resourceidentifier: NotRequired[DtoResourceidentifierDict]

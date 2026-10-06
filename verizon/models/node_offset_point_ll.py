@@ -16,4 +16,4 @@ class NodeOffsetPointLl(SdkBaseModel):
 
 
 class NodeOffsetPointLlDict(TypedDict):
-    node_lat_lon: NodeLlmD64B | NodeLlmD64BDict
+    node_lat_lon: NodeLlmD64BDict

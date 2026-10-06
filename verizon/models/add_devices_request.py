@@ -35,9 +35,9 @@ class AddDevicesRequest(SdkBaseModel):
 
 class AddDevicesRequestDict(TypedDict):
     state: str
-    devices_to_add: list[AccountDeviceList | AccountDeviceListDict]
+    devices_to_add: list[AccountDeviceListDict]
     account_name: NotRequired[str]
-    custom_fields: NotRequired[list[CustomFields | CustomFieldsDict]]
+    custom_fields: NotRequired[list[CustomFieldsDict]]
     group_name: NotRequired[str]
     sku_number: NotRequired[str]
     smsr_oid: NotRequired[str]

@@ -32,7 +32,17 @@ Change a device's service plan to use 5G BI.
 **Sync**
 
 ```python
-result = client.gbi_device_actions5.with_raw_response.business_internet_serviceplanchange(body)
+result = client.gbi_device_actions5.with_raw_response.business_internet_serviceplanchange(
+    GbichangeRequest5(
+        account_name="0000123456-00001",
+        service_plan="5G BI service plan name being changed to",
+        device_list_with_service_address=[
+            GbideviceIdarray25(device_id=[GbideviceId15(id="15-digit IMEI", kind="imei")]),
+            GbiaddressAndcustomerinfo25(primary_placeofuse=GbiaddressAndcustomerinfo5()),
+        ],
+        current_service_plan="Optional name of the plan being changed from",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GbiRequestResponse5
@@ -43,7 +53,17 @@ match result:
 **Async**
 
 ```python
-result = await async_client.gbi_device_actions5.with_raw_response.business_internet_serviceplanchange(body)
+result = await async_client.gbi_device_actions5.with_raw_response.business_internet_serviceplanchange(
+    GbichangeRequest5(
+        account_name="0000123456-00001",
+        service_plan="5G BI service plan name being changed to",
+        device_list_with_service_address=[
+            GbideviceIdarray25(device_id=[GbideviceId15(id="15-digit IMEI", kind="imei")]),
+            GbiaddressAndcustomerinfo25(primary_placeofuse=GbiaddressAndcustomerinfo5()),
+        ],
+        current_service_plan="Optional name of the plan being changed from",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GbiRequestResponse5
@@ -62,7 +82,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[GbichangeRequest5](verizon/models/gbichange_request5.py) \| [GbichangeRequest5Dict](verizon/models/gbichange_request5.py)</code> | This endpoint is for use when changing a device's service plan to a 5G BI service plan. The service plan can change for an active device up to four times per month but will require address validation for each change. The service plan cannot be changed for a device while its service is suspended. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -110,7 +130,26 @@ Uses the device's ICCID and IMEI to activate service.
 **Sync**
 
 ```python
-result = client.gbi_device_actions5.with_raw_response.business_internetactivate_using_post(body)
+result = client.gbi_device_actions5.with_raw_response.business_internetactivate_using_post(
+    GbiactivateRequest5(
+        account_name="0000123456-00001",
+        service_plan="service plan name",
+        device_list_with_service_address=[
+            GbideviceIdarray5(
+                device_id=[
+                    ESimdeviceId(id="15-digit IMEI", kind="imei"), ESimdeviceId(id="20-digit ICCID", kind="iccid")
+                ],
+            ),
+            GbiaddressAndcustomerinfo5(
+                primary_placeofuse=GbiprimaryPlaceofuse5(address=GbiAddress5(), customer_name=GbiCustomerName5())
+            ),
+        ],
+        sku_number="VZW Stock Keeping Unit number",
+        public_ip_restriction="Unrestricted",
+        carrier_name="Verizon Wireless",
+        mdn_zip_code="the 5-digit ZIP code of the Mobile Directory Number (MDN)",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GbiRequestResponse5
@@ -121,7 +160,26 @@ match result:
 **Async**
 
 ```python
-result = await async_client.gbi_device_actions5.with_raw_response.business_internetactivate_using_post(body)
+result = await async_client.gbi_device_actions5.with_raw_response.business_internetactivate_using_post(
+    GbiactivateRequest5(
+        account_name="0000123456-00001",
+        service_plan="service plan name",
+        device_list_with_service_address=[
+            GbideviceIdarray5(
+                device_id=[
+                    ESimdeviceId(id="15-digit IMEI", kind="imei"), ESimdeviceId(id="20-digit ICCID", kind="iccid")
+                ],
+            ),
+            GbiaddressAndcustomerinfo5(
+                primary_placeofuse=GbiprimaryPlaceofuse5(address=GbiAddress5(), customer_name=GbiCustomerName5())
+            ),
+        ],
+        sku_number="VZW Stock Keeping Unit number",
+        public_ip_restriction="Unrestricted",
+        carrier_name="Verizon Wireless",
+        mdn_zip_code="the 5-digit ZIP code of the Mobile Directory Number (MDN)",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GbiRequestResponse5
@@ -140,7 +198,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[GbiactivateRequest5](verizon/models/gbiactivate_request5.py) \| [GbiactivateRequest5Dict](verizon/models/gbiactivate_request5.py)</code> | Activate 5G BI service. Defining <code>publicIpRestriction</code> as "Unrestricted" or "Restricted" is required for activating as Public Static. Leave  <code>publicIpRestriction</code> undefined to activate as Public Dynamic. Removing <code>publicIpRestriction</code> from the request will activate as Mobile Private Network (MPN). |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -188,7 +246,9 @@ Uses the decive's Integrated Circuit Card Identification Number (ICCID) to retri
 **Sync**
 
 ```python
-result = client.gbi_device_actions5.with_raw_response.business_internetlist_device_information(body)
+result = client.gbi_device_actions5.with_raw_response.business_internetlist_device_information(
+    GbideviceId5(device_id=GbideviceId15(id="20-digit ICCID", kind="iccid"))
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GbideviceDetailsresponse5
@@ -199,7 +259,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.gbi_device_actions5.with_raw_response.business_internetlist_device_information(body)
+result = await async_client.gbi_device_actions5.with_raw_response.business_internetlist_device_information(
+    GbideviceId5(device_id=GbideviceId15(id="20-digit ICCID", kind="iccid"))
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GbideviceDetailsresponse5
@@ -218,7 +280,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[GbideviceId5](verizon/models/gbidevice_id5.py) \| [GbideviceId5Dict](verizon/models/gbidevice_id5.py)</code> | Device Profile Query |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -247,7 +309,7 @@ match result:
 > Source: [AccountDevices](verizon/apis/account_devices.py)
 
 <details>
-<summary><code>def get_account_device_information(acc: str, *, last_seen_device_id: str | None = None, protocol: DevicesProtocolOrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> ApiResult[V3AccountDeviceList, GetAccountDeviceInformationErrorBody]</code></summary>
+<summary><code>def get_account_device_information(acc: str, *, last_seen_device_id: str | None = None, protocol: DevicesProtocolOrStr | None = DevicesProtocol.LWM2_M, request_options: RequestOptionsOrDict | None = None) -> ApiResult[V3AccountDeviceList, GetAccountDeviceInformationErrorBody]</code></summary>
 
 <dl>
 <dd>
@@ -270,7 +332,9 @@ Retrieve account device information such as reported firmware on the devices.
 **Sync**
 
 ```python
-result = client.account_devices.with_raw_response.get_account_device_information(acc)
+result = client.account_devices.with_raw_response.get_account_device_information(
+    "0000123456-00001", last_seen_device_id="0", protocol=DevicesProtocol.LWM2_M
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type V3AccountDeviceList
@@ -281,7 +345,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.account_devices.with_raw_response.get_account_device_information(acc)
+result = await async_client.account_devices.with_raw_response.get_account_device_information(
+    "0000123456-00001", last_seen_device_id="0", protocol=DevicesProtocol.LWM2_M
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type V3AccountDeviceList
@@ -301,8 +367,8 @@ match result:
 | --- | --- | --- |
 | <code>acc</code> | <code>str</code> | Account identifier. |
 | <code>last_seen_device_id</code> | <code>str \| None</code> | Last seen device identifier.<br>**Default**: <code>None</code> |
-| <code>protocol</code> | <code>[DevicesProtocolOrStr](verizon/models/enums/devices_protocol.py) \| None</code> | Filter to retrieve a specific protocol type used.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>protocol</code> | <code>[DevicesProtocolOrStr](verizon/models/enums/devices_protocol.py) \| None</code> | Filter to retrieve a specific protocol type used.<br>**Default**: <code>DevicesProtocol.LWM2_M</code> |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -357,7 +423,9 @@ Retrieve device information for a list of devices on an account.
 **Sync**
 
 ```python
-result = client.account_devices.with_raw_response.list_account_devices_information(acc, body)
+result = client.account_devices.with_raw_response.list_account_devices_information(
+    "0000123456-00001", DeviceImei(device_list=["15-digit IMEI"])
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceListResult
@@ -368,7 +436,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.account_devices.with_raw_response.list_account_devices_information(acc, body)
+result = await async_client.account_devices.with_raw_response.list_account_devices_information(
+    "0000123456-00001", DeviceImei(device_list=["15-digit IMEI"])
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceListResult
@@ -388,7 +458,7 @@ match result:
 | --- | --- | --- |
 | <code>acc</code> | <code>str</code> | Account identifier. |
 | <code>body</code> | <code>[DeviceImei](verizon/models/device_imei.py) \| [DeviceImeiDict](verizon/models/device_imei.py)</code> | Request device list information. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -447,7 +517,9 @@ Returns the current status of an asynchronous request that was made for a single
 **Sync**
 
 ```python
-result = client.account_requests.with_raw_response.get_current_asynchronous_request_status(aname, request_id)
+result = client.account_requests.with_raw_response.get_current_asynchronous_request_status(
+    "0252012345-00001", "86c83330-4bf5-4235-9c4e-a83f93aeae4c"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type AsynchronousRequestResult
@@ -459,7 +531,7 @@ match result:
 
 ```python
 result = await async_client.account_requests.with_raw_response.get_current_asynchronous_request_status(
-    aname, request_id
+    "0252012345-00001", "86c83330-4bf5-4235-9c4e-a83f93aeae4c"
 )
 match result:
     case Success(payload=payload):
@@ -480,7 +552,7 @@ match result:
 | --- | --- | --- |
 | <code>aname</code> | <code>str</code> | Account name. |
 | <code>request_id</code> | <code>str</code> | UUID from synchronous response. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -539,7 +611,7 @@ Returns aaccount information associated with a specified account.
 **Sync**
 
 ```python
-result = client.account_service_controller.with_raw_response.get_account_information_using_get(account_name)
+result = client.account_service_controller.with_raw_response.get_account_information_using_get("0000123456-00002")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GetAccountInformationResponseforplanner
@@ -550,7 +622,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.account_service_controller.with_raw_response.get_account_information_using_get(account_name)
+result = await async_client.account_service_controller.with_raw_response.get_account_information_using_get(
+    "0000123456-00002"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GetAccountInformationResponseforplanner
@@ -569,7 +643,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>account_name</code> | <code>str</code> | The account's numeric name, including leading zeroes. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -629,7 +703,9 @@ Retrieves the total number of SIM-Secure for IoT subscription licenses purchased
 **Sync**
 
 ```python
-result = client.account_subscriptions.with_raw_response.list_account_subscriptions(body)
+result = client.account_subscriptions.with_raw_response.list_account_subscriptions(
+    SecuritySubscriptionRequest(account_name="000012345600001", sku_number="SIMSec-IoT-Lt")
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type SecuritySubscriptionResult
@@ -640,7 +716,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.account_subscriptions.with_raw_response.list_account_subscriptions(body)
+result = await async_client.account_subscriptions.with_raw_response.list_account_subscriptions(
+    SecuritySubscriptionRequest(account_name="000012345600001", sku_number="SIMSec-IoT-Lt")
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type SecuritySubscriptionResult
@@ -660,7 +738,7 @@ match result:
 | --- | --- | --- |
 | <code>body</code> | <code>[SecuritySubscriptionRequest](verizon/models/security_subscription_request.py) \| [SecuritySubscriptionRequestDict](verizon/models/security_subscription_request.py)</code> | Request for account subscription. |
 | <code>x_request_id</code> | <code>str \| None</code> | Transaction Id.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -719,7 +797,7 @@ Returns information about a specified account.
 **Sync**
 
 ```python
-result = client.accounts.with_raw_response.get_account_information(aname)
+result = client.accounts.with_raw_response.get_account_information("Chintan_CPNStaticBulk")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type Account
@@ -730,7 +808,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.accounts.with_raw_response.get_account_information(aname)
+result = await async_client.accounts.with_raw_response.get_account_information("Chintan_CPNStaticBulk")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type Account
@@ -749,7 +827,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>aname</code> | <code>str</code> | Account name. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -781,7 +859,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def list_account_leads(aname: str, *, next: int | None = None, request_options: RequestOptionsOrDict | None = None) -> ApiResult[AccountLeadsResult, ListAccountLeadsErrorBody]</code></summary>
+<summary><code>def list_account_leads(aname: str, *, next_: int | None = None, request_options: RequestOptionsOrDict | None = None) -> ApiResult[AccountLeadsResult, ListAccountLeadsErrorBody]</code></summary>
 
 <dl>
 <dd>
@@ -804,7 +882,7 @@ When HTTP status is 202, a URL will be returned in the Location header of the fo
 **Sync**
 
 ```python
-result = client.accounts.with_raw_response.list_account_leads(aname)
+result = client.accounts.with_raw_response.list_account_leads("0252012345-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type AccountLeadsResult
@@ -815,7 +893,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.accounts.with_raw_response.list_account_leads(aname)
+result = await async_client.accounts.with_raw_response.list_account_leads("0252012345-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type AccountLeadsResult
@@ -834,8 +912,8 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>aname</code> | <code>str</code> | Account name. |
-| <code>next</code> | <code>int \| None</code> | Continue the previous query from the pageUrl in Location Header.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>next_</code> | <code>int \| None</code> | Continue the previous query from the pageUrl in Location Header.<br>**Default**: <code>None</code> |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -890,7 +968,7 @@ Returns a list and details of all custom services and states defined for a speci
 **Sync**
 
 ```python
-result = client.accounts.with_raw_response.list_account_states_and_services(aname)
+result = client.accounts.with_raw_response.list_account_states_and_services("0252012345-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type AccountStatesAndServices
@@ -901,7 +979,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.accounts.with_raw_response.list_account_states_and_services(aname)
+result = await async_client.accounts.with_raw_response.list_account_states_and_services("0252012345-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type AccountStatesAndServices
@@ -920,7 +998,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>aname</code> | <code>str</code> | Account name. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -979,7 +1057,15 @@ Uses the subscribed account ID to activate anomaly detection and set threshold v
 **Sync**
 
 ```python
-result = client.anomaly_settings.with_raw_response.activate_anomaly_detection(body)
+result = client.anomaly_settings.with_raw_response.activate_anomaly_detection(
+    AnomalyDetectionRequest(
+        account_name="0000123456-00001",
+        request_type="anomaly",
+        sensitivity_parameter=SensitivityParameters(
+            abnormal_max_value=1.1, enable_abnormal=True, enable_very_abnormal=True, very_abnormal_max_value=0.55
+        ),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type IntelligenceSuccessResult
@@ -990,7 +1076,15 @@ match result:
 **Async**
 
 ```python
-result = await async_client.anomaly_settings.with_raw_response.activate_anomaly_detection(body)
+result = await async_client.anomaly_settings.with_raw_response.activate_anomaly_detection(
+    AnomalyDetectionRequest(
+        account_name="0000123456-00001",
+        request_type="anomaly",
+        sensitivity_parameter=SensitivityParameters(
+            abnormal_max_value=1.1, enable_abnormal=True, enable_very_abnormal=True, very_abnormal_max_value=0.55
+        ),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type IntelligenceSuccessResult
@@ -1009,7 +1103,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[AnomalyDetectionRequest](verizon/models/anomaly_detection_request.py) \| [AnomalyDetectionRequestDict](verizon/models/anomaly_detection_request.py)</code> | Request to activate anomaly detection. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -1057,7 +1151,7 @@ Retrieves the current anomaly detection settings for an account.
 **Sync**
 
 ```python
-result = client.anomaly_settings.with_raw_response.list_anomaly_detection_settings(account_name)
+result = client.anomaly_settings.with_raw_response.list_anomaly_detection_settings("0000123456-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type AnomalyDetectionSettings
@@ -1068,7 +1162,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.anomaly_settings.with_raw_response.list_anomaly_detection_settings(account_name)
+result = await async_client.anomaly_settings.with_raw_response.list_anomaly_detection_settings("0000123456-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type AnomalyDetectionSettings
@@ -1087,7 +1181,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>account_name</code> | <code>str</code> | The name of the subscribed account. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -1135,7 +1229,7 @@ Resets the thresholds to zero.
 **Sync**
 
 ```python
-result = client.anomaly_settings.with_raw_response.reset_anomaly_detection_parameters(account_name)
+result = client.anomaly_settings.with_raw_response.reset_anomaly_detection_parameters("0000123456-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type IntelligenceSuccessResult
@@ -1146,7 +1240,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.anomaly_settings.with_raw_response.reset_anomaly_detection_parameters(account_name)
+result = await async_client.anomaly_settings.with_raw_response.reset_anomaly_detection_parameters("0000123456-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type IntelligenceSuccessResult
@@ -1165,7 +1259,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>account_name</code> | <code>str</code> | The name of the subscribed account. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -1217,7 +1311,7 @@ This corresponds to the M2M-MC SOAP interface, ``CreateTrigger``.
 **Sync**
 
 ```python
-result = client.anomaly_triggers.with_raw_response.create_anomaly_detection_trigger(body)
+result = client.anomaly_triggers.with_raw_response.create_anomaly_detection_trigger(CreateTriggerRequest())
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type AnomalyDetectionTrigger
@@ -1228,7 +1322,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.anomaly_triggers.with_raw_response.create_anomaly_detection_trigger(body)
+result = await async_client.anomaly_triggers.with_raw_response.create_anomaly_detection_trigger(CreateTriggerRequest())
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type AnomalyDetectionTrigger
@@ -1247,7 +1341,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[CreateTriggerRequest](verizon/models/create_trigger_request.py) \| [CreateTriggerRequestDict](verizon/models/create_trigger_request.py)</code> | Create Trigger Request |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -1302,7 +1396,9 @@ Deletes a specific trigger ID
 **Sync**
 
 ```python
-result = client.anomaly_triggers.with_raw_response.delete_anomaly_detection_trigger(trigger_id)
+result = client.anomaly_triggers.with_raw_response.delete_anomaly_detection_trigger(
+    "be1b5958-3e11-41db-9abd-b1b7618c0035"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type AnomalyDetectionTrigger
@@ -1313,7 +1409,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.anomaly_triggers.with_raw_response.delete_anomaly_detection_trigger(trigger_id)
+result = await async_client.anomaly_triggers.with_raw_response.delete_anomaly_detection_trigger(
+    "be1b5958-3e11-41db-9abd-b1b7618c0035"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type AnomalyDetectionTrigger
@@ -1332,7 +1430,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>trigger_id</code> | <code>str</code> | The trigger ID to be deleted |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -1380,7 +1478,9 @@ This corresponds to the M2M-MC SOAP interface, ``GetTriggers``.
 **Sync**
 
 ```python
-result = client.anomaly_triggers.with_raw_response.list_anomaly_detection_trigger_settings(trigger_id)
+result = client.anomaly_triggers.with_raw_response.list_anomaly_detection_trigger_settings(
+    "be1b5958-3e11-41db-9abd-b1b7618c0035"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[GetTriggerResponseList]
@@ -1391,7 +1491,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.anomaly_triggers.with_raw_response.list_anomaly_detection_trigger_settings(trigger_id)
+result = await async_client.anomaly_triggers.with_raw_response.list_anomaly_detection_trigger_settings(
+    "be1b5958-3e11-41db-9abd-b1b7618c0035"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[GetTriggerResponseList]
@@ -1410,7 +1512,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>trigger_id</code> | <code>str</code> | trigger ID |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -1494,7 +1596,7 @@ match result:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -1549,7 +1651,7 @@ This corresponds to the M2M-MC SOAP interface, ``UpdateTriggerRequest``.
 **Sync**
 
 ```python
-result = client.anomaly_triggers.with_raw_response.update_anomaly_detection_trigger(body)
+result = client.anomaly_triggers.with_raw_response.update_anomaly_detection_trigger(UpdateTriggerRequest())
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type AnomalyDetectionTrigger
@@ -1560,7 +1662,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.anomaly_triggers.with_raw_response.update_anomaly_detection_trigger(body)
+result = await async_client.anomaly_triggers.with_raw_response.update_anomaly_detection_trigger(UpdateTriggerRequest())
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type AnomalyDetectionTrigger
@@ -1579,7 +1681,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[UpdateTriggerRequest](verizon/models/update_trigger_request.py) \| [UpdateTriggerRequestDict](verizon/models/update_trigger_request.py)</code> | Update Trigger Request |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -1638,7 +1740,35 @@ Creates the trigger to identify an anomaly.
 **Sync**
 
 ```python
-result = client.anomaly_triggers_v2.with_raw_response.create_anomaly_detection_trigger_v2(body)
+result = client.anomaly_triggers_v2.with_raw_response.create_anomaly_detection_trigger_v2(
+    [
+        TriggerType1(
+            name="Anomaly Daily Usage REST Test-Patch 1",
+            trigger_category="UsageAnomaly",
+            account_name="0000123456-00001",
+            anomaly_trigger_request=AnomalyTriggerRequest(
+                account_names="0000123456-00001",
+                include_abnormal=True,
+                include_very_abnormal=True,
+                include_under_expected_usage=True,
+                include_over_expected_usage=True,
+            ),
+            notification=TriggerNotification(
+                notification_type="DailySummary",
+                callback=True,
+                email_notification=False,
+                notification_group_name="Anomaly Test API",
+                notification_frequency_factor=3,
+                notification_frequency_interval="Hourly",
+                external_email_recipients="placeholder@verizon.com",
+                sms_notification=True,
+                sms_numbers=[Smsnumber(carrier="US Cellular", number="9299280711")],
+                reminder=True,
+                severity="Critical",
+            ),
+        ),
+    ],
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type AnomalyDetectionTrigger
@@ -1649,7 +1779,35 @@ match result:
 **Async**
 
 ```python
-result = await async_client.anomaly_triggers_v2.with_raw_response.create_anomaly_detection_trigger_v2(body)
+result = await async_client.anomaly_triggers_v2.with_raw_response.create_anomaly_detection_trigger_v2(
+    [
+        TriggerType1(
+            name="Anomaly Daily Usage REST Test-Patch 1",
+            trigger_category="UsageAnomaly",
+            account_name="0000123456-00001",
+            anomaly_trigger_request=AnomalyTriggerRequest(
+                account_names="0000123456-00001",
+                include_abnormal=True,
+                include_very_abnormal=True,
+                include_under_expected_usage=True,
+                include_over_expected_usage=True,
+            ),
+            notification=TriggerNotification(
+                notification_type="DailySummary",
+                callback=True,
+                email_notification=False,
+                notification_group_name="Anomaly Test API",
+                notification_frequency_factor=3,
+                notification_frequency_interval="Hourly",
+                external_email_recipients="placeholder@verizon.com",
+                sms_notification=True,
+                sms_numbers=[Smsnumber(carrier="US Cellular", number="9299280711")],
+                reminder=True,
+                severity="Critical",
+            ),
+        ),
+    ],
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type AnomalyDetectionTrigger
@@ -1668,7 +1826,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>list&#91;[CreateTriggerRequestOptions](verizon/models/unions/create_trigger_request_options.py) \| [CreateTriggerRequestOptionsDict](verizon/models/unions/create_trigger_request_options.py)&#93;</code> | Request to create an anomaly trigger. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -1716,7 +1874,9 @@ Retrieves the values for a specific trigger ID.
 **Sync**
 
 ```python
-result = client.anomaly_triggers_v2.with_raw_response.list_anomaly_detection_trigger_settings_v2(trigger_id)
+result = client.anomaly_triggers_v2.with_raw_response.list_anomaly_detection_trigger_settings_v2(
+    "be1b5958-3e11-41db-9abd-b1b7618c0035"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type AnomalyTriggerResult
@@ -1727,7 +1887,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.anomaly_triggers_v2.with_raw_response.list_anomaly_detection_trigger_settings_v2(trigger_id)
+result = await async_client.anomaly_triggers_v2.with_raw_response.list_anomaly_detection_trigger_settings_v2(
+    "be1b5958-3e11-41db-9abd-b1b7618c0035"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type AnomalyTriggerResult
@@ -1746,7 +1908,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>trigger_id</code> | <code>str</code> | The trigger ID of a specific trigger. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -1794,7 +1956,36 @@ Updates an existing trigger using the account name.
 **Sync**
 
 ```python
-result = client.anomaly_triggers_v2.with_raw_response.update_anomaly_detection_trigger_v2(body)
+result = client.anomaly_triggers_v2.with_raw_response.update_anomaly_detection_trigger_v2(
+    [
+        TriggerType3(
+            trigger_id="595f5c44-c31c-4552-8670-020a1545a84d",
+            trigger_name="Anomaly Daily Usage REST Test-Patch Update 4",
+            trigger_category="UsageAnomaly",
+            account_name="0000123456-00001",
+            anomaly_trigger_request=AnomalyTriggerRequest(
+                account_names="0000123456-00001",
+                include_abnormal=True,
+                include_very_abnormal=True,
+                include_under_expected_usage=False,
+                include_over_expected_usage=True,
+            ),
+            notification=TriggerNotification(
+                notification_type="DailySummary",
+                callback=True,
+                email_notification=False,
+                notification_group_name="Anomaly Test API",
+                notification_frequency_factor=3,
+                notification_frequency_interval="Hourly",
+                external_email_recipients="placeholder@verizon.com",
+                sms_notification=True,
+                sms_numbers=[Smsnumber(carrier="US Cellular", number="9299280711")],
+                reminder=True,
+                severity="Critical",
+            ),
+        ),
+    ],
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type IntelligenceSuccessResult
@@ -1805,7 +1996,36 @@ match result:
 **Async**
 
 ```python
-result = await async_client.anomaly_triggers_v2.with_raw_response.update_anomaly_detection_trigger_v2(body)
+result = await async_client.anomaly_triggers_v2.with_raw_response.update_anomaly_detection_trigger_v2(
+    [
+        TriggerType3(
+            trigger_id="595f5c44-c31c-4552-8670-020a1545a84d",
+            trigger_name="Anomaly Daily Usage REST Test-Patch Update 4",
+            trigger_category="UsageAnomaly",
+            account_name="0000123456-00001",
+            anomaly_trigger_request=AnomalyTriggerRequest(
+                account_names="0000123456-00001",
+                include_abnormal=True,
+                include_very_abnormal=True,
+                include_under_expected_usage=False,
+                include_over_expected_usage=True,
+            ),
+            notification=TriggerNotification(
+                notification_type="DailySummary",
+                callback=True,
+                email_notification=False,
+                notification_group_name="Anomaly Test API",
+                notification_frequency_factor=3,
+                notification_frequency_interval="Hourly",
+                external_email_recipients="placeholder@verizon.com",
+                sms_notification=True,
+                sms_numbers=[Smsnumber(carrier="US Cellular", number="9299280711")],
+                reminder=True,
+                severity="Critical",
+            ),
+        ),
+    ],
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type IntelligenceSuccessResult
@@ -1824,7 +2044,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>list&#91;[UpdateTriggerRequestOptions](verizon/models/unions/update_trigger_request_options.py) \| [UpdateTriggerRequestOptionsDict](verizon/models/unions/update_trigger_request_options.py)&#93;</code> | Request to update existing trigger. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -1876,7 +2096,14 @@ This endpoint allows user to add managed accounts to a primary account.
 **Sync**
 
 ```python
-result = client.billing.with_raw_response.add_account(body)
+result = client.billing.with_raw_response.add_account(
+    ManagedAccountsAddRequest(
+        account_name="1234567890-00001",
+        service_name=ServiceName.LOCATION,
+        type_="TS-LOC-COARSE-CellID-Aggr",
+        managed_acc_list=["1223334444-00001", "2334445555-00001", "3445556666-00001"],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ManagedAccountsAddResponse
@@ -1887,7 +2114,14 @@ match result:
 **Async**
 
 ```python
-result = await async_client.billing.with_raw_response.add_account(body)
+result = await async_client.billing.with_raw_response.add_account(
+    ManagedAccountsAddRequest(
+        account_name="1234567890-00001",
+        service_name=ServiceName.LOCATION,
+        type_="TS-LOC-COARSE-CellID-Aggr",
+        managed_acc_list=["1223334444-00001", "2334445555-00001", "3445556666-00001"],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ManagedAccountsAddResponse
@@ -1906,7 +2140,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[ManagedAccountsAddRequest](verizon/models/managed_accounts_add_request.py) \| [ManagedAccountsAddRequestDict](verizon/models/managed_accounts_add_request.py)</code> | Service name and list of accounts to add |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -1961,7 +2195,15 @@ Deactivates a managed billing service relationship between a managed account and
 **Sync**
 
 ```python
-result = client.billing.with_raw_response.cancel_managed_account_action(body)
+result = client.billing.with_raw_response.cancel_managed_account_action(
+    ManagedAccountCancelRequest(
+        account_name="1223334444-00001",
+        paccount_name="1234567890-00001",
+        service_name=ServiceName.LOCATION,
+        type_="TS-LOC-COARSE-CellID-5K",
+        txid="d4fbff33-eeee-ffff-gggg-2c90bd287e3b",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ManagedAccountCancelResponse
@@ -1972,7 +2214,15 @@ match result:
 **Async**
 
 ```python
-result = await async_client.billing.with_raw_response.cancel_managed_account_action(body)
+result = await async_client.billing.with_raw_response.cancel_managed_account_action(
+    ManagedAccountCancelRequest(
+        account_name="1223334444-00001",
+        paccount_name="1234567890-00001",
+        service_name=ServiceName.LOCATION,
+        type_="TS-LOC-COARSE-CellID-5K",
+        txid="d4fbff33-eeee-ffff-gggg-2c90bd287e3b",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ManagedAccountCancelResponse
@@ -1991,7 +2241,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[ManagedAccountCancelRequest](verizon/models/managed_account_cancel_request.py) \| [ManagedAccountCancelRequestDict](verizon/models/managed_account_cancel_request.py)</code> | Service name and list of accounts to add |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -2046,7 +2296,7 @@ This endpoint allows user to retrieve the list of all accounts managed by a prim
 **Sync**
 
 ```python
-result = client.billing.with_raw_response.list_managed_account(account_name, service_name)
+result = client.billing.with_raw_response.list_managed_account("1223334444-00001", "some example string")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ManagedAccountsGetAllResponse
@@ -2057,7 +2307,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.billing.with_raw_response.list_managed_account(account_name, service_name)
+result = await async_client.billing.with_raw_response.list_managed_account("1223334444-00001", "some example string")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ManagedAccountsGetAllResponse
@@ -2077,7 +2327,7 @@ match result:
 | --- | --- | --- |
 | <code>account_name</code> | <code>str</code> | Primary account identifier |
 | <code>service_name</code> | <code>str</code> | Service name |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -2132,7 +2382,15 @@ Activates a managed billing service relationship between a managed account and t
 **Sync**
 
 ```python
-result = client.billing.with_raw_response.managed_account_action(body)
+result = client.billing.with_raw_response.managed_account_action(
+    ManagedAccountsProvisionRequest(
+        account_name="1223334444-00001",
+        paccount_name="1234567890-00001",
+        service_name=ServiceName.LOCATION,
+        type_="TS-LOC-COARSE-CellID-5K",
+        txid="d4fbff33-eeee-ffff-gggg-2c90bd287e3b",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ManagedAccountsProvisionResponse
@@ -2143,7 +2401,15 @@ match result:
 **Async**
 
 ```python
-result = await async_client.billing.with_raw_response.managed_account_action(body)
+result = await async_client.billing.with_raw_response.managed_account_action(
+    ManagedAccountsProvisionRequest(
+        account_name="1223334444-00001",
+        paccount_name="1234567890-00001",
+        service_name=ServiceName.LOCATION,
+        type_="TS-LOC-COARSE-CellID-5K",
+        txid="d4fbff33-eeee-ffff-gggg-2c90bd287e3b",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ManagedAccountsProvisionResponse
@@ -2162,7 +2428,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[ManagedAccountsProvisionRequest](verizon/models/managed_accounts_provision_request.py) \| [ManagedAccountsProvisionRequestDict](verizon/models/managed_accounts_provision_request.py)</code> | Service name and list of accounts to add |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -2221,7 +2487,9 @@ This endpoint allows user to cancel software upgrade. A software upgrade already
 **Sync**
 
 ```python
-result = client.campaigns_v2.with_raw_response.cancel_campaign(account, campaign_id)
+result = client.campaigns_v2.with_raw_response.cancel_campaign(
+    "0000123456-00001", "60b5d639-ccdc-4db8-8824-069bd94c95bf"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FotaV2SuccessResult
@@ -2232,7 +2500,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.campaigns_v2.with_raw_response.cancel_campaign(account, campaign_id)
+result = await async_client.campaigns_v2.with_raw_response.cancel_campaign(
+    "0000123456-00001", "60b5d639-ccdc-4db8-8824-069bd94c95bf"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FotaV2SuccessResult
@@ -2252,7 +2522,7 @@ match result:
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier. |
 | <code>campaign_id</code> | <code>str</code> | Unique identifier of campaign. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -2307,7 +2577,9 @@ This endpoint allows user to get information of a software upgrade.
 **Sync**
 
 ```python
-result = client.campaigns_v2.with_raw_response.get_campaign_information(account, campaign_id)
+result = client.campaigns_v2.with_raw_response.get_campaign_information(
+    "0000123456-00001", "60b5d639-ccdc-4db8-8824-069bd94c95bf"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type CampaignSoftware
@@ -2318,7 +2590,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.campaigns_v2.with_raw_response.get_campaign_information(account, campaign_id)
+result = await async_client.campaigns_v2.with_raw_response.get_campaign_information(
+    "0000123456-00001", "60b5d639-ccdc-4db8-8824-069bd94c95bf"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type CampaignSoftware
@@ -2338,7 +2612,7 @@ match result:
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier. |
 | <code>campaign_id</code> | <code>str</code> | Software upgrade identifier. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -2393,7 +2667,7 @@ This endpoint allows user to schedule a software upgrade.
 **Sync**
 
 ```python
-result = client.campaigns_v2.with_raw_response.schedule_campaign_firmware_upgrade(account)
+result = client.campaigns_v2.with_raw_response.schedule_campaign_firmware_upgrade("0000123456-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type CampaignSoftware
@@ -2404,7 +2678,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.campaigns_v2.with_raw_response.schedule_campaign_firmware_upgrade(account)
+result = await async_client.campaigns_v2.with_raw_response.schedule_campaign_firmware_upgrade("0000123456-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type CampaignSoftware
@@ -2423,7 +2697,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -2478,7 +2752,7 @@ You can upload configuration files and schedule them in a campaign to devices.
 **Sync**
 
 ```python
-result = client.campaigns_v2.with_raw_response.schedule_file_upgrade(acc, body)
+result = client.campaigns_v2.with_raw_response.schedule_file_upgrade("0402196254-00001", UploadAndScheduleFileRequest())
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type UploadAndScheduleFileResponse
@@ -2489,7 +2763,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.campaigns_v2.with_raw_response.schedule_file_upgrade(acc, body)
+result = await async_client.campaigns_v2.with_raw_response.schedule_file_upgrade(
+    "0402196254-00001", UploadAndScheduleFileRequest()
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type UploadAndScheduleFileResponse
@@ -2509,7 +2785,7 @@ match result:
 | --- | --- | --- |
 | <code>acc</code> | <code>str</code> | Account identifier. |
 | <code>body</code> | <code>[UploadAndScheduleFileRequest](verizon/models/upload_and_schedule_file_request.py) \| [UploadAndScheduleFileRequestDict](verizon/models/upload_and_schedule_file_request.py)</code> | Device logging information. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -2564,7 +2840,23 @@ Campaign time windows for downloading and installing software are available as l
 **Sync**
 
 ```python
-result = client.campaigns_v2.with_raw_response.schedule_sw_upgrade_http_devices(acc, body)
+result = client.campaigns_v2.with_raw_response.schedule_sw_upgrade_http_devices(
+    "0402196254-00001",
+    SchedulesSoftwareUpgradeRequest(
+        campaign_name="FOTA_Verizon_Upgrade",
+        software_name="FOTA_Verizon_Model-A_02To03_HF",
+        software_from="FOTA_Verizon_Model-A_00To01_HF",
+        software_to="FOTA_Verizon_Model-A_02To03_HF",
+        distribution_type="HTTP",
+        start_date="2020-08-21",
+        end_date="2020-08-22",
+        download_after_date="2020-08-21",
+        download_time_window_list=[DownloadTimeWindow(start_time="20", end_time="21")],
+        install_after_date="2020-08-21",
+        install_time_window_list=[DownloadTimeWindow(start_time="22", end_time="23")],
+        device_list=["990013907835573", "990013907884259"],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type UploadAndScheduleFileResponse
@@ -2575,7 +2867,23 @@ match result:
 **Async**
 
 ```python
-result = await async_client.campaigns_v2.with_raw_response.schedule_sw_upgrade_http_devices(acc, body)
+result = await async_client.campaigns_v2.with_raw_response.schedule_sw_upgrade_http_devices(
+    "0402196254-00001",
+    SchedulesSoftwareUpgradeRequest(
+        campaign_name="FOTA_Verizon_Upgrade",
+        software_name="FOTA_Verizon_Model-A_02To03_HF",
+        software_from="FOTA_Verizon_Model-A_00To01_HF",
+        software_to="FOTA_Verizon_Model-A_02To03_HF",
+        distribution_type="HTTP",
+        start_date="2020-08-21",
+        end_date="2020-08-22",
+        download_after_date="2020-08-21",
+        download_time_window_list=[DownloadTimeWindow(start_time="20", end_time="21")],
+        install_after_date="2020-08-21",
+        install_time_window_list=[DownloadTimeWindow(start_time="22", end_time="23")],
+        device_list=["990013907835573", "990013907884259"],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type UploadAndScheduleFileResponse
@@ -2595,7 +2903,7 @@ match result:
 | --- | --- | --- |
 | <code>acc</code> | <code>str</code> | Account identifier. |
 | <code>body</code> | <code>[SchedulesSoftwareUpgradeRequest](verizon/models/schedules_software_upgrade_request.py) \| [SchedulesSoftwareUpgradeRequestDict](verizon/models/schedules_software_upgrade_request.py)</code> | Device logging information. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -2650,7 +2958,9 @@ This endpoint allows user to change campaign dates and time windows. Fields whic
 **Sync**
 
 ```python
-result = client.campaigns_v2.with_raw_response.update_campaign_dates(account, campaign_id)
+result = client.campaigns_v2.with_raw_response.update_campaign_dates(
+    "0000123456-00001", "60b5d639-ccdc-4db8-8824-069bd94c95bf"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type CampaignSoftware
@@ -2661,7 +2971,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.campaigns_v2.with_raw_response.update_campaign_dates(account, campaign_id)
+result = await async_client.campaigns_v2.with_raw_response.update_campaign_dates(
+    "0000123456-00001", "60b5d639-ccdc-4db8-8824-069bd94c95bf"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type CampaignSoftware
@@ -2681,7 +2993,7 @@ match result:
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier. |
 | <code>campaign_id</code> | <code>str</code> | Software upgrade information. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -2736,7 +3048,9 @@ This endpoint allows user to Add or Remove devices to an existing software upgra
 **Sync**
 
 ```python
-result = client.campaigns_v2.with_raw_response.update_campaign_firmware_devices(account, campaign_id)
+result = client.campaigns_v2.with_raw_response.update_campaign_firmware_devices(
+    "0000123456-00001", "60b5d639-ccdc-4db8-8824-069bd94c95bf"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type V2AddOrRemoveDeviceResult
@@ -2747,7 +3061,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.campaigns_v2.with_raw_response.update_campaign_firmware_devices(account, campaign_id)
+result = await async_client.campaigns_v2.with_raw_response.update_campaign_firmware_devices(
+    "0000123456-00001", "60b5d639-ccdc-4db8-8824-069bd94c95bf"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type V2AddOrRemoveDeviceResult
@@ -2767,7 +3083,7 @@ match result:
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier. |
 | <code>campaign_id</code> | <code>str</code> | Software upgrade information. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -2826,7 +3142,9 @@ This endpoint allows user to cancel a firmware campaign. A firmware campaign alr
 **Sync**
 
 ```python
-result = client.campaigns_v3.with_raw_response.cancel_campaign2(account_name, campaign_id)
+result = client.campaigns_v3.with_raw_response.cancel_campaign2(
+    "0000123456-00001", "f858b8c4-2153-11ec-8c44-aeb16d1aa652"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FotaV3SuccessResult
@@ -2837,7 +3155,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.campaigns_v3.with_raw_response.cancel_campaign2(account_name, campaign_id)
+result = await async_client.campaigns_v3.with_raw_response.cancel_campaign2(
+    "0000123456-00001", "f858b8c4-2153-11ec-8c44-aeb16d1aa652"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FotaV3SuccessResult
@@ -2857,7 +3177,7 @@ match result:
 | --- | --- | --- |
 | <code>account_name</code> | <code>str</code> | Account identifier. |
 | <code>campaign_id</code> | <code>str</code> | Firmware upgrade information. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -2912,7 +3232,9 @@ This endpoint allows the user to retrieve campaign level information for a speci
 **Sync**
 
 ```python
-result = client.campaigns_v3.with_raw_response.get_campaign_information2(account_name, campaign_id)
+result = client.campaigns_v3.with_raw_response.get_campaign_information2(
+    "0000123456-00001", "f858b8c4-2153-11ec-8c44-aeb16d1aa652"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type Campaign
@@ -2923,7 +3245,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.campaigns_v3.with_raw_response.get_campaign_information2(account_name, campaign_id)
+result = await async_client.campaigns_v3.with_raw_response.get_campaign_information2(
+    "0000123456-00001", "f858b8c4-2153-11ec-8c44-aeb16d1aa652"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type Campaign
@@ -2943,7 +3267,7 @@ match result:
 | --- | --- | --- |
 | <code>account_name</code> | <code>str</code> | Account identifier. |
 | <code>campaign_id</code> | <code>str</code> | Firmware upgrade identifier. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -2998,7 +3322,22 @@ This endpoint allows a user to schedule a firmware upgrade for a list of devices
 **Sync**
 
 ```python
-result = client.campaigns_v3.with_raw_response.schedule_campaign_firmware_upgrade2(account_name, body)
+result = client.campaigns_v3.with_raw_response.schedule_campaign_firmware_upgrade2(
+    "0000123456-00001",
+    CampaignFirmwareUpgrade(
+        campaign_name="Smart FOTA - test 4",
+        firmware_name="SEQUANSCommunications_GM01Q_SR1.2.0.0-10512_SR1.2.0.0-10657",
+        firmware_from="SR1.2.0.0-10512",
+        firmware_to="SR1.2.0.0-10657",
+        protocol="LWM2M",
+        start_date=date(2021, 9, 29),
+        end_date=date(2021, 10, 1),
+        campaign_time_window_list=[V3TimeWindow(start_time=18, end_time=22)],
+        device_list=["15-digit IMEI"],
+        auto_assign_license_flag=False,
+        auto_add_devices_flag=False,
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FirmwareCampaign
@@ -3009,7 +3348,22 @@ match result:
 **Async**
 
 ```python
-result = await async_client.campaigns_v3.with_raw_response.schedule_campaign_firmware_upgrade2(account_name, body)
+result = await async_client.campaigns_v3.with_raw_response.schedule_campaign_firmware_upgrade2(
+    "0000123456-00001",
+    CampaignFirmwareUpgrade(
+        campaign_name="Smart FOTA - test 4",
+        firmware_name="SEQUANSCommunications_GM01Q_SR1.2.0.0-10512_SR1.2.0.0-10657",
+        firmware_from="SR1.2.0.0-10512",
+        firmware_to="SR1.2.0.0-10657",
+        protocol="LWM2M",
+        start_date=date(2021, 9, 29),
+        end_date=date(2021, 10, 1),
+        campaign_time_window_list=[V3TimeWindow(start_time=18, end_time=22)],
+        device_list=["15-digit IMEI"],
+        auto_assign_license_flag=False,
+        auto_add_devices_flag=False,
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FirmwareCampaign
@@ -3029,7 +3383,7 @@ match result:
 | --- | --- | --- |
 | <code>account_name</code> | <code>str</code> | Account identifier. |
 | <code>body</code> | <code>[CampaignFirmwareUpgrade](verizon/models/campaign_firmware_upgrade.py) \| [CampaignFirmwareUpgradeDict](verizon/models/campaign_firmware_upgrade.py)</code> | Firmware upgrade information. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -3084,7 +3438,15 @@ This endpoint allows user to change campaign dates and time windows. Fields whic
 **Sync**
 
 ```python
-result = client.campaigns_v3.with_raw_response.update_campaign_dates2(acc, campaign_id, body)
+result = client.campaigns_v3.with_raw_response.update_campaign_dates2(
+    "0000123456-00001",
+    "f858b8c4-2153-11ec-8c44-aeb16d1aa652",
+    V3ChangeCampaignDatesRequest(
+        start_date=date(2022, 2, 23),
+        end_date=date(2022, 2, 24),
+        campaign_time_window_list=[V3TimeWindow(start_time=14, end_time=18)],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FirmwareCampaign
@@ -3095,7 +3457,15 @@ match result:
 **Async**
 
 ```python
-result = await async_client.campaigns_v3.with_raw_response.update_campaign_dates2(acc, campaign_id, body)
+result = await async_client.campaigns_v3.with_raw_response.update_campaign_dates2(
+    "0000123456-00001",
+    "f858b8c4-2153-11ec-8c44-aeb16d1aa652",
+    V3ChangeCampaignDatesRequest(
+        start_date=date(2022, 2, 23),
+        end_date=date(2022, 2, 24),
+        campaign_time_window_list=[V3TimeWindow(start_time=14, end_time=18)],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FirmwareCampaign
@@ -3116,7 +3486,7 @@ match result:
 | <code>acc</code> | <code>str</code> | Account identifier. |
 | <code>campaign_id</code> | <code>str</code> | Firmware upgrade information. |
 | <code>body</code> | <code>[V3ChangeCampaignDatesRequest](verizon/models/v3_change_campaign_dates_request.py) \| [V3ChangeCampaignDatesRequestDict](verizon/models/v3_change_campaign_dates_request.py)</code> | New dates and time windows. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -3171,7 +3541,11 @@ This endpoint allows user to Add or Remove devices to an existing campaign.
 **Sync**
 
 ```python
-result = client.campaigns_v3.with_raw_response.update_campaign_firmware_devices2(acc, campaign_id, body)
+result = client.campaigns_v3.with_raw_response.update_campaign_firmware_devices2(
+    "0000123456-00001",
+    "f858b8c4-2153-11ec-8c44-aeb16d1aa652",
+    V3AddOrRemoveDeviceRequest(type_="remove", device_list=["15-digit IMEI"]),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type V3AddOrRemoveDeviceResult
@@ -3182,7 +3556,11 @@ match result:
 **Async**
 
 ```python
-result = await async_client.campaigns_v3.with_raw_response.update_campaign_firmware_devices2(acc, campaign_id, body)
+result = await async_client.campaigns_v3.with_raw_response.update_campaign_firmware_devices2(
+    "0000123456-00001",
+    "f858b8c4-2153-11ec-8c44-aeb16d1aa652",
+    V3AddOrRemoveDeviceRequest(type_="remove", device_list=["15-digit IMEI"]),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type V3AddOrRemoveDeviceResult
@@ -3203,7 +3581,7 @@ match result:
 | <code>acc</code> | <code>str</code> | Account identifier. |
 | <code>campaign_id</code> | <code>str</code> | Unique identifier of a campaign. |
 | <code>body</code> | <code>[V3AddOrRemoveDeviceRequest](verizon/models/v3_add_or_remove_device_request.py) \| [V3AddOrRemoveDeviceRequestDict](verizon/models/v3_add_or_remove_device_request.py)</code> | Add or remove device to existing upgrade information. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -3262,7 +3640,7 @@ Disables logging for a specific device.
 **Sync**
 
 ```python
-result = client.client_logging.with_raw_response.disable_device_logging(account, device_id)
+result = client.client_logging.with_raw_response.disable_device_logging("0000123456-00001", "990013907835573")
 match result:
     case Success():
         ...  # 2xx, no content
@@ -3273,7 +3651,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.client_logging.with_raw_response.disable_device_logging(account, device_id)
+result = await async_client.client_logging.with_raw_response.disable_device_logging(
+    "0000123456-00001", "990013907835573"
+)
 match result:
     case Success():
         ...  # 2xx, no content
@@ -3293,7 +3673,7 @@ match result:
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier. |
 | <code>device_id</code> | <code>str</code> | Device IMEI identifier. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -3348,7 +3728,7 @@ Turn logging off for a list of devices.
 **Sync**
 
 ```python
-result = client.client_logging.with_raw_response.disable_logging_for_devices(account, device_ids)
+result = client.client_logging.with_raw_response.disable_logging_for_devices("0000123456-00001", "990013907835573")
 match result:
     case Success():
         ...  # 2xx, no content
@@ -3359,7 +3739,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.client_logging.with_raw_response.disable_logging_for_devices(account, device_ids)
+result = await async_client.client_logging.with_raw_response.disable_logging_for_devices(
+    "0000123456-00001", "990013907835573"
+)
 match result:
     case Success():
         ...  # 2xx, no content
@@ -3379,7 +3761,7 @@ match result:
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier. |
 | <code>device_ids</code> | <code>str</code> | The list of device IDs. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -3434,7 +3816,7 @@ Enables logging for a specific device.
 **Sync**
 
 ```python
-result = client.client_logging.with_raw_response.enable_device_logging(account, device_id)
+result = client.client_logging.with_raw_response.enable_device_logging("0000123456-00001", "990013907835573")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceLoggingStatus
@@ -3445,7 +3827,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.client_logging.with_raw_response.enable_device_logging(account, device_id)
+result = await async_client.client_logging.with_raw_response.enable_device_logging(
+    "0000123456-00001", "990013907835573"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceLoggingStatus
@@ -3465,7 +3849,7 @@ match result:
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier. |
 | <code>device_id</code> | <code>str</code> | Device IMEI identifier. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -3520,7 +3904,7 @@ Each customer may have a maximum of 20 devices enabled for logging.
 **Sync**
 
 ```python
-result = client.client_logging.with_raw_response.enable_logging_for_devices(account)
+result = client.client_logging.with_raw_response.enable_logging_for_devices("0000123456-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[DeviceLoggingStatus]
@@ -3531,7 +3915,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.client_logging.with_raw_response.enable_logging_for_devices(account)
+result = await async_client.client_logging.with_raw_response.enable_logging_for_devices("0000123456-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[DeviceLoggingStatus]
@@ -3550,7 +3934,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -3605,7 +3989,7 @@ Gets logs for a specific device.
 **Sync**
 
 ```python
-result = client.client_logging.with_raw_response.list_device_logs(account, device_id)
+result = client.client_logging.with_raw_response.list_device_logs("0000123456-00001", "990013907835573")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[DeviceLog]
@@ -3616,7 +4000,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.client_logging.with_raw_response.list_device_logs(account, device_id)
+result = await async_client.client_logging.with_raw_response.list_device_logs("0000123456-00001", "990013907835573")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[DeviceLog]
@@ -3636,7 +4020,7 @@ match result:
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier. |
 | <code>device_id</code> | <code>str</code> | Device IMEI identifier. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -3691,7 +4075,7 @@ Returns an array of all devices in the specified account for which logging is en
 **Sync**
 
 ```python
-result = client.client_logging.with_raw_response.list_devices_with_logging_enabled(account)
+result = client.client_logging.with_raw_response.list_devices_with_logging_enabled("0000123456-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[DeviceLoggingStatus]
@@ -3702,7 +4086,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.client_logging.with_raw_response.list_devices_with_logging_enabled(account)
+result = await async_client.client_logging.with_raw_response.list_devices_with_logging_enabled("0000123456-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[DeviceLoggingStatus]
@@ -3721,7 +4105,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -3780,7 +4164,12 @@ Remove a device from a ThingSpace account.
 **Sync**
 
 ```python
-result = client.cloud_connector_devices.with_raw_response.delete_device_from_account(body)
+result = client.cloud_connector_devices.with_raw_response.delete_device_from_account(
+    RemoveDeviceRequest(
+        accountidentifier=AccountIdentifier(billingaccountid="1223334444-00001"),
+        resourceidentifier=ResourceIdentifier(imei="864508030084997"),
+    ),
+)
 match result:
     case Success():
         ...  # 2xx, no content
@@ -3791,7 +4180,12 @@ match result:
 **Async**
 
 ```python
-result = await async_client.cloud_connector_devices.with_raw_response.delete_device_from_account(body)
+result = await async_client.cloud_connector_devices.with_raw_response.delete_device_from_account(
+    RemoveDeviceRequest(
+        accountidentifier=AccountIdentifier(billingaccountid="1223334444-00001"),
+        resourceidentifier=ResourceIdentifier(imei="864508030084997"),
+    ),
+)
 match result:
     case Success():
         ...  # 2xx, no content
@@ -3810,7 +4204,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[RemoveDeviceRequest](verizon/models/remove_device_request.py) \| [RemoveDeviceRequestDict](verizon/models/remove_device_request.py)</code> | The request body identifies the device to delete. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -3858,7 +4252,12 @@ Find devices by property values. Returns an array of all matching device resourc
 **Sync**
 
 ```python
-result = client.cloud_connector_devices.with_raw_response.find_device_by_property_values(body)
+result = client.cloud_connector_devices.with_raw_response.find_device_by_property_values(
+    QuerySubscriptionRequest(
+        accountidentifier=AccountIdentifier(billingaccountid="1223334444-00001"),
+        resourceidentifier=ResourceIdentifier(imei="159495694333703"),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FindDeviceByPropertyResponseList
@@ -3869,7 +4268,12 @@ match result:
 **Async**
 
 ```python
-result = await async_client.cloud_connector_devices.with_raw_response.find_device_by_property_values(body)
+result = await async_client.cloud_connector_devices.with_raw_response.find_device_by_property_values(
+    QuerySubscriptionRequest(
+        accountidentifier=AccountIdentifier(billingaccountid="1223334444-00001"),
+        resourceidentifier=ResourceIdentifier(imei="159495694333703"),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FindDeviceByPropertyResponseList
@@ -3888,7 +4292,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[QuerySubscriptionRequest](verizon/models/query_subscription_request.py) \| [QuerySubscriptionRequestDict](verizon/models/query_subscription_request.py)</code> | The request body specifies fields and values to match. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -3936,7 +4340,14 @@ Search device event history to find events that match criteria.Sensor readings, 
 **Sync**
 
 ```python
-result = client.cloud_connector_devices.with_raw_response.search_device_event_history(body)
+result = client.cloud_connector_devices.with_raw_response.search_device_event_history(
+    SearchDeviceEventHistoryRequest(
+        accountidentifier=AccountIdentifier(billingaccountid="1223334444-00001"),
+        selection={"kind": "ts.event.configuration"},
+        resourceidentifier=ResourceIdentifier(imei="864508030084997"),
+        limitnumber=2,
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type SearchDeviceEventHistoryResponseList
@@ -3947,7 +4358,14 @@ match result:
 **Async**
 
 ```python
-result = await async_client.cloud_connector_devices.with_raw_response.search_device_event_history(body)
+result = await async_client.cloud_connector_devices.with_raw_response.search_device_event_history(
+    SearchDeviceEventHistoryRequest(
+        accountidentifier=AccountIdentifier(billingaccountid="1223334444-00001"),
+        selection={"kind": "ts.event.configuration"},
+        resourceidentifier=ResourceIdentifier(imei="864508030084997"),
+        limitnumber=2,
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type SearchDeviceEventHistoryResponseList
@@ -3966,7 +4384,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[SearchDeviceEventHistoryRequest](verizon/models/search_device_event_history_request.py) \| [SearchDeviceEventHistoryRequestDict](verizon/models/search_device_event_history_request.py)</code> | The device identifier and fields to match in the search. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -4014,7 +4432,12 @@ Search for devices by property values. Returns an array of all matching device r
 **Sync**
 
 ```python
-result = client.cloud_connector_devices.with_raw_response.search_devices_resources_by_property_values(body)
+result = client.cloud_connector_devices.with_raw_response.search_devices_resources_by_property_values(
+    QuerySubscriptionRequest(
+        accountidentifier=AccountIdentifier(billingaccountid="1223334444-00001"),
+        selection={"iccid": "89148000003499233389"},
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type SearchDeviceByPropertyResponseList
@@ -4025,7 +4448,12 @@ match result:
 **Async**
 
 ```python
-result = await async_client.cloud_connector_devices.with_raw_response.search_devices_resources_by_property_values(body)
+result = await async_client.cloud_connector_devices.with_raw_response.search_devices_resources_by_property_values(
+    QuerySubscriptionRequest(
+        accountidentifier=AccountIdentifier(billingaccountid="1223334444-00001"),
+        selection={"iccid": "89148000003499233389"},
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type SearchDeviceByPropertyResponseList
@@ -4044,7 +4472,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[QuerySubscriptionRequest](verizon/models/query_subscription_request.py) \| [QuerySubscriptionRequestDict](verizon/models/query_subscription_request.py)</code> | The request body specifies fields and values to match. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -4092,7 +4520,14 @@ Returns the readings of a specified sensor, with the most recent reading first. 
 **Sync**
 
 ```python
-result = client.cloud_connector_devices.with_raw_response.search_sensor_readings(fieldname, body)
+result = client.cloud_connector_devices.with_raw_response.search_sensor_readings(
+    "some example string",
+    SearchSensorHistoryRequest(
+        accountidentifier=AccountIdentifier(billingaccountid="1223334444-00001"),
+        resourceidentifier=ResourceIdentifier(imei="864508030084997"),
+        limitnumber=2,
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type SearchSensorHistoryResponseList
@@ -4103,7 +4538,14 @@ match result:
 **Async**
 
 ```python
-result = await async_client.cloud_connector_devices.with_raw_response.search_sensor_readings(fieldname, body)
+result = await async_client.cloud_connector_devices.with_raw_response.search_sensor_readings(
+    "some example string",
+    SearchSensorHistoryRequest(
+        accountidentifier=AccountIdentifier(billingaccountid="1223334444-00001"),
+        resourceidentifier=ResourceIdentifier(imei="864508030084997"),
+        limitnumber=2,
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type SearchSensorHistoryResponseList
@@ -4123,7 +4565,7 @@ match result:
 | --- | --- | --- |
 | <code>fieldname</code> | <code>str</code> | The name of the sensor. |
 | <code>body</code> | <code>[SearchSensorHistoryRequest](verizon/models/search_sensor_history_request.py) \| [SearchSensorHistoryRequestDict](verizon/models/search_sensor_history_request.py)</code> | The device identifier and fields to match in the search. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -4171,7 +4613,13 @@ Change configuration values on a device, such as setting how often a device reco
 **Sync**
 
 ```python
-result = client.cloud_connector_devices.with_raw_response.update_devices_configuration_value(body)
+result = client.cloud_connector_devices.with_raw_response.update_devices_configuration_value(
+    ChangeConfigurationRequest(
+        accountidentifier=AccountIdentifier(billingaccountid="1223334444-00001"),
+        resourceidentifier=ResourceIdentifier(imei="864508030147323"),
+        configuration=Configuration(frequency="Low"),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ChangeConfigurationResponse
@@ -4182,7 +4630,13 @@ match result:
 **Async**
 
 ```python
-result = await async_client.cloud_connector_devices.with_raw_response.update_devices_configuration_value(body)
+result = await async_client.cloud_connector_devices.with_raw_response.update_devices_configuration_value(
+    ChangeConfigurationRequest(
+        accountidentifier=AccountIdentifier(billingaccountid="1223334444-00001"),
+        resourceidentifier=ResourceIdentifier(imei="864508030147323"),
+        configuration=Configuration(frequency="Low"),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ChangeConfigurationResponse
@@ -4201,7 +4655,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[ChangeConfigurationRequest](verizon/models/change_configuration_request.py) \| [ChangeConfigurationRequestDict](verizon/models/change_configuration_request.py)</code> | The request body changes configuration values on a device. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -4253,7 +4707,17 @@ Create a subscription to define a streaming channel that sends data from devices
 **Sync**
 
 ```python
-result = client.cloud_connector_subscriptions.with_raw_response.create_subscription(body)
+result = client.cloud_connector_subscriptions.with_raw_response.create_subscription(
+    CreateSubscriptionRequest(
+        accountidentifier=AccountIdentifier(billingaccountid="1223334444-00001"),
+        email="me@mycompany.com",
+        billingaccountid="1223334444-00001",
+        streamkind="ts.event",
+        targetid="{target ID}",
+        name="Account subscription 1",
+        allowaggregation=False,
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type Subscription
@@ -4264,7 +4728,17 @@ match result:
 **Async**
 
 ```python
-result = await async_client.cloud_connector_subscriptions.with_raw_response.create_subscription(body)
+result = await async_client.cloud_connector_subscriptions.with_raw_response.create_subscription(
+    CreateSubscriptionRequest(
+        accountidentifier=AccountIdentifier(billingaccountid="1223334444-00001"),
+        email="me@mycompany.com",
+        billingaccountid="1223334444-00001",
+        streamkind="ts.event",
+        targetid="{target ID}",
+        name="Account subscription 1",
+        allowaggregation=False,
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type Subscription
@@ -4283,7 +4757,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[CreateSubscriptionRequest](verizon/models/create_subscription_request.py) \| [CreateSubscriptionRequestDict](verizon/models/create_subscription_request.py)</code> | The request body provides the details of the subscription that you want to create. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -4331,7 +4805,12 @@ Remove a subscription from a ThingSpace account.
 **Sync**
 
 ```python
-result = client.cloud_connector_subscriptions.with_raw_response.delete_subscription(body)
+result = client.cloud_connector_subscriptions.with_raw_response.delete_subscription(
+    DeleteSubscriptionRequest(
+        accountidentifier=AccountIdentifier(billingaccountid="1223334444-00001"),
+        resourceidentifier=ResourceIdentifier(id="f8b112df-739c-6236-f059-106c67bafd99"),
+    ),
+)
 match result:
     case Success():
         ...  # 2xx, no content
@@ -4342,7 +4821,12 @@ match result:
 **Async**
 
 ```python
-result = await async_client.cloud_connector_subscriptions.with_raw_response.delete_subscription(body)
+result = await async_client.cloud_connector_subscriptions.with_raw_response.delete_subscription(
+    DeleteSubscriptionRequest(
+        accountidentifier=AccountIdentifier(billingaccountid="1223334444-00001"),
+        resourceidentifier=ResourceIdentifier(id="f8b112df-739c-6236-f059-106c67bafd99"),
+    ),
+)
 match result:
     case Success():
         ...  # 2xx, no content
@@ -4361,7 +4845,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DeleteSubscriptionRequest](verizon/models/delete_subscription_request.py) \| [DeleteSubscriptionRequestDict](verizon/models/delete_subscription_request.py)</code> | The request body identifies the subscription to delete. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -4409,7 +4893,12 @@ Search for subscriptions by property values. Returns an array of all matching su
 **Sync**
 
 ```python
-result = client.cloud_connector_subscriptions.with_raw_response.query_subscription(body)
+result = client.cloud_connector_subscriptions.with_raw_response.query_subscription(
+    QuerySubscriptionRequest(
+        accountidentifier=AccountIdentifier(billingaccountid="1223334444-00001"),
+        resourceidentifier=ResourceIdentifier(id="dd1682d3-2d80-cefc-f3ee-25154800beff"),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[Subscription]
@@ -4420,7 +4909,12 @@ match result:
 **Async**
 
 ```python
-result = await async_client.cloud_connector_subscriptions.with_raw_response.query_subscription(body)
+result = await async_client.cloud_connector_subscriptions.with_raw_response.query_subscription(
+    QuerySubscriptionRequest(
+        accountidentifier=AccountIdentifier(billingaccountid="1223334444-00001"),
+        resourceidentifier=ResourceIdentifier(id="dd1682d3-2d80-cefc-f3ee-25154800beff"),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[Subscription]
@@ -4439,7 +4933,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[QuerySubscriptionRequest](verizon/models/query_subscription_request.py) \| [QuerySubscriptionRequestDict](verizon/models/query_subscription_request.py)</code> | The request body specifies fields and values to match. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -4491,7 +4985,7 @@ You can retrieve a list of configuration or supplementary of files for an accoun
 **Sync**
 
 ```python
-result = client.configuration_files.with_raw_response.get_list_of_files(acc, distribution_type)
+result = client.configuration_files.with_raw_response.get_list_of_files("0402196254-00001", "HTTP")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type RetrievesAvailableFilesResponseList
@@ -4502,7 +4996,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.configuration_files.with_raw_response.get_list_of_files(acc, distribution_type)
+result = await async_client.configuration_files.with_raw_response.get_list_of_files("0402196254-00001", "HTTP")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type RetrievesAvailableFilesResponseList
@@ -4522,7 +5016,7 @@ match result:
 | --- | --- | --- |
 | <code>acc</code> | <code>str</code> | Account identifier. |
 | <code>distribution_type</code> | <code>str</code> | Filter the distributionType to only retrieve files for a specific distribution type. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -4554,7 +5048,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def upload_config_file(acc: str, *, file_version: str | None = None, make: str | None = None, model: str | None = None, local_target_path: str | None = None, fileupload: bytes | None = None, request_options: RequestOptionsOrDict | None = None) -> ApiResult[UploadConfigurationFilesResponse, UploadConfigFileErrorBody]</code></summary>
+<summary><code>def upload_config_file(acc: str, *, fileupload: FileInput | None = None, file_version: str | None = None, make: str | None = None, model: str | None = None, local_target_path: str | None = None, request_options: RequestOptionsOrDict | None = None) -> ApiResult[UploadConfigurationFilesResponse, UploadConfigFileErrorBody]</code></summary>
 
 <dl>
 <dd>
@@ -4577,7 +5071,9 @@ Uploads a configuration/supplementary file for an account. ThingSpace generates 
 **Sync**
 
 ```python
-result = client.configuration_files.with_raw_response.upload_config_file(acc)
+result = client.configuration_files.with_raw_response.upload_config_file(
+    "0402196254-00001", file_version="1.0", make="Verizon", model="VZW1", local_target_path="/VZWFOTA/hello-world.txt"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type UploadConfigurationFilesResponse
@@ -4588,7 +5084,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.configuration_files.with_raw_response.upload_config_file(acc)
+result = await async_client.configuration_files.with_raw_response.upload_config_file(
+    "0402196254-00001", file_version="1.0", make="Verizon", model="VZW1", local_target_path="/VZWFOTA/hello-world.txt"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type UploadConfigurationFilesResponse
@@ -4607,12 +5105,12 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>acc</code> | <code>str</code> | Account identifier. |
+| <code>fileupload</code> | <code>FileInput \| None</code> | The file to upload.<br>**Default**: <code>None</code> |
 | <code>file_version</code> | <code>str \| None</code> | Version of the file.<br>**Default**: <code>None</code> |
 | <code>make</code> | <code>str \| None</code> | The software-applicable device make.<br>**Default**: <code>None</code> |
 | <code>model</code> | <code>str \| None</code> | The software-applicable device model.<br>**Default**: <code>None</code> |
 | <code>local_target_path</code> | <code>str \| None</code> | Local target path on the device.<br>**Default**: <code>None</code> |
-| <code>fileupload</code> | <code>bytes \| None</code> | The file to upload.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -4671,7 +5169,7 @@ Stops ThingSpace from sending callback messages for the specified account and se
 **Sync**
 
 ```python
-result = client.connectivity_callbacks.with_raw_response.deregister_callback(aname, sname)
+result = client.connectivity_callbacks.with_raw_response.deregister_callback("1223334444-00001", "CarrierService")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type CallbackActionResult
@@ -4682,7 +5180,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.connectivity_callbacks.with_raw_response.deregister_callback(aname, sname)
+result = await async_client.connectivity_callbacks.with_raw_response.deregister_callback(
+    "1223334444-00001", "CarrierService"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type CallbackActionResult
@@ -4702,7 +5202,7 @@ match result:
 | --- | --- | --- |
 | <code>aname</code> | <code>str</code> | Account name. |
 | <code>sname</code> | <code>str</code> | Service name. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -4757,7 +5257,7 @@ Returns the name and endpoint URL of the callback listening services registered 
 **Sync**
 
 ```python
-result = client.connectivity_callbacks.with_raw_response.list_registered_callbacks(aname)
+result = client.connectivity_callbacks.with_raw_response.list_registered_callbacks("0252012345-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[ConnectivityManagementCallback]
@@ -4768,7 +5268,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.connectivity_callbacks.with_raw_response.list_registered_callbacks(aname)
+result = await async_client.connectivity_callbacks.with_raw_response.list_registered_callbacks("0252012345-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[ConnectivityManagementCallback]
@@ -4787,7 +5287,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>aname</code> | <code>str</code> | Account name. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -4842,7 +5342,9 @@ You are responsible for creating and running a listening process on your server 
 **Sync**
 
 ```python
-result = client.connectivity_callbacks.with_raw_response.register_callback(aname, body)
+result = client.connectivity_callbacks.with_raw_response.register_callback(
+    "TestAccount-2", RegisterCallbackRequest(name="CarrierService", url="https://mock.thingspace.verizon.com/webhook")
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type CallbackActionResult
@@ -4853,7 +5355,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.connectivity_callbacks.with_raw_response.register_callback(aname, body)
+result = await async_client.connectivity_callbacks.with_raw_response.register_callback(
+    "TestAccount-2", RegisterCallbackRequest(name="CarrierService", url="https://mock.thingspace.verizon.com/webhook")
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type CallbackActionResult
@@ -4873,7 +5377,7 @@ match result:
 | --- | --- | --- |
 | <code>aname</code> | <code>str</code> | Account name. |
 | <code>body</code> | <code>[RegisterCallbackRequest](verizon/models/register_callback_request.py) \| [RegisterCallbackRequestDict](verizon/models/register_callback_request.py)</code> | Request to register a callback. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -4932,7 +5436,35 @@ Create a usage trigger at the account level, device level or a price plan trigge
 **Sync**
 
 ```python
-result = client.create_price_plan_triggers.with_raw_response.create_trigger_rules(body)
+result = client.create_price_plan_triggers.with_raw_response.create_trigger_rules(
+    AccountLevelCreateTriggerRequest(
+        trigger_name="name of the trigger",
+        ecpd_id="Verizon profile ID",
+        trigger_category=TriggerCategory.ACCOUNT_USAGE,
+        data_trigger=DataTrigger(
+            account_level=AccountLevelObject(
+                filter_criteria=AccountLevelFilter(), condition=ConditionObjectCall(), action=AccountLevelAction.NOTIFY
+            ),
+        ),
+        notification=Notificationarray(
+            notification_type="PerEvent",
+            callback=True,
+            email_notification=False,
+            notification_group_name="NotificationGroupName",
+            notification_frequency_factor=3,
+            notification_frequency_interval="Daily",
+            external_email_recipients="ExternalEmailRecipients",
+            sms_notification=True,
+            sms_numbers=[
+                Cellphonenumber(number="10-digit mobile number", carrier="mobile service provider"),
+                Cellphonenumber(number="10-digit mobile number", carrier="mobile service provider"),
+            ],
+            reminder=True,
+            severity="Notice",
+        ),
+        active=Active.TRUE,
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type TriggerResponse
@@ -4943,7 +5475,35 @@ match result:
 **Async**
 
 ```python
-result = await async_client.create_price_plan_triggers.with_raw_response.create_trigger_rules(body)
+result = await async_client.create_price_plan_triggers.with_raw_response.create_trigger_rules(
+    AccountLevelCreateTriggerRequest(
+        trigger_name="name of the trigger",
+        ecpd_id="Verizon profile ID",
+        trigger_category=TriggerCategory.ACCOUNT_USAGE,
+        data_trigger=DataTrigger(
+            account_level=AccountLevelObject(
+                filter_criteria=AccountLevelFilter(), condition=ConditionObjectCall(), action=AccountLevelAction.NOTIFY
+            ),
+        ),
+        notification=Notificationarray(
+            notification_type="PerEvent",
+            callback=True,
+            email_notification=False,
+            notification_group_name="NotificationGroupName",
+            notification_frequency_factor=3,
+            notification_frequency_interval="Daily",
+            external_email_recipients="ExternalEmailRecipients",
+            sms_notification=True,
+            sms_numbers=[
+                Cellphonenumber(number="10-digit mobile number", carrier="mobile service provider"),
+                Cellphonenumber(number="10-digit mobile number", carrier="mobile service provider"),
+            ],
+            reminder=True,
+            severity="Notice",
+        ),
+        active=Active.TRUE,
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type TriggerResponse
@@ -4962,7 +5522,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[V2TriggersRequest](verizon/models/unions/v2_triggers_request.py) \| [V2TriggersRequestDict](verizon/models/unions/v2_triggers_request.py)</code> | Create a trigger |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -5014,7 +5574,7 @@ Retrieve all of the service plans, features and carriers associated with the acc
 **Sync**
 
 ```python
-result = client.device_actions.with_raw_response.account_information(account_name)
+result = client.device_actions.with_raw_response.account_information("some example string")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type AccountDetails
@@ -5025,7 +5585,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_actions.with_raw_response.account_information(account_name)
+result = await async_client.device_actions.with_raw_response.account_information("some example string")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type AccountDetails
@@ -5044,7 +5604,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>account_name</code> | <code>str</code> | Value sent with the request. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -5092,7 +5652,7 @@ Retrieve the aggregate usage for a device or a number of devices.
 **Sync**
 
 ```python
-result = client.device_actions.with_raw_response.aggregate_usage(body)
+result = client.device_actions.with_raw_response.aggregate_usage(AggregateUsage())
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GiorequestResponse
@@ -5103,7 +5663,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_actions.with_raw_response.aggregate_usage(body)
+result = await async_client.device_actions.with_raw_response.aggregate_usage(AggregateUsage())
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GiorequestResponse
@@ -5122,7 +5682,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[AggregateUsage](verizon/models/aggregate_usage.py) \| [AggregateUsageDict](verizon/models/aggregate_usage.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -5170,7 +5730,7 @@ Retrieve the daily usage for a device, for a specified period of time, segmented
 **Sync**
 
 ```python
-result = client.device_actions.with_raw_response.daily_usage(body)
+result = client.device_actions.with_raw_response.daily_usage(DailyUsage())
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DailyUsageResponse
@@ -5181,7 +5741,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_actions.with_raw_response.daily_usage(body)
+result = await async_client.device_actions.with_raw_response.daily_usage(DailyUsage())
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DailyUsageResponse
@@ -5200,7 +5760,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DailyUsage](verizon/models/daily_usage.py) \| [DailyUsageDict](verizon/models/daily_usage.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -5248,7 +5808,9 @@ Get the status of an asynchronous request made with the Device Actions.
 **Sync**
 
 ```python
-result = client.device_actions.with_raw_response.get_asynchronous_request_status(account_name, request_id)
+result = client.device_actions.with_raw_response.get_asynchronous_request_status(
+    "0000123456-00001", "d1f08526-5443-4054-9a29-4456490ea9f8"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type StatusResponse
@@ -5259,7 +5821,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_actions.with_raw_response.get_asynchronous_request_status(account_name, request_id)
+result = await async_client.device_actions.with_raw_response.get_asynchronous_request_status(
+    "0000123456-00001", "d1f08526-5443-4054-9a29-4456490ea9f8"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type StatusResponse
@@ -5279,7 +5843,7 @@ match result:
 | --- | --- | --- |
 | <code>account_name</code> | <code>str</code> | Value sent with the request. |
 | <code>request_id</code> | <code>str</code> | Value sent with the request. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -5327,7 +5891,7 @@ Retrieve the provisioning history of a specific device or devices.
 **Sync**
 
 ```python
-result = client.device_actions.with_raw_response.retrieve_device_provisioning_history(body)
+result = client.device_actions.with_raw_response.retrieve_device_provisioning_history(ProvhistoryRequest())
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GiorequestResponse
@@ -5338,7 +5902,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_actions.with_raw_response.retrieve_device_provisioning_history(body)
+result = await async_client.device_actions.with_raw_response.retrieve_device_provisioning_history(ProvhistoryRequest())
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GiorequestResponse
@@ -5357,7 +5921,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[ProvhistoryRequest](verizon/models/provhistory_request.py) \| [ProvhistoryRequestDict](verizon/models/provhistory_request.py)</code> | Device Provisioning History |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -5405,7 +5969,9 @@ Allows the profile to fetch the complete device list. This works with Verizon US
 **Sync**
 
 ```python
-result = client.device_actions.with_raw_response.retrieve_the_global_device_list(body)
+result = client.device_actions.with_raw_response.retrieve_the_global_device_list(
+    GetDeviceListWithProfilesRequest(account_name="some example string")
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GiorequestResponse
@@ -5416,7 +5982,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_actions.with_raw_response.retrieve_the_global_device_list(body)
+result = await async_client.device_actions.with_raw_response.retrieve_the_global_device_list(
+    GetDeviceListWithProfilesRequest(account_name="some example string")
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GiorequestResponse
@@ -5435,7 +6003,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[GetDeviceListWithProfilesRequest](verizon/models/get_device_list_with_profiles_request.py) \| [GetDeviceListWithProfilesRequestDict](verizon/models/get_device_list_with_profiles_request.py)</code> | Device Profile Query |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -5483,7 +6051,7 @@ Retrieve all of the service plans, features and carriers associated with the acc
 **Sync**
 
 ```python
-result = client.device_actions.with_raw_response.service_plan_list(account_name)
+result = client.device_actions.with_raw_response.service_plan_list("some example string")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type AccountDetails
@@ -5494,7 +6062,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_actions.with_raw_response.service_plan_list(account_name)
+result = await async_client.device_actions.with_raw_response.service_plan_list("some example string")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type AccountDetails
@@ -5513,7 +6081,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>account_name</code> | <code>str</code> | Value sent with the request. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -5565,7 +6133,13 @@ Send a `POST` request.
 **Sync**
 
 ```python
-result = client.device_credential_management.with_raw_response.drop_credentials(body)
+result = client.device_credential_management.with_raw_response.drop_credentials(
+    CredentialsRequest(
+        ecpd="some example string",
+        account_number="some example string",
+        items=[DeviceCredentialRequestItem(imei="some example string")],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DropResponse
@@ -5576,7 +6150,13 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_credential_management.with_raw_response.drop_credentials(body)
+result = await async_client.device_credential_management.with_raw_response.drop_credentials(
+    CredentialsRequest(
+        ecpd="some example string",
+        account_number="some example string",
+        items=[DeviceCredentialRequestItem(imei="some example string")],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DropResponse
@@ -5595,7 +6175,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[CredentialsRequest](verizon/models/credentials_request.py) \| [CredentialsRequestDict](verizon/models/credentials_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -5650,7 +6230,13 @@ Send a `POST` request.
 **Sync**
 
 ```python
-result = client.device_credential_management.with_raw_response.generate_credentials(body)
+result = client.device_credential_management.with_raw_response.generate_credentials(
+    CredentialsRequest(
+        ecpd="some example string",
+        account_number="some example string",
+        items=[DeviceCredentialRequestItem(imei="some example string")],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GenerateResponse
@@ -5661,7 +6247,13 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_credential_management.with_raw_response.generate_credentials(body)
+result = await async_client.device_credential_management.with_raw_response.generate_credentials(
+    CredentialsRequest(
+        ecpd="some example string",
+        account_number="some example string",
+        items=[DeviceCredentialRequestItem(imei="some example string")],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GenerateResponse
@@ -5680,7 +6272,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[CredentialsRequest](verizon/models/credentials_request.py) \| [CredentialsRequestDict](verizon/models/credentials_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -5735,7 +6327,13 @@ Send a `POST` request.
 **Sync**
 
 ```python
-result = client.device_credential_management.with_raw_response.reset_credentials(body)
+result = client.device_credential_management.with_raw_response.reset_credentials(
+    CredentialsRequest(
+        ecpd="some example string",
+        account_number="some example string",
+        items=[DeviceCredentialRequestItem(imei="some example string")],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GenerateResponse
@@ -5746,7 +6344,13 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_credential_management.with_raw_response.reset_credentials(body)
+result = await async_client.device_credential_management.with_raw_response.reset_credentials(
+    CredentialsRequest(
+        ecpd="some example string",
+        account_number="some example string",
+        items=[DeviceCredentialRequestItem(imei="some example string")],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GenerateResponse
@@ -5765,7 +6369,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[CredentialsRequest](verizon/models/credentials_request.py) \| [CredentialsRequestDict](verizon/models/credentials_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -5820,7 +6424,13 @@ Send a `POST` request.
 **Sync**
 
 ```python
-result = client.device_credential_management.with_raw_response.retrieve_credentials(body)
+result = client.device_credential_management.with_raw_response.retrieve_credentials(
+    CredentialsRequest(
+        ecpd="some example string",
+        account_number="some example string",
+        items=[DeviceCredentialRequestItem(imei="some example string")],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type RetrieveResponse
@@ -5831,7 +6441,13 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_credential_management.with_raw_response.retrieve_credentials(body)
+result = await async_client.device_credential_management.with_raw_response.retrieve_credentials(
+    CredentialsRequest(
+        ecpd="some example string",
+        account_number="some example string",
+        items=[DeviceCredentialRequestItem(imei="some example string")],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type RetrieveResponse
@@ -5850,7 +6466,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[CredentialsRequest](verizon/models/credentials_request.py) \| [CredentialsRequestDict](verizon/models/credentials_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -5910,7 +6526,13 @@ If the devices do not already exist in the account, this API resource adds them 
 **Sync**
 
 ```python
-result = client.device_diagnostics.with_raw_response.device_reachability_status_using_post(body)
+result = client.device_diagnostics.with_raw_response.device_reachability_status_using_post(
+    NotificationReportStatusRequest(
+        account_name="some example string",
+        device=DeviceId(id="some example string", kind="some example string"),
+        request_type="some example string",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -5921,7 +6543,13 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_diagnostics.with_raw_response.device_reachability_status_using_post(body)
+result = await async_client.device_diagnostics.with_raw_response.device_reachability_status_using_post(
+    NotificationReportStatusRequest(
+        account_name="some example string",
+        device=DeviceId(id="some example string", kind="some example string"),
+        request_type="some example string",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -5940,7 +6568,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[NotificationReportStatusRequest](verizon/models/notification_report_status_request.py) \| [NotificationReportStatusRequestDict](verizon/models/notification_report_status_request.py)</code> | Retrieve Reachability Report Status for a device. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -5995,7 +6623,12 @@ Retrieve all the active monitors.
 **Sync**
 
 ```python
-result = client.device_diagnostics.with_raw_response.retrieve_active_monitors_using_post(body)
+result = client.device_diagnostics.with_raw_response.retrieve_active_monitors_using_post(
+    RetrieveMonitorsRequest(
+        account_name="0242123520-00001",
+        devices=[AccountDeviceList(device_ids=[DeviceId(id="12016560696", kind="msisdn")])],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -6006,7 +6639,12 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_diagnostics.with_raw_response.retrieve_active_monitors_using_post(body)
+result = await async_client.device_diagnostics.with_raw_response.retrieve_active_monitors_using_post(
+    RetrieveMonitorsRequest(
+        account_name="0242123520-00001",
+        devices=[AccountDeviceList(device_ids=[DeviceId(id="12016560696", kind="msisdn")])],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -6025,7 +6663,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[RetrieveMonitorsRequest](verizon/models/retrieve_monitors_request.py) \| [RetrieveMonitorsRequestDict](verizon/models/retrieve_monitors_request.py)</code> | Retrieve Monitor Request. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -6084,7 +6722,14 @@ Create a new device group and optionally add devices to the group. Device groups
 **Sync**
 
 ```python
-result = client.device_groups.with_raw_response.create_device_group(body)
+result = client.device_groups.with_raw_response.create_device_group(
+    CreateDeviceGroupRequest(
+        account_name="0000123456-00001",
+        group_description="descriptive string",
+        group_name="group name",
+        devices_to_add=[DeviceId(id="15-digit IMEI", kind="imei")],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ConnectivityManagementSuccessResult
@@ -6095,7 +6740,14 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_groups.with_raw_response.create_device_group(body)
+result = await async_client.device_groups.with_raw_response.create_device_group(
+    CreateDeviceGroupRequest(
+        account_name="0000123456-00001",
+        group_description="descriptive string",
+        group_name="group name",
+        devices_to_add=[DeviceId(id="15-digit IMEI", kind="imei")],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ConnectivityManagementSuccessResult
@@ -6114,7 +6766,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[CreateDeviceGroupRequest](verizon/models/create_device_group_request.py) \| [CreateDeviceGroupRequestDict](verizon/models/create_device_group_request.py)</code> | A request to create a new device group. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -6169,7 +6821,7 @@ Deletes a device group from the account. Devices in the group are moved to the d
 **Sync**
 
 ```python
-result = client.device_groups.with_raw_response.delete_device_group(aname, gname)
+result = client.device_groups.with_raw_response.delete_device_group("0252012345-00001", "some example string")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ConnectivityManagementSuccessResult
@@ -6180,7 +6832,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_groups.with_raw_response.delete_device_group(aname, gname)
+result = await async_client.device_groups.with_raw_response.delete_device_group(
+    "0252012345-00001", "some example string"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ConnectivityManagementSuccessResult
@@ -6200,7 +6854,7 @@ match result:
 | --- | --- | --- |
 | <code>aname</code> | <code>str</code> | Account name. |
 | <code>gname</code> | <code>str</code> | Group name. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -6232,7 +6886,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def get_device_group_information(aname: str, gname: str, *, next: int | None = None, request_options: RequestOptionsOrDict | None = None) -> ApiResult[DeviceGroupDevicesData, GetDeviceGroupInformationErrorBody]</code></summary>
+<summary><code>def get_device_group_information(aname: str, gname: str, *, next_: int | None = None, request_options: RequestOptionsOrDict | None = None) -> ApiResult[DeviceGroupDevicesData, GetDeviceGroupInformationErrorBody]</code></summary>
 
 <dl>
 <dd>
@@ -6255,7 +6909,7 @@ When HTTP status is 202, a URL will be returned in the Location header of the fo
 **Sync**
 
 ```python
-result = client.device_groups.with_raw_response.get_device_group_information(aname, gname)
+result = client.device_groups.with_raw_response.get_device_group_information("0252012345-00001", "some example string")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceGroupDevicesData
@@ -6266,7 +6920,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_groups.with_raw_response.get_device_group_information(aname, gname)
+result = await async_client.device_groups.with_raw_response.get_device_group_information(
+    "0252012345-00001", "some example string"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceGroupDevicesData
@@ -6286,8 +6942,8 @@ match result:
 | --- | --- | --- |
 | <code>aname</code> | <code>str</code> | Account name. |
 | <code>gname</code> | <code>str</code> | Group name. |
-| <code>next</code> | <code>int \| None</code> | Continue the previous query from the pageUrl pagetoken.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>next_</code> | <code>int \| None</code> | Continue the previous query from the pageUrl pagetoken.<br>**Default**: <code>None</code> |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -6342,7 +6998,7 @@ Returns a list of all device groups in a specified account.
 **Sync**
 
 ```python
-result = client.device_groups.with_raw_response.list_device_groups(aname)
+result = client.device_groups.with_raw_response.list_device_groups("0252012345-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[DeviceGroup]
@@ -6353,7 +7009,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_groups.with_raw_response.list_device_groups(aname)
+result = await async_client.device_groups.with_raw_response.list_device_groups("0252012345-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[DeviceGroup]
@@ -6372,7 +7028,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>aname</code> | <code>str</code> | Account name. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -6427,7 +7083,15 @@ Make changes to a device group, including changing the name and description, and
 **Sync**
 
 ```python
-result = client.device_groups.with_raw_response.update_device_group(aname, gname, body)
+result = client.device_groups.with_raw_response.update_device_group(
+    "0252012345-00001",
+    "some example string",
+    DeviceGroupUpdateRequest(
+        devices_to_add=[DeviceId(id="990003420535537", kind="imei")],
+        new_group_description="All western region tank level monitors.",
+        new_group_name="Western region tanks",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ConnectivityManagementSuccessResult
@@ -6438,7 +7102,15 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_groups.with_raw_response.update_device_group(aname, gname, body)
+result = await async_client.device_groups.with_raw_response.update_device_group(
+    "0252012345-00001",
+    "some example string",
+    DeviceGroupUpdateRequest(
+        devices_to_add=[DeviceId(id="990003420535537", kind="imei")],
+        new_group_description="All western region tank level monitors.",
+        new_group_name="Western region tanks",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ConnectivityManagementSuccessResult
@@ -6459,7 +7131,7 @@ match result:
 | <code>aname</code> | <code>str</code> | Account name. |
 | <code>gname</code> | <code>str</code> | Group name. |
 | <code>body</code> | <code>[DeviceGroupUpdateRequest](verizon/models/device_group_update_request.py) \| [DeviceGroupUpdateRequestDict](verizon/models/device_group_update_request.py)</code> | Request to update device group. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -6518,7 +7190,9 @@ Cancel an asynchronous report request.
 **Sync**
 
 ```python
-result = client.device_location_callbacks.with_raw_response.cancel_async_report(txid, account_name)
+result = client.device_location_callbacks.with_raw_response.cancel_async_report(
+    "2c90bd28-eeee-ffff-gggg-7e3bd4fbff33", "0000123456-00001"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type TransactionId
@@ -6529,7 +7203,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_location_callbacks.with_raw_response.cancel_async_report(txid, account_name)
+result = await async_client.device_location_callbacks.with_raw_response.cancel_async_report(
+    "2c90bd28-eeee-ffff-gggg-7e3bd4fbff33", "0000123456-00001"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type TransactionId
@@ -6549,7 +7225,7 @@ match result:
 | --- | --- | --- |
 | <code>txid</code> | <code>str</code> | The `transactionId` value. |
 | <code>account_name</code> | <code>str</code> | Account identifier in "##########-#####". |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -6597,7 +7273,9 @@ Deregister a URL to stop receiving callback messages.
 **Sync**
 
 ```python
-result = client.device_location_callbacks.with_raw_response.deregister_callback2(account_name, service)
+result = client.device_location_callbacks.with_raw_response.deregister_callback2(
+    "0000123456-00001", CallbackServiceName.LOCATION
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceLocationSuccessResult
@@ -6608,7 +7286,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_location_callbacks.with_raw_response.deregister_callback2(account_name, service)
+result = await async_client.device_location_callbacks.with_raw_response.deregister_callback2(
+    "0000123456-00001", CallbackServiceName.LOCATION
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceLocationSuccessResult
@@ -6628,7 +7308,7 @@ match result:
 | --- | --- | --- |
 | <code>account_name</code> | <code>str</code> | Account number. |
 | <code>service</code> | <code>[CallbackServiceNameOrStr](verizon/models/enums/callback_service_name.py)</code> | Callback service name. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -6683,7 +7363,7 @@ Returns a list of all registered callback URLs for the account.
 **Sync**
 
 ```python
-result = client.device_location_callbacks.with_raw_response.list_registered_callbacks2(account_name)
+result = client.device_location_callbacks.with_raw_response.list_registered_callbacks2("0000123456-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[DeviceLocationCallback]
@@ -6694,7 +7374,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_location_callbacks.with_raw_response.list_registered_callbacks2(account_name)
+result = await async_client.device_location_callbacks.with_raw_response.list_registered_callbacks2("0000123456-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[DeviceLocationCallback]
@@ -6713,7 +7393,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>account_name</code> | <code>str</code> | Account number. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -6768,7 +7448,7 @@ Provide a URL to receive messages from a ThingSpace callback service.
 **Sync**
 
 ```python
-result = client.device_location_callbacks.with_raw_response.register_callback2(account_name)
+result = client.device_location_callbacks.with_raw_response.register_callback2("0000123456-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type CallbackRegistrationResult
@@ -6779,7 +7459,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_location_callbacks.with_raw_response.register_callback2(account_name)
+result = await async_client.device_location_callbacks.with_raw_response.register_callback2("0000123456-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type CallbackRegistrationResult
@@ -6798,7 +7478,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>account_name</code> | <code>str</code> | Account number. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -6857,7 +7537,35 @@ If the devices do not already exist in the account, this API resource adds them 
 **Sync**
 
 ```python
-result = client.device_management.with_raw_response.activate_service_for_devices(body)
+result = client.device_management.with_raw_response.activate_service_for_devices(
+    CarrierActivateRequest(
+        devices=[
+            AccountDeviceList(
+                device_ids=[
+                    DeviceId(id="990013907835573", kind="imei"), DeviceId(id="89141390780800784259", kind="iccid")
+                ],
+                ip_address="1.2.3.456",
+            ),
+            AccountDeviceList(
+                device_ids=[
+                    DeviceId(id="990013907884259", kind="imei"), DeviceId(id="89141390780800735573", kind="iccid")
+                ],
+                ip_address="1.2.3.456",
+            ),
+        ],
+        service_plan="the service plan name",
+        mdn_zip_code="98801",
+        account_name="0868924207-00001",
+        custom_fields=[CustomFields(key="CustomField2", value="SuperVend")],
+        group_name="4G West",
+        primary_place_of_use=PlaceOfUse(
+            address=Address(
+                address_line1="1600 Pennsylvania Ave NW", city="Washington", state="DC", zip="20500", country="USA"
+            ),
+            customer_name=CustomerName(title="President", first_name="Zaffod", last_name="Beeblebrox"),
+        ),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -6868,7 +7576,35 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_management.with_raw_response.activate_service_for_devices(body)
+result = await async_client.device_management.with_raw_response.activate_service_for_devices(
+    CarrierActivateRequest(
+        devices=[
+            AccountDeviceList(
+                device_ids=[
+                    DeviceId(id="990013907835573", kind="imei"), DeviceId(id="89141390780800784259", kind="iccid")
+                ],
+                ip_address="1.2.3.456",
+            ),
+            AccountDeviceList(
+                device_ids=[
+                    DeviceId(id="990013907884259", kind="imei"), DeviceId(id="89141390780800735573", kind="iccid")
+                ],
+                ip_address="1.2.3.456",
+            ),
+        ],
+        service_plan="the service plan name",
+        mdn_zip_code="98801",
+        account_name="0868924207-00001",
+        custom_fields=[CustomFields(key="CustomField2", value="SuperVend")],
+        group_name="4G West",
+        primary_place_of_use=PlaceOfUse(
+            address=Address(
+                address_line1="1600 Pennsylvania Ave NW", city="Washington", state="DC", zip="20500", country="USA"
+            ),
+            customer_name=CustomerName(title="President", first_name="Zaffod", last_name="Beeblebrox"),
+        ),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -6887,7 +7623,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[CarrierActivateRequest](verizon/models/carrier_activate_request.py) \| [CarrierActivateRequestDict](verizon/models/carrier_activate_request.py)</code> | Request for activating a service on devices. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -6942,7 +7678,22 @@ Use this API if you want to manage some device settings before you are ready to 
 **Sync**
 
 ```python
-result = client.device_management.with_raw_response.add_devices(body)
+result = client.device_management.with_raw_response.add_devices(
+    AddDevicesRequest(
+        state="Pre-active",
+        devices_to_add=[
+            AccountDeviceList(
+                device_ids=[DeviceId(id="15-digit IMEI", kind="imei"), DeviceId(id="20-digit ICCID", kind="iccid")]
+            ),
+            AccountDeviceList(
+                device_ids=[DeviceId(id="15-digit IMEI", kind="imei"), DeviceId(id="20-digit ICCID", kind="iccid")]
+            ),
+        ],
+        account_name="0000123456-00001",
+        custom_fields=[CustomFields(key="CustomField2", value="SuperVend")],
+        group_name="West Region",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[AddDevicesResult]
@@ -6953,7 +7704,22 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_management.with_raw_response.add_devices(body)
+result = await async_client.device_management.with_raw_response.add_devices(
+    AddDevicesRequest(
+        state="Pre-active",
+        devices_to_add=[
+            AccountDeviceList(
+                device_ids=[DeviceId(id="15-digit IMEI", kind="imei"), DeviceId(id="20-digit ICCID", kind="iccid")]
+            ),
+            AccountDeviceList(
+                device_ids=[DeviceId(id="15-digit IMEI", kind="imei"), DeviceId(id="20-digit ICCID", kind="iccid")]
+            ),
+        ],
+        account_name="0000123456-00001",
+        custom_fields=[CustomFields(key="CustomField2", value="SuperVend")],
+        group_name="West Region",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[AddDevicesResult]
@@ -6972,7 +7738,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[AddDevicesRequest](verizon/models/add_devices_request.py) \| [AddDevicesRequestDict](verizon/models/add_devices_request.py)</code> | Devices to add. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -7027,7 +7793,9 @@ Gets billed usage for for either multiple devices or an entire billing account.
 **Sync**
 
 ```python
-result = client.device_management.with_raw_response.billed_usage_info(body)
+result = client.device_management.with_raw_response.billed_usage_info(
+    BilledusageListRequest(account_name="0342077109-00001")
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -7038,7 +7806,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_management.with_raw_response.billed_usage_info(body)
+result = await async_client.device_management.with_raw_response.billed_usage_info(
+    BilledusageListRequest(account_name="0342077109-00001")
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -7057,7 +7827,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[BilledusageListRequest](verizon/models/billedusage_list_request.py) \| [BilledusageListRequestDict](verizon/models/billedusage_list_request.py)</code> | Request to list devices with mismatched IMEIs and ICCIDs. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -7112,7 +7882,13 @@ Changes the service plan for one or more devices.
 **Sync**
 
 ```python
-result = client.device_management.with_raw_response.change_devices_service_plan(body)
+result = client.device_management.with_raw_response.change_devices_service_plan(
+    ServicePlanUpdateRequest(
+        service_plan="Tablet5GB",
+        devices=[AccountDeviceList(device_ids=[DeviceId(id="A100003685E561", kind="meid")])],
+        carrier_ip_pool_name="IPPool",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -7123,7 +7899,13 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_management.with_raw_response.change_devices_service_plan(body)
+result = await async_client.device_management.with_raw_response.change_devices_service_plan(
+    ServicePlanUpdateRequest(
+        service_plan="Tablet5GB",
+        devices=[AccountDeviceList(device_ids=[DeviceId(id="A100003685E561", kind="meid")])],
+        carrier_ip_pool_name="IPPool",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -7142,7 +7924,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[ServicePlanUpdateRequest](verizon/models/service_plan_update_request.py) \| [ServicePlanUpdateRequestDict](verizon/models/service_plan_update_request.py)</code> | Request to change device service plan. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -7197,7 +7979,12 @@ Checks whether specified devices are registered by the manufacturer with the Ver
 **Sync**
 
 ```python
-result = client.device_management.with_raw_response.check_devices_availability_for_activation(body)
+result = client.device_management.with_raw_response.check_devices_availability_for_activation(
+    DeviceActivationRequest(
+        account_name="0212345678-00001",
+        devices=[AccountDeviceList(device_ids=[DeviceId(id="A100008385E561", kind="meid")])],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -7208,7 +7995,12 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_management.with_raw_response.check_devices_availability_for_activation(body)
+result = await async_client.device_management.with_raw_response.check_devices_availability_for_activation(
+    DeviceActivationRequest(
+        account_name="0212345678-00001",
+        devices=[AccountDeviceList(device_ids=[DeviceId(id="A100008385E561", kind="meid")])],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -7227,7 +8019,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DeviceActivationRequest](verizon/models/device_activation_request.py) \| [DeviceActivationRequestDict](verizon/models/device_activation_request.py)</code> | Request to check if devices can be activated or not. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -7282,7 +8074,15 @@ Deactivating service for a device may result in an early termination fee (ETF) b
 **Sync**
 
 ```python
-result = client.device_management.with_raw_response.deactivate_service_for_devices(body)
+result = client.device_management.with_raw_response.deactivate_service_for_devices(
+    CarrierDeactivateRequest(
+        account_name="0000123456-00001",
+        devices=[AccountDeviceList(device_ids=[DeviceId(id="20-digit ICCID", kind="iccid")])],
+        reason_code="FF",
+        etf_waiver=True,
+        delete_after_deactivation=True,
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -7293,7 +8093,15 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_management.with_raw_response.deactivate_service_for_devices(body)
+result = await async_client.device_management.with_raw_response.deactivate_service_for_devices(
+    CarrierDeactivateRequest(
+        account_name="0000123456-00001",
+        devices=[AccountDeviceList(device_ids=[DeviceId(id="20-digit ICCID", kind="iccid")])],
+        reason_code="FF",
+        etf_waiver=True,
+        delete_after_deactivation=True,
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -7312,7 +8120,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[CarrierDeactivateRequest](verizon/models/carrier_deactivate_request.py) \| [CarrierDeactivateRequestDict](verizon/models/carrier_deactivate_request.py)</code> | Request to deactivate service for one or more devices. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -7367,7 +8175,15 @@ Use this API to remove unneeded devices from an account.
 **Sync**
 
 ```python
-result = client.device_management.with_raw_response.delete_deactivated_devices(body)
+result = client.device_management.with_raw_response.delete_deactivated_devices(
+    DeleteDevicesRequest(
+        devices_to_delete=[
+            AccountDeviceList(device_ids=[DeviceId(id="09005470263", kind="esn")]),
+            AccountDeviceList(device_ids=[DeviceId(id="85000022411113460014", kind="iccid")]),
+            AccountDeviceList(device_ids=[DeviceId(id="85000022412313460016", kind="iccid")]),
+        ],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[DeleteDevicesResult]
@@ -7378,7 +8194,15 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_management.with_raw_response.delete_deactivated_devices(body)
+result = await async_client.device_management.with_raw_response.delete_deactivated_devices(
+    DeleteDevicesRequest(
+        devices_to_delete=[
+            AccountDeviceList(device_ids=[DeviceId(id="09005470263", kind="esn")]),
+            AccountDeviceList(device_ids=[DeviceId(id="85000022411113460014", kind="iccid")]),
+            AccountDeviceList(device_ids=[DeviceId(id="85000022412313460016", kind="iccid")]),
+        ],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[DeleteDevicesResult]
@@ -7397,7 +8221,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DeleteDevicesRequest](verizon/models/delete_devices_request.py) \| [DeleteDevicesRequestDict](verizon/models/delete_devices_request.py)</code> | Devices to delete. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -7452,7 +8276,19 @@ Upload a device record
 **Sync**
 
 ```python
-result = client.device_management.with_raw_response.device_upload(body)
+result = client.device_management.with_raw_response.device_upload(
+    DeviceUploadRequest(
+        account_name="1223334444-00001",
+        devices=[
+            DeviceList(device_ids=[DeviceId(id="15-digit IMEI", kind="IMEI")]),
+            DeviceList(device_ids=[DeviceId(id="15-digit IMEI", kind="IMEI")]),
+            DeviceList(device_ids=[DeviceId(id="15-digit IMEI", kind="IMEI")]),
+        ],
+        email_address="bob@mycompany.com",
+        device_sku="VZW123456",
+        upload_type="IMEI",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type RequestResponse
@@ -7463,7 +8299,19 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_management.with_raw_response.device_upload(body)
+result = await async_client.device_management.with_raw_response.device_upload(
+    DeviceUploadRequest(
+        account_name="1223334444-00001",
+        devices=[
+            DeviceList(device_ids=[DeviceId(id="15-digit IMEI", kind="IMEI")]),
+            DeviceList(device_ids=[DeviceId(id="15-digit IMEI", kind="IMEI")]),
+            DeviceList(device_ids=[DeviceId(id="15-digit IMEI", kind="IMEI")]),
+        ],
+        email_address="bob@mycompany.com",
+        device_sku="VZW123456",
+        upload_type="IMEI",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type RequestResponse
@@ -7482,7 +8330,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DeviceUploadRequest](verizon/models/device_upload_request.py) \| [DeviceUploadRequestDict](verizon/models/device_upload_request.py)</code> | Device Upload Query |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -7537,7 +8385,13 @@ Checks the status of an activation order and lists where the order is in the pro
 **Sync**
 
 ```python
-result = client.device_management.with_raw_response.device_upload_status(body)
+result = client.device_management.with_raw_response.device_upload_status(
+    CheckOrderStatusRequest(
+        account_name="4Gpublicaccount ",
+        order_request_id=" f55fea16-3664-4a32-ae9d-c0cbe3eedf1d ",
+        devices=[DeviceList(device_ids=[DeviceId(id="20112019672551234613", kind="iccid")])],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -7548,7 +8402,13 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_management.with_raw_response.device_upload_status(body)
+result = await async_client.device_management.with_raw_response.device_upload_status(
+    CheckOrderStatusRequest(
+        account_name="4Gpublicaccount ",
+        order_request_id=" f55fea16-3664-4a32-ae9d-c0cbe3eedf1d ",
+        devices=[DeviceList(device_ids=[DeviceId(id="20112019672551234613", kind="iccid")])],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -7567,7 +8427,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[CheckOrderStatusRequest](verizon/models/check_order_status_request.py) \| [CheckOrderStatusRequestDict](verizon/models/check_order_status_request.py)</code> | The request body identifies the device and reporting period that you want included in the report. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -7622,7 +8482,11 @@ Returns extended diagnostic information about a specified device, including conn
 **Sync**
 
 ```python
-result = client.device_management.with_raw_response.get_device_extended_diagnostic_information(body)
+result = client.device_management.with_raw_response.get_device_extended_diagnostic_information(
+    DeviceExtendedDiagnosticsRequest(
+        account_name="0000123456-00001", device_list=[DeviceId(id="10-digit MDN", kind="mdn")]
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceExtendedDiagnosticsResult
@@ -7633,7 +8497,11 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_management.with_raw_response.get_device_extended_diagnostic_information(body)
+result = await async_client.device_management.with_raw_response.get_device_extended_diagnostic_information(
+    DeviceExtendedDiagnosticsRequest(
+        account_name="0000123456-00001", device_list=[DeviceId(id="10-digit MDN", kind="mdn")]
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceExtendedDiagnosticsResult
@@ -7652,7 +8520,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DeviceExtendedDiagnosticsRequest](verizon/models/device_extended_diagnostics_request.py) \| [DeviceExtendedDiagnosticsRequestDict](verizon/models/device_extended_diagnostics_request.py)</code> | Request to query extended diagnostics information for a device. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -7707,7 +8575,11 @@ Returns DeviceSuspensionStatus callback messages containing the current device s
 **Sync**
 
 ```python
-result = client.device_management.with_raw_response.get_device_service_suspension_status(body)
+result = client.device_management.with_raw_response.get_device_service_suspension_status(
+    DeviceSuspensionStatusRequest(
+        device_ids=[DeviceId(id="A10085E5003861", kind="meid"), DeviceId(id="A10085E5003186", kind="meid")]
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -7718,7 +8590,11 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_management.with_raw_response.get_device_service_suspension_status(body)
+result = await async_client.device_management.with_raw_response.get_device_service_suspension_status(
+    DeviceSuspensionStatusRequest(
+        device_ids=[DeviceId(id="A10085E5003861", kind="meid"), DeviceId(id="A10085E5003186", kind="meid")]
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -7737,7 +8613,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DeviceSuspensionStatusRequest](verizon/models/device_suspension_status_request.py) \| [DeviceSuspensionStatusRequestDict](verizon/models/device_suspension_status_request.py)</code> | Request to obtain service suspenstion status for a device. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -7792,7 +8668,11 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 **Sync**
 
 ```python
-result = client.device_management.with_raw_response.list_current_devices_prl_version(body)
+result = client.device_management.with_raw_response.list_current_devices_prl_version(
+    DevicePrlListRequest(
+        device_ids=[DeviceId(id="A10085E5003861", kind="meid"), DeviceId(id="A10085E5003186", kind="meid")]
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -7803,7 +8683,11 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_management.with_raw_response.list_current_devices_prl_version(body)
+result = await async_client.device_management.with_raw_response.list_current_devices_prl_version(
+    DevicePrlListRequest(
+        device_ids=[DeviceId(id="A10085E5003861", kind="meid"), DeviceId(id="A10085E5003186", kind="meid")]
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -7822,7 +8706,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DevicePrlListRequest](verizon/models/device_prl_list_request.py) \| [DevicePrlListRequestDict](verizon/models/device_prl_list_request.py)</code> | Request to query device PRL. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -7877,7 +8761,9 @@ Returns information about a single device or information about all devices that 
 **Sync**
 
 ```python
-result = client.device_management.with_raw_response.list_devices_information(body)
+result = client.device_management.with_raw_response.list_devices_information(
+    AccountDeviceListRequest(device_id=DeviceId(id="20-digit ICCID", kind="iccid"))
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type AccountDeviceListResult
@@ -7888,7 +8774,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_management.with_raw_response.list_devices_information(body)
+result = await async_client.device_management.with_raw_response.list_devices_information(
+    AccountDeviceListRequest(device_id=DeviceId(id="20-digit ICCID", kind="iccid"))
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type AccountDeviceListResult
@@ -7907,7 +8795,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[AccountDeviceListRequest](verizon/models/account_device_list_request.py) \| [AccountDeviceListRequestDict](verizon/models/account_device_list_request.py)</code> | Device information query. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -7962,7 +8850,13 @@ Returns the provisioning history of a specified device during a specified time p
 **Sync**
 
 ```python
-result = client.device_management.with_raw_response.list_devices_provisioning_history(body)
+result = client.device_management.with_raw_response.list_devices_provisioning_history(
+    DeviceProvisioningHistoryListRequest(
+        device_id=DeviceId(id="89141390780800784259", kind="iccid"),
+        earliest="2015-09-16T00:00:01Z",
+        latest="2015-09-18T00:00:01Z",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[DeviceProvisioningHistoryListResult]
@@ -7973,7 +8867,13 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_management.with_raw_response.list_devices_provisioning_history(body)
+result = await async_client.device_management.with_raw_response.list_devices_provisioning_history(
+    DeviceProvisioningHistoryListRequest(
+        device_id=DeviceId(id="89141390780800784259", kind="iccid"),
+        earliest="2015-09-16T00:00:01Z",
+        latest="2015-09-18T00:00:01Z",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[DeviceProvisioningHistoryListResult]
@@ -7992,7 +8892,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DeviceProvisioningHistoryListRequest](verizon/models/device_provisioning_history_list_request.py) \| [DeviceProvisioningHistoryListRequestDict](verizon/models/device_provisioning_history_list_request.py)</code> | Query to obtain device provisioning history. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -8047,7 +8947,13 @@ Returns the network data usage history of a device during a specified time perio
 **Sync**
 
 ```python
-result = client.device_management.with_raw_response.list_devices_usage_history(body)
+result = client.device_management.with_raw_response.list_devices_usage_history(
+    DeviceUsageListRequest(
+        earliest="2018-03-20T00:00:01Z",
+        latest="2020-12-31T00:00:01Z",
+        device_id=DeviceId(id="50684915885088839315521399821675", kind="eid"),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceUsageListResult
@@ -8058,7 +8964,13 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_management.with_raw_response.list_devices_usage_history(body)
+result = await async_client.device_management.with_raw_response.list_devices_usage_history(
+    DeviceUsageListRequest(
+        earliest="2018-03-20T00:00:01Z",
+        latest="2020-12-31T00:00:01Z",
+        device_id=DeviceId(id="50684915885088839315521399821675", kind="eid"),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceUsageListResult
@@ -8077,7 +8989,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DeviceUsageListRequest](verizon/models/device_usage_list_request.py) \| [DeviceUsageListRequestDict](verizon/models/device_usage_list_request.py)</code> | Request to obtain usage history for a specific device. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -8132,7 +9044,17 @@ Returns a list of all 4G devices with an ICCID (SIM) that was not activated with
 **Sync**
 
 ```python
-result = client.device_management.with_raw_response.list_devices_with_imei_iccid_mismatch(body)
+result = client.device_management.with_raw_response.list_devices_with_imei_iccid_mismatch(
+    DeviceMismatchListRequest(
+        filter=DateFilter(earliest="2020-05-01T15:00:00-08:00Z", latest="2020-07-30T15:00:00-08:00Z"),
+        devices=[
+            AccountDeviceList(
+                device_ids=[DeviceId(id="8914800000080078", kind="ICCID"), DeviceId(id="5096300587", kind="MDN")]
+            ),
+        ],
+        account_name="0342077109-00001",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceMismatchListResult
@@ -8143,7 +9065,17 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_management.with_raw_response.list_devices_with_imei_iccid_mismatch(body)
+result = await async_client.device_management.with_raw_response.list_devices_with_imei_iccid_mismatch(
+    DeviceMismatchListRequest(
+        filter=DateFilter(earliest="2020-05-01T15:00:00-08:00Z", latest="2020-07-30T15:00:00-08:00Z"),
+        devices=[
+            AccountDeviceList(
+                device_ids=[DeviceId(id="8914800000080078", kind="ICCID"), DeviceId(id="5096300587", kind="MDN")]
+            ),
+        ],
+        account_name="0342077109-00001",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceMismatchListResult
@@ -8162,7 +9094,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DeviceMismatchListRequest](verizon/models/device_mismatch_list_request.py) \| [DeviceMismatchListRequestDict](verizon/models/device_mismatch_list_request.py)</code> | Request to list devices with mismatched IMEIs and ICCIDs. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -8217,7 +9149,13 @@ Move active devices from one billing account to another within a customer profil
 **Sync**
 
 ```python
-result = client.device_management.with_raw_response.move_devices_within_accounts_of_profile(body)
+result = client.device_management.with_raw_response.move_devices_within_accounts_of_profile(
+    MoveDeviceRequest(
+        account_name="0212345678-00001",
+        devices=[AccountDeviceList(device_ids=[DeviceId(id="19110173057", kind="ESN")])],
+        service_plan="M2M5GB",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -8228,7 +9166,13 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_management.with_raw_response.move_devices_within_accounts_of_profile(body)
+result = await async_client.device_management.with_raw_response.move_devices_within_accounts_of_profile(
+    MoveDeviceRequest(
+        account_name="0212345678-00001",
+        devices=[AccountDeviceList(device_ids=[DeviceId(id="19110173057", kind="ESN")])],
+        service_plan="M2M5GB",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -8247,7 +9191,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[MoveDeviceRequest](verizon/models/move_device_request.py) \| [MoveDeviceRequestDict](verizon/models/move_device_request.py)</code> | Request to move devices between accounts. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -8302,7 +9246,9 @@ Restores service to one or more suspended devices.
 **Sync**
 
 ```python
-result = client.device_management.with_raw_response.restore_service_for_suspended_devices(body)
+result = client.device_management.with_raw_response.restore_service_for_suspended_devices(
+    CarrierActionsRequest(devices=[AccountDeviceList(device_ids=[DeviceId(id="89148000000800139708", kind="iccid")])])
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -8313,7 +9259,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_management.with_raw_response.restore_service_for_suspended_devices(body)
+result = await async_client.device_management.with_raw_response.restore_service_for_suspended_devices(
+    CarrierActionsRequest(devices=[AccountDeviceList(device_ids=[DeviceId(id="89148000000800139708", kind="iccid")])])
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -8332,7 +9280,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[CarrierActionsRequest](verizon/models/carrier_actions_request.py) \| [CarrierActionsRequestDict](verizon/models/carrier_actions_request.py)</code> | Request to restore services of one or more suspended devices. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -8387,7 +9335,14 @@ The information is returned in a callback response, so you must register a URL f
 **Sync**
 
 ```python
-result = client.device_management.with_raw_response.retrieve_aggregate_device_usage_history(body)
+result = client.device_management.with_raw_response.retrieve_aggregate_device_usage_history(
+    DeviceAggregateUsageListRequest(
+        start_time="2021-08-01T00:00:00-06:00",
+        end_time="2021-08-30T00:00:00-06:00",
+        device_ids=[DeviceId(id="84258000000891490087", kind="ICCID")],
+        account_name="9992330389-00001",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -8398,7 +9353,14 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_management.with_raw_response.retrieve_aggregate_device_usage_history(body)
+result = await async_client.device_management.with_raw_response.retrieve_aggregate_device_usage_history(
+    DeviceAggregateUsageListRequest(
+        start_time="2021-08-01T00:00:00-06:00",
+        end_time="2021-08-30T00:00:00-06:00",
+        device_ids=[DeviceId(id="84258000000891490087", kind="ICCID")],
+        account_name="9992330389-00001",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -8417,7 +9379,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DeviceAggregateUsageListRequest](verizon/models/device_aggregate_usage_list_request.py) \| [DeviceAggregateUsageListRequestDict](verizon/models/device_aggregate_usage_list_request.py)</code> | A request to retrieve aggregated device usage history information. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -8472,7 +9434,13 @@ Each response includes a maximum of 500 records. To obtain more records, you can
 **Sync**
 
 ```python
-result = client.device_management.with_raw_response.retrieve_device_connection_history(body)
+result = client.device_management.with_raw_response.retrieve_device_connection_history(
+    DeviceConnectionListRequest(
+        device_id=DeviceId(id="89141390780800784259", kind="iccid"),
+        earliest="2015-09-16T00:00:01Z",
+        latest="2010-09-18T00:00:01Z",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ConnectionHistoryResult
@@ -8483,7 +9451,13 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_management.with_raw_response.retrieve_device_connection_history(body)
+result = await async_client.device_management.with_raw_response.retrieve_device_connection_history(
+    DeviceConnectionListRequest(
+        device_id=DeviceId(id="89141390780800784259", kind="iccid"),
+        earliest="2015-09-16T00:00:01Z",
+        latest="2010-09-18T00:00:01Z",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ConnectionHistoryResult
@@ -8502,7 +9476,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DeviceConnectionListRequest](verizon/models/device_connection_list_request.py) \| [DeviceConnectionListRequestDict](verizon/models/device_connection_list_request.py)</code> | Query to retrieve device connection history. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -8557,7 +9531,9 @@ Suspends service for one or more devices.
 **Sync**
 
 ```python
-result = client.device_management.with_raw_response.suspend_service_for_devices(body)
+result = client.device_management.with_raw_response.suspend_service_for_devices(
+    CarrierActionsRequest(devices=[AccountDeviceList(device_ids=[DeviceId(id="89148000000800139708", kind="iccid")])])
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -8568,7 +9544,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_management.with_raw_response.suspend_service_for_devices(body)
+result = await async_client.device_management.with_raw_response.suspend_service_for_devices(
+    CarrierActionsRequest(devices=[AccountDeviceList(device_ids=[DeviceId(id="89148000000800139708", kind="iccid")])])
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -8587,7 +9565,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[CarrierActionsRequest](verizon/models/carrier_actions_request.py) \| [CarrierActionsRequestDict](verizon/models/carrier_actions_request.py)</code> | Request to suspend service for one or more devices. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -8642,7 +9620,16 @@ Changes the identifier of a 3G or 4G device to match hardware changes made for a
 **Sync**
 
 ```python
-result = client.device_management.with_raw_response.update_device_id(service_type, body)
+result = client.device_management.with_raw_response.update_device_id(
+    "some example string",
+    ChangeDeviceIdRequest(
+        change4g_option="ChangeICCID",
+        device_ids=[DeviceId(id="42590078891480000008", kind="iccid")],
+        device_ids_to=[DeviceId(id="89148000000842590078", kind="iccid")],
+        service_plan="4G 2GB",
+        zip_code="98802",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -8653,7 +9640,16 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_management.with_raw_response.update_device_id(service_type, body)
+result = await async_client.device_management.with_raw_response.update_device_id(
+    "some example string",
+    ChangeDeviceIdRequest(
+        change4g_option="ChangeICCID",
+        device_ids=[DeviceId(id="42590078891480000008", kind="iccid")],
+        device_ids_to=[DeviceId(id="89148000000842590078", kind="iccid")],
+        service_plan="4G 2GB",
+        zip_code="98802",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -8673,7 +9669,7 @@ match result:
 | --- | --- | --- |
 | <code>service_type</code> | <code>str</code> | Identifier type. |
 | <code>body</code> | <code>[ChangeDeviceIdRequest](verizon/models/change_device_id_request.py) \| [ChangeDeviceIdRequestDict](verizon/models/change_device_id_request.py)</code> | Request to update device id. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -8728,7 +9724,33 @@ Sends a CarrierService callback message for each device in the request when the 
 **Sync**
 
 ```python
-result = client.device_management.with_raw_response.update_devices_contact_information(body)
+result = client.device_management.with_raw_response.update_devices_contact_information(
+    ContactInfoUpdateRequest(
+        primary_place_of_use=PlaceOfUse(
+            address=Address(
+                address_line1="9868 Scranton Rd",
+                address_line2="Suite A",
+                city="San Diego",
+                state="CA",
+                zip="92121",
+                zip4="0001",
+                country="USA",
+                phone="1234567890",
+                phone_type="H",
+                email_address="zaffod@theinternet.com",
+            ),
+            customer_name=CustomerName(
+                title="President", first_name="Zaffod", middle_name="P", last_name="Beeblebrox", suffix="I"
+            ),
+        ),
+        account_name="0000123456-00001",
+        devices=[
+            AccountDeviceList(
+                device_ids=[DeviceId(id="19110173057", kind="ESN"), DeviceId(id="19110173057", kind="ESN")]
+            ),
+        ],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -8739,7 +9761,33 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_management.with_raw_response.update_devices_contact_information(body)
+result = await async_client.device_management.with_raw_response.update_devices_contact_information(
+    ContactInfoUpdateRequest(
+        primary_place_of_use=PlaceOfUse(
+            address=Address(
+                address_line1="9868 Scranton Rd",
+                address_line2="Suite A",
+                city="San Diego",
+                state="CA",
+                zip="92121",
+                zip4="0001",
+                country="USA",
+                phone="1234567890",
+                phone_type="H",
+                email_address="zaffod@theinternet.com",
+            ),
+            customer_name=CustomerName(
+                title="President", first_name="Zaffod", middle_name="P", last_name="Beeblebrox", suffix="I"
+            ),
+        ),
+        account_name="0000123456-00001",
+        devices=[
+            AccountDeviceList(
+                device_ids=[DeviceId(id="19110173057", kind="ESN"), DeviceId(id="19110173057", kind="ESN")]
+            ),
+        ],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -8758,7 +9806,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[ContactInfoUpdateRequest](verizon/models/contact_info_update_request.py) \| [ContactInfoUpdateRequestDict](verizon/models/contact_info_update_request.py)</code> | Request to update contact information for devices. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -8813,7 +9861,12 @@ Changes or removes the CostCenterCode value or customer name and address (Primar
 **Sync**
 
 ```python
-result = client.device_management.with_raw_response.update_devices_cost_center_code(body)
+result = client.device_management.with_raw_response.update_devices_cost_center_code(
+    DeviceCostCenterRequest(
+        cost_center="cc12345",
+        devices=[AccountDeviceList(device_ids=[DeviceId(id="89148000000800139708", kind="iccid")])],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -8824,7 +9877,12 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_management.with_raw_response.update_devices_cost_center_code(body)
+result = await async_client.device_management.with_raw_response.update_devices_cost_center_code(
+    DeviceCostCenterRequest(
+        cost_center="cc12345",
+        devices=[AccountDeviceList(device_ids=[DeviceId(id="89148000000800139708", kind="iccid")])],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -8843,7 +9901,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DeviceCostCenterRequest](verizon/models/device_cost_center_request.py) \| [DeviceCostCenterRequestDict](verizon/models/device_cost_center_request.py)</code> | Request to update cost center code value for one or more devices. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -8898,7 +9956,15 @@ Sends a CarrierService callback message for each device in the request when the 
 **Sync**
 
 ```python
-result = client.device_management.with_raw_response.update_devices_custom_fields(body)
+result = client.device_management.with_raw_response.update_devices_custom_fields(
+    CustomFieldsUpdateRequest(
+        custom_fields_to_update=[
+            CustomFields(key="CustomField1", value="West Region"),
+            CustomFields(key="CustomField2", value="Distribution"),
+        ],
+        devices=[AccountDeviceList(device_ids=[DeviceId(id="89148000000800139708", kind="iccid")])],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -8909,7 +9975,15 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_management.with_raw_response.update_devices_custom_fields(body)
+result = await async_client.device_management.with_raw_response.update_devices_custom_fields(
+    CustomFieldsUpdateRequest(
+        custom_fields_to_update=[
+            CustomFields(key="CustomField1", value="West Region"),
+            CustomFields(key="CustomField2", value="Distribution"),
+        ],
+        devices=[AccountDeviceList(device_ids=[DeviceId(id="89148000000800139708", kind="iccid")])],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -8928,7 +10002,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[CustomFieldsUpdateRequest](verizon/models/custom_fields_update_request.py) \| [CustomFieldsUpdateRequestDict](verizon/models/custom_fields_update_request.py)</code> | Request to update custom field of devices. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -8983,7 +10057,14 @@ Changes the provisioning state of one or more devices to a specified customer-de
 **Sync**
 
 ```python
-result = client.device_management.with_raw_response.update_devices_state(body)
+result = client.device_management.with_raw_response.update_devices_state(
+    GoToStateRequest(
+        service_name="some example string",
+        state_name="some example string",
+        service_plan="some example string",
+        mdn_zip_code="some example string",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -8994,7 +10075,14 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_management.with_raw_response.update_devices_state(body)
+result = await async_client.device_management.with_raw_response.update_devices_state(
+    GoToStateRequest(
+        service_name="some example string",
+        state_name="some example string",
+        service_plan="some example string",
+        mdn_zip_code="some example string",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -9013,7 +10101,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[GoToStateRequest](verizon/models/go_to_state_request.py) \| [GoToStateRequestDict](verizon/models/go_to_state_request.py)</code> | Request to change device state to one defined by the user. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -9068,7 +10156,24 @@ Uploads and activates device identifiers and SKUs for new devices from OEMs to V
 **Sync**
 
 ```python
-result = client.device_management.with_raw_response.upload_activate_device(body)
+result = client.device_management.with_raw_response.upload_activate_device(
+    UploadsActivatesDeviceRequest(
+        account_name="1223334444-00001",
+        email_address="bob@mycompany.com",
+        device_sku="VZW123456",
+        upload_type="IMEI ICCID Pair",
+        service_plan="15MBShr",
+        carrier_ip_pool_name="",
+        mdn_zip_code="92222",
+        devices=[
+            DeviceList(
+                device_ids=[
+                    DeviceId(id="990013907835573", kind="imei"), DeviceId(id="89141390780800784259", kind="iccid")
+                ],
+            ),
+        ],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -9079,7 +10184,24 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_management.with_raw_response.upload_activate_device(body)
+result = await async_client.device_management.with_raw_response.upload_activate_device(
+    UploadsActivatesDeviceRequest(
+        account_name="1223334444-00001",
+        email_address="bob@mycompany.com",
+        device_sku="VZW123456",
+        upload_type="IMEI ICCID Pair",
+        service_plan="15MBShr",
+        carrier_ip_pool_name="",
+        mdn_zip_code="92222",
+        devices=[
+            DeviceList(
+                device_ids=[
+                    DeviceId(id="990013907835573", kind="imei"), DeviceId(id="89141390780800784259", kind="iccid")
+                ],
+            ),
+        ],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -9098,7 +10220,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[UploadsActivatesDeviceRequest](verizon/models/uploads_activates_device_request.py) \| [UploadsActivatesDeviceRequestDict](verizon/models/uploads_activates_device_request.py)</code> | Request to Upload and Activate device. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -9153,7 +10275,9 @@ Allows you to associate your own usage segmentation label with a device.
 **Sync**
 
 ```python
-result = client.device_management.with_raw_response.usage_segmentation_label_association(body)
+result = client.device_management.with_raw_response.usage_segmentation_label_association(
+    AssociateLabelRequest(account_name="some example string", labels=AccountLabels(devices=[DeviceList()]))
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -9164,7 +10288,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_management.with_raw_response.usage_segmentation_label_association(body)
+result = await async_client.device_management.with_raw_response.usage_segmentation_label_association(
+    AssociateLabelRequest(account_name="some example string", labels=AccountLabels(devices=[DeviceList()]))
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -9183,7 +10309,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[AssociateLabelRequest](verizon/models/associate_label_request.py) \| [AssociateLabelRequestDict](verizon/models/associate_label_request.py)</code> | Request to associate a label to a device. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -9238,7 +10364,7 @@ Allow customers to remove the associated label from a device.
 **Sync**
 
 ```python
-result = client.device_management.with_raw_response.usage_segmentation_label_deletion(account_name, label_list)
+result = client.device_management.with_raw_response.usage_segmentation_label_deletion("0000123456-00001", LabelsList())
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -9250,7 +10376,7 @@ match result:
 
 ```python
 result = await async_client.device_management.with_raw_response.usage_segmentation_label_deletion(
-    account_name, label_list
+    "0000123456-00001", LabelsList()
 )
 match result:
     case Success(payload=payload):
@@ -9271,7 +10397,7 @@ match result:
 | --- | --- | --- |
 | <code>account_name</code> | <code>str</code> | The numeric name of the account. |
 | <code>label_list</code> | <code>[LabelsList](verizon/models/labels_list.py) \| [LabelsListDict](verizon/models/labels_list.py)</code> | A list of the Label IDs to remove from the exclusion list. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -9330,7 +10456,18 @@ Send a `POST` request.
 **Sync**
 
 ```python
-result = client.device_monitoring.with_raw_response.device_reachability(body)
+result = client.device_monitoring.with_raw_response.device_reachability(
+    NotificationReportRequest(
+        account_name="0000123456-00001",
+        request_type="REACHABLE_FOR_DATA",
+        devices=[
+            DeviceList(
+                device_ids=[DeviceId(id="20-digit ICCID", kind="iccid"), DeviceId(id="20-digit ICCID", kind="iccid")]
+            ),
+        ],
+        monitor_expiration_time="2019-12-02T15:00:00-08:00Z",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type RequestResponse
@@ -9341,7 +10478,18 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_monitoring.with_raw_response.device_reachability(body)
+result = await async_client.device_monitoring.with_raw_response.device_reachability(
+    NotificationReportRequest(
+        account_name="0000123456-00001",
+        request_type="REACHABLE_FOR_DATA",
+        devices=[
+            DeviceList(
+                device_ids=[DeviceId(id="20-digit ICCID", kind="iccid"), DeviceId(id="20-digit ICCID", kind="iccid")]
+            ),
+        ],
+        monitor_expiration_time="2019-12-02T15:00:00-08:00Z",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type RequestResponse
@@ -9360,7 +10508,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[NotificationReportRequest](verizon/models/notification_report_request.py) \| [NotificationReportRequestDict](verizon/models/notification_report_request.py)</code> | Create Reachability Report Request |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -9415,7 +10563,12 @@ Send a `DELETE` request.
 **Sync**
 
 ```python
-result = client.device_monitoring.with_raw_response.stop_device_reachability(stopreachabilitypayload)
+result = client.device_monitoring.with_raw_response.stop_device_reachability(
+    StopMonitorRequest(
+        account_name="0000123456-00001",
+        devices=[DeviceList(device_ids=[DeviceId(id="1+ 10-digit phone number", kind="msisdn")])],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type RequestResponse
@@ -9426,7 +10579,12 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_monitoring.with_raw_response.stop_device_reachability(stopreachabilitypayload)
+result = await async_client.device_monitoring.with_raw_response.stop_device_reachability(
+    StopMonitorRequest(
+        account_name="0000123456-00001",
+        devices=[DeviceList(device_ids=[DeviceId(id="1+ 10-digit phone number", kind="msisdn")])],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type RequestResponse
@@ -9445,7 +10603,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>stopreachabilitypayload</code> | <code>[StopMonitorRequest](verizon/models/stop_monitor_request.py) \| [StopMonitorRequestDict](verizon/models/stop_monitor_request.py)</code> | Payload for the Stop Device Reachability monitors request. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -9504,7 +10662,16 @@ Uses the profile to bring the device under management.
 **Sync**
 
 ```python
-result = client.device_profile_management.with_raw_response.activate_device_through_profile(body)
+result = client.device_profile_management.with_raw_response.activate_device_through_profile(
+    ActivateDeviceProfileRequest(
+        devices=[
+            DeviceList(device_ids=[DeviceId(id="32-digit EID", kind="eid"), DeviceId(id="15-digit IMEI", kind="imei")])
+        ],
+        account_name="0000123456-00001",
+        service_plan="The service plan name",
+        mdn_zip_code="five digit zip code",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type RequestResponse
@@ -9515,7 +10682,16 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_profile_management.with_raw_response.activate_device_through_profile(body)
+result = await async_client.device_profile_management.with_raw_response.activate_device_through_profile(
+    ActivateDeviceProfileRequest(
+        devices=[
+            DeviceList(device_ids=[DeviceId(id="32-digit EID", kind="eid"), DeviceId(id="15-digit IMEI", kind="imei")])
+        ],
+        account_name="0000123456-00001",
+        service_plan="The service plan name",
+        mdn_zip_code="five digit zip code",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type RequestResponse
@@ -9534,7 +10710,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[ActivateDeviceProfileRequest](verizon/models/activate_device_profile_request.py) \| [ActivateDeviceProfileRequestDict](verizon/models/activate_device_profile_request.py)</code> | Device Profile Query |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -9589,7 +10765,9 @@ Uses the profile to activate the device.
 **Sync**
 
 ```python
-result = client.device_profile_management.with_raw_response.profile_to_activate_device(body)
+result = client.device_profile_management.with_raw_response.profile_to_activate_device(
+    ProfileRequest(account_name="some example string", devices=[DeviceList()])
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type RequestResponse
@@ -9600,7 +10778,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_profile_management.with_raw_response.profile_to_activate_device(body)
+result = await async_client.device_profile_management.with_raw_response.profile_to_activate_device(
+    ProfileRequest(account_name="some example string", devices=[DeviceList()])
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type RequestResponse
@@ -9619,7 +10799,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[ProfileRequest](verizon/models/profile_request.py) \| [ProfileRequestDict](verizon/models/profile_request.py)</code> | Device Profile Query |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -9674,7 +10854,9 @@ Uses the profile to deactivate the device.
 **Sync**
 
 ```python
-result = client.device_profile_management.with_raw_response.profile_to_deactivate_device(body)
+result = client.device_profile_management.with_raw_response.profile_to_deactivate_device(
+    DeactivateDeviceProfileRequest(account_name="some example string", reason_code="some example string")
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type RequestResponse
@@ -9685,7 +10867,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_profile_management.with_raw_response.profile_to_deactivate_device(body)
+result = await async_client.device_profile_management.with_raw_response.profile_to_deactivate_device(
+    DeactivateDeviceProfileRequest(account_name="some example string", reason_code="some example string")
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type RequestResponse
@@ -9704,7 +10888,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DeactivateDeviceProfileRequest](verizon/models/deactivate_device_profile_request.py) \| [DeactivateDeviceProfileRequestDict](verizon/models/deactivate_device_profile_request.py)</code> | Device Profile Query |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -9759,7 +10943,9 @@ Allows the profile to set the fallback attribute to the device.
 **Sync**
 
 ```python
-result = client.device_profile_management.with_raw_response.profile_to_set_fallback_attribute(body)
+result = client.device_profile_management.with_raw_response.profile_to_set_fallback_attribute(
+    SetFallbackAttributeRequest(devices=[DeviceList()], account_name="some example string")
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type RequestResponse
@@ -9770,7 +10956,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_profile_management.with_raw_response.profile_to_set_fallback_attribute(body)
+result = await async_client.device_profile_management.with_raw_response.profile_to_set_fallback_attribute(
+    SetFallbackAttributeRequest(devices=[DeviceList()], account_name="some example string")
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type RequestResponse
@@ -9789,7 +10977,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[SetFallbackAttributeRequest](verizon/models/set_fallback_attribute_request.py) \| [SetFallbackAttributeRequestDict](verizon/models/set_fallback_attribute_request.py)</code> | Device Profile Query |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -9848,7 +11036,17 @@ Calculate aggregated report per day with number of sessions and usage informatio
 **Sync**
 
 ```python
-result = client.device_reports.with_raw_response.calculate_aggregated_report_asynchronous(body)
+result = client.device_reports.with_raw_response.calculate_aggregated_report_asynchronous(
+    AggregateSessionReportRequest(
+        account_number="0000123456-00001",
+        start_date="2022-12-09T22:01:06.217Z",
+        end_date="2022-12-09T22:01:08.734Z",
+        imei=["15-digit IMEI"],
+        device_group="string",
+        data_plan="string",
+        no_session_flag=False,
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type AggregatedReportCallbackResult
@@ -9859,7 +11057,17 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_reports.with_raw_response.calculate_aggregated_report_asynchronous(body)
+result = await async_client.device_reports.with_raw_response.calculate_aggregated_report_asynchronous(
+    AggregateSessionReportRequest(
+        account_number="0000123456-00001",
+        start_date="2022-12-09T22:01:06.217Z",
+        end_date="2022-12-09T22:01:08.734Z",
+        imei=["15-digit IMEI"],
+        device_group="string",
+        data_plan="string",
+        no_session_flag=False,
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type AggregatedReportCallbackResult
@@ -9878,7 +11086,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[AggregateSessionReportRequest](verizon/models/aggregate_session_report_request.py) \| [AggregateSessionReportRequestDict](verizon/models/aggregate_session_report_request.py)</code> | Aggregated session report request. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -9933,7 +11141,17 @@ Calculate aggregated report per day with number of sessions and usage informatio
 **Sync**
 
 ```python
-result = client.device_reports.with_raw_response.calculate_aggregated_report_synchronous(body)
+result = client.device_reports.with_raw_response.calculate_aggregated_report_synchronous(
+    AggregateSessionReportRequest(
+        account_number="0000123456-00001",
+        start_date="2022-12-09T22:01:06.217Z",
+        end_date="2022-12-09T22:01:08.734Z",
+        imei=["15-digit IMEI"],
+        device_group="string",
+        data_plan="string",
+        no_session_flag=False,
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type AggregateSessionReport
@@ -9944,7 +11162,17 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_reports.with_raw_response.calculate_aggregated_report_synchronous(body)
+result = await async_client.device_reports.with_raw_response.calculate_aggregated_report_synchronous(
+    AggregateSessionReportRequest(
+        account_number="0000123456-00001",
+        start_date="2022-12-09T22:01:06.217Z",
+        end_date="2022-12-09T22:01:08.734Z",
+        imei=["15-digit IMEI"],
+        device_group="string",
+        data_plan="string",
+        no_session_flag=False,
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type AggregateSessionReport
@@ -9963,7 +11191,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[AggregateSessionReportRequest](verizon/models/aggregate_session_report_request.py) \| [AggregateSessionReportRequestDict](verizon/models/aggregate_session_report_request.py)</code> | Aggregated report request. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -10018,7 +11246,16 @@ Detailed report of session duration and number of bytes transferred per day.
 **Sync**
 
 ```python
-result = client.device_reports.with_raw_response.get_sessions_report(body)
+result = client.device_reports.with_raw_response.get_sessions_report(
+    SessionReportRequest(
+        account_number="0000123456-00001",
+        imei="15-digit IMEI",
+        start_date="2022-12-09T22:01:06.217Z",
+        end_date="2022-12-09T22:01:08.734Z",
+        duration_low=0,
+        duration_high=0,
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type SessionReport
@@ -10029,7 +11266,16 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_reports.with_raw_response.get_sessions_report(body)
+result = await async_client.device_reports.with_raw_response.get_sessions_report(
+    SessionReportRequest(
+        account_number="0000123456-00001",
+        imei="15-digit IMEI",
+        start_date="2022-12-09T22:01:06.217Z",
+        end_date="2022-12-09T22:01:08.734Z",
+        duration_low=0,
+        duration_high=0,
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type SessionReport
@@ -10048,7 +11294,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[SessionReportRequest](verizon/models/session_report_request.py) \| [SessionReportRequestDict](verizon/models/session_report_request.py)</code> | Request for sessions report. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -10084,7 +11330,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 > Source: [DeviceSmsMessaging](verizon/apis/device_sms_messaging.py)
 
 <details>
-<summary><code>def get_sms_messages(account_name: str, *, next: str | None = None, request_options: RequestOptionsOrDict | None = None) -> ApiResult[SmsMessagesResponse, RawError]</code></summary>
+<summary><code>def get_sms_messages(account_name: str, *, next_: str | None = None, request_options: RequestOptionsOrDict | None = None) -> ApiResult[SmsMessagesResponse, RawError]</code></summary>
 
 <dl>
 <dd>
@@ -10107,7 +11353,9 @@ Retrieves queued SMS messages sent by all M2M MC devices associated with an acco
 **Sync**
 
 ```python
-result = client.device_sms_messaging.with_raw_response.get_sms_messages(account_name)
+result = client.device_sms_messaging.with_raw_response.get_sms_messages(
+    "0000123456-00001", next_="TheURLForTheNextQuery"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type SmsMessagesResponse
@@ -10118,7 +11366,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_sms_messaging.with_raw_response.get_sms_messages(account_name)
+result = await async_client.device_sms_messaging.with_raw_response.get_sms_messages(
+    "0000123456-00001", next_="TheURLForTheNextQuery"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type SmsMessagesResponse
@@ -10137,8 +11387,8 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>account_name</code> | <code>str</code> | Numeric account name |
-| <code>next</code> | <code>str \| None</code> | Continue the previous query from the pageUrl in Location Header<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>next_</code> | <code>str \| None</code> | Continue the previous query from the pageUrl in Location Header<br>**Default**: <code>None</code> |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -10186,7 +11436,9 @@ Returns a list of sms history for a given device during a specified time frame.
 **Sync**
 
 ```python
-result = client.device_sms_messaging.with_raw_response.list_sms_message_history(body)
+result = client.device_sms_messaging.with_raw_response.list_sms_message_history(
+    SmseventHistoryRequest(device_id=GiodeviceId(kind="some example string", id="some example string"))
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GiorequestResponse
@@ -10197,7 +11449,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_sms_messaging.with_raw_response.list_sms_message_history(body)
+result = await async_client.device_sms_messaging.with_raw_response.list_sms_message_history(
+    SmseventHistoryRequest(device_id=GiodeviceId(kind="some example string", id="some example string"))
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GiorequestResponse
@@ -10216,7 +11470,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[SmseventHistoryRequest](verizon/models/smsevent_history_request.py) \| [SmseventHistoryRequestDict](verizon/models/smsevent_history_request.py)</code> | Device Query |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -10264,7 +11518,16 @@ Sends an SMS message to one device. Messages are queued on the M2M MC Platform a
 **Sync**
 
 ```python
-result = client.device_sms_messaging.with_raw_response.send_an_sms_message(body)
+result = client.device_sms_messaging.with_raw_response.send_an_sms_message(
+    GiosmssendRequest(
+        account_name="0000123456-00001",
+        custom_fields=[KvPair(key="CustomField1", value="value of the field")],
+        data_encoding="optional 7 or 8-bit encoding",
+        time_to_live="000000010000000R",
+        device_ids=[GiodeviceId(kind="iccid", id="20-digit ICCID")],
+        sms_message="the body or text of the message itself",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GiorequestResponse
@@ -10275,7 +11538,16 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_sms_messaging.with_raw_response.send_an_sms_message(body)
+result = await async_client.device_sms_messaging.with_raw_response.send_an_sms_message(
+    GiosmssendRequest(
+        account_name="0000123456-00001",
+        custom_fields=[KvPair(key="CustomField1", value="value of the field")],
+        data_encoding="optional 7 or 8-bit encoding",
+        time_to_live="000000010000000R",
+        device_ids=[GiodeviceId(kind="iccid", id="20-digit ICCID")],
+        sms_message="the body or text of the message itself",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GiorequestResponse
@@ -10294,7 +11566,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[GiosmssendRequest](verizon/models/giosmssend_request.py) \| [GiosmssendRequestDict](verizon/models/giosmssend_request.py)</code> | SMS message to an indiividual device. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -10342,7 +11614,7 @@ Starts delivery of SMS messages for the specified account.
 **Sync**
 
 ```python
-result = client.device_sms_messaging.with_raw_response.start_sms_message_delivery(account_name)
+result = client.device_sms_messaging.with_raw_response.start_sms_message_delivery("0000123456-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type SuccessResponse
@@ -10353,7 +11625,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_sms_messaging.with_raw_response.start_sms_message_delivery(account_name)
+result = await async_client.device_sms_messaging.with_raw_response.start_sms_message_delivery("0000123456-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type SuccessResponse
@@ -10372,7 +11644,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>account_name</code> | <code>str</code> | Numeric account name |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -10424,7 +11696,9 @@ Gets the list of a status for hyper-precise location devices.
 **Sync**
 
 ```python
-result = client.device_service_management.with_raw_response.get_device_hyper_precise_status(imei, account_number)
+result = client.device_service_management.with_raw_response.get_device_hyper_precise_status(
+    "15-digit IMEI", "0000123456-00001"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type BullseyeServiceResult
@@ -10436,7 +11710,7 @@ match result:
 
 ```python
 result = await async_client.device_service_management.with_raw_response.get_device_hyper_precise_status(
-    imei, account_number
+    "15-digit IMEI", "0000123456-00001"
 )
 match result:
     case Success(payload=payload):
@@ -10457,7 +11731,7 @@ match result:
 | --- | --- | --- |
 | <code>imei</code> | <code>str</code> | The International Mobile Equipment Identifier of the device. |
 | <code>account_number</code> | <code>str</code> | The numeric name of the account and must include leading zeroes. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -10512,7 +11786,12 @@ Enable/disable hyper-precise service for a device.
 **Sync**
 
 ```python
-result = client.device_service_management.with_raw_response.update_device_hyper_precise_status(body)
+result = client.device_service_management.with_raw_response.update_device_hyper_precise_status(
+    BullseyeServiceRequest(
+        device_list=[DeviceServiceRequest(imei="some example string", bullseye_enable=HplBullseyeEnable())],
+        account_number="some example string",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type BullseyeServiceResult
@@ -10523,7 +11802,12 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_service_management.with_raw_response.update_device_hyper_precise_status(body)
+result = await async_client.device_service_management.with_raw_response.update_device_hyper_precise_status(
+    BullseyeServiceRequest(
+        device_list=[DeviceServiceRequest(imei="some example string", bullseye_enable=HplBullseyeEnable())],
+        account_number="some example string",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type BullseyeServiceResult
@@ -10542,7 +11826,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[BullseyeServiceRequest](verizon/models/bullseye_service_request.py) \| [BullseyeServiceRequestDict](verizon/models/bullseye_service_request.py)</code> | List of devices and hyper-precise required statuses. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -10601,7 +11885,9 @@ This subscriptions endpoint retrieves an account's current location subscription
 **Sync**
 
 ```python
-result = client.devices_location_subscriptions.with_raw_response.get_location_service_subscription_status(account_name)
+result = client.devices_location_subscriptions.with_raw_response.get_location_service_subscription_status(
+    "0000123456-00001"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceLocationSubscription
@@ -10613,7 +11899,7 @@ match result:
 
 ```python
 result = await async_client.devices_location_subscriptions.with_raw_response.get_location_service_subscription_status(
-    account_name
+    "0000123456-00001"
 )
 match result:
     case Success(payload=payload):
@@ -10633,7 +11919,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>account_name</code> | <code>str</code> | Account identifier in "##########-#####". |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -10717,7 +12003,7 @@ match result:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -10776,7 +12062,9 @@ Cancel a queued device location report.
 **Sync**
 
 ```python
-result = client.devices_locations.with_raw_response.cancel_queued_location_report_generation(account_name, txid)
+result = client.devices_locations.with_raw_response.cancel_queued_location_report_generation(
+    "0252012345-00001", "2c90bd28-eeee-ffff-gggg-7e3bd4fbff33"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type TransactionId
@@ -10788,7 +12076,7 @@ match result:
 
 ```python
 result = await async_client.devices_locations.with_raw_response.cancel_queued_location_report_generation(
-    account_name, txid
+    "0252012345-00001", "2c90bd28-eeee-ffff-gggg-7e3bd4fbff33"
 )
 match result:
     case Success(payload=payload):
@@ -10809,7 +12097,7 @@ match result:
 | --- | --- | --- |
 | <code>account_name</code> | <code>str</code> | Account identifier in "##########-#####". |
 | <code>txid</code> | <code>str</code> | Transaction ID of the report to cancel. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -10886,7 +12174,7 @@ match result:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -10934,7 +12222,9 @@ Returns the current status of a requested device location report.
 **Sync**
 
 ```python
-result = client.devices_locations.with_raw_response.get_location_report_status(account_name, txid)
+result = client.devices_locations.with_raw_response.get_location_report_status(
+    "0252012345-00001", "2c90bd28-eeee-ffff-gggg-7e3bd4fbff33"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type LocationReportStatus
@@ -10945,7 +12235,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.devices_locations.with_raw_response.get_location_report_status(account_name, txid)
+result = await async_client.devices_locations.with_raw_response.get_location_report_status(
+    "0252012345-00001", "2c90bd28-eeee-ffff-gggg-7e3bd4fbff33"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type LocationReportStatus
@@ -10965,7 +12257,7 @@ match result:
 | --- | --- | --- |
 | <code>account_name</code> | <code>str</code> | Account identifier in "##########-#####". |
 | <code>txid</code> | <code>str</code> | Transaction ID of the report. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -11042,7 +12334,7 @@ match result:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -11090,7 +12382,17 @@ This locations endpoint retrieves the locations for a list of devices.
 **Sync**
 
 ```python
-result = client.devices_locations.with_raw_response.list_devices_locations_synchronous(body)
+result = client.devices_locations.with_raw_response.list_devices_locations_synchronous(
+    LocationRequest(
+        account_name="1234567890-00001",
+        device_list=[
+            DeviceInfo(id="980003420535573", kind="imei", mdn="7892345678"),
+            DeviceInfo(id="375535024300089", kind="imei", mdn="7897654321"),
+        ],
+        accuracy_mode=AccuracyMode._0,
+        cache_mode=CacheMode._1,
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[Location]
@@ -11101,7 +12403,17 @@ match result:
 **Async**
 
 ```python
-result = await async_client.devices_locations.with_raw_response.list_devices_locations_synchronous(body)
+result = await async_client.devices_locations.with_raw_response.list_devices_locations_synchronous(
+    LocationRequest(
+        account_name="1234567890-00001",
+        device_list=[
+            DeviceInfo(id="980003420535573", kind="imei", mdn="7892345678"),
+            DeviceInfo(id="375535024300089", kind="imei", mdn="7897654321"),
+        ],
+        accuracy_mode=AccuracyMode._0,
+        cache_mode=CacheMode._1,
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[Location]
@@ -11120,7 +12432,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[LocationRequest](verizon/models/location_request.py) \| [LocationRequestDict](verizon/models/location_request.py)</code> | Request to obtain location of devices. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -11168,7 +12480,9 @@ Download a completed asynchronous device location report.
 **Sync**
 
 ```python
-result = client.devices_locations.with_raw_response.retrieve_location_report(account_name, txid, startindex)
+result = client.devices_locations.with_raw_response.retrieve_location_report(
+    "0000123456-00001", "2017-12-11Te8b47da2-eeee-ffff-gggg-61815e1e97e9", 0
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type LocationReport
@@ -11179,7 +12493,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.devices_locations.with_raw_response.retrieve_location_report(account_name, txid, startindex)
+result = await async_client.devices_locations.with_raw_response.retrieve_location_report(
+    "0000123456-00001", "2017-12-11Te8b47da2-eeee-ffff-gggg-61815e1e97e9", 0
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type LocationReport
@@ -11200,7 +12516,7 @@ match result:
 | <code>account_name</code> | <code>str</code> | Account identifier in "##########-#####". |
 | <code>txid</code> | <code>str</code> | Transaction ID from POST /locationreports response. |
 | <code>startindex</code> | <code>int</code> | Zero-based number of the first record to return. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -11252,7 +12568,7 @@ This endpoint allows user to get the registered callback information of an exist
 **Sync**
 
 ```python
-result = client.diagnostics_callbacks.with_raw_response.get_diagnostics_subscription_callback_info(account_name)
+result = client.diagnostics_callbacks.with_raw_response.get_diagnostics_subscription_callback_info("0000123456-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[DeviceDiagnosticsCallback]
@@ -11264,7 +12580,7 @@ match result:
 
 ```python
 result = await async_client.diagnostics_callbacks.with_raw_response.get_diagnostics_subscription_callback_info(
-    account_name
+    "0000123456-00001"
 )
 match result:
     case Success(payload=payload):
@@ -11284,7 +12600,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>account_name</code> | <code>str</code> | Account identifier. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -11368,7 +12684,7 @@ match result:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -11423,7 +12739,7 @@ This endpoint allows user to delete a registered callback URL and credential.
 **Sync**
 
 ```python
-result = client.diagnostics_callbacks.with_raw_response.unregister_diagnostics_callback(account_name, service_name)
+result = client.diagnostics_callbacks.with_raw_response.unregister_diagnostics_callback("0000123456-00001", "string")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceDiagnosticsCallback
@@ -11435,7 +12751,7 @@ match result:
 
 ```python
 result = await async_client.diagnostics_callbacks.with_raw_response.unregister_diagnostics_callback(
-    account_name, service_name
+    "0000123456-00001", "string"
 )
 match result:
     case Success(payload=payload):
@@ -11456,7 +12772,7 @@ match result:
 | --- | --- | --- |
 | <code>account_name</code> | <code>str</code> | Account identifier. |
 | <code>service_name</code> | <code>str</code> | Service name for callback notification. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -11515,7 +12831,11 @@ Performs a device reboot or a factory reset on the modem portion of the device.
 **Sync**
 
 ```python
-result = client.diagnostics_factory_reset.with_raw_response.decives_restart(body)
+result = client.diagnostics_factory_reset.with_raw_response.decives_restart(
+    DeviceResetRequest(
+        account_name="0642233522-00003", action="reboot", devices=[Device(id="355154080648401", kind="IMEI")]
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DiagnosticsObservationResult
@@ -11526,7 +12846,11 @@ match result:
 **Async**
 
 ```python
-result = await async_client.diagnostics_factory_reset.with_raw_response.decives_restart(body)
+result = await async_client.diagnostics_factory_reset.with_raw_response.decives_restart(
+    DeviceResetRequest(
+        account_name="0642233522-00003", action="reboot", devices=[Device(id="355154080648401", kind="IMEI")]
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DiagnosticsObservationResult
@@ -11545,7 +12869,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DeviceResetRequest](verizon/models/device_reset_request.py) \| [DeviceResetRequestDict](verizon/models/device_reset_request.py)</code> | A request to perform a device reboot. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -11626,7 +12950,7 @@ match result:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -11707,7 +13031,7 @@ match result:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -11755,7 +13079,9 @@ This endpoint allows the user to stop or reset observe diagnostics.
 **Sync**
 
 ```python
-result = client.diagnostics_observations.with_raw_response.stop_diagnostics_observation(transaction_id, account_name)
+result = client.diagnostics_observations.with_raw_response.stop_diagnostics_observation(
+    "5f4bd2ff-5d7f-444d-af17-3f6a80bb2a94", "0000123456-00001"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DiagnosticsObservationResult
@@ -11767,7 +13093,7 @@ match result:
 
 ```python
 result = await async_client.diagnostics_observations.with_raw_response.stop_diagnostics_observation(
-    transaction_id, account_name
+    "5f4bd2ff-5d7f-444d-af17-3f6a80bb2a94", "0000123456-00001"
 )
 match result:
     case Success(payload=payload):
@@ -11788,7 +13114,7 @@ match result:
 | --- | --- | --- |
 | <code>transaction_id</code> | <code>str</code> | The ID value associated with the transaction. |
 | <code>account_name</code> | <code>str</code> | The numeric account name. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -11840,7 +13166,9 @@ This endpoint retrieves diagnostics settings synchronously.
 **Sync**
 
 ```python
-result = client.diagnostics_settings.with_raw_response.list_diagnostics_settings(account_name, devices)
+result = client.diagnostics_settings.with_raw_response.list_diagnostics_settings(
+    "0000123456-00001", "864508030026238,IMEI"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[DiagnosticObservationSetting]
@@ -11851,7 +13179,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.diagnostics_settings.with_raw_response.list_diagnostics_settings(account_name, devices)
+result = await async_client.diagnostics_settings.with_raw_response.list_diagnostics_settings(
+    "0000123456-00001", "864508030026238,IMEI"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[DiagnosticObservationSetting]
@@ -11871,7 +13201,7 @@ match result:
 | --- | --- | --- |
 | <code>account_name</code> | <code>str</code> | Account identifier. |
 | <code>devices</code> | <code>str</code> | Devices list formatted as "id, kind" |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -11923,7 +13253,7 @@ This endpoint retrieves a diagnostics subscription by account.
 **Sync**
 
 ```python
-result = client.diagnostics_subscriptions.with_raw_response.get_diagnostics_subscription(account_name)
+result = client.diagnostics_subscriptions.with_raw_response.get_diagnostics_subscription("0000123456-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DiagnosticsSubscription
@@ -11934,7 +13264,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.diagnostics_subscriptions.with_raw_response.get_diagnostics_subscription(account_name)
+result = await async_client.diagnostics_subscriptions.with_raw_response.get_diagnostics_subscription("0000123456-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DiagnosticsSubscription
@@ -11953,7 +13283,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>account_name</code> | <code>str</code> | Account identifier. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -12007,7 +13337,28 @@ Note: The user needs to authenticate with their ThingSpace credentials using the
 **Sync**
 
 ```python
-result = client.etxapp_configuration.with_raw_response.create_configuration(vendor_id, body)
+result = client.etxapp_configuration.with_raw_response.create_configuration(
+    "VerizonETX",
+    GeoFenceConfigurationRequest(
+        geo_fence=GeoFence(
+            type_=Type.FEATURE_COLLECTION,
+            features=[FeatureItem(type_=Type1.FEATURE, geometry=LineString(), properties={})],
+        ),
+        messages=[
+            Message(
+                is_private=True,
+                road_user_type=[RoadUserTypes.VULNERABLE_ROAD_USER],
+                trigger_conditions=[TriggerCondition.ENTER],
+                generic=GenericPayload(
+                    message_type="some example string",
+                    message_format="some example string",
+                    payload="some example string",
+                ),
+            ),
+        ],
+        is_active=True,
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GeoFenceConfigurationResponse
@@ -12018,7 +13369,28 @@ match result:
 **Async**
 
 ```python
-result = await async_client.etxapp_configuration.with_raw_response.create_configuration(vendor_id, body)
+result = await async_client.etxapp_configuration.with_raw_response.create_configuration(
+    "VerizonETX",
+    GeoFenceConfigurationRequest(
+        geo_fence=GeoFence(
+            type_=Type.FEATURE_COLLECTION,
+            features=[FeatureItem(type_=Type1.FEATURE, geometry=LineString(), properties={})],
+        ),
+        messages=[
+            Message(
+                is_private=True,
+                road_user_type=[RoadUserTypes.VULNERABLE_ROAD_USER],
+                trigger_conditions=[TriggerCondition.ENTER],
+                generic=GenericPayload(
+                    message_type="some example string",
+                    message_format="some example string",
+                    payload="some example string",
+                ),
+            ),
+        ],
+        is_active=True,
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GeoFenceConfigurationResponse
@@ -12038,7 +13410,7 @@ match result:
 | --- | --- | --- |
 | <code>vendor_id</code> | <code>str</code> | The vendor's identifier |
 | <code>body</code> | <code>[GeoFenceConfigurationRequest](verizon/models/geo_fence_configuration_request.py) \| [GeoFenceConfigurationRequestDict](verizon/models/geo_fence_configuration_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -12070,7 +13442,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def delete_configuration(id: str, vendor_id: str, *, request_options: RequestOptionsOrDict | None = None) -> ApiResult[None, DeleteConfigurationErrorBody]</code></summary>
+<summary><code>def delete_configuration(id_: str, vendor_id: str, *, request_options: RequestOptionsOrDict | None = None) -> ApiResult[None, DeleteConfigurationErrorBody]</code></summary>
 
 <dl>
 <dd>
@@ -12095,7 +13467,9 @@ Note: The user needs to authenticate with their ThingSpace credentials using the
 **Sync**
 
 ```python
-result = client.etxapp_configuration.with_raw_response.delete_configuration(id, vendor_id)
+result = client.etxapp_configuration.with_raw_response.delete_configuration(
+    "18bac1ff-c7bd-44d9-a7ad-06a093a94713", "VerizonETX"
+)
 match result:
     case Success():
         ...  # 2xx, no content
@@ -12106,7 +13480,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.etxapp_configuration.with_raw_response.delete_configuration(id, vendor_id)
+result = await async_client.etxapp_configuration.with_raw_response.delete_configuration(
+    "18bac1ff-c7bd-44d9-a7ad-06a093a94713", "VerizonETX"
+)
 match result:
     case Success():
         ...  # 2xx, no content
@@ -12124,9 +13500,9 @@ match result:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>id</code> | <code>str</code> | The configuration identifier |
+| <code>id_</code> | <code>str</code> | The configuration identifier |
 | <code>vendor_id</code> | <code>str</code> | The vendor's identifier |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -12158,7 +13534,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def get_configuration(id: str, vendor_id: str, *, request_options: RequestOptionsOrDict | None = None) -> ApiResult[GeoFenceConfigurationResponse, GetConfigurationErrorBody]</code></summary>
+<summary><code>def get_configuration(id_: str, vendor_id: str, *, request_options: RequestOptionsOrDict | None = None) -> ApiResult[GeoFenceConfigurationResponse, GetConfigurationErrorBody]</code></summary>
 
 <dl>
 <dd>
@@ -12183,7 +13559,9 @@ Note: The user needs to authenticate with their ThingSpace credentials using the
 **Sync**
 
 ```python
-result = client.etxapp_configuration.with_raw_response.get_configuration(id, vendor_id)
+result = client.etxapp_configuration.with_raw_response.get_configuration(
+    "18bac1ff-c7bd-44d9-a7ad-06a093a94713", "VerizonETX"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GeoFenceConfigurationResponse
@@ -12194,7 +13572,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.etxapp_configuration.with_raw_response.get_configuration(id, vendor_id)
+result = await async_client.etxapp_configuration.with_raw_response.get_configuration(
+    "18bac1ff-c7bd-44d9-a7ad-06a093a94713", "VerizonETX"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GeoFenceConfigurationResponse
@@ -12212,9 +13592,9 @@ match result:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>id</code> | <code>str</code> | The configuration identifier |
+| <code>id_</code> | <code>str</code> | The configuration identifier |
 | <code>vendor_id</code> | <code>str</code> | The vendor's identifier |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -12271,7 +13651,7 @@ Note: The user needs to authenticate with their ThingSpace credentials using the
 **Sync**
 
 ```python
-result = client.etxapp_configuration.with_raw_response.get_configuration_list(vendor_id)
+result = client.etxapp_configuration.with_raw_response.get_configuration_list("VerizonETX")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[ConfigurationListItem]
@@ -12282,7 +13662,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.etxapp_configuration.with_raw_response.get_configuration_list(vendor_id)
+result = await async_client.etxapp_configuration.with_raw_response.get_configuration_list("VerizonETX")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[ConfigurationListItem]
@@ -12301,7 +13681,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>vendor_id</code> | <code>str</code> | The vendor's identifier |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -12333,7 +13713,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def update_configuration(id: str, vendor_id: str, body: GeoFenceConfigurationUpdateRequest | GeoFenceConfigurationUpdateRequestDict, *, request_options: RequestOptionsOrDict | None = None) -> ApiResult[None, UpdateConfigurationErrorBody]</code></summary>
+<summary><code>def update_configuration(id_: str, vendor_id: str, body: GeoFenceConfigurationUpdateRequest | GeoFenceConfigurationUpdateRequestDict, *, request_options: RequestOptionsOrDict | None = None) -> ApiResult[None, UpdateConfigurationErrorBody]</code></summary>
 
 <dl>
 <dd>
@@ -12358,7 +13738,9 @@ Note: The user needs to authenticate with their ThingSpace credentials using the
 **Sync**
 
 ```python
-result = client.etxapp_configuration.with_raw_response.update_configuration(id, vendor_id, body)
+result = client.etxapp_configuration.with_raw_response.update_configuration(
+    "18bac1ff-c7bd-44d9-a7ad-06a093a94713", "VerizonETX", GeoFenceConfigurationUpdateRequest()
+)
 match result:
     case Success():
         ...  # 2xx, no content
@@ -12369,7 +13751,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.etxapp_configuration.with_raw_response.update_configuration(id, vendor_id, body)
+result = await async_client.etxapp_configuration.with_raw_response.update_configuration(
+    "18bac1ff-c7bd-44d9-a7ad-06a093a94713", "VerizonETX", GeoFenceConfigurationUpdateRequest()
+)
 match result:
     case Success():
         ...  # 2xx, no content
@@ -12387,10 +13771,10 @@ match result:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>id</code> | <code>str</code> | The configuration identifier |
+| <code>id_</code> | <code>str</code> | The configuration identifier |
 | <code>vendor_id</code> | <code>str</code> | The vendor's identifier |
 | <code>body</code> | <code>[GeoFenceConfigurationUpdateRequest](verizon/models/geo_fence_configuration_update_request.py) \| [GeoFenceConfigurationUpdateRequestDict](verizon/models/geo_fence_configuration_update_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -12426,7 +13810,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 > Source: [Etxregistration](verizon/apis/etxregistration.py)
 
 <details>
-<summary><code>def get_etx_client_certificate(id: EtxclientIdlookup | EtxclientIdlookupDict, vendor_id: str, *, x_transaction_id: UUID | None = None, request_options: RequestOptionsOrDict | None = None) -> ApiResult[ClientPersistenceResponse, GetEtxclientCertificateErrorBody]</code></summary>
+<summary><code>def get_etx_client_certificate(id_: EtxclientIdlookup | EtxclientIdlookupDict, vendor_id: str, *, x_transaction_id: UUID | None = None, request_options: RequestOptionsOrDict | None = None) -> ApiResult[ClientPersistenceResponse, GetEtxclientCertificateErrorBody]</code></summary>
 
 <dl>
 <dd>
@@ -12451,7 +13835,9 @@ Note: The user needs to authenticate with their ThingSpace credentials using the
 **Sync**
 
 ```python
-result = client.etxregistration.with_raw_response.get_etx_client_certificate(id, vendor_id)
+result = client.etxregistration.with_raw_response.get_etx_client_certificate(
+    EtxclientIdlookup(), "VerizonETX", x_transaction_id=UUID("123e4567-e89b-12d3-a456-426614174000")
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ClientPersistenceResponse
@@ -12462,7 +13848,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.etxregistration.with_raw_response.get_etx_client_certificate(id, vendor_id)
+result = await async_client.etxregistration.with_raw_response.get_etx_client_certificate(
+    EtxclientIdlookup(), "VerizonETX", x_transaction_id=UUID("123e4567-e89b-12d3-a456-426614174000")
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ClientPersistenceResponse
@@ -12480,10 +13868,10 @@ match result:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>id</code> | <code>[EtxclientIdlookup](verizon/models/etxclient_idlookup.py) \| [EtxclientIdlookupDict](verizon/models/etxclient_idlookup.py)</code> | One of the following IDs is required- DeviceID, IMEI, ICCID, IMSI. If more than one ID is provided, the API will return the certificate for the first ID found. The IDs are evaluated in the following order: DeviceID, IMEI, ICCID, IMSI. If the first provided ID is not found, the API will return an error. |
+| <code>id_</code> | <code>[EtxclientIdlookup](verizon/models/etxclient_idlookup.py) \| [EtxclientIdlookupDict](verizon/models/etxclient_idlookup.py)</code> | One of the following IDs is required- DeviceID, IMEI, ICCID, IMSI. If more than one ID is provided, the API will return the certificate for the first ID found. The IDs are evaluated in the following order: DeviceID, IMEI, ICCID, IMSI. If the first provided ID is not found, the API will return an error. |
 | <code>vendor_id</code> | <code>str</code> | The VendorID set during the Vendor registration call. |
 | <code>x_transaction_id</code> | <code>UUID \| None</code> | Optional transaction identifier for tracing requests. If not provided, the application will generate one.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -12540,7 +13928,15 @@ Note: The user needs to authenticate with their ThingSpace credentials using the
 **Sync**
 
 ```python
-result = client.etxregistration.with_raw_response.get_etx_connection_url(vendor_id, body)
+result = client.etxregistration.with_raw_response.get_etx_connection_url(
+    "VerizonETX",
+    ConnectionRequest(
+        device_id=UUID("00000000-0000-0000-0000-000000000000"),
+        geolocation=Geolocation(latitude=1.5, longitude=1.5),
+        network_type=NetworkType.VZ,
+    ),
+    x_transaction_id=UUID("123e4567-e89b-12d3-a456-426614174000"),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ConnectionResponse
@@ -12551,7 +13947,15 @@ match result:
 **Async**
 
 ```python
-result = await async_client.etxregistration.with_raw_response.get_etx_connection_url(vendor_id, body)
+result = await async_client.etxregistration.with_raw_response.get_etx_connection_url(
+    "VerizonETX",
+    ConnectionRequest(
+        device_id=UUID("00000000-0000-0000-0000-000000000000"),
+        geolocation=Geolocation(latitude=1.5, longitude=1.5),
+        network_type=NetworkType.VZ,
+    ),
+    x_transaction_id=UUID("123e4567-e89b-12d3-a456-426614174000"),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ConnectionResponse
@@ -12572,7 +13976,7 @@ match result:
 | <code>vendor_id</code> | <code>str</code> | The VendorID set during the Vendor registration call. |
 | <code>body</code> | <code>[ConnectionRequest](verizon/models/connection_request.py) \| [ConnectionRequestDict](verizon/models/connection_request.py)</code> | The request body. |
 | <code>x_transaction_id</code> | <code>UUID \| None</code> | Optional transaction identifier for tracing requests. If not provided, the application will generate one.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -12631,7 +14035,15 @@ Note: The user needs to authenticate with their ThingSpace credentials using the
 **Sync**
 
 ```python
-result = client.etxregistration.with_raw_response.get_etx_connection_url_multi_mec(vendor_id, body)
+result = client.etxregistration.with_raw_response.get_etx_connection_url_multi_mec(
+    "VerizonETX",
+    ConnectionRequest(
+        device_id=UUID("00000000-0000-0000-0000-000000000000"),
+        geolocation=Geolocation(latitude=1.5, longitude=1.5),
+        network_type=NetworkType.VZ,
+    ),
+    x_transaction_id=UUID("123e4567-e89b-12d3-a456-426614174000"),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ConnectionResponseV3
@@ -12642,7 +14054,15 @@ match result:
 **Async**
 
 ```python
-result = await async_client.etxregistration.with_raw_response.get_etx_connection_url_multi_mec(vendor_id, body)
+result = await async_client.etxregistration.with_raw_response.get_etx_connection_url_multi_mec(
+    "VerizonETX",
+    ConnectionRequest(
+        device_id=UUID("00000000-0000-0000-0000-000000000000"),
+        geolocation=Geolocation(latitude=1.5, longitude=1.5),
+        network_type=NetworkType.VZ,
+    ),
+    x_transaction_id=UUID("123e4567-e89b-12d3-a456-426614174000"),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ConnectionResponseV3
@@ -12663,7 +14083,7 @@ match result:
 | <code>vendor_id</code> | <code>str</code> | The VendorID set during the Vendor registration call. |
 | <code>body</code> | <code>[ConnectionRequest](verizon/models/connection_request.py) \| [ConnectionRequestDict](verizon/models/connection_request.py)</code> | The request body. |
 | <code>x_transaction_id</code> | <code>UUID \| None</code> | Optional transaction identifier for tracing requests. If not provided, the application will generate one.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -12718,7 +14138,9 @@ This API allows retrieving devices by vendor ID and optional filters. The reques
 **Sync**
 
 ```python
-result = client.etxregistration.with_raw_response.query_etx_devices(body)
+result = client.etxregistration.with_raw_response.query_etx_devices(
+    DevicesRequest(vendor_id="some example string"), x_transaction_id=UUID("123e4567-e89b-12d3-a456-426614174000")
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[DevicesResponse]
@@ -12729,7 +14151,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.etxregistration.with_raw_response.query_etx_devices(body)
+result = await async_client.etxregistration.with_raw_response.query_etx_devices(
+    DevicesRequest(vendor_id="some example string"), x_transaction_id=UUID("123e4567-e89b-12d3-a456-426614174000")
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[DevicesResponse]
@@ -12749,7 +14173,7 @@ match result:
 | --- | --- | --- |
 | <code>body</code> | <code>[DevicesRequest](verizon/models/devices_request.py) \| [DevicesRequestDict](verizon/models/devices_request.py)</code> | The request body. |
 | <code>x_transaction_id</code> | <code>UUID \| None</code> | Optional transaction identifier for tracing requests. If not provided, the application will generate one.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -12810,7 +14234,12 @@ Note: The user needs to authenticate with their ThingSpace credentials using the
 **Sync**
 
 ```python
-result = client.etxregistration.with_raw_response.register_etx_client(body)
+result = client.etxregistration.with_raw_response.register_etx_client(
+    ClientRegistrationRequestV2(
+        client_type=EtxClientType.VEHICLE, client_subtype=ClientSubtype.PASSENGER_CAR, vendor_id="some example string"
+    ),
+    x_transaction_id=UUID("123e4567-e89b-12d3-a456-426614174000"),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ClientRegistrationResponse
@@ -12821,7 +14250,12 @@ match result:
 **Async**
 
 ```python
-result = await async_client.etxregistration.with_raw_response.register_etx_client(body)
+result = await async_client.etxregistration.with_raw_response.register_etx_client(
+    ClientRegistrationRequestV2(
+        client_type=EtxClientType.VEHICLE, client_subtype=ClientSubtype.PASSENGER_CAR, vendor_id="some example string"
+    ),
+    x_transaction_id=UUID("123e4567-e89b-12d3-a456-426614174000"),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ClientRegistrationResponse
@@ -12841,7 +14275,7 @@ match result:
 | --- | --- | --- |
 | <code>body</code> | <code>[ClientRegistrationRequestV2](verizon/models/client_registration_request_v2.py) \| [ClientRegistrationRequestV2Dict](verizon/models/client_registration_request_v2.py)</code> | The request body. |
 | <code>x_transaction_id</code> | <code>UUID \| None</code> | Optional transaction identifier for tracing requests. If not provided, the application will generate one.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -12900,7 +14334,11 @@ Note: The user needs to authenticate with their ThingSpace credentials using the
 **Sync**
 
 ```python
-result = client.etxregistration.with_raw_response.renew_etx_client_certificate(device_id, vendor_id)
+result = client.etxregistration.with_raw_response.renew_etx_client_certificate(
+    UUID("a4fcd16a-343d-4527-8203-2f46e3e4ff4b"),
+    "VerizonETX",
+    x_transaction_id=UUID("123e4567-e89b-12d3-a456-426614174000"),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ClientRegistrationResponse
@@ -12911,7 +14349,11 @@ match result:
 **Async**
 
 ```python
-result = await async_client.etxregistration.with_raw_response.renew_etx_client_certificate(device_id, vendor_id)
+result = await async_client.etxregistration.with_raw_response.renew_etx_client_certificate(
+    UUID("a4fcd16a-343d-4527-8203-2f46e3e4ff4b"),
+    "VerizonETX",
+    x_transaction_id=UUID("123e4567-e89b-12d3-a456-426614174000"),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ClientRegistrationResponse
@@ -12933,7 +14375,7 @@ match result:
 | <code>vendor_id</code> | <code>str</code> | The VendorID set during the Vendor registration call. |
 | <code>x_transaction_id</code> | <code>UUID \| None</code> | Optional transaction identifier for tracing requests. If not provided, the application will generate one.<br>**Default**: <code>None</code> |
 | <code>body</code> | <code>Any \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -12990,7 +14432,11 @@ Note: The user needs to authenticate with their ThingSpace credentials using the
 **Sync**
 
 ```python
-result = client.etxregistration.with_raw_response.unregister_etx_clients(device_ids, vendor_id)
+result = client.etxregistration.with_raw_response.unregister_etx_clients(
+    [UUID("00000000-0000-0000-0000-000000000000")],
+    "VerizonETX",
+    x_transaction_id=UUID("123e4567-e89b-12d3-a456-426614174000"),
+)
 match result:
     case Success():
         ...  # 2xx, no content
@@ -13001,7 +14447,11 @@ match result:
 **Async**
 
 ```python
-result = await async_client.etxregistration.with_raw_response.unregister_etx_clients(device_ids, vendor_id)
+result = await async_client.etxregistration.with_raw_response.unregister_etx_clients(
+    [UUID("00000000-0000-0000-0000-000000000000")],
+    "VerizonETX",
+    x_transaction_id=UUID("123e4567-e89b-12d3-a456-426614174000"),
+)
 match result:
     case Success():
         ...  # 2xx, no content
@@ -13022,7 +14472,7 @@ match result:
 | <code>device_ids</code> | <code>list&#91;UUID&#93;</code> | The list of device IDs and software service IDs to be unregistered |
 | <code>vendor_id</code> | <code>str</code> | The VendorID set during the Vendor registration call. |
 | <code>x_transaction_id</code> | <code>UUID \| None</code> | Optional transaction identifier for tracing requests. If not provided, the application will generate one.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -13081,7 +14531,9 @@ Get the consent settings for the entire account or device list in an account.
 **Sync**
 
 ```python
-result = client.exclusions.with_raw_response.devices_location_get_consent_async(account_name)
+result = client.exclusions.with_raw_response.devices_location_get_consent_async(
+    "0000123456-00001", device_id="900000000000009"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GetAccountDeviceConsent
@@ -13092,7 +14544,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.exclusions.with_raw_response.devices_location_get_consent_async(account_name)
+result = await async_client.exclusions.with_raw_response.devices_location_get_consent_async(
+    "0000123456-00001", device_id="900000000000009"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GetAccountDeviceConsent
@@ -13112,7 +14566,7 @@ match result:
 | --- | --- | --- |
 | <code>account_name</code> | <code>str</code> | The numeric name of the account. |
 | <code>device_id</code> | <code>str \| None</code> | The IMEI of the device being queried<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -13190,7 +14644,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[AccountConsentCreate](verizon/models/account_consent_create.py) \| [AccountConsentCreateDict](verizon/models/account_consent_create.py) \| None</code> | Account details to create a consent record.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -13268,7 +14722,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[AccountConsentUpdate](verizon/models/account_consent_update.py) \| [AccountConsentUpdateDict](verizon/models/account_consent_update.py) \| None</code> | Account details to update a consent record.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -13345,7 +14799,7 @@ match result:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -13400,7 +14854,7 @@ This consents endpoint retrieves a list of excluded devices in an account.
 **Sync**
 
 ```python
-result = client.exclusions.with_raw_response.list_excluded_devices(account_name, start_index)
+result = client.exclusions.with_raw_response.list_excluded_devices("0252012345-00001", "0")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DevicesConsentResult
@@ -13411,7 +14865,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.exclusions.with_raw_response.list_excluded_devices(account_name, start_index)
+result = await async_client.exclusions.with_raw_response.list_excluded_devices("0252012345-00001", "0")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DevicesConsentResult
@@ -13431,7 +14885,7 @@ match result:
 | --- | --- | --- |
 | <code>account_name</code> | <code>str</code> | Account identifier in "##########-#####". |
 | <code>start_index</code> | <code>str</code> | Zero-based number of the first record to return. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -13486,7 +14940,7 @@ Removes devices from the exclusion list so that they can be located with Device 
 **Sync**
 
 ```python
-result = client.exclusions.with_raw_response.remove_devices_from_exclusion_list(account_name, device_list)
+result = client.exclusions.with_raw_response.remove_devices_from_exclusion_list("0000123456-00001", "IMEI")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceLocationSuccessResult
@@ -13497,7 +14951,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.exclusions.with_raw_response.remove_devices_from_exclusion_list(account_name, device_list)
+result = await async_client.exclusions.with_raw_response.remove_devices_from_exclusion_list("0000123456-00001", "IMEI")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceLocationSuccessResult
@@ -13517,7 +14971,7 @@ match result:
 | --- | --- | --- |
 | <code>account_name</code> | <code>str</code> | The numeric name of the account. |
 | <code>device_list</code> | <code>str</code> | A list of the device IDs to remove from the exclusion list. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -13576,7 +15030,9 @@ Cancel a scheduled firmware upgrade.
 **Sync**
 
 ```python
-result = client.firmware_v1.with_raw_response.cancel_scheduled_firmware_upgrade(account_name, upgrade_id)
+result = client.firmware_v1.with_raw_response.cancel_scheduled_firmware_upgrade(
+    "0242078689-00001", "e3a8d88a-04c6-4ef3-b039-89b62f91e962"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FotaV1SuccessResult
@@ -13587,7 +15043,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.firmware_v1.with_raw_response.cancel_scheduled_firmware_upgrade(account_name, upgrade_id)
+result = await async_client.firmware_v1.with_raw_response.cancel_scheduled_firmware_upgrade(
+    "0242078689-00001", "e3a8d88a-04c6-4ef3-b039-89b62f91e962"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FotaV1SuccessResult
@@ -13607,7 +15065,7 @@ match result:
 | --- | --- | --- |
 | <code>account_name</code> | <code>str</code> | Account identifier in "##########-#####". |
 | <code>upgrade_id</code> | <code>str</code> | The UUID of the scheduled upgrade that you want to cancel. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -13662,7 +15120,7 @@ Lists all device firmware images available for an account, based on the devices 
 **Sync**
 
 ```python
-result = client.firmware_v1.with_raw_response.list_available_firmware(account)
+result = client.firmware_v1.with_raw_response.list_available_firmware("0242078689-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[Firmware]
@@ -13673,7 +15131,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.firmware_v1.with_raw_response.list_available_firmware(account)
+result = await async_client.firmware_v1.with_raw_response.list_available_firmware("0242078689-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[Firmware]
@@ -13692,7 +15150,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier in "##########-#####". |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -13747,7 +15205,9 @@ Returns information about a specified upgrade, include the target date of the up
 **Sync**
 
 ```python
-result = client.firmware_v1.with_raw_response.list_firmware_upgrade_details(account_name, upgrade_id)
+result = client.firmware_v1.with_raw_response.list_firmware_upgrade_details(
+    "0242078689-00001", "e3a8d88a-04c6-4ef3-b039-89b62f91e962"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FirmwareUpgrade
@@ -13758,7 +15218,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.firmware_v1.with_raw_response.list_firmware_upgrade_details(account_name, upgrade_id)
+result = await async_client.firmware_v1.with_raw_response.list_firmware_upgrade_details(
+    "0242078689-00001", "e3a8d88a-04c6-4ef3-b039-89b62f91e962"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FirmwareUpgrade
@@ -13778,7 +15240,7 @@ match result:
 | --- | --- | --- |
 | <code>account_name</code> | <code>str</code> | Account identifier in "##########-#####". |
 | <code>upgrade_id</code> | <code>str</code> | The UUID of the upgrade, returned by POST /upgrades when the upgrade was scheduled. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -13833,7 +15295,16 @@ Schedules a firmware upgrade for devices.
 **Sync**
 
 ```python
-result = client.firmware_v1.with_raw_response.schedule_firmware_upgrade(body)
+result = client.firmware_v1.with_raw_response.schedule_firmware_upgrade(
+    FirmwareUpgradeRequest(
+        account_name="0402196254-00001",
+        firmware_name="FOTA_Verizon_Model-A_01To02_HF",
+        firmware_to="VerizonFirmwareVersion-02",
+        start_date=date(2018, 4, 1),
+        end_date=date(2018, 4, 5),
+        device_list=["990003425730535", "990000473475989"],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FirmwareUpgrade
@@ -13844,7 +15315,16 @@ match result:
 **Async**
 
 ```python
-result = await async_client.firmware_v1.with_raw_response.schedule_firmware_upgrade(body)
+result = await async_client.firmware_v1.with_raw_response.schedule_firmware_upgrade(
+    FirmwareUpgradeRequest(
+        account_name="0402196254-00001",
+        firmware_name="FOTA_Verizon_Model-A_01To02_HF",
+        firmware_to="VerizonFirmwareVersion-02",
+        start_date=date(2018, 4, 1),
+        end_date=date(2018, 4, 5),
+        device_list=["990003425730535", "990000473475989"],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FirmwareUpgrade
@@ -13863,7 +15343,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[FirmwareUpgradeRequest](verizon/models/firmware_upgrade_request.py) \| [FirmwareUpgradeRequestDict](verizon/models/firmware_upgrade_request.py)</code> | Details of the firmware upgrade request. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -13918,7 +15398,9 @@ Add or remove devices from a scheduled upgrade.
 **Sync**
 
 ```python
-result = client.firmware_v1.with_raw_response.update_firmware_upgrade_devices(account_name, upgrade_id)
+result = client.firmware_v1.with_raw_response.update_firmware_upgrade_devices(
+    "0242078689-00001", "e3a8d88a-04c6-4ef3-b039-89b62f91e962"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FirmwareUpgradeChangeResult
@@ -13929,7 +15411,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.firmware_v1.with_raw_response.update_firmware_upgrade_devices(account_name, upgrade_id)
+result = await async_client.firmware_v1.with_raw_response.update_firmware_upgrade_devices(
+    "0242078689-00001", "e3a8d88a-04c6-4ef3-b039-89b62f91e962"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FirmwareUpgradeChangeResult
@@ -13949,7 +15433,7 @@ match result:
 | --- | --- | --- |
 | <code>account_name</code> | <code>str</code> | Account identifier in "##########-#####". |
 | <code>upgrade_id</code> | <code>str</code> | The UUID of the upgrade, returned by POST /upgrades when the upgrade was scheduled. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -13985,7 +15469,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 > Source: [FirmwareV3](verizon/apis/firmware_v3.py)
 
 <details>
-<summary><code>def list_available_firmware2(acc: str, protocol: FirmwareProtocolOrStr, *, request_options: RequestOptionsOrDict | None = None) -> ApiResult[list[FirmwarePackage], ListAvailableFirmware2ErrorBody]</code></summary>
+<summary><code>def list_available_firmware2(acc: str, *, protocol: FirmwareProtocolOrStr = FirmwareProtocol.LWM2_M, request_options: RequestOptionsOrDict | None = None) -> ApiResult[list[FirmwarePackage], ListAvailableFirmware2ErrorBody]</code></summary>
 
 <dl>
 <dd>
@@ -14008,7 +15492,9 @@ This endpoint allows user to list the firmware of an account.
 **Sync**
 
 ```python
-result = client.firmware_v3.with_raw_response.list_available_firmware2(acc, protocol)
+result = client.firmware_v3.with_raw_response.list_available_firmware2(
+    "0000123456-00001", protocol=FirmwareProtocol.LWM2_M
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[FirmwarePackage]
@@ -14019,7 +15505,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.firmware_v3.with_raw_response.list_available_firmware2(acc, protocol)
+result = await async_client.firmware_v3.with_raw_response.list_available_firmware2(
+    "0000123456-00001", protocol=FirmwareProtocol.LWM2_M
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[FirmwarePackage]
@@ -14038,8 +15526,8 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>acc</code> | <code>str</code> | Account identifier. |
-| <code>protocol</code> | <code>[FirmwareProtocolOrStr](verizon/models/enums/firmware_protocol.py)</code> | Filter to retrieve a specific protocol type used. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>protocol</code> | <code>[FirmwareProtocolOrStr](verizon/models/enums/firmware_protocol.py)</code> | Filter to retrieve a specific protocol type used.<br>**Default**: <code>FirmwareProtocol.LWM2_M</code> |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -14094,7 +15582,7 @@ Ask a device to report its firmware version asynchronously.
 **Sync**
 
 ```python
-result = client.firmware_v3.with_raw_response.report_device_firmware(acc, device_id)
+result = client.firmware_v3.with_raw_response.report_device_firmware("0000123456-00001", "15-digit IMEI")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceFirmwareVersionUpdateResult
@@ -14105,7 +15593,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.firmware_v3.with_raw_response.report_device_firmware(acc, device_id)
+result = await async_client.firmware_v3.with_raw_response.report_device_firmware("0000123456-00001", "15-digit IMEI")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceFirmwareVersionUpdateResult
@@ -14125,7 +15613,7 @@ match result:
 | --- | --- | --- |
 | <code>acc</code> | <code>str</code> | Account identifier. |
 | <code>device_id</code> | <code>str</code> | Device identifier. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -14180,7 +15668,9 @@ Synchronize ThingSpace with the FOTA server for up to 100 devices.
 **Sync**
 
 ```python
-result = client.firmware_v3.with_raw_response.synchronize_device_firmware(acc, body)
+result = client.firmware_v3.with_raw_response.synchronize_device_firmware(
+    "0000123456-00001", FirmwareImei(device_list=["15-digit IMEI"])
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceFirmwareList
@@ -14191,7 +15681,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.firmware_v3.with_raw_response.synchronize_device_firmware(acc, body)
+result = await async_client.firmware_v3.with_raw_response.synchronize_device_firmware(
+    "0000123456-00001", FirmwareImei(device_list=["15-digit IMEI"])
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceFirmwareList
@@ -14211,7 +15703,7 @@ match result:
 | --- | --- | --- |
 | <code>acc</code> | <code>str</code> | Account identifier. |
 | <code>body</code> | <code>[FirmwareImei](verizon/models/firmware_imei.py) \| [FirmwareImeiDict](verizon/models/firmware_imei.py)</code> | DeviceIds to get firmware info synchronously. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -14270,7 +15762,7 @@ Retrieve a list of all devices associated with an account.
 **Sync**
 
 ```python
-result = client.global_reporting.with_raw_response.retrieve_global_list(body)
+result = client.global_reporting.with_raw_response.retrieve_global_list(ESimglobalDeviceList())
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ESimrequestResponse
@@ -14281,7 +15773,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.global_reporting.with_raw_response.retrieve_global_list(body)
+result = await async_client.global_reporting.with_raw_response.retrieve_global_list(ESimglobalDeviceList())
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ESimrequestResponse
@@ -14300,7 +15792,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[ESimglobalDeviceList](verizon/models/e_simglobal_device_list.py) \| [ESimglobalDeviceListDict](verizon/models/e_simglobal_device_list.py)</code> | Device List |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -14355,7 +15847,7 @@ Retrieve the provisioning history of a specific device or devices.
 **Sync**
 
 ```python
-result = client.global_reporting.with_raw_response.deviceprovhistory_using_post(body)
+result = client.global_reporting.with_raw_response.deviceprovhistory_using_post(ESimprovhistoryRequest())
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ESimrequestResponse
@@ -14366,7 +15858,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.global_reporting.with_raw_response.deviceprovhistory_using_post(body)
+result = await async_client.global_reporting.with_raw_response.deviceprovhistory_using_post(ESimprovhistoryRequest())
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ESimrequestResponse
@@ -14385,7 +15877,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[ESimprovhistoryRequest](verizon/models/e_simprovhistory_request.py) \| [ESimprovhistoryRequestDict](verizon/models/e_simprovhistory_request.py)</code> | Device Provisioning History |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -14444,7 +15936,26 @@ Use this API if you want to manage some device settings before you are ready to 
 **Sync**
 
 ```python
-result = client.hpl_device_management.with_raw_response.add_devices_hyper_precise(body)
+result = client.hpl_device_management.with_raw_response.add_devices_hyper_precise(
+    HplAddDevicesRequest(
+        state="preactive",
+        devices_to_add=[
+            HplAccountDeviceList(
+                device_ids=[
+                    HplDeviceId(kind="imei", id="15-digit IMEI"), HplDeviceId(kind="iccid", id="20-digit ICCID")
+                ],
+            ),
+            HplAccountDeviceList(
+                device_ids=[
+                    HplDeviceId(kind="imei", id="15-digit IMEI"), HplDeviceId(kind="iccid", id="20-digit ICCID")
+                ],
+            ),
+        ],
+        account_name="0000123456-00001",
+        custom_fields=[HplCustomFields(key="CustomField2", value="SuperVend")],
+        group_name="West Region",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[HplAddDevicesRequest]
@@ -14455,7 +15966,26 @@ match result:
 **Async**
 
 ```python
-result = await async_client.hpl_device_management.with_raw_response.add_devices_hyper_precise(body)
+result = await async_client.hpl_device_management.with_raw_response.add_devices_hyper_precise(
+    HplAddDevicesRequest(
+        state="preactive",
+        devices_to_add=[
+            HplAccountDeviceList(
+                device_ids=[
+                    HplDeviceId(kind="imei", id="15-digit IMEI"), HplDeviceId(kind="iccid", id="20-digit ICCID")
+                ],
+            ),
+            HplAccountDeviceList(
+                device_ids=[
+                    HplDeviceId(kind="imei", id="15-digit IMEI"), HplDeviceId(kind="iccid", id="20-digit ICCID")
+                ],
+            ),
+        ],
+        account_name="0000123456-00001",
+        custom_fields=[HplCustomFields(key="CustomField2", value="SuperVend")],
+        group_name="West Region",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[HplAddDevicesRequest]
@@ -14474,7 +16004,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[HplAddDevicesRequest](verizon/models/hpl_add_devices_request.py) \| [HplAddDevicesRequestDict](verizon/models/hpl_add_devices_request.py)</code> | Devices to add to the account. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -14533,7 +16063,9 @@ Stops ThingSpace from sending callback messages for the specified account and li
 **Sync**
 
 ```python
-result = client.hyper_precise_location_callbacks.with_raw_response.deregister_callback6(account_number, service)
+result = client.hyper_precise_location_callbacks.with_raw_response.deregister_callback6(
+    "0000123456-00001", "BullseyeReporting"
+)
 match result:
     case Success():
         ...  # 2xx, no content
@@ -14545,7 +16077,7 @@ match result:
 
 ```python
 result = await async_client.hyper_precise_location_callbacks.with_raw_response.deregister_callback6(
-    account_number, service
+    "0000123456-00001", "BullseyeReporting"
 )
 match result:
     case Success():
@@ -14566,7 +16098,7 @@ match result:
 | --- | --- | --- |
 | <code>account_number</code> | <code>str</code> | The numeric ID of the account and must include leading zeroes. This value is indentical to `accountName`. |
 | <code>service</code> | <code>str</code> | The name of the callback service that will be deleted. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -14621,7 +16153,7 @@ Find registered callback listener for account by account number.
 **Sync**
 
 ```python
-result = client.hyper_precise_location_callbacks.with_raw_response.list_registered_callbacks6(account_number)
+result = client.hyper_precise_location_callbacks.with_raw_response.list_registered_callbacks6("0000123456-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[CallbackCreated]
@@ -14633,7 +16165,7 @@ match result:
 
 ```python
 result = await async_client.hyper_precise_location_callbacks.with_raw_response.list_registered_callbacks6(
-    account_number
+    "0000123456-00001"
 )
 match result:
     case Success(payload=payload):
@@ -14653,7 +16185,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>account_number</code> | <code>str</code> | The numeric ID of the account and must include leading zeroes. This value is indentical to `accountName`. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -14708,7 +16240,10 @@ Registers a URL at which an account receives asynchronous responses and other me
 **Sync**
 
 ```python
-result = client.hyper_precise_location_callbacks.with_raw_response.register_callback6(account_number, body)
+result = client.hyper_precise_location_callbacks.with_raw_response.register_callback6(
+    "0000123456-00001",
+    HyperPreciseLocationCallback(name="BullseyeReporting", url="https://tsustgtests.mocklab.io/notifications/bullseye"),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type CallbackRegistered
@@ -14719,7 +16254,10 @@ match result:
 **Async**
 
 ```python
-result = await async_client.hyper_precise_location_callbacks.with_raw_response.register_callback6(account_number, body)
+result = await async_client.hyper_precise_location_callbacks.with_raw_response.register_callback6(
+    "0000123456-00001",
+    HyperPreciseLocationCallback(name="BullseyeReporting", url="https://tsustgtests.mocklab.io/notifications/bullseye"),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type CallbackRegistered
@@ -14739,7 +16277,7 @@ match result:
 | --- | --- | --- |
 | <code>account_number</code> | <code>str</code> | A unique identifier for an account. |
 | <code>body</code> | <code>[HyperPreciseLocationCallback](verizon/models/hyper_precise_location_callback.py) \| [HyperPreciseLocationCallbackDict](verizon/models/hyper_precise_location_callback.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -14798,7 +16336,13 @@ Retrieves available device windows for Connection Planner.
 **Sync**
 
 ```python
-result = client.intelligence_service_controller.with_raw_response.set_connection_planner()
+result = client.intelligence_service_controller.with_raw_response.set_connection_planner(
+    body=GetDevicesWindowsRequestforplanner(
+        account_number="0000123456-00001",
+        filter="All or Best or Worst",
+        devices=[DeviceListforplanner(device_ids=[DeviceIdforplanner(kind="imei", id="15-digit IMEI value")])],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type AsynchronousRequestResultforplanner
@@ -14809,7 +16353,13 @@ match result:
 **Async**
 
 ```python
-result = await async_client.intelligence_service_controller.with_raw_response.set_connection_planner()
+result = await async_client.intelligence_service_controller.with_raw_response.set_connection_planner(
+    body=GetDevicesWindowsRequestforplanner(
+        account_number="0000123456-00001",
+        filter="All or Best or Worst",
+        devices=[DeviceListforplanner(device_ids=[DeviceIdforplanner(kind="imei", id="15-digit IMEI value")])],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type AsynchronousRequestResultforplanner
@@ -14828,7 +16378,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[GetDevicesWindowsRequestforplanner](verizon/models/get_devices_windows_requestforplanner.py) \| [GetDevicesWindowsRequestforplannerDict](verizon/models/get_devices_windows_requestforplanner.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -14914,7 +16464,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[GetDeviceStatusesRequestforplanner](verizon/models/get_device_statuses_requestforplanner.py) \| [GetDeviceStatusesRequestforplannerDict](verizon/models/get_device_statuses_requestforplanner.py) \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -14974,7 +16524,9 @@ Activate a device with either a lead or local profile.
 **Sync**
 
 ```python
-result = client.managing_e_sim_profiles.with_raw_response.activate_a_device_profile(body)
+result = client.managing_e_sim_profiles.with_raw_response.activate_a_device_profile(
+    GioprofileRequest(devices=[GiodeviceList()], account_name="some example string")
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GiorequestResponse
@@ -14985,7 +16537,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.managing_e_sim_profiles.with_raw_response.activate_a_device_profile(body)
+result = await async_client.managing_e_sim_profiles.with_raw_response.activate_a_device_profile(
+    GioprofileRequest(devices=[GiodeviceList()], account_name="some example string")
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GiorequestResponse
@@ -15004,7 +16558,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[GioprofileRequest](verizon/models/gioprofile_request.py) \| [GioprofileRequestDict](verizon/models/gioprofile_request.py)</code> | Device Profile Query |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -15052,7 +16606,9 @@ Deactivate the lead or local profile. **Note:** to reactivate the profile, use t
 **Sync**
 
 ```python
-result = client.managing_e_sim_profiles.with_raw_response.deactivate_a_device_profile(body)
+result = client.managing_e_sim_profiles.with_raw_response.deactivate_a_device_profile(
+    GiodeactivateDeviceProfileRequest()
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GiorequestResponse
@@ -15063,7 +16619,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.managing_e_sim_profiles.with_raw_response.deactivate_a_device_profile(body)
+result = await async_client.managing_e_sim_profiles.with_raw_response.deactivate_a_device_profile(
+    GiodeactivateDeviceProfileRequest()
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GiorequestResponse
@@ -15082,7 +16640,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[GiodeactivateDeviceProfileRequest](verizon/models/giodeactivate_device_profile_request.py) \| [GiodeactivateDeviceProfileRequestDict](verizon/models/giodeactivate_device_profile_request.py)</code> | Device Profile Query |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -15130,7 +16688,7 @@ Delete a device profile for Global IoT Orchestration. **Note:** the profile must
 **Sync**
 
 ```python
-result = client.managing_e_sim_profiles.with_raw_response.delete_a_device_profile(body)
+result = client.managing_e_sim_profiles.with_raw_response.delete_a_device_profile(DeviceProfileRequest())
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GiorequestResponse
@@ -15141,7 +16699,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.managing_e_sim_profiles.with_raw_response.delete_a_device_profile(body)
+result = await async_client.managing_e_sim_profiles.with_raw_response.delete_a_device_profile(DeviceProfileRequest())
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GiorequestResponse
@@ -15160,7 +16718,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DeviceProfileRequest](verizon/models/device_profile_request.py) \| [DeviceProfileRequestDict](verizon/models/device_profile_request.py)</code> | Device Profile Query |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -15208,7 +16766,9 @@ Suspend all service to an eUICC device, including the lead and local profile.
 **Sync**
 
 ```python
-result = client.managing_e_sim_profiles.with_raw_response.device_suspend(body)
+result = client.managing_e_sim_profiles.with_raw_response.device_suspend(
+    GioprofileRequest(devices=[GiodeviceList()], account_name="some example string")
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GiorequestResponse
@@ -15219,7 +16779,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.managing_e_sim_profiles.with_raw_response.device_suspend(body)
+result = await async_client.managing_e_sim_profiles.with_raw_response.device_suspend(
+    GioprofileRequest(devices=[GiodeviceList()], account_name="some example string")
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GiorequestResponse
@@ -15238,7 +16800,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[GioprofileRequest](verizon/models/gioprofile_request.py) \| [GioprofileRequestDict](verizon/models/gioprofile_request.py)</code> | Device Profile Query |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -15286,7 +16848,7 @@ Download a Global IoT Orchestration device profile.
 **Sync**
 
 ```python
-result = client.managing_e_sim_profiles.with_raw_response.download_a_device_profile(body)
+result = client.managing_e_sim_profiles.with_raw_response.download_a_device_profile(DeviceProfileRequest())
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GiorequestResponse
@@ -15297,7 +16859,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.managing_e_sim_profiles.with_raw_response.download_a_device_profile(body)
+result = await async_client.managing_e_sim_profiles.with_raw_response.download_a_device_profile(DeviceProfileRequest())
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GiorequestResponse
@@ -15316,7 +16878,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DeviceProfileRequest](verizon/models/device_profile_request.py) \| [DeviceProfileRequestDict](verizon/models/device_profile_request.py)</code> | Device Profile Query |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -15364,7 +16926,7 @@ Enable a device lead or local profile.
 **Sync**
 
 ```python
-result = client.managing_e_sim_profiles.with_raw_response.enable_a_device_profile(body)
+result = client.managing_e_sim_profiles.with_raw_response.enable_a_device_profile(DeviceProfileRequest())
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GiorequestResponse
@@ -15375,7 +16937,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.managing_e_sim_profiles.with_raw_response.enable_a_device_profile(body)
+result = await async_client.managing_e_sim_profiles.with_raw_response.enable_a_device_profile(DeviceProfileRequest())
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GiorequestResponse
@@ -15394,7 +16956,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DeviceProfileRequest](verizon/models/device_profile_request.py) \| [DeviceProfileRequestDict](verizon/models/device_profile_request.py)</code> | Device Profile Query |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -15442,7 +17004,7 @@ Enable the Global IoT Orchestration device profile for download.
 **Sync**
 
 ```python
-result = client.managing_e_sim_profiles.with_raw_response.enable_a_device_profile_for_download(body)
+result = client.managing_e_sim_profiles.with_raw_response.enable_a_device_profile_for_download(DeviceProfileRequest())
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GiorequestResponse
@@ -15453,7 +17015,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.managing_e_sim_profiles.with_raw_response.enable_a_device_profile_for_download(body)
+result = await async_client.managing_e_sim_profiles.with_raw_response.enable_a_device_profile_for_download(
+    DeviceProfileRequest()
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GiorequestResponse
@@ -15472,7 +17036,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DeviceProfileRequest](verizon/models/device_profile_request.py) \| [DeviceProfileRequestDict](verizon/models/device_profile_request.py)</code> | Device Profile Query |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -15520,7 +17084,15 @@ Suspend a device's Global profile.
 **Sync**
 
 ```python
-result = client.managing_e_sim_profiles.with_raw_response.profile_suspend(body)
+result = client.managing_e_sim_profiles.with_raw_response.profile_suspend(
+    GioprofileRequest(
+        devices=[GiodeviceList(device_ids=[GiodeviceId(kind="eid", id="12345678901234567890123456789012")])],
+        account_name="0000123456-00001",
+        smrs_oid="1.3.6.1.4.1.#####.1.500.200.101.5",
+        mdn_zip_code="12345",
+        service_plan="service plan name",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GiorequestResponse
@@ -15531,7 +17103,15 @@ match result:
 **Async**
 
 ```python
-result = await async_client.managing_e_sim_profiles.with_raw_response.profile_suspend(body)
+result = await async_client.managing_e_sim_profiles.with_raw_response.profile_suspend(
+    GioprofileRequest(
+        devices=[GiodeviceList(device_ids=[GiodeviceId(kind="eid", id="12345678901234567890123456789012")])],
+        account_name="0000123456-00001",
+        smrs_oid="1.3.6.1.4.1.#####.1.500.200.101.5",
+        mdn_zip_code="12345",
+        service_plan="service plan name",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GiorequestResponse
@@ -15550,7 +17130,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[GioprofileRequest](verizon/models/gioprofile_request.py) \| [GioprofileRequestDict](verizon/models/gioprofile_request.py)</code> | Device Profile Query |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -15598,7 +17178,15 @@ Resume service to a device with either a lead or local profile.
 **Sync**
 
 ```python
-result = client.managing_e_sim_profiles.with_raw_response.resume_profile(body)
+result = client.managing_e_sim_profiles.with_raw_response.resume_profile(
+    GioprofileRequest(
+        devices=[GiodeviceList(device_ids=[GiodeviceId(kind="eid", id="12345678901234567890123456789012")])],
+        account_name="0000123456-00001",
+        smrs_oid="1.3.6.1.4.1.#####.1.500.200.101.5",
+        mdn_zip_code="12345",
+        service_plan="service plan name",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GiorequestResponse
@@ -15609,7 +17197,15 @@ match result:
 **Async**
 
 ```python
-result = await async_client.managing_e_sim_profiles.with_raw_response.resume_profile(body)
+result = await async_client.managing_e_sim_profiles.with_raw_response.resume_profile(
+    GioprofileRequest(
+        devices=[GiodeviceList(device_ids=[GiodeviceId(kind="eid", id="12345678901234567890123456789012")])],
+        account_name="0000123456-00001",
+        smrs_oid="1.3.6.1.4.1.#####.1.500.200.101.5",
+        mdn_zip_code="12345",
+        service_plan="service plan name",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GiorequestResponse
@@ -15628,7 +17224,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[GioprofileRequest](verizon/models/gioprofile_request.py) \| [GioprofileRequestDict](verizon/models/gioprofile_request.py)</code> | Device Profile Query |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -15676,7 +17272,7 @@ Enable a fallback profile to be set.
 **Sync**
 
 ```python
-result = client.managing_e_sim_profiles.with_raw_response.set_fallback(body)
+result = client.managing_e_sim_profiles.with_raw_response.set_fallback(FallBack())
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GiorequestResponse
@@ -15687,7 +17283,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.managing_e_sim_profiles.with_raw_response.set_fallback(body)
+result = await async_client.managing_e_sim_profiles.with_raw_response.set_fallback(FallBack())
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GiorequestResponse
@@ -15706,7 +17302,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[FallBack](verizon/models/fall_back.py) \| [FallBackDict](verizon/models/fall_back.py)</code> | Set the fallback attributes to allow a fallback profile to be activated. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -15758,7 +17354,17 @@ Send a `PUT` request.
 **Sync**
 
 ```python
-result = client.pwn.with_raw_response.change_pwn_device_i_paddress(body)
+result = client.pwn.with_raw_response.change_pwn_device_i_paddress(
+    ChangePwndeviceIpaddressRequest(
+        account_name="some example string",
+        device_list=[
+            DeviceListIp(
+                device_ids=[PwndeviceId(id="some example string", kind="some example string")],
+                ip_address="some example string",
+            ),
+        ],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ChangePwndeviceIpaddressResponse
@@ -15769,7 +17375,17 @@ match result:
 **Async**
 
 ```python
-result = await async_client.pwn.with_raw_response.change_pwn_device_i_paddress(body)
+result = await async_client.pwn.with_raw_response.change_pwn_device_i_paddress(
+    ChangePwndeviceIpaddressRequest(
+        account_name="some example string",
+        device_list=[
+            DeviceListIp(
+                device_ids=[PwndeviceId(id="some example string", kind="some example string")],
+                ip_address="some example string",
+            ),
+        ],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ChangePwndeviceIpaddressResponse
@@ -15788,7 +17404,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[ChangePwndeviceIpaddressRequest](verizon/models/change_pwndevice_ipaddress_request.py) \| [ChangePwndeviceIpaddressRequestDict](verizon/models/change_pwndevice_ipaddress_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -15836,7 +17452,13 @@ Send a `POST` request.
 **Sync**
 
 ```python
-result = client.pwn.with_raw_response.change_pwn_device_profile(body)
+result = client.pwn.with_raw_response.change_pwn_device_profile(
+    ChangePwndeviceProfileRequest(
+        account_name="0342351414-00001",
+        device_list=[PwndeviceList(device_ids=[PwndeviceId(id="99948099913024600000", kind="iccid")])],
+        new_profile="HSS EsmProfile Enterprise 5G internet",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ChangePwndeviceProfileResponse
@@ -15847,7 +17469,13 @@ match result:
 **Async**
 
 ```python
-result = await async_client.pwn.with_raw_response.change_pwn_device_profile(body)
+result = await async_client.pwn.with_raw_response.change_pwn_device_profile(
+    ChangePwndeviceProfileRequest(
+        account_name="0342351414-00001",
+        device_list=[PwndeviceList(device_ids=[PwndeviceId(id="99948099913024600000", kind="iccid")])],
+        new_profile="HSS EsmProfile Enterprise 5G internet",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ChangePwndeviceProfileResponse
@@ -15866,7 +17494,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[ChangePwndeviceProfileRequest](verizon/models/change_pwndevice_profile_request.py) \| [ChangePwndeviceProfileRequestDict](verizon/models/change_pwndevice_profile_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -15914,7 +17542,13 @@ Send a `POST` request.
 **Sync**
 
 ```python
-result = client.pwn.with_raw_response.change_pwn_device_state_activate(body)
+result = client.pwn.with_raw_response.change_pwn_device_state_activate(
+    ChangePwndeviceStateActivateRequest(
+        account_name="0342351414-00001",
+        device_list=[PwndeviceList(device_ids=[PwndeviceId(id="99948099913024600001", kind="iccid")])],
+        activate=Activate(profile="HSS EsmProfile Enterprise 5G"),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ChangePwndeviceStateResponse
@@ -15925,7 +17559,13 @@ match result:
 **Async**
 
 ```python
-result = await async_client.pwn.with_raw_response.change_pwn_device_state_activate(body)
+result = await async_client.pwn.with_raw_response.change_pwn_device_state_activate(
+    ChangePwndeviceStateActivateRequest(
+        account_name="0342351414-00001",
+        device_list=[PwndeviceList(device_ids=[PwndeviceId(id="99948099913024600001", kind="iccid")])],
+        activate=Activate(profile="HSS EsmProfile Enterprise 5G"),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ChangePwndeviceStateResponse
@@ -15944,7 +17584,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[ChangePwndeviceStateActivateRequest](verizon/models/change_pwndevice_state_activate_request.py) \| [ChangePwndeviceStateActivateRequestDict](verizon/models/change_pwndevice_state_activate_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -15992,7 +17632,15 @@ Send a `POST` request.
 **Sync**
 
 ```python
-result = client.pwn.with_raw_response.change_pwn_device_state_deactivate(body)
+result = client.pwn.with_raw_response.change_pwn_device_state_deactivate(
+    ChangePwndeviceStateDeactivateRequest(
+        account_name="0342351414-00001",
+        device_list=[
+            PwndeviceList(device_ids=[PwndeviceId(id="99948099913031600000", kind="iccid")]),
+            PwndeviceList(device_ids=[PwndeviceId(id="99948099913031700000", kind="iccid")]),
+        ],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ChangePwndeviceStateResponse
@@ -16003,7 +17651,15 @@ match result:
 **Async**
 
 ```python
-result = await async_client.pwn.with_raw_response.change_pwn_device_state_deactivate(body)
+result = await async_client.pwn.with_raw_response.change_pwn_device_state_deactivate(
+    ChangePwndeviceStateDeactivateRequest(
+        account_name="0342351414-00001",
+        device_list=[
+            PwndeviceList(device_ids=[PwndeviceId(id="99948099913031600000", kind="iccid")]),
+            PwndeviceList(device_ids=[PwndeviceId(id="99948099913031700000", kind="iccid")]),
+        ],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ChangePwndeviceStateResponse
@@ -16022,7 +17678,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[ChangePwndeviceStateDeactivateRequest](verizon/models/change_pwndevice_state_deactivate_request.py) \| [ChangePwndeviceStateDeactivateRequestDict](verizon/models/change_pwndevice_state_deactivate_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -16070,7 +17726,7 @@ Send a `GET` request.
 **Sync**
 
 ```python
-result = client.pwn.with_raw_response.get_pwn_performance_consent(aname)
+result = client.pwn.with_raw_response.get_pwn_performance_consent("1533445500-00088")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GetPwnperformanceConsentResponse
@@ -16081,7 +17737,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.pwn.with_raw_response.get_pwn_performance_consent(aname)
+result = await async_client.pwn.with_raw_response.get_pwn_performance_consent("1533445500-00088")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GetPwnperformanceConsentResponse
@@ -16100,7 +17756,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>aname</code> | <code>str</code> | Account name. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -16148,7 +17804,7 @@ Send a `GET` request.
 **Sync**
 
 ```python
-result = client.pwn.with_raw_response.get_profile_list(aname)
+result = client.pwn.with_raw_response.get_profile_list("0342351414-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type PwnprofileList
@@ -16159,7 +17815,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.pwn.with_raw_response.get_profile_list(aname)
+result = await async_client.pwn.with_raw_response.get_profile_list("0342351414-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type PwnprofileList
@@ -16178,7 +17834,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>aname</code> | <code>str</code> | Account name. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -16226,7 +17882,7 @@ Send a `GET` request.
 **Sync**
 
 ```python
-result = client.pwn.with_raw_response.kpi_list(aname)
+result = client.pwn.with_raw_response.kpi_list("0342351414-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type KpiinfoList
@@ -16237,7 +17893,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.pwn.with_raw_response.kpi_list(aname)
+result = await async_client.pwn.with_raw_response.kpi_list("0342351414-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type KpiinfoList
@@ -16256,7 +17912,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>aname</code> | <code>str</code> | Account name. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -16308,7 +17964,9 @@ Retrieves the aggregate usage for an account using pseudo-MDN during the promoti
 **Sync**
 
 ```python
-result = client.promotion_period_information.with_raw_response.get_promo_device_aggregate_usage_history(body)
+result = client.promotion_period_information.with_raw_response.get_promo_device_aggregate_usage_history(
+    RequestBodyForUsage()
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type UsageRequestResponse
@@ -16320,7 +17978,7 @@ match result:
 
 ```python
 result = await async_client.promotion_period_information.with_raw_response.get_promo_device_aggregate_usage_history(
-    body
+    RequestBodyForUsage()
 )
 match result:
     case Success(payload=payload):
@@ -16340,7 +17998,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[RequestBodyForUsage](verizon/models/request_body_for_usage.py) \| [RequestBodyForUsageDict](verizon/models/request_body_for_usage.py)</code> | Retrieve Aggregate Usage |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -16388,7 +18046,7 @@ Retrieves the usage history of a device during the promotion period.
 **Sync**
 
 ```python
-result = client.promotion_period_information.with_raw_response.get_promo_device_usage_history(body)
+result = client.promotion_period_information.with_raw_response.get_promo_device_usage_history(ARequestBodyForUsage())
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ResponseToUsageQuery
@@ -16399,7 +18057,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.promotion_period_information.with_raw_response.get_promo_device_usage_history(body)
+result = await async_client.promotion_period_information.with_raw_response.get_promo_device_usage_history(
+    ARequestBodyForUsage()
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ResponseToUsageQuery
@@ -16418,7 +18078,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[ARequestBodyForUsage](verizon/models/a_request_body_for_usage.py) \| [ARequestBodyForUsageDict](verizon/models/a_request_body_for_usage.py)</code> | Retrieve Aggregate Usage |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -16470,7 +18130,7 @@ Retrieves the rate plans and rate plan details for a profile ID.
 **Sync**
 
 ```python
-result = client.retrieve_rate_plan_list.with_raw_response.get_rate_plan_list(ecpd_id)
+result = client.retrieve_rate_plan_list.with_raw_response.get_rate_plan_list("0000123456-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type Rateplan
@@ -16481,7 +18141,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.retrieve_rate_plan_list.with_raw_response.get_rate_plan_list(ecpd_id)
+result = await async_client.retrieve_rate_plan_list.with_raw_response.get_rate_plan_list("0000123456-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type Rateplan
@@ -16500,7 +18160,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>ecpd_id</code> | <code>str</code> | The Enterprise Customer Profile Database ID. This is the same as the accountName value |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -16581,7 +18241,7 @@ match result:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -16629,7 +18289,7 @@ Retrieve the triggers associated with an account name.
 **Sync**
 
 ```python
-result = client.retrieve_the_triggers.with_raw_response.get_all_triggers_by_account_name(account_name)
+result = client.retrieve_the_triggers.with_raw_response.get_all_triggers_by_account_name("0000123456-000001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type TriggerValueResponse
@@ -16640,7 +18300,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.retrieve_the_triggers.with_raw_response.get_all_triggers_by_account_name(account_name)
+result = await async_client.retrieve_the_triggers.with_raw_response.get_all_triggers_by_account_name(
+    "0000123456-000001"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type TriggerValueResponse
@@ -16659,7 +18321,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>account_name</code> | <code>str</code> | The account name |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -16736,7 +18398,7 @@ match result:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -16784,7 +18446,7 @@ Retrives a specific trigger by its ID.
 **Sync**
 
 ```python
-result = client.retrieve_the_triggers.with_raw_response.get_triggers_by_id(trigger_id)
+result = client.retrieve_the_triggers.with_raw_response.get_triggers_by_id("2874DEC7-26CF-4797-9C6A-B5A2AC72D526")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type TriggerValueResponse2
@@ -16795,7 +18457,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.retrieve_the_triggers.with_raw_response.get_triggers_by_id(trigger_id)
+result = await async_client.retrieve_the_triggers.with_raw_response.get_triggers_by_id(
+    "2874DEC7-26CF-4797-9C6A-B5A2AC72D526"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type TriggerValueResponse2
@@ -16814,7 +18478,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>trigger_id</code> | <code>str</code> | The ID of a specific trigger |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -16866,7 +18530,20 @@ System assign a new activation code to reactivate a deactivated device. **Note:*
 **Sync**
 
 ```python
-result = client.sim_actions.with_raw_response.newactivatecode(body)
+result = client.sim_actions.with_raw_response.newactivatecode(
+    ESimprofileRequest2(
+        devices=[
+            ESimdeviceList(
+                device_ids=[
+                    ESimdeviceId(id="15-digit IMEI", kind="imei"), ESimdeviceId(id="20-digit ICCID", kind="iccid")
+                ],
+            ),
+        ],
+        account_name="0000123456-00001",
+        service_plan="the service plan name",
+        mdn_zip_code="five digit zip code",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ESimrequestResponse
@@ -16877,7 +18554,20 @@ match result:
 **Async**
 
 ```python
-result = await async_client.sim_actions.with_raw_response.newactivatecode(body)
+result = await async_client.sim_actions.with_raw_response.newactivatecode(
+    ESimprofileRequest2(
+        devices=[
+            ESimdeviceList(
+                device_ids=[
+                    ESimdeviceId(id="15-digit IMEI", kind="imei"), ESimdeviceId(id="20-digit ICCID", kind="iccid")
+                ],
+            ),
+        ],
+        account_name="0000123456-00001",
+        service_plan="the service plan name",
+        mdn_zip_code="five digit zip code",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ESimrequestResponse
@@ -16896,7 +18586,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[ESimprofileRequest2](verizon/models/e_simprofile_request2.py) \| [ESimprofileRequest2Dict](verizon/models/e_simprofile_request2.py)</code> | Device Profile Query |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -16951,7 +18641,23 @@ Uses the profile to activate the SIM.
 **Sync**
 
 ```python
-result = client.sim_actions.with_raw_response.setactivate_using_post(body)
+result = client.sim_actions.with_raw_response.setactivate_using_post(
+    ESimprofileRequest(
+        devices=[
+            ESimdeviceList(
+                device_ids=[
+                    ESimdeviceId(id="32-digit EID", kind="eid"),
+                    ESimdeviceId(id="15-digit IMEI", kind="imei"),
+                    ESimdeviceId(id="20-digit ICCID", kind="iccid (ICCID is only used for reactivation)"),
+                ],
+            ),
+        ],
+        carrier_name="Verizon Wireless",
+        account_name="0000123456-00001",
+        service_plan="the service plan name",
+        mdn_zip_code="five digit zip code",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ESimrequestResponse
@@ -16962,7 +18668,23 @@ match result:
 **Async**
 
 ```python
-result = await async_client.sim_actions.with_raw_response.setactivate_using_post(body)
+result = await async_client.sim_actions.with_raw_response.setactivate_using_post(
+    ESimprofileRequest(
+        devices=[
+            ESimdeviceList(
+                device_ids=[
+                    ESimdeviceId(id="32-digit EID", kind="eid"),
+                    ESimdeviceId(id="15-digit IMEI", kind="imei"),
+                    ESimdeviceId(id="20-digit ICCID", kind="iccid (ICCID is only used for reactivation)"),
+                ],
+            ),
+        ],
+        carrier_name="Verizon Wireless",
+        account_name="0000123456-00001",
+        service_plan="the service plan name",
+        mdn_zip_code="five digit zip code",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ESimrequestResponse
@@ -16981,7 +18703,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[ESimprofileRequest](verizon/models/e_simprofile_request.py) \| [ESimprofileRequestDict](verizon/models/e_simprofile_request.py)</code> | Device Profile Query |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -17036,7 +18758,7 @@ Uses the profile to deactivate the SIM.
 **Sync**
 
 ```python
-result = client.sim_actions.with_raw_response.setdeactivate_using_post(body)
+result = client.sim_actions.with_raw_response.setdeactivate_using_post(ProfileRequest2())
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ESimrequestResponse
@@ -17047,7 +18769,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.sim_actions.with_raw_response.setdeactivate_using_post(body)
+result = await async_client.sim_actions.with_raw_response.setdeactivate_using_post(ProfileRequest2())
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ESimrequestResponse
@@ -17066,7 +18788,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[ProfileRequest2](verizon/models/profile_request2.py) \| [ProfileRequest2Dict](verizon/models/profile_request2.py)</code> | Device Profile Query |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -17125,7 +18847,13 @@ Assigns SIM-Secure for IoT licenses to SIMs.
 **Sync**
 
 ```python
-result = client.sim_secure_for_io_t_licenses.with_raw_response.assign_license_to_devices(body)
+result = client.sim_secure_for_io_t_licenses.with_raw_response.assign_license_to_devices(
+    AssignLicenseRequest(
+        account_name="0000123456-00001",
+        devices=[LicenseDeviceList(device_ids=[LicenseDeviceId(id="864508030109877", kind="IMEI")])],
+        sku_number="SIMSec-IoT-Lt",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type SecuritySuccessResult
@@ -17136,7 +18864,13 @@ match result:
 **Async**
 
 ```python
-result = await async_client.sim_secure_for_io_t_licenses.with_raw_response.assign_license_to_devices(body)
+result = await async_client.sim_secure_for_io_t_licenses.with_raw_response.assign_license_to_devices(
+    AssignLicenseRequest(
+        account_name="0000123456-00001",
+        devices=[LicenseDeviceList(device_ids=[LicenseDeviceId(id="864508030109877", kind="IMEI")])],
+        sku_number="SIMSec-IoT-Lt",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type SecuritySuccessResult
@@ -17156,7 +18890,7 @@ match result:
 | --- | --- | --- |
 | <code>body</code> | <code>[AssignLicenseRequest](verizon/models/assign_license_request.py) \| [AssignLicenseRequestDict](verizon/models/assign_license_request.py)</code> | Request to assign license to devices. |
 | <code>x_request_id</code> | <code>str \| None</code> | Transaction Id.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -17211,7 +18945,7 @@ Unassigns SIM-Secure for IoT Flexible and Flexible Bundle license from SIMs.
 **Sync**
 
 ```python
-result = client.sim_secure_for_io_t_licenses.with_raw_response.unassign_license_to_devices(x_request_id)
+result = client.sim_secure_for_io_t_licenses.with_raw_response.unassign_license_to_devices("some example string")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type SecuritySuccessResult
@@ -17222,7 +18956,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.sim_secure_for_io_t_licenses.with_raw_response.unassign_license_to_devices(x_request_id)
+result = await async_client.sim_secure_for_io_t_licenses.with_raw_response.unassign_license_to_devices(
+    "some example string"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type SecuritySuccessResult
@@ -17241,7 +18977,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>x_request_id</code> | <code>str</code> | Transaction Id. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -17277,7 +19013,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 > Source: [Sms](verizon/apis/sms.py)
 
 <details>
-<summary><code>def list_devices_sms_messages(aname: str, *, next: int | None = None, request_options: RequestOptionsOrDict | None = None) -> ApiResult[SmsmessagesQueryResult, ListDevicesSmsmessagesErrorBody]</code></summary>
+<summary><code>def list_devices_sms_messages(aname: str, *, next_: int | None = None, request_options: RequestOptionsOrDict | None = None) -> ApiResult[SmsmessagesQueryResult, ListDevicesSmsmessagesErrorBody]</code></summary>
 
 <dl>
 <dd>
@@ -17300,7 +19036,7 @@ When HTTP status is 202, a URL will be returned in the Location header of the fo
 **Sync**
 
 ```python
-result = client.sms.with_raw_response.list_devices_sms_messages(aname)
+result = client.sms.with_raw_response.list_devices_sms_messages("0252012345-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type SmsmessagesQueryResult
@@ -17311,7 +19047,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.sms.with_raw_response.list_devices_sms_messages(aname)
+result = await async_client.sms.with_raw_response.list_devices_sms_messages("0252012345-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type SmsmessagesQueryResult
@@ -17330,8 +19066,8 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>aname</code> | <code>str</code> | Account name. |
-| <code>next</code> | <code>int \| None</code> | Continue the previous query from the URL in Location Header.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>next_</code> | <code>int \| None</code> | Continue the previous query from the URL in Location Header.<br>**Default**: <code>None</code> |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -17386,7 +19122,16 @@ The messages are queued on the ThingSpace Platform and sent as soon as possible,
 **Sync**
 
 ```python
-result = client.sms.with_raw_response.send_sms_to_device(body)
+result = client.sms.with_raw_response.send_sms_to_device(
+    SmssendRequest(
+        account_name="0000123456-00001",
+        sms_message="the body or text of the message itself",
+        custom_fields=[CustomFields(key="CustomField1", value="value of the field")],
+        data_encoding="optional 7 or 8-bit encoding",
+        device_ids=[DeviceId(id="20-digit ICCID", kind="iccid")],
+        time_to_live="a000000010000000R",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -17397,7 +19142,16 @@ match result:
 **Async**
 
 ```python
-result = await async_client.sms.with_raw_response.send_sms_to_device(body)
+result = await async_client.sms.with_raw_response.send_sms_to_device(
+    SmssendRequest(
+        account_name="0000123456-00001",
+        sms_message="the body or text of the message itself",
+        custom_fields=[CustomFields(key="CustomField1", value="value of the field")],
+        data_encoding="optional 7 or 8-bit encoding",
+        device_ids=[DeviceId(id="20-digit ICCID", kind="iccid")],
+        time_to_live="a000000010000000R",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -17416,7 +19170,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[SmssendRequest](verizon/models/smssend_request.py) \| [SmssendRequestDict](verizon/models/smssend_request.py)</code> | Request to send SMS. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -17471,7 +19225,7 @@ Tells the ThingSpace Platform to start sending mobile-originated SMS messages th
 **Sync**
 
 ```python
-result = client.sms.with_raw_response.start_queued_sms_delivery(aname)
+result = client.sms.with_raw_response.start_queued_sms_delivery("0252012345-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ConnectivityManagementSuccessResult
@@ -17482,7 +19236,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.sms.with_raw_response.start_queued_sms_delivery(aname)
+result = await async_client.sms.with_raw_response.start_queued_sms_delivery("0252012345-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ConnectivityManagementSuccessResult
@@ -17501,7 +19255,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>aname</code> | <code>str</code> | Account name. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -17560,7 +19314,20 @@ Create a device profile
 **Sync**
 
 ```python
-result = client.sensor_insights_device_profile.with_raw_response.create_a_profile(body)
+result = client.sensor_insights_device_profile.with_raw_response.create_a_profile(
+    DtoConfigurationProfile(
+        accountname="0000123456-00001",
+        profiles=[
+            DtoProfile(
+                kind="the kind of profile being created",
+                version="1.0",
+                modelid="00000000-0000-0000-0000-000000000019",
+                name="Demo Entry sensor 1730928792",
+                configuration={},
+            ),
+        ],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[DtoProfileResponse]
@@ -17571,7 +19338,20 @@ match result:
 **Async**
 
 ```python
-result = await async_client.sensor_insights_device_profile.with_raw_response.create_a_profile(body)
+result = await async_client.sensor_insights_device_profile.with_raw_response.create_a_profile(
+    DtoConfigurationProfile(
+        accountname="0000123456-00001",
+        profiles=[
+            DtoProfile(
+                kind="the kind of profile being created",
+                version="1.0",
+                modelid="00000000-0000-0000-0000-000000000019",
+                name="Demo Entry sensor 1730928792",
+                configuration={},
+            ),
+        ],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[DtoProfileResponse]
@@ -17590,7 +19370,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DtoConfigurationProfile](verizon/models/dto_configuration_profile.py) \| [DtoConfigurationProfileDict](verizon/models/dto_configuration_profile.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -17648,7 +19428,7 @@ Delete a device profile
 **Sync**
 
 ```python
-result = client.sensor_insights_device_profile.with_raw_response.delete_a_profile(deleterequest)
+result = client.sensor_insights_device_profile.with_raw_response.delete_a_profile(DtoConfigurationProfileDelete())
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[DtoProfileResponse]
@@ -17659,7 +19439,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.sensor_insights_device_profile.with_raw_response.delete_a_profile(deleterequest)
+result = await async_client.sensor_insights_device_profile.with_raw_response.delete_a_profile(
+    DtoConfigurationProfileDelete()
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[DtoProfileResponse]
@@ -17678,7 +19460,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>deleterequest</code> | <code>[DtoConfigurationProfileDelete](verizon/models/dto_configuration_profile_delete.py) \| [DtoConfigurationProfileDeleteDict](verizon/models/dto_configuration_profile_delete.py)</code> | payload for the delete request |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -17736,7 +19518,13 @@ Query a device profile for an individual device
 **Sync**
 
 ```python
-result = client.sensor_insights_device_profile.with_raw_response.query_a_profile(body)
+result = client.sensor_insights_device_profile.with_raw_response.query_a_profile(
+    ResourceResourceQuery(
+        filter=Devicepropertyfilter(
+            selection=Devicepropertyselection(modelid="00000000-0000-0000-0000-000000000019"), querytotalcount=True
+        ),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[DtoProfileResponse]
@@ -17747,7 +19535,13 @@ match result:
 **Async**
 
 ```python
-result = await async_client.sensor_insights_device_profile.with_raw_response.query_a_profile(body)
+result = await async_client.sensor_insights_device_profile.with_raw_response.query_a_profile(
+    ResourceResourceQuery(
+        filter=Devicepropertyfilter(
+            selection=Devicepropertyselection(modelid="00000000-0000-0000-0000-000000000019"), querytotalcount=True
+        ),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[DtoProfileResponse]
@@ -17766,7 +19560,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[ResourceResourceQuery](verizon/models/resource_resource_query.py) \| [ResourceResourceQueryDict](verizon/models/resource_resource_query.py)</code> | body |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -17824,7 +19618,7 @@ Partially update a device profile
 **Sync**
 
 ```python
-result = client.sensor_insights_device_profile.with_raw_response.update_a_profile(body)
+result = client.sensor_insights_device_profile.with_raw_response.update_a_profile(DtoConfigurationProfilePath())
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[DtoProfileResponse]
@@ -17835,7 +19629,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.sensor_insights_device_profile.with_raw_response.update_a_profile(body)
+result = await async_client.sensor_insights_device_profile.with_raw_response.update_a_profile(
+    DtoConfigurationProfilePath()
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[DtoProfileResponse]
@@ -17854,7 +19650,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DtoConfigurationProfilePath](verizon/models/dto_configuration_profile_path.py) \| [DtoConfigurationProfilePathDict](verizon/models/dto_configuration_profile_path.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -17916,7 +19712,27 @@ Send a `POST` request.
 **Sync**
 
 ```python
-result = client.sensor_insights_devices.with_raw_response.sensor_insights_device_action_set_request(body)
+result = client.sensor_insights_devices.with_raw_response.sensor_insights_device_action_set_request(
+    DtoDeviceActionSetRequest(
+        accountname="0000123456-00001",
+        configuration=DtoDeviceActionSetConfiguration(device_config=DtoDeviceConfig(ble=SensorInsightsBle())),
+        resourceidentifier=DtoDeviceResourceIdentifier(
+            deveui="The unique EUI64 address of the device",
+            deviceid="The UUID of the device",
+            esn=223372036854775800,
+            iccid="The 20-digit Integrated Circuit Card ID (SIM card ID)",
+            imei=223372036854775,
+            imsi=223372036854775800,
+            mac="The Media Access Control address of the device, listed on the device in the format XX-XX-XX-XX-XX-XX or XX:XX:XX:XX:XX:XX",
+            manufacturer="REOLINK",
+            meid="The 56-bit Mobile Equipment ID",
+            msisdn="The Mobile Station International Subscriber Directory Number. In the USA, this is 1+ a 10-digit phone number",
+            node_uuid="The UUID of the node the device is associated with",
+            qrcode="The Quick Response (QR) code",
+            serial="The device's serial number",
+        ),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DtoDeviceActionSetResponse
@@ -17927,7 +19743,27 @@ match result:
 **Async**
 
 ```python
-result = await async_client.sensor_insights_devices.with_raw_response.sensor_insights_device_action_set_request(body)
+result = await async_client.sensor_insights_devices.with_raw_response.sensor_insights_device_action_set_request(
+    DtoDeviceActionSetRequest(
+        accountname="0000123456-00001",
+        configuration=DtoDeviceActionSetConfiguration(device_config=DtoDeviceConfig(ble=SensorInsightsBle())),
+        resourceidentifier=DtoDeviceResourceIdentifier(
+            deveui="The unique EUI64 address of the device",
+            deviceid="The UUID of the device",
+            esn=223372036854775800,
+            iccid="The 20-digit Integrated Circuit Card ID (SIM card ID)",
+            imei=223372036854775,
+            imsi=223372036854775800,
+            mac="The Media Access Control address of the device, listed on the device in the format XX-XX-XX-XX-XX-XX or XX:XX:XX:XX:XX:XX",
+            manufacturer="REOLINK",
+            meid="The 56-bit Mobile Equipment ID",
+            msisdn="The Mobile Station International Subscriber Directory Number. In the USA, this is 1+ a 10-digit phone number",
+            node_uuid="The UUID of the node the device is associated with",
+            qrcode="The Quick Response (QR) code",
+            serial="The device's serial number",
+        ),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DtoDeviceActionSetResponse
@@ -17946,7 +19782,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DmV1DevicesActionsSetRequest](verizon/models/unions/dm_v1_devices_actions_set_request.py) \| [DmV1DevicesActionsSetRequestDict](verizon/models/unions/dm_v1_devices_actions_set_request.py)</code> | Set device configuration |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -18003,7 +19839,26 @@ Send a `POST` request.
 **Sync**
 
 ```python
-result = client.sensor_insights_devices.with_raw_response.sensor_insights_last_reported_time_request(body)
+result = client.sensor_insights_devices.with_raw_response.sensor_insights_last_reported_time_request(
+    DtoLastReportedTimeRequest(
+        accountname="0000123456-00001",
+        resourceidentifier=DtoDeviceResourceIdentifier(
+            deveui="The unique EUI64 address of the device",
+            deviceid="The UUID of the device",
+            esn=223372036854775800,
+            iccid="The 20-digit Integrated Circuit Card ID (SIM card ID)",
+            imei=223372036854775,
+            imsi=223372036854775800,
+            mac="The Media Access Control address of the device, listed on the device in the format XX-XX-XX-XX-XX-XX or XX:XX:XX:XX:XX:XX",
+            manufacturer="REOLINK",
+            meid="The 56-bit Mobile Equipment ID",
+            msisdn="The Mobile Station International Subscriber Directory Number. In the USA, this is 1+ a 10-digit phone number",
+            node_uuid="The UUID of the node the device is associated with",
+            qrcode="The Quick Response (QR) code",
+            serial="The device's serial number",
+        ),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DtoLastReportedTimeResponse
@@ -18014,7 +19869,26 @@ match result:
 **Async**
 
 ```python
-result = await async_client.sensor_insights_devices.with_raw_response.sensor_insights_last_reported_time_request(body)
+result = await async_client.sensor_insights_devices.with_raw_response.sensor_insights_last_reported_time_request(
+    DtoLastReportedTimeRequest(
+        accountname="0000123456-00001",
+        resourceidentifier=DtoDeviceResourceIdentifier(
+            deveui="The unique EUI64 address of the device",
+            deviceid="The UUID of the device",
+            esn=223372036854775800,
+            iccid="The 20-digit Integrated Circuit Card ID (SIM card ID)",
+            imei=223372036854775,
+            imsi=223372036854775800,
+            mac="The Media Access Control address of the device, listed on the device in the format XX-XX-XX-XX-XX-XX or XX:XX:XX:XX:XX:XX",
+            manufacturer="REOLINK",
+            meid="The 56-bit Mobile Equipment ID",
+            msisdn="The Mobile Station International Subscriber Directory Number. In the USA, this is 1+ a 10-digit phone number",
+            node_uuid="The UUID of the node the device is associated with",
+            qrcode="The Quick Response (QR) code",
+            serial="The device's serial number",
+        ),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DtoLastReportedTimeResponse
@@ -18033,7 +19907,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DtoLastReportedTimeRequest](verizon/models/dto_last_reported_time_request.py) \| [DtoLastReportedTimeRequestDict](verizon/models/dto_last_reported_time_request.py)</code> | Get the last reported information for a device |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -18090,7 +19964,20 @@ Send a `POST` request.
 **Sync**
 
 ```python
-result = client.sensor_insights_devices.with_raw_response.sensor_insights_list_device_experience_history_request(body)
+result = client.sensor_insights_devices.with_raw_response.sensor_insights_list_device_experience_history_request(
+    DtoListDeviceExperienceHistoryRequest(
+        accountname="0000123456-00001",
+        filter=DtoFilter(
+            expand="device detail(s)",
+            limitnumber=100,
+            nopagination=True,
+            page="The number of pages",
+            pagenumber=100,
+            projection=["specific device fields requested"],
+            selection={"additionalProp1": "string", "additionalProp2": "string", "additionalProp3": "string"},
+        ),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[UserDeviceExperienceHistory]
@@ -18102,7 +19989,18 @@ match result:
 
 ```python
 result = await async_client.sensor_insights_devices.with_raw_response.sensor_insights_list_device_experience_history_request(
-    body
+    DtoListDeviceExperienceHistoryRequest(
+        accountname="0000123456-00001",
+        filter=DtoFilter(
+            expand="device detail(s)",
+            limitnumber=100,
+            nopagination=True,
+            page="The number of pages",
+            pagenumber=100,
+            projection=["specific device fields requested"],
+            selection={"additionalProp1": "string", "additionalProp2": "string", "additionalProp3": "string"},
+        ),
+    ),
 )
 match result:
     case Success(payload=payload):
@@ -18122,7 +20020,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DtoListDeviceExperienceHistoryRequest](verizon/models/dto_list_device_experience_history_request.py) \| [DtoListDeviceExperienceHistoryRequestDict](verizon/models/dto_list_device_experience_history_request.py)</code> | List the device experience |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -18181,7 +20079,35 @@ Send a `POST` request.
 **Sync**
 
 ```python
-result = client.sensor_insights_devices.with_raw_response.sensor_insights_list_devices_request(body)
+result = client.sensor_insights_devices.with_raw_response.sensor_insights_list_devices_request(
+    DtoListDevicesRequest(
+        accountname="0000123456-00001",
+        filter=DtoFilter(
+            expand="device detail(s)",
+            limitnumber=100,
+            nopagination=True,
+            page="The number of pages",
+            pagenumber=100,
+            projection=["specific device fields requested"],
+            selection={"additionalProp1": "string", "additionalProp2": "string", "additionalProp3": "string"},
+        ),
+        resourceidentifier=DtoDeviceResourceIdentifier(
+            deveui="The unique EUI64 address of the device",
+            deviceid="The UUID of the device",
+            esn=223372036854775800,
+            iccid="The 20-digit Integrated Circuit Card ID (SIM card ID)",
+            imei=223372036854775,
+            imsi=223372036854775800,
+            mac="The Media Access Control address of the device, listed on the device in the format XX-XX-XX-XX-XX-XX or XX:XX:XX:XX:XX:XX",
+            manufacturer="REOLINK",
+            meid="The 56-bit Mobile Equipment ID",
+            msisdn="The Mobile Station International Subscriber Directory Number. In the USA, this is 1+ a 10-digit phone number",
+            node_uuid="The UUID of the node the device is associated with",
+            qrcode="The Quick Response (QR) code",
+            serial="The device's serial number",
+        ),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[DtoExpandedDeviceResponse]
@@ -18192,7 +20118,35 @@ match result:
 **Async**
 
 ```python
-result = await async_client.sensor_insights_devices.with_raw_response.sensor_insights_list_devices_request(body)
+result = await async_client.sensor_insights_devices.with_raw_response.sensor_insights_list_devices_request(
+    DtoListDevicesRequest(
+        accountname="0000123456-00001",
+        filter=DtoFilter(
+            expand="device detail(s)",
+            limitnumber=100,
+            nopagination=True,
+            page="The number of pages",
+            pagenumber=100,
+            projection=["specific device fields requested"],
+            selection={"additionalProp1": "string", "additionalProp2": "string", "additionalProp3": "string"},
+        ),
+        resourceidentifier=DtoDeviceResourceIdentifier(
+            deveui="The unique EUI64 address of the device",
+            deviceid="The UUID of the device",
+            esn=223372036854775800,
+            iccid="The 20-digit Integrated Circuit Card ID (SIM card ID)",
+            imei=223372036854775,
+            imsi=223372036854775800,
+            mac="The Media Access Control address of the device, listed on the device in the format XX-XX-XX-XX-XX-XX or XX:XX:XX:XX:XX:XX",
+            manufacturer="REOLINK",
+            meid="The 56-bit Mobile Equipment ID",
+            msisdn="The Mobile Station International Subscriber Directory Number. In the USA, this is 1+ a 10-digit phone number",
+            node_uuid="The UUID of the node the device is associated with",
+            qrcode="The Quick Response (QR) code",
+            serial="The device's serial number",
+        ),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[DtoExpandedDeviceResponse]
@@ -18211,7 +20165,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DtoListDevicesRequest](verizon/models/dto_list_devices_request.py) \| [DtoListDevicesRequestDict](verizon/models/dto_list_devices_request.py)</code> | List all device details on an account |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -18266,7 +20220,20 @@ Send a `POST` request.
 **Sync**
 
 ```python
-result = client.sensor_insights_devices.with_raw_response.sensor_insights_list_network_experience_history_request(body)
+result = client.sensor_insights_devices.with_raw_response.sensor_insights_list_network_experience_history_request(
+    DtoListNetworkExperienceHistoryRequest(
+        accountname="0000123456-00001",
+        filter=DtoFilter(
+            expand="device detail(s)",
+            limitnumber=100,
+            nopagination=True,
+            page="The number of pages",
+            pagenumber=100,
+            projection=["specific device fields requested"],
+            selection={"additionalProp1": "string", "additionalProp2": "string", "additionalProp3": "string"},
+        ),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[UserNetworkExperienceHistory]
@@ -18278,7 +20245,18 @@ match result:
 
 ```python
 result = await async_client.sensor_insights_devices.with_raw_response.sensor_insights_list_network_experience_history_request(
-    body
+    DtoListNetworkExperienceHistoryRequest(
+        accountname="0000123456-00001",
+        filter=DtoFilter(
+            expand="device detail(s)",
+            limitnumber=100,
+            nopagination=True,
+            page="The number of pages",
+            pagenumber=100,
+            projection=["specific device fields requested"],
+            selection={"additionalProp1": "string", "additionalProp2": "string", "additionalProp3": "string"},
+        ),
+    ),
 )
 match result:
     case Success(payload=payload):
@@ -18298,7 +20276,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DtoListNetworkExperienceHistoryRequest](verizon/models/dto_list_network_experience_history_request.py) \| [DtoListNetworkExperienceHistoryRequestDict](verizon/models/dto_list_network_experience_history_request.py)</code> | List the network experience |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -18357,7 +20335,63 @@ Send a `PATCH` request.
 **Sync**
 
 ```python
-result = client.sensor_insights_devices.with_raw_response.sensor_insights_patch_device_request(body)
+result = client.sensor_insights_devices.with_raw_response.sensor_insights_patch_device_request(
+    DtoPatchDeviceRequest(
+        accountname="0000123456-00001",
+        device=ResourceDevice(
+            accountclientid="null",
+            billingaccountid="0000123456-00001",
+            chipset="The chipset used by the device",
+            createdon=datetime(2023, 10, 2, 15, 46, 34, 562000, tzinfo=timezone.utc),
+            customdata={"additionalProp1": {}, "additionalProp2": {}, "additionalProp3": {}},
+            description="The number of days to retaing the event data",
+            esn=223372036854775800,
+            fields=DtoFields(additional_prop1="string", additional_prop2="string", additional_prop3="string"),
+            foreignid="c1f178d3-eeee-ffff-gggg-0d6b7ae6022a",
+            hardwareversion="1.0",
+            iccid="The 20-digit Integrated Circuit Card ID (SIM card ID)",
+            id="33e21f61-a44a-44c9-b7a0-a63f5d19bd4f",
+            imei=223372036854775,
+            imsi=223372036854775800,
+            lastupdated=datetime(2023, 10, 2, 15, 46, 34, 562000, tzinfo=timezone.utc),
+            licenses=["licenses assigned to the device"],
+            mac="The Media Access Control address of the device, listed on the device in the format XX-XX-XX-XX-XX-XX or XX:XX:XX:XX:XX:XX",
+            manufacturer="REOLINK",
+            meid="The 56-bit Mobile Equipment ID",
+            msisdn="The Mobile Station International Subscriber Directory Number. In the USA, this is 1+ a 10-digit phone number",
+            name="User defined name of the record",
+            parentdeviceid="BLE device ID",
+            productmodel="Model name of the device",
+            providerid="Verizon Wireless",
+            qrcode="The Quick Response (QR) code",
+            refid="P3730-1422323050860",
+            refidtype="The type of value represented by `refid`",
+            serial="The device's serial number",
+            services=["configuration"],
+            sku="The Stock Keeping Unit (SKU) number",
+            softwareversion="the current device software version",
+            state="success",
+            version="1.0",
+            versionid="337bd2e8-eeee-ffff-gggg-5207992fd395",
+            eventretention=90,
+        ),
+        resourceidentifier=DtoDeviceResourceIdentifier(
+            deveui="The unique EUI64 address of the device",
+            deviceid="The UUID of the device",
+            esn=223372036854775800,
+            iccid="The 20-digit Integrated Circuit Card ID (SIM card ID)",
+            imei=223372036854775,
+            imsi=223372036854775800,
+            mac="The Media Access Control address of the device, listed on the device in the format XX-XX-XX-XX-XX-XX or XX:XX:XX:XX:XX:XX",
+            manufacturer="REOLINK",
+            meid="The 56-bit Mobile Equipment ID",
+            msisdn="The Mobile Station International Subscriber Directory Number. In the USA, this is 1+ a 10-digit phone number",
+            node_uuid="The UUID of the node the device is associated with",
+            qrcode="The Quick Response (QR) code",
+            serial="The device's serial number",
+        ),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ResourceDevice
@@ -18368,7 +20402,63 @@ match result:
 **Async**
 
 ```python
-result = await async_client.sensor_insights_devices.with_raw_response.sensor_insights_patch_device_request(body)
+result = await async_client.sensor_insights_devices.with_raw_response.sensor_insights_patch_device_request(
+    DtoPatchDeviceRequest(
+        accountname="0000123456-00001",
+        device=ResourceDevice(
+            accountclientid="null",
+            billingaccountid="0000123456-00001",
+            chipset="The chipset used by the device",
+            createdon=datetime(2023, 10, 2, 15, 46, 34, 562000, tzinfo=timezone.utc),
+            customdata={"additionalProp1": {}, "additionalProp2": {}, "additionalProp3": {}},
+            description="The number of days to retaing the event data",
+            esn=223372036854775800,
+            fields=DtoFields(additional_prop1="string", additional_prop2="string", additional_prop3="string"),
+            foreignid="c1f178d3-eeee-ffff-gggg-0d6b7ae6022a",
+            hardwareversion="1.0",
+            iccid="The 20-digit Integrated Circuit Card ID (SIM card ID)",
+            id="33e21f61-a44a-44c9-b7a0-a63f5d19bd4f",
+            imei=223372036854775,
+            imsi=223372036854775800,
+            lastupdated=datetime(2023, 10, 2, 15, 46, 34, 562000, tzinfo=timezone.utc),
+            licenses=["licenses assigned to the device"],
+            mac="The Media Access Control address of the device, listed on the device in the format XX-XX-XX-XX-XX-XX or XX:XX:XX:XX:XX:XX",
+            manufacturer="REOLINK",
+            meid="The 56-bit Mobile Equipment ID",
+            msisdn="The Mobile Station International Subscriber Directory Number. In the USA, this is 1+ a 10-digit phone number",
+            name="User defined name of the record",
+            parentdeviceid="BLE device ID",
+            productmodel="Model name of the device",
+            providerid="Verizon Wireless",
+            qrcode="The Quick Response (QR) code",
+            refid="P3730-1422323050860",
+            refidtype="The type of value represented by `refid`",
+            serial="The device's serial number",
+            services=["configuration"],
+            sku="The Stock Keeping Unit (SKU) number",
+            softwareversion="the current device software version",
+            state="success",
+            version="1.0",
+            versionid="337bd2e8-eeee-ffff-gggg-5207992fd395",
+            eventretention=90,
+        ),
+        resourceidentifier=DtoDeviceResourceIdentifier(
+            deveui="The unique EUI64 address of the device",
+            deviceid="The UUID of the device",
+            esn=223372036854775800,
+            iccid="The 20-digit Integrated Circuit Card ID (SIM card ID)",
+            imei=223372036854775,
+            imsi=223372036854775800,
+            mac="The Media Access Control address of the device, listed on the device in the format XX-XX-XX-XX-XX-XX or XX:XX:XX:XX:XX:XX",
+            manufacturer="REOLINK",
+            meid="The 56-bit Mobile Equipment ID",
+            msisdn="The Mobile Station International Subscriber Directory Number. In the USA, this is 1+ a 10-digit phone number",
+            node_uuid="The UUID of the node the device is associated with",
+            qrcode="The Quick Response (QR) code",
+            serial="The device's serial number",
+        ),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ResourceDevice
@@ -18387,7 +20477,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DtoPatchDeviceRequest](verizon/models/dto_patch_device_request.py) \| [DtoPatchDeviceRequestDict](verizon/models/dto_patch_device_request.py)</code> | Partially update a device's details |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -18450,7 +20540,35 @@ Send a `POST` request.
 **Sync**
 
 ```python
-result = client.sensor_insights_gateways.with_raw_response.sensor_insights_list_gateway_devices_request(body)
+result = client.sensor_insights_gateways.with_raw_response.sensor_insights_list_gateway_devices_request(
+    DtoListDevicesRequest(
+        accountname="0000123456-00001",
+        filter=DtoFilter(
+            expand="device detail(s)",
+            limitnumber=100,
+            nopagination=True,
+            page="The number of pages",
+            pagenumber=100,
+            projection=["specific device fields requested"],
+            selection={"additionalProp1": "string", "additionalProp2": "string", "additionalProp3": "string"},
+        ),
+        resourceidentifier=DtoDeviceResourceIdentifier(
+            deveui="The unique EUI64 address of the device",
+            deviceid="The UUID of the device",
+            esn=223372036854775800,
+            iccid="The 20-digit Integrated Circuit Card ID (SIM card ID)",
+            imei=223372036854775,
+            imsi=223372036854775800,
+            mac="The Media Access Control address of the device, listed on the device in the format XX-XX-XX-XX-XX-XX or XX:XX:XX:XX:XX:XX",
+            manufacturer="REOLINK",
+            meid="The 56-bit Mobile Equipment ID",
+            msisdn="The Mobile Station International Subscriber Directory Number. In the USA, this is 1+ a 10-digit phone number",
+            node_uuid="The UUID of the node the device is associated with",
+            qrcode="The Quick Response (QR) code",
+            serial="The device's serial number",
+        ),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[ResourceDevice]
@@ -18462,7 +20580,33 @@ match result:
 
 ```python
 result = await async_client.sensor_insights_gateways.with_raw_response.sensor_insights_list_gateway_devices_request(
-    body
+    DtoListDevicesRequest(
+        accountname="0000123456-00001",
+        filter=DtoFilter(
+            expand="device detail(s)",
+            limitnumber=100,
+            nopagination=True,
+            page="The number of pages",
+            pagenumber=100,
+            projection=["specific device fields requested"],
+            selection={"additionalProp1": "string", "additionalProp2": "string", "additionalProp3": "string"},
+        ),
+        resourceidentifier=DtoDeviceResourceIdentifier(
+            deveui="The unique EUI64 address of the device",
+            deviceid="The UUID of the device",
+            esn=223372036854775800,
+            iccid="The 20-digit Integrated Circuit Card ID (SIM card ID)",
+            imei=223372036854775,
+            imsi=223372036854775800,
+            mac="The Media Access Control address of the device, listed on the device in the format XX-XX-XX-XX-XX-XX or XX:XX:XX:XX:XX:XX",
+            manufacturer="REOLINK",
+            meid="The 56-bit Mobile Equipment ID",
+            msisdn="The Mobile Station International Subscriber Directory Number. In the USA, this is 1+ a 10-digit phone number",
+            node_uuid="The UUID of the node the device is associated with",
+            qrcode="The Quick Response (QR) code",
+            serial="The device's serial number",
+        ),
+    ),
 )
 match result:
     case Success(payload=payload):
@@ -18482,7 +20626,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DtoListDevicesRequest](verizon/models/dto_list_devices_request.py) \| [DtoListDevicesRequestDict](verizon/models/dto_list_devices_request.py)</code> | Get gateway information |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -18574,7 +20718,7 @@ match result:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -18661,7 +20805,7 @@ match result:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -18724,7 +20868,11 @@ Send a `POST` request.
 
 ```python
 result = client.sensor_insights_notification_groups.with_raw_response.sensor_insights_add_users_to_notification_group_request(
-    body
+    DtoAddUsersToNotificationGroupRequest(
+        accountname="0000123456-00001",
+        id="45f1a56e-eeee-ffff-gggg-68cb994feb5f",
+        userids=["ee70a869-eeee-ffff-gggg-07c14c31f96e", "131501ff-eeee-ffff-gggg-647d19179a12"],
+    ),
 )
 match result:
     case Success():
@@ -18737,7 +20885,11 @@ match result:
 
 ```python
 result = await async_client.sensor_insights_notification_groups.with_raw_response.sensor_insights_add_users_to_notification_group_request(
-    body
+    DtoAddUsersToNotificationGroupRequest(
+        accountname="0000123456-00001",
+        id="45f1a56e-eeee-ffff-gggg-68cb994feb5f",
+        userids=["ee70a869-eeee-ffff-gggg-07c14c31f96e", "131501ff-eeee-ffff-gggg-647d19179a12"],
+    ),
 )
 match result:
     case Success():
@@ -18757,7 +20909,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DtoAddUsersToNotificationGroupRequest](verizon/models/dto_add_users_to_notification_group_request.py) \| [DtoAddUsersToNotificationGroupRequestDict](verizon/models/dto_add_users_to_notification_group_request.py)</code> | Add users to a notification group |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -18817,7 +20969,13 @@ Send a `POST` request.
 
 ```python
 result = client.sensor_insights_notification_groups.with_raw_response.sensor_insights_create_notification_group_request(
-    body
+    DtoCreateNotificationGroupRequest(
+        accountname="0000123456-00001",
+        group=DtoNotificationGroupRequestEntity(
+            description="a short description", groupemail="email@domain.com", name="User defined name of the record"
+        ),
+        userids=["ee70a869-eeee-ffff-gggg-07c14c31f96e", "131501ff-eeee-ffff-gggg-647d19179a12"],
+    ),
 )
 match result:
     case Success(payload=payload):
@@ -18830,7 +20988,13 @@ match result:
 
 ```python
 result = await async_client.sensor_insights_notification_groups.with_raw_response.sensor_insights_create_notification_group_request(
-    body
+    DtoCreateNotificationGroupRequest(
+        accountname="0000123456-00001",
+        group=DtoNotificationGroupRequestEntity(
+            description="a short description", groupemail="email@domain.com", name="User defined name of the record"
+        ),
+        userids=["ee70a869-eeee-ffff-gggg-07c14c31f96e", "131501ff-eeee-ffff-gggg-647d19179a12"],
+    ),
 )
 match result:
     case Success(payload=payload):
@@ -18850,7 +21014,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DtoCreateNotificationGroupRequest](verizon/models/dto_create_notification_group_request.py) \| [DtoCreateNotificationGroupRequestDict](verizon/models/dto_create_notification_group_request.py)</code> | Create a notification group |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -18908,7 +21072,11 @@ Send a `DELETE` request.
 **Sync**
 
 ```python
-result = client.sensor_insights_notification_groups.with_raw_response.sensor_insights_delete_notification_group(payload)
+result = client.sensor_insights_notification_groups.with_raw_response.sensor_insights_delete_notification_group(
+    DtoDeleteNotificationGroupRequest(
+        accountname="0000123456-00001", force=True, id="6737ca22-eeee-ffff-gggg-84c09f2ede8e"
+    ),
+)
 match result:
     case Success():
         ...  # 2xx, no content
@@ -18920,7 +21088,9 @@ match result:
 
 ```python
 result = await async_client.sensor_insights_notification_groups.with_raw_response.sensor_insights_delete_notification_group(
-    payload
+    DtoDeleteNotificationGroupRequest(
+        accountname="0000123456-00001", force=True, id="6737ca22-eeee-ffff-gggg-84c09f2ede8e"
+    ),
 )
 match result:
     case Success():
@@ -18940,7 +21110,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>payload</code> | <code>[DtoDeleteNotificationGroupRequest](verizon/models/dto_delete_notification_group_request.py) \| [DtoDeleteNotificationGroupRequestDict](verizon/models/dto_delete_notification_group_request.py)</code> | Payload for the delete request. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -18999,7 +21169,18 @@ Send a `POST` request.
 
 ```python
 result = client.sensor_insights_notification_groups.with_raw_response.sensor_insights_list_notification_group_request(
-    body
+    DtoListNotificationGroupRequest(
+        accountname="0000123456-00001",
+        filter=DtoFilter(
+            expand="device detail(s)",
+            limitnumber=100,
+            nopagination=True,
+            page="The number of pages",
+            pagenumber=100,
+            projection=["specific device fields requested"],
+            selection={"additionalProp1": "string", "additionalProp2": "string", "additionalProp3": "string"},
+        ),
+    ),
 )
 match result:
     case Success(payload=payload):
@@ -19012,7 +21193,18 @@ match result:
 
 ```python
 result = await async_client.sensor_insights_notification_groups.with_raw_response.sensor_insights_list_notification_group_request(
-    body
+    DtoListNotificationGroupRequest(
+        accountname="0000123456-00001",
+        filter=DtoFilter(
+            expand="device detail(s)",
+            limitnumber=100,
+            nopagination=True,
+            page="The number of pages",
+            pagenumber=100,
+            projection=["specific device fields requested"],
+            selection={"additionalProp1": "string", "additionalProp2": "string", "additionalProp3": "string"},
+        ),
+    ),
 )
 match result:
     case Success(payload=payload):
@@ -19032,7 +21224,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DtoListNotificationGroupRequest](verizon/models/dto_list_notification_group_request.py) \| [DtoListNotificationGroupRequestDict](verizon/models/dto_list_notification_group_request.py)</code> | Retrieve a notification group |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -19092,7 +21284,11 @@ Send a `POST` request.
 
 ```python
 result = client.sensor_insights_notification_groups.with_raw_response.sensor_insights_remove_users_from_notification_group_request(
-    body
+    DtoRemoveUsersFromNotificationGroupRequest(
+        accountname="0000123456-00001",
+        id="111538a8-eeee-ffff-gggg-3b72804403e8",
+        userids=["ee70a869-eeee-ffff-gggg-07c14c31f96e", "131501ff-eeee-ffff-gggg-647d19179a12"],
+    ),
 )
 match result:
     case Success():
@@ -19105,7 +21301,11 @@ match result:
 
 ```python
 result = await async_client.sensor_insights_notification_groups.with_raw_response.sensor_insights_remove_users_from_notification_group_request(
-    body
+    DtoRemoveUsersFromNotificationGroupRequest(
+        accountname="0000123456-00001",
+        id="111538a8-eeee-ffff-gggg-3b72804403e8",
+        userids=["ee70a869-eeee-ffff-gggg-07c14c31f96e", "131501ff-eeee-ffff-gggg-647d19179a12"],
+    ),
 )
 match result:
     case Success():
@@ -19125,7 +21325,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DtoRemoveUsersFromNotificationGroupRequest](verizon/models/dto_remove_users_from_notification_group_request.py) \| [DtoRemoveUsersFromNotificationGroupRequestDict](verizon/models/dto_remove_users_from_notification_group_request.py)</code> | Remove users from a notification group |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -19185,7 +21385,14 @@ Send a `PATCH` request.
 
 ```python
 result = client.sensor_insights_notification_groups.with_raw_response.sensor_insights_update_notification_group_request(
-    body
+    DtoUpdateNotificationGroupRequest(
+        accountname="0000123456-00001",
+        group=DtoNotificationGroupRequestEntity(
+            description="a short description", groupemail="email@domain.com", name="User defined name of the record"
+        ),
+        id="7b0b9c53-eeee-ffff-gggg-bde5e44f4b12",
+        userids=["ee70a869-eeee-ffff-gggg-07c14c31f96e", "131501ff-eeee-ffff-gggg-647d19179a12"],
+    ),
 )
 match result:
     case Success(payload=payload):
@@ -19198,7 +21405,14 @@ match result:
 
 ```python
 result = await async_client.sensor_insights_notification_groups.with_raw_response.sensor_insights_update_notification_group_request(
-    body
+    DtoUpdateNotificationGroupRequest(
+        accountname="0000123456-00001",
+        group=DtoNotificationGroupRequestEntity(
+            description="a short description", groupemail="email@domain.com", name="User defined name of the record"
+        ),
+        id="7b0b9c53-eeee-ffff-gggg-bde5e44f4b12",
+        userids=["ee70a869-eeee-ffff-gggg-07c14c31f96e", "131501ff-eeee-ffff-gggg-647d19179a12"],
+    ),
 )
 match result:
     case Success(payload=payload):
@@ -19218,7 +21432,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DtoUpdateNotificationGroupRequest](verizon/models/dto_update_notification_group_request.py) \| [DtoUpdateNotificationGroupRequestDict](verizon/models/dto_update_notification_group_request.py)</code> | Partially update a notification group |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -19281,7 +21495,21 @@ Send a `POST` request.
 **Sync**
 
 ```python
-result = client.sensor_insights_rules.with_raw_response.sensor_insights_list_rules_request(body)
+result = client.sensor_insights_rules.with_raw_response.sensor_insights_list_rules_request(
+    DtoListRulesRequest(
+        accountname="0000123456-00001",
+        filter=DtoFilter(
+            expand="device detail(s)",
+            limitnumber=100,
+            nopagination=True,
+            page="The number of pages",
+            pagenumber=100,
+            projection=["specific device fields requested"],
+            selection={"additionalProp1": "string", "additionalProp2": "string", "additionalProp3": "string"},
+        ),
+        resourceidentifier=DtoResourceidentifier(id="ffb86390-eeee-ffff-gggg-9d1180882d63"),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[ResourceRule]
@@ -19292,7 +21520,21 @@ match result:
 **Async**
 
 ```python
-result = await async_client.sensor_insights_rules.with_raw_response.sensor_insights_list_rules_request(body)
+result = await async_client.sensor_insights_rules.with_raw_response.sensor_insights_list_rules_request(
+    DtoListRulesRequest(
+        accountname="0000123456-00001",
+        filter=DtoFilter(
+            expand="device detail(s)",
+            limitnumber=100,
+            nopagination=True,
+            page="The number of pages",
+            pagenumber=100,
+            projection=["specific device fields requested"],
+            selection={"additionalProp1": "string", "additionalProp2": "string", "additionalProp3": "string"},
+        ),
+        resourceidentifier=DtoResourceidentifier(id="ffb86390-eeee-ffff-gggg-9d1180882d63"),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[ResourceRule]
@@ -19311,7 +21553,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DtoListRulesRequest](verizon/models/dto_list_rules_request.py) \| [DtoListRulesRequestDict](verizon/models/dto_list_rules_request.py)</code> | Retrieve a rule |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -19370,7 +21612,28 @@ Send a `POST` request.
 **Sync**
 
 ```python
-result = client.sensor_insights_rules.with_raw_response.sensor_insights_overwrite_rule_request(body)
+result = client.sensor_insights_rules.with_raw_response.sensor_insights_overwrite_rule_request(
+    DtoOverwriteRuleRequest(
+        accountname="0000123456-00001",
+        resourceidentifier=DtoResourceidentifier(id="7f5f610a-eeee-ffff-gggg-4d20cf3dcfbc"),
+        rule=ResourceRule(
+            accountclientid="null",
+            billingaccountid="The billing account ID",
+            createdon=datetime(2023, 10, 2, 15, 46, 34, 562000, tzinfo=timezone.utc),
+            description="a short description",
+            deviceid="The UUID of the device",
+            disabled=True,
+            foreignid="c1f178d3-eeee-ffff-gggg-0d6b7ae6022a",
+            id="bc5b5b5a-eeee-ffff-gggg-cb2cb2533d47",
+            lastupdated=datetime(2023, 10, 2, 15, 46, 34, 562000, tzinfo=timezone.utc),
+            name="User defined name of the record",
+            rulechain={},
+            rulesyntax="The rule syntax",
+            version="1.0",
+            versionid="337bd2e8-eeee-ffff-gggg-5207992fd395",
+        ),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ResourceRule
@@ -19381,7 +21644,28 @@ match result:
 **Async**
 
 ```python
-result = await async_client.sensor_insights_rules.with_raw_response.sensor_insights_overwrite_rule_request(body)
+result = await async_client.sensor_insights_rules.with_raw_response.sensor_insights_overwrite_rule_request(
+    DtoOverwriteRuleRequest(
+        accountname="0000123456-00001",
+        resourceidentifier=DtoResourceidentifier(id="7f5f610a-eeee-ffff-gggg-4d20cf3dcfbc"),
+        rule=ResourceRule(
+            accountclientid="null",
+            billingaccountid="The billing account ID",
+            createdon=datetime(2023, 10, 2, 15, 46, 34, 562000, tzinfo=timezone.utc),
+            description="a short description",
+            deviceid="The UUID of the device",
+            disabled=True,
+            foreignid="c1f178d3-eeee-ffff-gggg-0d6b7ae6022a",
+            id="bc5b5b5a-eeee-ffff-gggg-cb2cb2533d47",
+            lastupdated=datetime(2023, 10, 2, 15, 46, 34, 562000, tzinfo=timezone.utc),
+            name="User defined name of the record",
+            rulechain={},
+            rulesyntax="The rule syntax",
+            version="1.0",
+            versionid="337bd2e8-eeee-ffff-gggg-5207992fd395",
+        ),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ResourceRule
@@ -19400,7 +21684,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DtoOverwriteRuleRequest](verizon/models/dto_overwrite_rule_request.py) \| [DtoOverwriteRuleRequestDict](verizon/models/dto_overwrite_rule_request.py)</code> | Overwrite a rule |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -19463,7 +21747,35 @@ Send a `POST` request.
 **Sync**
 
 ```python
-result = client.sensor_insights_sensors.with_raw_response.sensor_insights_list_sensor_devices_request(body)
+result = client.sensor_insights_sensors.with_raw_response.sensor_insights_list_sensor_devices_request(
+    DtoListSensorDevicesRequest(
+        accountname="0000123456-00001",
+        filter=DtoFilter(
+            expand="device detail(s)",
+            limitnumber=100,
+            nopagination=True,
+            page="The number of pages",
+            pagenumber=1,
+            projection=["specific device fields requested"],
+            selection={"additionalProp1": "string", "additionalProp2": "string", "additionalProp3": "string"},
+        ),
+        resourceidentifier=DtoDeviceResourceIdentifier(
+            deveui="The unique EUI64 address of the device",
+            deviceid="The UUID of the device",
+            esn=223372036854775800,
+            iccid="The 20-digit Integrated Circuit Card ID (SIM card ID)",
+            imei=223372036854775,
+            imsi=223372036854775800,
+            mac="The Media Access Control address of the device, listed on the device in the format XX-XX-XX-XX-XX-XX or XX:XX:XX:XX:XX:XX",
+            manufacturer="REOLINK",
+            meid="The 56-bit Mobile Equipment ID",
+            msisdn="The Mobile Station International Subscriber Directory Number. In the USA, this is 1+ a 10-digit phone number",
+            node_uuid="The UUID of the node the device is associated with",
+            qrcode="The Quick Response (QR) code",
+            serial="The device's serial number",
+        ),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[ResourceDevice]
@@ -19474,7 +21786,35 @@ match result:
 **Async**
 
 ```python
-result = await async_client.sensor_insights_sensors.with_raw_response.sensor_insights_list_sensor_devices_request(body)
+result = await async_client.sensor_insights_sensors.with_raw_response.sensor_insights_list_sensor_devices_request(
+    DtoListSensorDevicesRequest(
+        accountname="0000123456-00001",
+        filter=DtoFilter(
+            expand="device detail(s)",
+            limitnumber=100,
+            nopagination=True,
+            page="The number of pages",
+            pagenumber=1,
+            projection=["specific device fields requested"],
+            selection={"additionalProp1": "string", "additionalProp2": "string", "additionalProp3": "string"},
+        ),
+        resourceidentifier=DtoDeviceResourceIdentifier(
+            deveui="The unique EUI64 address of the device",
+            deviceid="The UUID of the device",
+            esn=223372036854775800,
+            iccid="The 20-digit Integrated Circuit Card ID (SIM card ID)",
+            imei=223372036854775,
+            imsi=223372036854775800,
+            mac="The Media Access Control address of the device, listed on the device in the format XX-XX-XX-XX-XX-XX or XX:XX:XX:XX:XX:XX",
+            manufacturer="REOLINK",
+            meid="The 56-bit Mobile Equipment ID",
+            msisdn="The Mobile Station International Subscriber Directory Number. In the USA, this is 1+ a 10-digit phone number",
+            node_uuid="The UUID of the node the device is associated with",
+            qrcode="The Quick Response (QR) code",
+            serial="The device's serial number",
+        ),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[ResourceDevice]
@@ -19493,7 +21833,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DtoListSensorDevicesRequest](verizon/models/dto_list_sensor_devices_request.py) \| [DtoListSensorDevicesRequestDict](verizon/models/dto_list_sensor_devices_request.py)</code> | List details of the sensors |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -19552,7 +21892,14 @@ Send a `POST` request.
 **Sync**
 
 ```python
-result = client.sensor_insights_sensors.with_raw_response.sensor_insights_off_board_sensor_request(body)
+result = client.sensor_insights_sensors.with_raw_response.sensor_insights_off_board_sensor_request(
+    DtoOffBoardSensorRequest(
+        accountname="0000123456-00001",
+        configuration=Sensorinsightsconfig(
+            removesensor=DtoOffBoardSensor(deveui="The unique EUI64 address of the device")
+        ),
+    ),
+)
 match result:
     case Success():
         ...  # 2xx, no content
@@ -19563,7 +21910,14 @@ match result:
 **Async**
 
 ```python
-result = await async_client.sensor_insights_sensors.with_raw_response.sensor_insights_off_board_sensor_request(body)
+result = await async_client.sensor_insights_sensors.with_raw_response.sensor_insights_off_board_sensor_request(
+    DtoOffBoardSensorRequest(
+        accountname="0000123456-00001",
+        configuration=Sensorinsightsconfig(
+            removesensor=DtoOffBoardSensor(deveui="The unique EUI64 address of the device")
+        ),
+    ),
+)
 match result:
     case Success():
         ...  # 2xx, no content
@@ -19582,7 +21936,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DtoOffBoardSensorRequest](verizon/models/dto_off_board_sensor_request.py) \| [DtoOffBoardSensorRequestDict](verizon/models/dto_off_board_sensor_request.py)</code> | Offboard a sensor |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -19639,7 +21993,23 @@ Send a `POST` request.
 **Sync**
 
 ```python
-result = client.sensor_insights_sensors.with_raw_response.sensor_insights_on_board_sensor_request(body)
+result = client.sensor_insights_sensors.with_raw_response.sensor_insights_on_board_sensor_request(
+    DtoOnBoardSensorRequest(
+        accountname="0000123456-00001",
+        payload=Payload(
+            addsensor=ResourceOnBoardSensor(
+                deveui="The unique EUI64 address of the device",
+                appeui="global application ID in IEEE EUI64 address space that uniquely identifies the entity able to process the JoinReq frame",
+                appkey="Encryption key used for messages during every over the air activation",
+                class_="A",
+                kind="ts.device.sensor.lorawan.radiobridge.RBS301-DWS-US",
+                description="used to identify water leaks",
+                name="Water Leak sensor",
+                customdata={"additionalProp1": {}, "additionalProp2": {}, "additionalProp3": {}},
+            ),
+        ),
+    ),
+)
 match result:
     case Success():
         ...  # 2xx, no content
@@ -19650,7 +22020,23 @@ match result:
 **Async**
 
 ```python
-result = await async_client.sensor_insights_sensors.with_raw_response.sensor_insights_on_board_sensor_request(body)
+result = await async_client.sensor_insights_sensors.with_raw_response.sensor_insights_on_board_sensor_request(
+    DtoOnBoardSensorRequest(
+        accountname="0000123456-00001",
+        payload=Payload(
+            addsensor=ResourceOnBoardSensor(
+                deveui="The unique EUI64 address of the device",
+                appeui="global application ID in IEEE EUI64 address space that uniquely identifies the entity able to process the JoinReq frame",
+                appkey="Encryption key used for messages during every over the air activation",
+                class_="A",
+                kind="ts.device.sensor.lorawan.radiobridge.RBS301-DWS-US",
+                description="used to identify water leaks",
+                name="Water Leak sensor",
+                customdata={"additionalProp1": {}, "additionalProp2": {}, "additionalProp3": {}},
+            ),
+        ),
+    ),
+)
 match result:
     case Success():
         ...  # 2xx, no content
@@ -19669,7 +22055,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DtoOnBoardSensorRequest](verizon/models/dto_on_board_sensor_request.py) \| [DtoOnBoardSensorRequestDict](verizon/models/dto_on_board_sensor_request.py)</code> | Onboarding a sensor |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -19727,7 +22113,13 @@ Send a `POST` request.
 **Sync**
 
 ```python
-result = client.sensor_insights_sensors.with_raw_response.sensor_insights_sensor_off_boarding_status_request(body)
+result = client.sensor_insights_sensors.with_raw_response.sensor_insights_sensor_off_boarding_status_request(
+    DtoSensorOffBoardStatusRequest(
+        accountname="0000123456-00001",
+        gatewayidentifier=Gatewayidentifier(deviceid="UUID of the Gateway device"),
+        offboarding=Offboarding(),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DtoSensorOffBoardingStatusResponse
@@ -19739,7 +22131,11 @@ match result:
 
 ```python
 result = await async_client.sensor_insights_sensors.with_raw_response.sensor_insights_sensor_off_boarding_status_request(
-    body
+    DtoSensorOffBoardStatusRequest(
+        accountname="0000123456-00001",
+        gatewayidentifier=Gatewayidentifier(deviceid="UUID of the Gateway device"),
+        offboarding=Offboarding(),
+    ),
 )
 match result:
     case Success(payload=payload):
@@ -19759,7 +22155,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DtoSensorOffBoardStatusRequest](verizon/models/dto_sensor_off_board_status_request.py) \| [DtoSensorOffBoardStatusRequestDict](verizon/models/dto_sensor_off_board_status_request.py)</code> | Get a sensor's offboarding status |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -19818,7 +22214,13 @@ Send a `POST` request.
 **Sync**
 
 ```python
-result = client.sensor_insights_sensors.with_raw_response.sensor_insights_sensor_on_board_status_request(body)
+result = client.sensor_insights_sensors.with_raw_response.sensor_insights_sensor_on_board_status_request(
+    DtoSensorOnBoardStatusRequest(
+        accountname="0000123456-00001",
+        gatewayidentifier=Gatewayidentifier(deviceid="00000000-0000-0000-0000-000000000255"),
+        onboarding=Onboarding(),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DtoSensorOnBoardingStatusResponse
@@ -19830,7 +22232,11 @@ match result:
 
 ```python
 result = await async_client.sensor_insights_sensors.with_raw_response.sensor_insights_sensor_on_board_status_request(
-    body
+    DtoSensorOnBoardStatusRequest(
+        accountname="0000123456-00001",
+        gatewayidentifier=Gatewayidentifier(deviceid="00000000-0000-0000-0000-000000000255"),
+        onboarding=Onboarding(),
+    ),
 )
 match result:
     case Success(payload=payload):
@@ -19850,7 +22256,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DtoSensorOnBoardStatusRequest](verizon/models/dto_sensor_on_board_status_request.py) \| [DtoSensorOnBoardStatusRequestDict](verizon/models/dto_sensor_on_board_status_request.py)</code> | Get the sensor's onboarding status |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -19913,7 +22319,7 @@ Get Device Alerts for the most recent daily period, up to 30 days.
 **Sync**
 
 ```python
-result = client.sensor_insights_smart_alert_metrics.with_raw_response.sensorinsightsmetricsquery(body)
+result = client.sensor_insights_smart_alert_metrics.with_raw_response.sensorinsightsmetricsquery(DtoQueryMetrics())
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DtoQueryMetricsResponse
@@ -19924,7 +22330,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.sensor_insights_smart_alert_metrics.with_raw_response.sensorinsightsmetricsquery(body)
+result = await async_client.sensor_insights_smart_alert_metrics.with_raw_response.sensorinsightsmetricsquery(
+    DtoQueryMetrics()
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DtoQueryMetricsResponse
@@ -19943,7 +22351,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DtoQueryMetrics](verizon/models/dto_query_metrics.py) \| [DtoQueryMetricsDict](verizon/models/dto_query_metrics.py)</code> | Daily period requested, up to 30 days. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -20005,7 +22413,16 @@ Send a `POST` request.
 **Sync**
 
 ```python
-result = client.sensor_insights_smart_alerts.with_raw_response.sensor_insights_bulk_update(body)
+result = client.sensor_insights_smart_alerts.with_raw_response.sensor_insights_bulk_update(
+    DtoBulkUpdate(
+        accountname="0000123456-00001",
+        resourceidentifiers=[
+            TheIdresourceandDeviceId(id="ee70a869-eeee-ffff-gggg-07c14c31f96e"),
+            TheIdresourceandDeviceId(deviceid="The UUID of the device"),
+        ],
+        smartalert=BulkUpdateSmartalert(name="User defined name of the record"),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type UserSmartAlert
@@ -20016,7 +22433,16 @@ match result:
 **Async**
 
 ```python
-result = await async_client.sensor_insights_smart_alerts.with_raw_response.sensor_insights_bulk_update(body)
+result = await async_client.sensor_insights_smart_alerts.with_raw_response.sensor_insights_bulk_update(
+    DtoBulkUpdate(
+        accountname="0000123456-00001",
+        resourceidentifiers=[
+            TheIdresourceandDeviceId(id="ee70a869-eeee-ffff-gggg-07c14c31f96e"),
+            TheIdresourceandDeviceId(deviceid="The UUID of the device"),
+        ],
+        smartalert=BulkUpdateSmartalert(name="User defined name of the record"),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type UserSmartAlert
@@ -20035,7 +22461,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DtoBulkUpdate](verizon/models/dto_bulk_update.py) \| [DtoBulkUpdateDict](verizon/models/dto_bulk_update.py)</code> | Bulk update smart alerts |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -20094,7 +22520,21 @@ Send a `POST` request.
 **Sync**
 
 ```python
-result = client.sensor_insights_smart_alerts.with_raw_response.sensor_insights_list_smart_alerts_request(body)
+result = client.sensor_insights_smart_alerts.with_raw_response.sensor_insights_list_smart_alerts_request(
+    DtoListSmartAlertsRequest(
+        accountname="0000123456-00001",
+        filter=DtoFilter(
+            expand="device detail(s)",
+            limitnumber=100,
+            nopagination=True,
+            page="The number of pages",
+            pagenumber=100,
+            projection=["specific device fields requested"],
+            selection={"additionalProp1": "string", "additionalProp2": "string", "additionalProp3": "string"},
+        ),
+        resourceidentifier=DtoResourceidentifier(id="cb3eea68-eeee-ffff-gggg-ac4463ccd073"),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[UserSmartAlert]
@@ -20106,7 +22546,19 @@ match result:
 
 ```python
 result = await async_client.sensor_insights_smart_alerts.with_raw_response.sensor_insights_list_smart_alerts_request(
-    body
+    DtoListSmartAlertsRequest(
+        accountname="0000123456-00001",
+        filter=DtoFilter(
+            expand="device detail(s)",
+            limitnumber=100,
+            nopagination=True,
+            page="The number of pages",
+            pagenumber=100,
+            projection=["specific device fields requested"],
+            selection={"additionalProp1": "string", "additionalProp2": "string", "additionalProp3": "string"},
+        ),
+        resourceidentifier=DtoResourceidentifier(id="cb3eea68-eeee-ffff-gggg-ac4463ccd073"),
+    ),
 )
 match result:
     case Success(payload=payload):
@@ -20126,7 +22578,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DtoListSmartAlertsRequest](verizon/models/dto_list_smart_alerts_request.py) \| [DtoListSmartAlertsRequestDict](verizon/models/dto_list_smart_alerts_request.py)</code> | Retrieve a smart alert |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -20185,7 +22637,34 @@ Send a `PATCH` request.
 **Sync**
 
 ```python
-result = client.sensor_insights_smart_alerts.with_raw_response.sensor_insights_patch_smart_alert_request(body)
+result = client.sensor_insights_smart_alerts.with_raw_response.sensor_insights_patch_smart_alert_request(
+    DtoPatchSmartAlertRequest(
+        accountname="0000123456-00001",
+        resourceidentifier=DtoResourceidentifier(id="0b37ab8b-eeee-ffff-gggg-e0149af43f43"),
+        smartalert=UserSmartAlert(
+            accountclientid="null",
+            billingaccountid="0000123456-00001",
+            category="telemetry",
+            condition=2592000,
+            createdon=datetime(2023, 10, 2, 15, 46, 34, 562000, tzinfo=timezone.utc),
+            description="a short description",
+            deviceid="The UUID of the device",
+            foreignid="c1f178d3-eeee-ffff-gggg-0d6b7ae6022a",
+            id="fecbe450-eeee-ffff-gggg-aa166fd5f8e3",
+            isacknowledged=True,
+            iscleared=True,
+            isdisabled=False,
+            lastupdated=datetime(2023, 10, 2, 15, 46, 34, 562000, tzinfo=timezone.utc),
+            name="User defined name of the record",
+            ruleid="The UUID of a rule",
+            severity="minor",
+            state="success",
+            template="The template ID",
+            version="1.0",
+            versionid="337bd2e8-eeee-ffff-gggg-5207992fd395",
+        ),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type UserSmartAlert
@@ -20197,7 +22676,32 @@ match result:
 
 ```python
 result = await async_client.sensor_insights_smart_alerts.with_raw_response.sensor_insights_patch_smart_alert_request(
-    body
+    DtoPatchSmartAlertRequest(
+        accountname="0000123456-00001",
+        resourceidentifier=DtoResourceidentifier(id="0b37ab8b-eeee-ffff-gggg-e0149af43f43"),
+        smartalert=UserSmartAlert(
+            accountclientid="null",
+            billingaccountid="0000123456-00001",
+            category="telemetry",
+            condition=2592000,
+            createdon=datetime(2023, 10, 2, 15, 46, 34, 562000, tzinfo=timezone.utc),
+            description="a short description",
+            deviceid="The UUID of the device",
+            foreignid="c1f178d3-eeee-ffff-gggg-0d6b7ae6022a",
+            id="fecbe450-eeee-ffff-gggg-aa166fd5f8e3",
+            isacknowledged=True,
+            iscleared=True,
+            isdisabled=False,
+            lastupdated=datetime(2023, 10, 2, 15, 46, 34, 562000, tzinfo=timezone.utc),
+            name="User defined name of the record",
+            ruleid="The UUID of a rule",
+            severity="minor",
+            state="success",
+            template="The template ID",
+            version="1.0",
+            versionid="337bd2e8-eeee-ffff-gggg-5207992fd395",
+        ),
+    ),
 )
 match result:
     case Success(payload=payload):
@@ -20217,7 +22721,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DtoPatchSmartAlertRequest](verizon/models/dto_patch_smart_alert_request.py) \| [DtoPatchSmartAlertRequestDict](verizon/models/dto_patch_smart_alert_request.py)</code> | Partially update a smart alert |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -20280,7 +22784,18 @@ Send a `POST` request.
 **Sync**
 
 ```python
-result = client.sensor_insights_users.with_raw_response.sensor_insights_create_user_request(body)
+result = client.sensor_insights_users.with_raw_response.sensor_insights_create_user_request(
+    DtoCreateUserRequest(
+        accountname="0000123456-00001",
+        user=DtoUserDto(
+            email="email@domain.com",
+            firstname="First name",
+            lastname="Last name or Surname",
+            mdn="908-555-1234",
+            customdata={"additionalProp1": {}, "additionalProp2": {}, "additionalProp3": {}},
+        ),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ResourceUser
@@ -20291,7 +22806,18 @@ match result:
 **Async**
 
 ```python
-result = await async_client.sensor_insights_users.with_raw_response.sensor_insights_create_user_request(body)
+result = await async_client.sensor_insights_users.with_raw_response.sensor_insights_create_user_request(
+    DtoCreateUserRequest(
+        accountname="0000123456-00001",
+        user=DtoUserDto(
+            email="email@domain.com",
+            firstname="First name",
+            lastname="Last name or Surname",
+            mdn="908-555-1234",
+            customdata={"additionalProp1": {}, "additionalProp2": {}, "additionalProp3": {}},
+        ),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ResourceUser
@@ -20310,7 +22836,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DtoCreateUserRequest](verizon/models/dto_create_user_request.py) \| [DtoCreateUserRequestDict](verizon/models/dto_create_user_request.py)</code> | Create a user profile |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -20368,7 +22894,9 @@ Send a `DELETE` request.
 **Sync**
 
 ```python
-result = client.sensor_insights_users.with_raw_response.sensor_insights_delete_user(deleterequestpayload)
+result = client.sensor_insights_users.with_raw_response.sensor_insights_delete_user(
+    DtoDeleteUserRequest(accountname="0000123456-00001", id="8ea30999-eeee-ffff-gggg-3ea409f5fee4")
+)
 match result:
     case Success():
         ...  # 2xx, no content
@@ -20379,7 +22907,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.sensor_insights_users.with_raw_response.sensor_insights_delete_user(deleterequestpayload)
+result = await async_client.sensor_insights_users.with_raw_response.sensor_insights_delete_user(
+    DtoDeleteUserRequest(accountname="0000123456-00001", id="8ea30999-eeee-ffff-gggg-3ea409f5fee4")
+)
 match result:
     case Success():
         ...  # 2xx, no content
@@ -20398,7 +22928,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>deleterequestpayload</code> | <code>[DtoDeleteUserRequest](verizon/models/dto_delete_user_request.py) \| [DtoDeleteUserRequestDict](verizon/models/dto_delete_user_request.py)</code> | Payload for the delete user request. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -20456,7 +22986,20 @@ Send a `POST` request.
 **Sync**
 
 ```python
-result = client.sensor_insights_users.with_raw_response.sensor_insights_list_user_request(body)
+result = client.sensor_insights_users.with_raw_response.sensor_insights_list_user_request(
+    DtoListUserRequest(
+        accountname="0000123456-00001",
+        filter=DtoFilter(
+            expand="device detail(s)",
+            limitnumber=100,
+            nopagination=True,
+            page="The number of pages",
+            pagenumber=100,
+            projection=["specific device fields requested"],
+            selection={"additionalProp1": "string", "additionalProp2": "string", "additionalProp3": "string"},
+        ),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[ResourceUser]
@@ -20467,7 +23010,20 @@ match result:
 **Async**
 
 ```python
-result = await async_client.sensor_insights_users.with_raw_response.sensor_insights_list_user_request(body)
+result = await async_client.sensor_insights_users.with_raw_response.sensor_insights_list_user_request(
+    DtoListUserRequest(
+        accountname="0000123456-00001",
+        filter=DtoFilter(
+            expand="device detail(s)",
+            limitnumber=100,
+            nopagination=True,
+            page="The number of pages",
+            pagenumber=100,
+            projection=["specific device fields requested"],
+            selection={"additionalProp1": "string", "additionalProp2": "string", "additionalProp3": "string"},
+        ),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[ResourceUser]
@@ -20486,7 +23042,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DtoListUserRequest](verizon/models/dto_list_user_request.py) \| [DtoListUserRequestDict](verizon/models/dto_list_user_request.py)</code> | A summary of user profile records on an account |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -20545,7 +23101,19 @@ Send a `PATCH` request.
 **Sync**
 
 ```python
-result = client.sensor_insights_users.with_raw_response.sensor_insights_update_user_request(body)
+result = client.sensor_insights_users.with_raw_response.sensor_insights_update_user_request(
+    DtoUpdateUserRequest(
+        accountname="0000123456-00001",
+        id="9dd573ba-eeee-ffff-gggg-8009758bcaca",
+        user=DtoUserDto(
+            email="email@domain.com",
+            firstname="First name",
+            lastname="Last name or Surname",
+            mdn="908-555-1234",
+            customdata={"additionalProp1": {}, "additionalProp2": {}, "additionalProp3": {}},
+        ),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ResourceUser
@@ -20556,7 +23124,19 @@ match result:
 **Async**
 
 ```python
-result = await async_client.sensor_insights_users.with_raw_response.sensor_insights_update_user_request(body)
+result = await async_client.sensor_insights_users.with_raw_response.sensor_insights_update_user_request(
+    DtoUpdateUserRequest(
+        accountname="0000123456-00001",
+        id="9dd573ba-eeee-ffff-gggg-8009758bcaca",
+        user=DtoUserDto(
+            email="email@domain.com",
+            firstname="First name",
+            lastname="Last name or Surname",
+            mdn="908-555-1234",
+            customdata={"additionalProp1": {}, "additionalProp2": {}, "additionalProp3": {}},
+        ),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ResourceUser
@@ -20575,7 +23155,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DtoUpdateUserRequest](verizon/models/dto_update_user_request.py) \| [DtoUpdateUserRequestDict](verizon/models/dto_update_user_request.py)</code> | Partially update a user profile |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -20638,7 +23218,7 @@ Check-in history can be retrieved for any device belonging to the account, not n
 **Sync**
 
 ```python
-result = client.server_logging.with_raw_response.get_device_check_in_history(account, device_id)
+result = client.server_logging.with_raw_response.get_device_check_in_history("0000123456-00001", "990013907835573")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[CheckInHistoryItem]
@@ -20649,7 +23229,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.server_logging.with_raw_response.get_device_check_in_history(account, device_id)
+result = await async_client.server_logging.with_raw_response.get_device_check_in_history(
+    "0000123456-00001", "990013907835573"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[CheckInHistoryItem]
@@ -20669,7 +23251,7 @@ match result:
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier. |
 | <code>device_id</code> | <code>str</code> | Device IMEI identifier. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -20728,7 +23310,7 @@ Returns a list of all data service plans that are associated with a specified bi
 **Sync**
 
 ```python
-result = client.service_plans.with_raw_response.list_account_service_plans(aname)
+result = client.service_plans.with_raw_response.list_account_service_plans("0252012345-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[ServicePlan]
@@ -20739,7 +23321,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.service_plans.with_raw_response.list_account_service_plans(aname)
+result = await async_client.service_plans.with_raw_response.list_account_service_plans("0252012345-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[ServicePlan]
@@ -20758,7 +23340,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>aname</code> | <code>str</code> | Account name. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -20846,7 +23428,7 @@ match result:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -20901,7 +23483,9 @@ The new password is effective immediately. Passwords do not expire, but Verizon 
 **Sync**
 
 ```python
-result = client.session_management.with_raw_response.reset_connectivity_management_password(body)
+result = client.session_management.with_raw_response.reset_connectivity_management_password(
+    SessionResetPasswordRequest(old_password="grflbk")
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type SessionResetPasswordResult
@@ -20912,7 +23496,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.session_management.with_raw_response.reset_connectivity_management_password(body)
+result = await async_client.session_management.with_raw_response.reset_connectivity_management_password(
+    SessionResetPasswordRequest(old_password="grflbk")
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type SessionResetPasswordResult
@@ -20931,7 +23517,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[SessionResetPasswordRequest](verizon/models/session_reset_password_request.py) \| [SessionResetPasswordRequestDict](verizon/models/session_reset_password_request.py)</code> | Request with current password that needs to be reset. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -20986,7 +23572,9 @@ Initiates a Connectivity Management session and returns a VZ-M2M session token t
 **Sync**
 
 ```python
-result = client.session_management.with_raw_response.start_connectivity_management_session()
+result = client.session_management.with_raw_response.start_connectivity_management_session(
+    body=LogInRequest(username="zbeeblebrox", password="IMgr8")
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type LogInResult
@@ -20997,7 +23585,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.session_management.with_raw_response.start_connectivity_management_session()
+result = await async_client.session_management.with_raw_response.start_connectivity_management_session(
+    body=LogInRequest(username="zbeeblebrox", password="IMgr8")
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type LogInResult
@@ -21016,7 +23606,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[LogInRequest](verizon/models/log_in_request.py) \| [LogInRequestDict](verizon/models/log_in_request.py) \| None</code> | Request to initiate a session.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -21075,7 +23665,9 @@ Deregisters the callback endpoint and stops ThingSpace from sending FOTA callbac
 **Sync**
 
 ```python
-result = client.software_management_callbacks_v1.with_raw_response.deregister_callback3(account, service)
+result = client.software_management_callbacks_v1.with_raw_response.deregister_callback3(
+    "0242078689-00001", CallbackService.FOTA
+)
 match result:
     case Success():
         ...  # 2xx, no content
@@ -21086,7 +23678,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.software_management_callbacks_v1.with_raw_response.deregister_callback3(account, service)
+result = await async_client.software_management_callbacks_v1.with_raw_response.deregister_callback3(
+    "0242078689-00001", CallbackService.FOTA
+)
 match result:
     case Success():
         ...  # 2xx, no content
@@ -21106,7 +23700,7 @@ match result:
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier in "##########-#####". |
 | <code>service</code> | <code>[CallbackServiceOrStr](verizon/models/enums/callback_service.py)</code> | Callback type. Must be 'Fota' for Software Management Services API. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -21161,7 +23755,7 @@ Returns the name and endpoint URL of the callback listening services registered 
 **Sync**
 
 ```python
-result = client.software_management_callbacks_v1.with_raw_response.list_registered_callbacks3(account)
+result = client.software_management_callbacks_v1.with_raw_response.list_registered_callbacks3("0242078689-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[RegisteredCallbacks]
@@ -21172,7 +23766,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.software_management_callbacks_v1.with_raw_response.list_registered_callbacks3(account)
+result = await async_client.software_management_callbacks_v1.with_raw_response.list_registered_callbacks3(
+    "0242078689-00001"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[RegisteredCallbacks]
@@ -21191,7 +23787,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier in "##########-#####". |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -21246,7 +23842,12 @@ Registers a URL to receive RESTful messages from a callback service when new fir
 **Sync**
 
 ```python
-result = client.software_management_callbacks_v1.with_raw_response.register_callback3(account, body)
+result = client.software_management_callbacks_v1.with_raw_response.register_callback3(
+    "0242078689-00001",
+    FotaV1CallbackRegistrationRequest(
+        name="Fota", url="https://10.120.102.183:50559/CallbackListener/FirmwareServiceMessages.asmx"
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FotaV1CallbackRegistrationResult
@@ -21257,7 +23858,12 @@ match result:
 **Async**
 
 ```python
-result = await async_client.software_management_callbacks_v1.with_raw_response.register_callback3(account, body)
+result = await async_client.software_management_callbacks_v1.with_raw_response.register_callback3(
+    "0242078689-00001",
+    FotaV1CallbackRegistrationRequest(
+        name="Fota", url="https://10.120.102.183:50559/CallbackListener/FirmwareServiceMessages.asmx"
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FotaV1CallbackRegistrationResult
@@ -21277,7 +23883,7 @@ match result:
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier in "##########-#####". |
 | <code>body</code> | <code>[FotaV1CallbackRegistrationRequest](verizon/models/fota_v1_callback_registration_request.py) \| [FotaV1CallbackRegistrationRequestDict](verizon/models/fota_v1_callback_registration_request.py)</code> | Callback details. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -21336,7 +23942,7 @@ This endpoint allows user to delete a previously registered callback URL.
 **Sync**
 
 ```python
-result = client.software_management_callbacks_v2.with_raw_response.deregister_callback4(account)
+result = client.software_management_callbacks_v2.with_raw_response.deregister_callback4("0000123456-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FotaV2SuccessResult
@@ -21347,7 +23953,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.software_management_callbacks_v2.with_raw_response.deregister_callback4(account)
+result = await async_client.software_management_callbacks_v2.with_raw_response.deregister_callback4("0000123456-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FotaV2SuccessResult
@@ -21366,7 +23972,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -21421,7 +24027,7 @@ This endpoint allows user to get the registered callback information.
 **Sync**
 
 ```python
-result = client.software_management_callbacks_v2.with_raw_response.list_registered_callbacks4(account)
+result = client.software_management_callbacks_v2.with_raw_response.list_registered_callbacks4("0000123456-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type CallbackSummary
@@ -21432,7 +24038,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.software_management_callbacks_v2.with_raw_response.list_registered_callbacks4(account)
+result = await async_client.software_management_callbacks_v2.with_raw_response.list_registered_callbacks4(
+    "0000123456-00001"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type CallbackSummary
@@ -21451,7 +24059,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -21506,7 +24114,7 @@ This endpoint allows user to create the HTTPS callback address.
 **Sync**
 
 ```python
-result = client.software_management_callbacks_v2.with_raw_response.register_callback4(account)
+result = client.software_management_callbacks_v2.with_raw_response.register_callback4("0000123456-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FotaV2CallbackRegistrationResult
@@ -21517,7 +24125,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.software_management_callbacks_v2.with_raw_response.register_callback4(account)
+result = await async_client.software_management_callbacks_v2.with_raw_response.register_callback4("0000123456-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FotaV2CallbackRegistrationResult
@@ -21536,7 +24144,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -21591,7 +24199,7 @@ This endpoint allows user to update the HTTPS callback address.
 **Sync**
 
 ```python
-result = client.software_management_callbacks_v2.with_raw_response.update_callback(account)
+result = client.software_management_callbacks_v2.with_raw_response.update_callback("0000123456-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FotaV2CallbackRegistrationResult
@@ -21602,7 +24210,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.software_management_callbacks_v2.with_raw_response.update_callback(account)
+result = await async_client.software_management_callbacks_v2.with_raw_response.update_callback("0000123456-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FotaV2CallbackRegistrationResult
@@ -21621,7 +24229,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -21680,7 +24288,7 @@ This endpoint allows user to delete a previously registered callback URL.
 **Sync**
 
 ```python
-result = client.software_management_callbacks_v3.with_raw_response.deregister_callback5(acc)
+result = client.software_management_callbacks_v3.with_raw_response.deregister_callback5("0000123456-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FotaV3SuccessResult
@@ -21691,7 +24299,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.software_management_callbacks_v3.with_raw_response.deregister_callback5(acc)
+result = await async_client.software_management_callbacks_v3.with_raw_response.deregister_callback5("0000123456-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FotaV3SuccessResult
@@ -21710,7 +24318,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>acc</code> | <code>str</code> | Account identifier. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -21765,7 +24373,7 @@ This endpoint allows user to get the registered callback information.
 **Sync**
 
 ```python
-result = client.software_management_callbacks_v3.with_raw_response.list_registered_callbacks5(acc)
+result = client.software_management_callbacks_v3.with_raw_response.list_registered_callbacks5("0000123456-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FotaV3CallbackSummary
@@ -21776,7 +24384,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.software_management_callbacks_v3.with_raw_response.list_registered_callbacks5(acc)
+result = await async_client.software_management_callbacks_v3.with_raw_response.list_registered_callbacks5(
+    "0000123456-00001"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FotaV3CallbackSummary
@@ -21795,7 +24405,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>acc</code> | <code>str</code> | Account identifier. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -21850,7 +24460,10 @@ This endpoint allows the user to create the HTTPS callback address.
 **Sync**
 
 ```python
-result = client.software_management_callbacks_v3.with_raw_response.register_callback5(acc, body)
+result = client.software_management_callbacks_v3.with_raw_response.register_callback5(
+    "0000123456-00001",
+    FotaV3CallbackRegistrationRequest(url="https://255.255.11.135:50559/CallbackListener/FirmwareServiceMessages.asmx"),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FotaV3CallbackRegistrationResult
@@ -21861,7 +24474,10 @@ match result:
 **Async**
 
 ```python
-result = await async_client.software_management_callbacks_v3.with_raw_response.register_callback5(acc, body)
+result = await async_client.software_management_callbacks_v3.with_raw_response.register_callback5(
+    "0000123456-00001",
+    FotaV3CallbackRegistrationRequest(url="https://255.255.11.135:50559/CallbackListener/FirmwareServiceMessages.asmx"),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FotaV3CallbackRegistrationResult
@@ -21881,7 +24497,7 @@ match result:
 | --- | --- | --- |
 | <code>acc</code> | <code>str</code> | Account identifier. |
 | <code>body</code> | <code>[FotaV3CallbackRegistrationRequest](verizon/models/fota_v3_callback_registration_request.py) \| [FotaV3CallbackRegistrationRequestDict](verizon/models/fota_v3_callback_registration_request.py)</code> | Callback URL registration. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -21936,7 +24552,10 @@ This endpoint allows the user to update the HTTPS callback address.
 **Sync**
 
 ```python
-result = client.software_management_callbacks_v3.with_raw_response.update_callback2(acc, body)
+result = client.software_management_callbacks_v3.with_raw_response.update_callback2(
+    "0000123456-00001",
+    FotaV3CallbackRegistrationRequest(url="https://255.255.11.135:50559/CallbackListener/FirmwareServiceMessages.asmx"),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FotaV3CallbackRegistrationResult
@@ -21947,7 +24566,10 @@ match result:
 **Async**
 
 ```python
-result = await async_client.software_management_callbacks_v3.with_raw_response.update_callback2(acc, body)
+result = await async_client.software_management_callbacks_v3.with_raw_response.update_callback2(
+    "0000123456-00001",
+    FotaV3CallbackRegistrationRequest(url="https://255.255.11.135:50559/CallbackListener/FirmwareServiceMessages.asmx"),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FotaV3CallbackRegistrationResult
@@ -21967,7 +24589,7 @@ match result:
 | --- | --- | --- |
 | <code>acc</code> | <code>str</code> | Account identifier. |
 | <code>body</code> | <code>[FotaV3CallbackRegistrationRequest](verizon/models/fota_v3_callback_registration_request.py) \| [FotaV3CallbackRegistrationRequestDict](verizon/models/fota_v3_callback_registration_request.py)</code> | Callback URL registration. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -22026,7 +24648,9 @@ Assigns licenses to a specified list of devices so that firmware upgrades can be
 **Sync**
 
 ```python
-result = client.software_management_licenses_v1.with_raw_response.assign_licenses_to_devices(account, body)
+result = client.software_management_licenses_v1.with_raw_response.assign_licenses_to_devices(
+    "0242078689-00001", V1LicensesAssignedRemovedRequest(device_list=["990003425730535", "990000473475989"])
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type V1LicensesAssignedRemovedResult
@@ -22037,7 +24661,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.software_management_licenses_v1.with_raw_response.assign_licenses_to_devices(account, body)
+result = await async_client.software_management_licenses_v1.with_raw_response.assign_licenses_to_devices(
+    "0242078689-00001", V1LicensesAssignedRemovedRequest(device_list=["990003425730535", "990000473475989"])
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type V1LicensesAssignedRemovedResult
@@ -22057,7 +24683,7 @@ match result:
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier in "##########-#####". |
 | <code>body</code> | <code>[V1LicensesAssignedRemovedRequest](verizon/models/v1_licenses_assigned_removed_request.py) \| [V1LicensesAssignedRemovedRequestDict](verizon/models/v1_licenses_assigned_removed_request.py)</code> | IMEIs of the devices to assign licenses to. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -22112,7 +24738,10 @@ Creates a list of devices from which licenses will be removed if the number of M
 **Sync**
 
 ```python
-result = client.software_management_licenses_v1.with_raw_response.create_list_of_licenses_to_remove(account, body)
+result = client.software_management_licenses_v1.with_raw_response.create_list_of_licenses_to_remove(
+    "0242078689-00001",
+    V1ListOfLicensesToRemoveRequest(type_="append", device_list=["990003425730535", "990000473475989"]),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type V1ListOfLicensesToRemoveResult
@@ -22124,7 +24753,8 @@ match result:
 
 ```python
 result = await async_client.software_management_licenses_v1.with_raw_response.create_list_of_licenses_to_remove(
-    account, body
+    "0242078689-00001",
+    V1ListOfLicensesToRemoveRequest(type_="append", device_list=["990003425730535", "990000473475989"]),
 )
 match result:
     case Success(payload=payload):
@@ -22145,7 +24775,7 @@ match result:
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier in "##########-#####". |
 | <code>body</code> | <code>[V1ListOfLicensesToRemoveRequest](verizon/models/v1_list_of_licenses_to_remove_request.py) \| [V1ListOfLicensesToRemoveRequestDict](verizon/models/v1_list_of_licenses_to_remove_request.py)</code> | Cancellation candidate device list. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -22200,7 +24830,7 @@ Deletes the entire list of cancellation candidate devices.
 **Sync**
 
 ```python
-result = client.software_management_licenses_v1.with_raw_response.delete_list_of_licenses_to_remove(account)
+result = client.software_management_licenses_v1.with_raw_response.delete_list_of_licenses_to_remove("0242078689-00001")
 match result:
     case Success():
         ...  # 2xx, no content
@@ -22211,7 +24841,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.software_management_licenses_v1.with_raw_response.delete_list_of_licenses_to_remove(account)
+result = await async_client.software_management_licenses_v1.with_raw_response.delete_list_of_licenses_to_remove(
+    "0242078689-00001"
+)
 match result:
     case Success():
         ...  # 2xx, no content
@@ -22230,7 +24862,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier in "##########-#####". |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -22285,7 +24917,9 @@ Returns a list of devices from which licenses will be removed if the number of M
 **Sync**
 
 ```python
-result = client.software_management_licenses_v1.with_raw_response.list_licenses_to_remove(account, start_index)
+result = client.software_management_licenses_v1.with_raw_response.list_licenses_to_remove(
+    "0242078689-00001", "some example string"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type V1ListOfLicensesToRemove
@@ -22297,7 +24931,7 @@ match result:
 
 ```python
 result = await async_client.software_management_licenses_v1.with_raw_response.list_licenses_to_remove(
-    account, start_index
+    "0242078689-00001", "some example string"
 )
 match result:
     case Success(payload=payload):
@@ -22318,7 +24952,7 @@ match result:
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier in "##########-#####". |
 | <code>start_index</code> | <code>str</code> | The zero-based number of the first record to return. Set startIndex=0 for the first request. If there are more than 1,000 devices in the response, set startIndex=1000 for the second request, 2000 for the third request, etc. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -22373,7 +25007,10 @@ Remove unused licenses from device.
 **Sync**
 
 ```python
-result = client.software_management_licenses_v1.with_raw_response.remove_licenses_from_devices(account, body)
+result = client.software_management_licenses_v1.with_raw_response.remove_licenses_from_devices(
+    "0242078689-00001",
+    V1LicensesAssignedRemovedRequest(device_list=["900000000000001", "900000000000998", "900000000000999"]),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type V1LicensesAssignedRemovedResult
@@ -22385,7 +25022,8 @@ match result:
 
 ```python
 result = await async_client.software_management_licenses_v1.with_raw_response.remove_licenses_from_devices(
-    account, body
+    "0242078689-00001",
+    V1LicensesAssignedRemovedRequest(device_list=["900000000000001", "900000000000998", "900000000000999"]),
 )
 match result:
     case Success(payload=payload):
@@ -22406,7 +25044,7 @@ match result:
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier in "##########-#####". |
 | <code>body</code> | <code>[V1LicensesAssignedRemovedRequest](verizon/models/v1_licenses_assigned_removed_request.py) \| [V1LicensesAssignedRemovedRequestDict](verizon/models/v1_licenses_assigned_removed_request.py)</code> | IMEIs of the devices to remove licenses from. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -22465,7 +25103,7 @@ This endpoint allows user to assign licenses to a list of devices.
 **Sync**
 
 ```python
-result = client.software_management_licenses_v2.with_raw_response.assign_licenses_to_devices2(account)
+result = client.software_management_licenses_v2.with_raw_response.assign_licenses_to_devices2("0242078689-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type V2LicensesAssignedRemovedResult
@@ -22476,7 +25114,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.software_management_licenses_v2.with_raw_response.assign_licenses_to_devices2(account)
+result = await async_client.software_management_licenses_v2.with_raw_response.assign_licenses_to_devices2(
+    "0242078689-00001"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type V2LicensesAssignedRemovedResult
@@ -22495,7 +25135,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -22550,7 +25190,7 @@ The license cancel endpoint allows user to create a list of license cancellation
 **Sync**
 
 ```python
-result = client.software_management_licenses_v2.with_raw_response.create_list_of_licenses_to_remove2(account)
+result = client.software_management_licenses_v2.with_raw_response.create_list_of_licenses_to_remove2("0242078689-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type V2ListOfLicensesToRemoveResult
@@ -22562,7 +25202,7 @@ match result:
 
 ```python
 result = await async_client.software_management_licenses_v2.with_raw_response.create_list_of_licenses_to_remove2(
-    account
+    "0242078689-00001"
 )
 match result:
     case Success(payload=payload):
@@ -22582,7 +25222,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -22637,7 +25277,7 @@ This endpoint allows user to delete a created cancel candidate device list.
 **Sync**
 
 ```python
-result = client.software_management_licenses_v2.with_raw_response.delete_list_of_licenses_to_remove2(account)
+result = client.software_management_licenses_v2.with_raw_response.delete_list_of_licenses_to_remove2("0242078689-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FotaV2SuccessResult
@@ -22649,7 +25289,7 @@ match result:
 
 ```python
 result = await async_client.software_management_licenses_v2.with_raw_response.delete_list_of_licenses_to_remove2(
-    account
+    "0242078689-00001"
 )
 match result:
     case Success(payload=payload):
@@ -22669,7 +25309,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -22724,7 +25364,9 @@ The endpoint allows user to list license usage.
 **Sync**
 
 ```python
-result = client.software_management_licenses_v2.with_raw_response.get_account_license_status2(account)
+result = client.software_management_licenses_v2.with_raw_response.get_account_license_status2(
+    "0000123456-00001", last_seen_device_id="15-digit IMEI"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type V2LicenseSummary
@@ -22735,7 +25377,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.software_management_licenses_v2.with_raw_response.get_account_license_status2(account)
+result = await async_client.software_management_licenses_v2.with_raw_response.get_account_license_status2(
+    "0000123456-00001", last_seen_device_id="15-digit IMEI"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type V2LicenseSummary
@@ -22755,7 +25399,7 @@ match result:
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier. |
 | <code>last_seen_device_id</code> | <code>str \| None</code> | Last seen device identifier.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -22810,7 +25454,7 @@ The license cancel endpoint allows user to list registered license cancellation 
 **Sync**
 
 ```python
-result = client.software_management_licenses_v2.with_raw_response.list_licenses_to_remove2(account)
+result = client.software_management_licenses_v2.with_raw_response.list_licenses_to_remove2("0242078689-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type V2ListOfLicensesToRemove
@@ -22821,7 +25465,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.software_management_licenses_v2.with_raw_response.list_licenses_to_remove2(account)
+result = await async_client.software_management_licenses_v2.with_raw_response.list_licenses_to_remove2(
+    "0242078689-00001"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type V2ListOfLicensesToRemove
@@ -22841,7 +25487,7 @@ match result:
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier. |
 | <code>start_index</code> | <code>str \| None</code> | Start index to retrieve.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -22896,7 +25542,7 @@ This endpoint allows user to remove licenses from a list of devices.
 **Sync**
 
 ```python
-result = client.software_management_licenses_v2.with_raw_response.remove_licenses_from_devices2(account)
+result = client.software_management_licenses_v2.with_raw_response.remove_licenses_from_devices2("0242078689-00001")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type V2LicensesAssignedRemovedResult
@@ -22907,7 +25553,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.software_management_licenses_v2.with_raw_response.remove_licenses_from_devices2(account)
+result = await async_client.software_management_licenses_v2.with_raw_response.remove_licenses_from_devices2(
+    "0242078689-00001"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type V2LicensesAssignedRemovedResult
@@ -22926,7 +25574,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -22985,7 +25633,9 @@ This endpoint allows user to assign licenses to a list of devices.
 **Sync**
 
 ```python
-result = client.software_management_licenses_v3.with_raw_response.assign_licenses_to_devices3(acc, body)
+result = client.software_management_licenses_v3.with_raw_response.assign_licenses_to_devices3(
+    "0000123456-00001", V3LicenseImei(device_list=["15-digit IMEI", "15-digit IMEI"])
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type V3LicenseAssignedRemovedResult
@@ -22996,7 +25646,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.software_management_licenses_v3.with_raw_response.assign_licenses_to_devices3(acc, body)
+result = await async_client.software_management_licenses_v3.with_raw_response.assign_licenses_to_devices3(
+    "0000123456-00001", V3LicenseImei(device_list=["15-digit IMEI", "15-digit IMEI"])
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type V3LicenseAssignedRemovedResult
@@ -23016,7 +25668,7 @@ match result:
 | --- | --- | --- |
 | <code>acc</code> | <code>str</code> | Account identifier. |
 | <code>body</code> | <code>[V3LicenseImei](verizon/models/v3_license_imei.py) \| [V3LicenseImeiDict](verizon/models/v3_license_imei.py)</code> | License assignment. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -23071,7 +25723,9 @@ The endpoint allows user to list license usage.
 **Sync**
 
 ```python
-result = client.software_management_licenses_v3.with_raw_response.get_account_licenses_status(acc)
+result = client.software_management_licenses_v3.with_raw_response.get_account_licenses_status(
+    "0000123456-00001", last_seen_device_id="0"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type V3LicenseSummary
@@ -23082,7 +25736,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.software_management_licenses_v3.with_raw_response.get_account_licenses_status(acc)
+result = await async_client.software_management_licenses_v3.with_raw_response.get_account_licenses_status(
+    "0000123456-00001", last_seen_device_id="0"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type V3LicenseSummary
@@ -23102,7 +25758,7 @@ match result:
 | --- | --- | --- |
 | <code>acc</code> | <code>str</code> | Account identifier. |
 | <code>last_seen_device_id</code> | <code>str \| None</code> | Last seen device identifier.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -23157,7 +25813,9 @@ This endpoint allows user to remove licenses from a list of devices.
 **Sync**
 
 ```python
-result = client.software_management_licenses_v3.with_raw_response.remove_licenses_from_devices3(acc, body)
+result = client.software_management_licenses_v3.with_raw_response.remove_licenses_from_devices3(
+    "0000123456-00001", V3LicenseImei(device_list=["15-digit IMEI", "15-digit IMEI", "15-digit IMEI"])
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type V3LicenseAssignedRemovedResult
@@ -23168,7 +25826,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.software_management_licenses_v3.with_raw_response.remove_licenses_from_devices3(acc, body)
+result = await async_client.software_management_licenses_v3.with_raw_response.remove_licenses_from_devices3(
+    "0000123456-00001", V3LicenseImei(device_list=["15-digit IMEI", "15-digit IMEI", "15-digit IMEI"])
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type V3LicenseAssignedRemovedResult
@@ -23188,7 +25848,7 @@ match result:
 | --- | --- | --- |
 | <code>acc</code> | <code>str</code> | Account identifier. |
 | <code>body</code> | <code>[V3LicenseImei](verizon/models/v3_license_imei.py) \| [V3LicenseImeiDict](verizon/models/v3_license_imei.py)</code> | License removal. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -23247,7 +25907,9 @@ Returns the upgrade history of the specified device from the previous six months
 **Sync**
 
 ```python
-result = client.software_management_reports_v1.with_raw_response.get_device_firmware_upgrade_history(account, device_id)
+result = client.software_management_reports_v1.with_raw_response.get_device_firmware_upgrade_history(
+    "0242078689-00001", "900000000000001"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[DeviceUpgradeHistory]
@@ -23259,7 +25921,7 @@ match result:
 
 ```python
 result = await async_client.software_management_reports_v1.with_raw_response.get_device_firmware_upgrade_history(
-    account, device_id
+    "0242078689-00001", "900000000000001"
 )
 match result:
     case Success(payload=payload):
@@ -23280,7 +25942,7 @@ match result:
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier in "##########-#####". |
 | <code>device_id</code> | <code>str</code> | The IMEI of the device. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -23335,7 +25997,9 @@ Returns an array of all devices in the specified account. Each device object inc
 **Sync**
 
 ```python
-result = client.software_management_reports_v1.with_raw_response.list_account_devices(account, start_index)
+result = client.software_management_reports_v1.with_raw_response.list_account_devices(
+    "0242078689-00001", "some example string"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceListQueryResult
@@ -23346,7 +26010,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.software_management_reports_v1.with_raw_response.list_account_devices(account, start_index)
+result = await async_client.software_management_reports_v1.with_raw_response.list_account_devices(
+    "0242078689-00001", "some example string"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceListQueryResult
@@ -23366,7 +26032,7 @@ match result:
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier in "##########-#####". |
 | <code>start_index</code> | <code>str</code> | Only return devices with IMEIs larger than this value. Use 0 for the first request. If `hasMoreData`=true in the response, use the `lastSeenDeviceId` value from the response as the startIndex in the next request. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -23422,7 +26088,7 @@ Returns a list of all upgrades with a specified status.
 
 ```python
 result = client.software_management_reports_v1.with_raw_response.list_upgrades_for_specified_status(
-    account, upgrade_status, start_index
+    "0242078689-00001", UpgradeStatus.REQUEST_PENDING, "some example string"
 )
 match result:
     case Success(payload=payload):
@@ -23435,7 +26101,7 @@ match result:
 
 ```python
 result = await async_client.software_management_reports_v1.with_raw_response.list_upgrades_for_specified_status(
-    account, upgrade_status, start_index
+    "0242078689-00001", UpgradeStatus.REQUEST_PENDING, "some example string"
 )
 match result:
     case Success(payload=payload):
@@ -23457,7 +26123,7 @@ match result:
 | <code>account</code> | <code>str</code> | Account identifier in "##########-#####". |
 | <code>upgrade_status</code> | <code>[UpgradeStatusOrStr](verizon/models/enums/upgrade_status.py)</code> | The status of the upgrades that you want to retrieve. |
 | <code>start_index</code> | <code>str</code> | The zero-based number of the first record to return. Set startIndex=0 for the first request. If `hasMoreFlag`=true in the response, use the `lastSeenUpgradeId` value from the response as the startIndex in the next request. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -23516,7 +26182,9 @@ The report endpoint allows user to get the full list of device of a campaign.
 **Sync**
 
 ```python
-result = client.software_management_reports_v2.with_raw_response.get_campaign_device_status(account, campaign_id)
+result = client.software_management_reports_v2.with_raw_response.get_campaign_device_status(
+    "0000123456-00001", "60b5d639-ccdc-4db8-8824-069bd94c95bf", last_seen_device_id="15-digit IMEI"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type V2CampaignDevice
@@ -23528,7 +26196,7 @@ match result:
 
 ```python
 result = await async_client.software_management_reports_v2.with_raw_response.get_campaign_device_status(
-    account, campaign_id
+    "0000123456-00001", "60b5d639-ccdc-4db8-8824-069bd94c95bf", last_seen_device_id="15-digit IMEI"
 )
 match result:
     case Success(payload=payload):
@@ -23550,7 +26218,7 @@ match result:
 | <code>account</code> | <code>str</code> | Account identifier. |
 | <code>campaign_id</code> | <code>str</code> | Campaign identifier. |
 | <code>last_seen_device_id</code> | <code>str \| None</code> | Last seen device identifier.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -23606,7 +26274,7 @@ The report endpoint allows user to get campaign history of an account for specif
 
 ```python
 result = client.software_management_reports_v2.with_raw_response.get_campaign_history_by_status(
-    account, campaign_status
+    "0000123456-00001", "some example string", last_seen_campaign_id="60b5d639-ccdc-4db8-8824-069bd94c95bf"
 )
 match result:
     case Success(payload=payload):
@@ -23619,7 +26287,7 @@ match result:
 
 ```python
 result = await async_client.software_management_reports_v2.with_raw_response.get_campaign_history_by_status(
-    account, campaign_status
+    "0000123456-00001", "some example string", last_seen_campaign_id="60b5d639-ccdc-4db8-8824-069bd94c95bf"
 )
 match result:
     case Success(payload=payload):
@@ -23641,7 +26309,7 @@ match result:
 | <code>account</code> | <code>str</code> | Account identifier. |
 | <code>campaign_status</code> | <code>str</code> | Status of the campaign. |
 | <code>last_seen_campaign_id</code> | <code>str \| None</code> | Last seen campaign Id.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -23697,7 +26365,7 @@ The endpoint allows user to get software upgrade history of a device based on de
 
 ```python
 result = client.software_management_reports_v2.with_raw_response.get_device_firmware_upgrade_history2(
-    account, device_id
+    "0000123456-00001", "990013907835573"
 )
 match result:
     case Success(payload=payload):
@@ -23710,7 +26378,7 @@ match result:
 
 ```python
 result = await async_client.software_management_reports_v2.with_raw_response.get_device_firmware_upgrade_history2(
-    account, device_id
+    "0000123456-00001", "990013907835573"
 )
 match result:
     case Success(payload=payload):
@@ -23731,7 +26399,7 @@ match result:
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier. |
 | <code>device_id</code> | <code>str</code> | Device IMEI identifier. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -23786,7 +26454,9 @@ The device endpoint gets devices information of an account.
 **Sync**
 
 ```python
-result = client.software_management_reports_v2.with_raw_response.list_account_devices2(account)
+result = client.software_management_reports_v2.with_raw_response.list_account_devices2(
+    "0000123456-00001", last_seen_device_id="15-digit IMEI", distribution_type="HTTP"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type V2AccountDeviceList
@@ -23797,7 +26467,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.software_management_reports_v2.with_raw_response.list_account_devices2(account)
+result = await async_client.software_management_reports_v2.with_raw_response.list_account_devices2(
+    "0000123456-00001", last_seen_device_id="15-digit IMEI", distribution_type="HTTP"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type V2AccountDeviceList
@@ -23818,7 +26490,7 @@ match result:
 | <code>account</code> | <code>str</code> | Account identifier. |
 | <code>last_seen_device_id</code> | <code>str \| None</code> | Last seen device identifier.<br>**Default**: <code>None</code> |
 | <code>distribution_type</code> | <code>str \| None</code> | Filter distributionType to get specific type of devices. Values is LWM2M, OMD-DM or HTTP.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -23873,7 +26545,9 @@ This endpoint allows user to list a certain type of software of an account.
 **Sync**
 
 ```python
-result = client.software_management_reports_v2.with_raw_response.list_available_software(account)
+result = client.software_management_reports_v2.with_raw_response.list_available_software(
+    "0000123456-00001", distribution_type="HTTP"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[SoftwarePackage]
@@ -23884,7 +26558,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.software_management_reports_v2.with_raw_response.list_available_software(account)
+result = await async_client.software_management_reports_v2.with_raw_response.list_available_software(
+    "0000123456-00001", distribution_type="HTTP"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[SoftwarePackage]
@@ -23904,7 +26580,7 @@ match result:
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier. |
 | <code>distribution_type</code> | <code>str \| None</code> | Filter distributionType to get specific type of software. Value is LWM2M, OMD-DM or HTTP.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -23963,7 +26639,9 @@ Retrieve a list of all devices in a campaign and the status of each device.
 **Sync**
 
 ```python
-result = client.software_management_reports_v3.with_raw_response.get_campaign_device_status2(acc, campaign_id)
+result = client.software_management_reports_v3.with_raw_response.get_campaign_device_status2(
+    "0000123456-00001", "f858b8c4-2153-11ec-8c44-aeb16d1aa652", last_seen_device_id="15-digit IMEI"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type V3CampaignDevice
@@ -23975,7 +26653,7 @@ match result:
 
 ```python
 result = await async_client.software_management_reports_v3.with_raw_response.get_campaign_device_status2(
-    acc, campaign_id
+    "0000123456-00001", "f858b8c4-2153-11ec-8c44-aeb16d1aa652", last_seen_device_id="15-digit IMEI"
 )
 match result:
     case Success(payload=payload):
@@ -23997,7 +26675,7 @@ match result:
 | <code>acc</code> | <code>str</code> | Account identifier. |
 | <code>campaign_id</code> | <code>str</code> | Campaign identifier. |
 | <code>last_seen_device_id</code> | <code>str \| None</code> | Last seen device identifier.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -24052,7 +26730,11 @@ Retrieve a list of campaigns for an account that have a specified campaign statu
 **Sync**
 
 ```python
-result = client.software_management_reports_v3.with_raw_response.get_campaign_history_by_status2(acc, campaign_status)
+result = client.software_management_reports_v3.with_raw_response.get_campaign_history_by_status2(
+    "0000123456-00001",
+    CampaignStatus.CAMPAIGN_REQUEST_PENDING,
+    last_seen_campaign_id="60b5d639-ccdc-4db8-8824-069bd94c95bf",
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type V3CampaignHistory
@@ -24064,7 +26746,9 @@ match result:
 
 ```python
 result = await async_client.software_management_reports_v3.with_raw_response.get_campaign_history_by_status2(
-    acc, campaign_status
+    "0000123456-00001",
+    CampaignStatus.CAMPAIGN_REQUEST_PENDING,
+    last_seen_campaign_id="60b5d639-ccdc-4db8-8824-069bd94c95bf",
 )
 match result:
     case Success(payload=payload):
@@ -24086,7 +26770,7 @@ match result:
 | <code>acc</code> | <code>str</code> | Account identifier. |
 | <code>campaign_status</code> | <code>[CampaignStatusOrStr](verizon/models/enums/campaign_status.py)</code> | Campaign status. |
 | <code>last_seen_campaign_id</code> | <code>str \| None</code> | Last seen campaign Id.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -24141,7 +26825,9 @@ Retrieve campaign history for a specific device.
 **Sync**
 
 ```python
-result = client.software_management_reports_v3.with_raw_response.get_device_firmware_upgrade_history3(acc, device_id)
+result = client.software_management_reports_v3.with_raw_response.get_device_firmware_upgrade_history3(
+    "0000123456-00001", "15-digit IMEI"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[DeviceFirmwareUpgrade]
@@ -24153,7 +26839,7 @@ match result:
 
 ```python
 result = await async_client.software_management_reports_v3.with_raw_response.get_device_firmware_upgrade_history3(
-    acc, device_id
+    "0000123456-00001", "15-digit IMEI"
 )
 match result:
     case Success(payload=payload):
@@ -24174,7 +26860,7 @@ match result:
 | --- | --- | --- |
 | <code>acc</code> | <code>str</code> | Account identifier. |
 | <code>device_id</code> | <code>str</code> | Device IMEI identifier. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -24233,7 +26919,9 @@ Returns information about an account's Software Management Services licenses and
 **Sync**
 
 ```python
-result = client.software_management_subscriptions_v1.with_raw_response.get_account_license_status(account, start_index)
+result = client.software_management_subscriptions_v1.with_raw_response.get_account_license_status(
+    "0402196254-00001", "0"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type AccountLicenseInfo
@@ -24245,7 +26933,7 @@ match result:
 
 ```python
 result = await async_client.software_management_subscriptions_v1.with_raw_response.get_account_license_status(
-    account, start_index
+    "0402196254-00001", "0"
 )
 match result:
     case Success(payload=payload):
@@ -24266,7 +26954,7 @@ match result:
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier in "##########-#####". |
 | <code>start_index</code> | <code>str</code> | The zero-based number of the first record to return. Set startIndex=0 for the first request. If there are more than 1,000 devices in the response, set startIndex=1000 for the second request, 2000 for the third request, etc. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -24321,7 +27009,9 @@ This subscriptions endpoint retrieves an account's current Software Management S
 **Sync**
 
 ```python
-result = client.software_management_subscriptions_v1.with_raw_response.get_account_subscription_status(account)
+result = client.software_management_subscriptions_v1.with_raw_response.get_account_subscription_status(
+    "0402196254-00001"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type V1AccountSubscription
@@ -24333,7 +27023,7 @@ match result:
 
 ```python
 result = await async_client.software_management_subscriptions_v1.with_raw_response.get_account_subscription_status(
-    account
+    "0402196254-00001"
 )
 match result:
     case Success(payload=payload):
@@ -24353,7 +27043,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier in "##########-#####". |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -24412,7 +27102,9 @@ This endpoint retrieves a FOTA subscription by account.
 **Sync**
 
 ```python
-result = client.software_management_subscriptions_v2.with_raw_response.get_account_subscription_status2(account)
+result = client.software_management_subscriptions_v2.with_raw_response.get_account_subscription_status2(
+    "0000123456-00001"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FotaV2Subscription
@@ -24424,7 +27116,7 @@ match result:
 
 ```python
 result = await async_client.software_management_subscriptions_v2.with_raw_response.get_account_subscription_status2(
-    account
+    "0000123456-00001"
 )
 match result:
     case Success(payload=payload):
@@ -24444,7 +27136,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>account</code> | <code>str</code> | Account identifier. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -24503,7 +27195,9 @@ This endpoint retrieves a FOTA subscription by account.
 **Sync**
 
 ```python
-result = client.software_management_subscriptions_v3.with_raw_response.get_account_subscription_status3(acc)
+result = client.software_management_subscriptions_v3.with_raw_response.get_account_subscription_status3(
+    "0000123456-00001"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FotaV3Subscription
@@ -24514,7 +27208,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.software_management_subscriptions_v3.with_raw_response.get_account_subscription_status3(acc)
+result = await async_client.software_management_subscriptions_v3.with_raw_response.get_account_subscription_status3(
+    "0000123456-00001"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type FotaV3Subscription
@@ -24533,7 +27229,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>acc</code> | <code>str</code> | Account identifier. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -24592,7 +27288,20 @@ Deploy a new Azure IoT Central application based on the Verizon ARM template wit
 **Sync**
 
 ```python
-result = client.targets.with_raw_response.create_azure_central_io_t_application(billingaccount_id, body)
+result = client.targets.with_raw_response.create_azure_central_io_t_application(
+    "some example string",
+    CreateIoTapplicationRequest(
+        app_name="newarmapp1",
+        billing_account_id="0000123456-00001",
+        client_id="UUID",
+        client_secret="client secret",
+        email_ids="email@domain.com",
+        resourcegroup="Myresourcegroup",
+        sample_io_tc_app="{app ID}",
+        subscription_id="{subscription ID}",
+        tenant_id="{tenant ID}",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type CreateIoTapplicationResponse
@@ -24603,7 +27312,20 @@ match result:
 **Async**
 
 ```python
-result = await async_client.targets.with_raw_response.create_azure_central_io_t_application(billingaccount_id, body)
+result = await async_client.targets.with_raw_response.create_azure_central_io_t_application(
+    "some example string",
+    CreateIoTapplicationRequest(
+        app_name="newarmapp1",
+        billing_account_id="0000123456-00001",
+        client_id="UUID",
+        client_secret="client secret",
+        email_ids="email@domain.com",
+        resourcegroup="Myresourcegroup",
+        sample_io_tc_app="{app ID}",
+        subscription_id="{subscription ID}",
+        tenant_id="{tenant ID}",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type CreateIoTapplicationResponse
@@ -24623,7 +27345,7 @@ match result:
 | --- | --- | --- |
 | <code>billingaccount_id</code> | <code>str</code> | TThe ThingSpace ID of the authenticating billing account. |
 | <code>body</code> | <code>[CreateIoTapplicationRequest](verizon/models/create_io_tapplication_request.py) \| [CreateIoTapplicationRequestDict](verizon/models/create_io_tapplication_request.py)</code> | The request body must include the UUID of the subscription that you want to update plus any properties that you want to change. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -24671,7 +27393,21 @@ Define a target to receive data streams, alerts, or callbacks. After creating th
 **Sync**
 
 ```python
-result = client.targets.with_raw_response.create_target(body)
+result = client.targets.with_raw_response.create_target(
+    CreateTargetRequest(
+        accountidentifier=AccountIdentifier(billingaccountid="0000000000-00001"),
+        billingaccountid="0000000000-00001",
+        kind="ts.target",
+        address="https://your_IoT_Central_Application.azureiotcentral.com",
+        addressscheme="streamazureiot",
+        fields=CreateTargetRequestFields(
+            httpheaders=FieldsHttpHeaders(
+                authorization="SharedAccessSignature sr=d1f9b6bf-1380-41f6-b757-d9805e48392b&sig=EF5tnXClw3MWkb84OkIOUhMH%2FaS1DRD2nXT69QR8RD8%3D&skn=TSCCtoken&se=1648827260410",
+            ),
+            devicetypes=["cHeAssetTracker", "cHeAssetTrackerV2", "tgAssetTracker", "tgAssetTrackerV2"],
+        ),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type Target
@@ -24682,7 +27418,21 @@ match result:
 **Async**
 
 ```python
-result = await async_client.targets.with_raw_response.create_target(body)
+result = await async_client.targets.with_raw_response.create_target(
+    CreateTargetRequest(
+        accountidentifier=AccountIdentifier(billingaccountid="0000000000-00001"),
+        billingaccountid="0000000000-00001",
+        kind="ts.target",
+        address="https://your_IoT_Central_Application.azureiotcentral.com",
+        addressscheme="streamazureiot",
+        fields=CreateTargetRequestFields(
+            httpheaders=FieldsHttpHeaders(
+                authorization="SharedAccessSignature sr=d1f9b6bf-1380-41f6-b757-d9805e48392b&sig=EF5tnXClw3MWkb84OkIOUhMH%2FaS1DRD2nXT69QR8RD8%3D&skn=TSCCtoken&se=1648827260410",
+            ),
+            devicetypes=["cHeAssetTracker", "cHeAssetTrackerV2", "tgAssetTracker", "tgAssetTrackerV2"],
+        ),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type Target
@@ -24701,7 +27451,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[CreateTargetRequest](verizon/models/create_target_request.py) \| [CreateTargetRequestDict](verizon/models/create_target_request.py)</code> | The request body provides the details of the target that you want to create. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -24749,7 +27499,12 @@ Remove a target from a ThingSpace account.
 **Sync**
 
 ```python
-result = client.targets.with_raw_response.delete_target(body)
+result = client.targets.with_raw_response.delete_target(
+    DeleteTargetRequest(
+        accountidentifier=AccountIdentifier(billingaccountid="0000000000-00001"),
+        resourceidentifier=ResourceIdentifier(id="2e61a17d-8fd1-6816-e995-e4c2528bf535"),
+    ),
+)
 match result:
     case Success():
         ...  # 2xx, no content
@@ -24760,7 +27515,12 @@ match result:
 **Async**
 
 ```python
-result = await async_client.targets.with_raw_response.delete_target(body)
+result = await async_client.targets.with_raw_response.delete_target(
+    DeleteTargetRequest(
+        accountidentifier=AccountIdentifier(billingaccountid="0000000000-00001"),
+        resourceidentifier=ResourceIdentifier(id="2e61a17d-8fd1-6816-e995-e4c2528bf535"),
+    ),
+)
 match result:
     case Success():
         ...  # 2xx, no content
@@ -24779,7 +27539,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[DeleteTargetRequest](verizon/models/delete_target_request.py) \| [DeleteTargetRequestDict](verizon/models/delete_target_request.py)</code> | The request body identifies the target to delete. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -24827,7 +27587,9 @@ Create a unique string that ThingSpace will pass to AWS for increased security.
 **Sync**
 
 ```python
-result = client.targets.with_raw_response.generate_target_external_id(body)
+result = client.targets.with_raw_response.generate_target_external_id(
+    GenerateExternalIdrequest(accountidentifier=AccountIdentifier(billingaccountid="0000000000-00001"))
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GenerateExternalIdresult
@@ -24838,7 +27600,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.targets.with_raw_response.generate_target_external_id(body)
+result = await async_client.targets.with_raw_response.generate_target_external_id(
+    GenerateExternalIdrequest(accountidentifier=AccountIdentifier(billingaccountid="0000000000-00001"))
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type GenerateExternalIdresult
@@ -24857,7 +27621,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[GenerateExternalIdrequest](verizon/models/generate_external_idrequest.py) \| [GenerateExternalIdrequestDict](verizon/models/generate_external_idrequest.py)</code> | The request body only contains the authenticating account. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -24905,7 +27669,12 @@ Search for targets by property values. Returns an array of all matching target r
 **Sync**
 
 ```python
-result = client.targets.with_raw_response.query_target(body)
+result = client.targets.with_raw_response.query_target(
+    QueryTargetRequest(
+        accountidentifier=AccountIdentifier(billingaccountid="1223334444-00001"),
+        resourceidentifier=ResourceIdentifier(id="dd1682d3-2d80-cefc-f3ee-25154800beff"),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[Target]
@@ -24916,7 +27685,12 @@ match result:
 **Async**
 
 ```python
-result = await async_client.targets.with_raw_response.query_target(body)
+result = await async_client.targets.with_raw_response.query_target(
+    QueryTargetRequest(
+        accountidentifier=AccountIdentifier(billingaccountid="1223334444-00001"),
+        resourceidentifier=ResourceIdentifier(id="dd1682d3-2d80-cefc-f3ee-25154800beff"),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[Target]
@@ -24935,7 +27709,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[QueryTargetRequest](verizon/models/query_target_request.py) \| [QueryTargetRequestDict](verizon/models/query_target_request.py)</code> | Search for targets by property values. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -24988,7 +27762,9 @@ Creates a QoS elevation subscription ID and activates the subscription.
 
 ```python
 result = client.thing_space_quality_of_service_api_actions.with_raw_response.create_a_thing_space_quality_of_service_api_subscription(
-    body
+    SubscribeRequest(
+        account_name="some example string", device_info=[QosdeviceInfo(device_id=QosdeviceId(), flow_info=[FlowInfo()])]
+    ),
 )
 match result:
     case Success(payload=payload):
@@ -25001,7 +27777,9 @@ match result:
 
 ```python
 result = await async_client.thing_space_quality_of_service_api_actions.with_raw_response.create_a_thing_space_quality_of_service_api_subscription(
-    body
+    SubscribeRequest(
+        account_name="some example string", device_info=[QosdeviceInfo(device_id=QosdeviceId(), flow_info=[FlowInfo()])]
+    ),
 )
 match result:
     case Success(payload=payload):
@@ -25021,7 +27799,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[SubscribeRequest](verizon/models/subscribe_request.py) \| [SubscribeRequestDict](verizon/models/subscribe_request.py)</code> | The request details to create a ThingSpace Quality of Service API subscription. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -25070,7 +27848,7 @@ Stops an active ThingSpace Quality of Service API subscription using the account
 
 ```python
 result = client.thing_space_quality_of_service_api_actions.with_raw_response.stop_a_thing_space_quality_of_service_api_subscription(
-    account_name, qos_subscription_id
+    "0000123456-00001", "QoS subscription ID"
 )
 match result:
     case Success(payload=payload):
@@ -25083,7 +27861,7 @@ match result:
 
 ```python
 result = await async_client.thing_space_quality_of_service_api_actions.with_raw_response.stop_a_thing_space_quality_of_service_api_subscription(
-    account_name, qos_subscription_id
+    "0000123456-00001", "QoS subscription ID"
 )
 match result:
     case Success(payload=payload):
@@ -25104,7 +27882,7 @@ match result:
 | --- | --- | --- |
 | <code>account_name</code> | <code>str</code> | Value sent with the request. |
 | <code>qos_subscription_id</code> | <code>str</code> | Value sent with the request. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -25156,7 +27934,32 @@ Updates a usage trigger at the account level, device level or a price plan trigg
 **Sync**
 
 ```python
-result = client.update_price_plan_triggers.with_raw_response.update_trigger_rules(body)
+result = client.update_price_plan_triggers.with_raw_response.update_trigger_rules(
+    AccountLevelUpdateTriggerRequest(
+        trigger_id="b9cc1da6-ffff-eeee-gggg-7eba8859ab5e",
+        trigger_name="name of the trigger",
+        ecpd_id="Verizon profile ID",
+        trigger_category=TriggerCategory.ACCOUNT_USAGE,
+        data_trigger=DataTrigger1(),
+        notification=Notificationarray(
+            notification_type="PerEvent",
+            callback=True,
+            email_notification=False,
+            notification_group_name="NotificationGroupName",
+            notification_frequency_factor=3,
+            notification_frequency_interval="Daily",
+            external_email_recipients="ExternalEmailRecipients",
+            sms_notification=True,
+            sms_numbers=[
+                Cellphonenumber(number="10-digit mobile number", carrier="mobile service provider"),
+                Cellphonenumber(number="10-digit mobile number", carrier="mobile service provider"),
+            ],
+            reminder=True,
+            severity="Notice",
+        ),
+        active=Active.TRUE,
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type TriggerResponse
@@ -25167,7 +27970,32 @@ match result:
 **Async**
 
 ```python
-result = await async_client.update_price_plan_triggers.with_raw_response.update_trigger_rules(body)
+result = await async_client.update_price_plan_triggers.with_raw_response.update_trigger_rules(
+    AccountLevelUpdateTriggerRequest(
+        trigger_id="b9cc1da6-ffff-eeee-gggg-7eba8859ab5e",
+        trigger_name="name of the trigger",
+        ecpd_id="Verizon profile ID",
+        trigger_category=TriggerCategory.ACCOUNT_USAGE,
+        data_trigger=DataTrigger1(),
+        notification=Notificationarray(
+            notification_type="PerEvent",
+            callback=True,
+            email_notification=False,
+            notification_group_name="NotificationGroupName",
+            notification_frequency_factor=3,
+            notification_frequency_interval="Daily",
+            external_email_recipients="ExternalEmailRecipients",
+            sms_notification=True,
+            sms_numbers=[
+                Cellphonenumber(number="10-digit mobile number", carrier="mobile service provider"),
+                Cellphonenumber(number="10-digit mobile number", carrier="mobile service provider"),
+            ],
+            reminder=True,
+            severity="Notice",
+        ),
+        active=Active.TRUE,
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type TriggerResponse
@@ -25186,7 +28014,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[V2TriggersRequest1](verizon/models/unions/v2_triggers_request1.py) \| [V2TriggersRequest1Dict](verizon/models/unions/v2_triggers_request1.py)</code> | Update a trigger |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -25268,7 +28096,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[RequestTrigger](verizon/models/request_trigger.py) \| [RequestTriggerDict](verizon/models/request_trigger.py) \| None</code> | Update the triggers<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -25320,7 +28148,19 @@ Create a new usage trigger, which will send an alert when the number of device l
 **Sync**
 
 ```python
-result = client.usage_trigger_management.with_raw_response.create_new_trigger()
+result = client.usage_trigger_management.with_raw_response.create_new_trigger(
+    body=UsageTriggerAddRequest(
+        trigger_name="95% usage alert",
+        account_name="0212312345-00001",
+        service_name=ServiceName.LOCATION,
+        threshold_value="95",
+        allow_excess=True,
+        send_sms_notification=True,
+        sms_phone_numbers="5551231234",
+        send_email_notification=True,
+        email_addresses="you@theinternet.com",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type UsageTriggerResponse
@@ -25331,7 +28171,19 @@ match result:
 **Async**
 
 ```python
-result = await async_client.usage_trigger_management.with_raw_response.create_new_trigger()
+result = await async_client.usage_trigger_management.with_raw_response.create_new_trigger(
+    body=UsageTriggerAddRequest(
+        trigger_name="95% usage alert",
+        account_name="0212312345-00001",
+        service_name=ServiceName.LOCATION,
+        threshold_value="95",
+        allow_excess=True,
+        send_sms_notification=True,
+        sms_phone_numbers="5551231234",
+        send_email_notification=True,
+        email_addresses="you@theinternet.com",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type UsageTriggerResponse
@@ -25350,7 +28202,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[UsageTriggerAddRequest](verizon/models/usage_trigger_add_request.py) \| [UsageTriggerAddRequestDict](verizon/models/usage_trigger_add_request.py) \| None</code> | License assignment.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -25405,7 +28257,9 @@ eletes the specified usage trigger from the given account
 **Sync**
 
 ```python
-result = client.usage_trigger_management.with_raw_response.delete_trigger(account_name, trigger_id)
+result = client.usage_trigger_management.with_raw_response.delete_trigger(
+    "0212312345-00001", "595f5c44-c31c-4552-8670-020a1545a84d"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceLocationSuccessResult
@@ -25416,7 +28270,9 @@ match result:
 **Async**
 
 ```python
-result = await async_client.usage_trigger_management.with_raw_response.delete_trigger(account_name, trigger_id)
+result = await async_client.usage_trigger_management.with_raw_response.delete_trigger(
+    "0212312345-00001", "595f5c44-c31c-4552-8670-020a1545a84d"
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceLocationSuccessResult
@@ -25436,7 +28292,7 @@ match result:
 | --- | --- | --- |
 | <code>account_name</code> | <code>str</code> | Account name |
 | <code>trigger_id</code> | <code>str</code> | Usage trigger ID |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -25491,7 +28347,10 @@ Update an existing usage trigger
 **Sync**
 
 ```python
-result = client.usage_trigger_management.with_raw_response.update_trigger(trigger_id)
+result = client.usage_trigger_management.with_raw_response.update_trigger(
+    "595f5c44-c31c-4552-8670-020a1545a84d",
+    body=UsageTriggerUpdateRequest(account_name="1000012345-00001", threshold_value="95"),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type UsageTriggerResponse
@@ -25502,7 +28361,10 @@ match result:
 **Async**
 
 ```python
-result = await async_client.usage_trigger_management.with_raw_response.update_trigger(trigger_id)
+result = await async_client.usage_trigger_management.with_raw_response.update_trigger(
+    "595f5c44-c31c-4552-8670-020a1545a84d",
+    body=UsageTriggerUpdateRequest(account_name="1000012345-00001", threshold_value="95"),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type UsageTriggerResponse
@@ -25522,7 +28384,7 @@ match result:
 | --- | --- | --- |
 | <code>trigger_id</code> | <code>str</code> | Usage trigger ID |
 | <code>body</code> | <code>[UsageTriggerUpdateRequest](verizon/models/usage_trigger_update_request.py) \| [UsageTriggerUpdateRequestDict](verizon/models/usage_trigger_update_request.py) \| None</code> | New trigger values<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -25581,7 +28443,12 @@ A report of a specific device's service scores over a 30 day period.
 **Sync**
 
 ```python
-result = client.wireless_network_performance.with_raw_response.device_experience30days_history(body)
+result = client.wireless_network_performance.with_raw_response.device_experience30days_history(
+    GetDeviceExperienceScoreHistoryRequest(
+        account_name="0000123456-00001",
+        device_id=DeviceIdentifier(kind="iccid", id="01234567899876543210", mdn="0123456789"),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type WnprequestResponse
@@ -25592,7 +28459,12 @@ match result:
 **Async**
 
 ```python
-result = await async_client.wireless_network_performance.with_raw_response.device_experience30days_history(body)
+result = await async_client.wireless_network_performance.with_raw_response.device_experience30days_history(
+    GetDeviceExperienceScoreHistoryRequest(
+        account_name="0000123456-00001",
+        device_id=DeviceIdentifier(kind="iccid", id="01234567899876543210", mdn="0123456789"),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type WnprequestResponse
@@ -25611,7 +28483,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[GetDeviceExperienceScoreHistoryRequest](verizon/models/get_device_experience_score_history_request.py) \| [GetDeviceExperienceScoreHistoryRequestDict](verizon/models/get_device_experience_score_history_request.py)</code> | Request for a device's 30 day experience. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -25659,7 +28531,12 @@ Run a report to view the latest device experience score for specific devices.
 **Sync**
 
 ```python
-result = client.wireless_network_performance.with_raw_response.device_experience_bulk_latest(body)
+result = client.wireless_network_performance.with_raw_response.device_experience_bulk_latest(
+    GetDeviceExperienceScoreBulkRequest(
+        account_name="0000123456-00001",
+        device_list=[DeviceIdentifier(kind="iccid", id="01234567899876543210", mdn="0123456789")],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type WnprequestResponse
@@ -25670,7 +28547,12 @@ match result:
 **Async**
 
 ```python
-result = await async_client.wireless_network_performance.with_raw_response.device_experience_bulk_latest(body)
+result = await async_client.wireless_network_performance.with_raw_response.device_experience_bulk_latest(
+    GetDeviceExperienceScoreBulkRequest(
+        account_name="0000123456-00001",
+        device_list=[DeviceIdentifier(kind="iccid", id="01234567899876543210", mdn="0123456789")],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type WnprequestResponse
@@ -25689,7 +28571,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[GetDeviceExperienceScoreBulkRequest](verizon/models/get_device_experience_score_bulk_request.py) \| [GetDeviceExperienceScoreBulkRequestDict](verizon/models/get_device_experience_score_bulk_request.py)</code> | Request for bulk latest history details. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -25737,7 +28619,15 @@ Run a report for FWA Address qualification or to determine network types availab
 **Sync**
 
 ```python
-result = client.wireless_network_performance.with_raw_response.domestic4_g_and5_g_nationwide_network_coverage(body)
+result = client.wireless_network_performance.with_raw_response.domestic4_g_and5_g_nationwide_network_coverage(
+    GetWirelessCoverageRequest(
+        account_name="0000123456-00001",
+        request_type="FWA",
+        location_type="ADDRESS",
+        locations=Locationscoord(),
+        network_types_list=[NetworkTypeObject(network_type="LTE")],
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type WnprequestResponse
@@ -25749,7 +28639,13 @@ match result:
 
 ```python
 result = await async_client.wireless_network_performance.with_raw_response.domestic4_g_and5_g_nationwide_network_coverage(
-    body
+    GetWirelessCoverageRequest(
+        account_name="0000123456-00001",
+        request_type="FWA",
+        location_type="ADDRESS",
+        locations=Locationscoord(),
+        network_types_list=[NetworkTypeObject(network_type="LTE")],
+    ),
 )
 match result:
     case Success(payload=payload):
@@ -25769,7 +28665,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[M2MV1IntelligenceWirelessCoverageRequest](verizon/models/unions/m2_mv1_intelligence_wireless_coverage_request.py) \| [M2MV1IntelligenceWirelessCoverageRequestDict](verizon/models/unions/m2_mv1_intelligence_wireless_coverage_request.py)</code> | Request for network coverage details. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -25817,7 +28713,13 @@ WNP Query for current network condition.
 **Sync**
 
 ```python
-result = client.wireless_network_performance.with_raw_response.near_real_time_network_conditions(body)
+result = client.wireless_network_performance.with_raw_response.near_real_time_network_conditions(
+    GetNetworkConditionsRequest(
+        account_name="0000123456-00001",
+        location_type="LONGLAT",
+        coordinates=Coordinates(latitude="-33.84819", longitude="151.22049"),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type WnprequestResponse
@@ -25828,7 +28730,13 @@ match result:
 **Async**
 
 ```python
-result = await async_client.wireless_network_performance.with_raw_response.near_real_time_network_conditions(body)
+result = await async_client.wireless_network_performance.with_raw_response.near_real_time_network_conditions(
+    GetNetworkConditionsRequest(
+        account_name="0000123456-00001",
+        location_type="LONGLAT",
+        coordinates=Coordinates(latitude="-33.84819", longitude="151.22049"),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type WnprequestResponse
@@ -25847,7 +28755,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[GetNetworkConditionsRequest](verizon/models/get_network_conditions_request.py) \| [GetNetworkConditionsRequestDict](verizon/models/get_network_conditions_request.py)</code> | Request for current network health. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -25895,7 +28803,13 @@ Identify the direction and general distance of nearby cell sites and the technol
 **Sync**
 
 ```python
-result = client.wireless_network_performance.with_raw_response.site_proximity(body)
+result = client.wireless_network_performance.with_raw_response.site_proximity(
+    GetNetworkConditionsRequest(
+        account_name="0000123456-00001",
+        location_type="LONGLAT",
+        coordinates=Coordinates(latitude="-33.84819", longitude="151.22049"),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type WnprequestResponse
@@ -25906,7 +28820,13 @@ match result:
 **Async**
 
 ```python
-result = await async_client.wireless_network_performance.with_raw_response.site_proximity(body)
+result = await async_client.wireless_network_performance.with_raw_response.site_proximity(
+    GetNetworkConditionsRequest(
+        account_name="0000123456-00001",
+        location_type="LONGLAT",
+        coordinates=Coordinates(latitude="-33.84819", longitude="151.22049"),
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type WnprequestResponse
@@ -25925,7 +28845,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[GetNetworkConditionsRequest](verizon/models/get_network_conditions_request.py) \| [GetNetworkConditionsRequestDict](verizon/models/get_network_conditions_request.py)</code> | Request for cell site proximity. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -25977,7 +28897,7 @@ This API allows the user to get the access control rules defined for them.
 **Sync**
 
 ```python
-result = client.device_role_controller.with_raw_response.get_acl_rules_by_vendor_id(vendor_id)
+result = client.device_role_controller.with_raw_response.get_acl_rules_by_vendor_id("TestVendor")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[DeviceRole]
@@ -25988,7 +28908,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.device_role_controller.with_raw_response.get_acl_rules_by_vendor_id(vendor_id)
+result = await async_client.device_role_controller.with_raw_response.get_acl_rules_by_vendor_id("TestVendor")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[DeviceRole]
@@ -26007,7 +28927,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>vendor_id</code> | <code>str</code> | The user's Vendor ID |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -26066,7 +28986,20 @@ Delete a local profile from eUICC devices. If the local profile is enabled, it w
 **Sync**
 
 ```python
-result = client.e_uicc_device_profile_management.with_raw_response.delete_local_profile(body)
+result = client.e_uicc_device_profile_management.with_raw_response.delete_local_profile(
+    ProfileChangeStateRequest(
+        devices=[
+            DeviceList(
+                device_ids=[
+                    DeviceId(id="678912789123453456784008666456", kind="eid"),
+                    DeviceId(id="78425989148000000840", kind="iccid"),
+                ],
+            ),
+        ],
+        account_name="1223334444-00001",
+        smsr_oid="1.3.6.1.4.1.31746.1.500.200.101.5",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type RequestResponse
@@ -26077,7 +29010,20 @@ match result:
 **Async**
 
 ```python
-result = await async_client.e_uicc_device_profile_management.with_raw_response.delete_local_profile(body)
+result = await async_client.e_uicc_device_profile_management.with_raw_response.delete_local_profile(
+    ProfileChangeStateRequest(
+        devices=[
+            DeviceList(
+                device_ids=[
+                    DeviceId(id="678912789123453456784008666456", kind="eid"),
+                    DeviceId(id="78425989148000000840", kind="iccid"),
+                ],
+            ),
+        ],
+        account_name="1223334444-00001",
+        smsr_oid="1.3.6.1.4.1.31746.1.500.200.101.5",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type RequestResponse
@@ -26096,7 +29042,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[ProfileChangeStateRequest](verizon/models/profile_change_state_request.py) \| [ProfileChangeStateRequestDict](verizon/models/profile_change_state_request.py)</code> | Update state |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -26151,7 +29097,20 @@ Disable a local profile on eUICC devices. The default or boot profile will becom
 **Sync**
 
 ```python
-result = client.e_uicc_device_profile_management.with_raw_response.disable_local_profile(body)
+result = client.e_uicc_device_profile_management.with_raw_response.disable_local_profile(
+    ProfileChangeStateRequest(
+        devices=[
+            DeviceList(
+                device_ids=[
+                    DeviceId(id="678912789123453456784008666456", kind="eid"),
+                    DeviceId(id="78425989148000000840", kind="iccid"),
+                ],
+            ),
+        ],
+        account_name="1223334444-00001",
+        smsr_oid="1.3.6.1.4.1.31746.1.500.200.101.5",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type RequestResponse
@@ -26162,7 +29121,20 @@ match result:
 **Async**
 
 ```python
-result = await async_client.e_uicc_device_profile_management.with_raw_response.disable_local_profile(body)
+result = await async_client.e_uicc_device_profile_management.with_raw_response.disable_local_profile(
+    ProfileChangeStateRequest(
+        devices=[
+            DeviceList(
+                device_ids=[
+                    DeviceId(id="678912789123453456784008666456", kind="eid"),
+                    DeviceId(id="78425989148000000840", kind="iccid"),
+                ],
+            ),
+        ],
+        account_name="1223334444-00001",
+        smsr_oid="1.3.6.1.4.1.31746.1.500.200.101.5",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type RequestResponse
@@ -26181,7 +29153,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[ProfileChangeStateRequest](verizon/models/profile_change_state_request.py) \| [ProfileChangeStateRequestDict](verizon/models/profile_change_state_request.py)</code> | Update state |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -26236,7 +29208,20 @@ Downloads an eUICC local profile to devices and leaves the profile disabled.
 **Sync**
 
 ```python
-result = client.e_uicc_device_profile_management.with_raw_response.download_local_profile_to_disable(body)
+result = client.e_uicc_device_profile_management.with_raw_response.download_local_profile_to_disable(
+    ProfileChangeStateRequest(
+        devices=[
+            DeviceList(
+                device_ids=[
+                    DeviceId(id="678912789123453456784008666456", kind="eid"),
+                    DeviceId(id="78425989148000000840", kind="iccid"),
+                ],
+            ),
+        ],
+        account_name="1223334444-00001",
+        smsr_oid="1.3.6.1.4.1.31746.1.500.200.101.5",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -26247,7 +29232,20 @@ match result:
 **Async**
 
 ```python
-result = await async_client.e_uicc_device_profile_management.with_raw_response.download_local_profile_to_disable(body)
+result = await async_client.e_uicc_device_profile_management.with_raw_response.download_local_profile_to_disable(
+    ProfileChangeStateRequest(
+        devices=[
+            DeviceList(
+                device_ids=[
+                    DeviceId(id="678912789123453456784008666456", kind="eid"),
+                    DeviceId(id="78425989148000000840", kind="iccid"),
+                ],
+            ),
+        ],
+        account_name="1223334444-00001",
+        smsr_oid="1.3.6.1.4.1.31746.1.500.200.101.5",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -26266,7 +29264,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[ProfileChangeStateRequest](verizon/models/profile_change_state_request.py) \| [ProfileChangeStateRequestDict](verizon/models/profile_change_state_request.py)</code> | Device Profile Query |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -26321,7 +29319,20 @@ Downloads an eUICC local profile to devices and enables the profile.
 **Sync**
 
 ```python
-result = client.e_uicc_device_profile_management.with_raw_response.download_local_profile_to_enable(body)
+result = client.e_uicc_device_profile_management.with_raw_response.download_local_profile_to_enable(
+    ProfileChangeStateRequest(
+        devices=[
+            DeviceList(
+                device_ids=[
+                    DeviceId(id="678912789123453456784008666456", kind="eid"),
+                    DeviceId(id="78425989148000000840", kind="iccid"),
+                ],
+            ),
+        ],
+        account_name="1223334444-00001",
+        smsr_oid="1.3.6.1.4.1.31746.1.500.200.101.5",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -26332,7 +29343,20 @@ match result:
 **Async**
 
 ```python
-result = await async_client.e_uicc_device_profile_management.with_raw_response.download_local_profile_to_enable(body)
+result = await async_client.e_uicc_device_profile_management.with_raw_response.download_local_profile_to_enable(
+    ProfileChangeStateRequest(
+        devices=[
+            DeviceList(
+                device_ids=[
+                    DeviceId(id="678912789123453456784008666456", kind="eid"),
+                    DeviceId(id="78425989148000000840", kind="iccid"),
+                ],
+            ),
+        ],
+        account_name="1223334444-00001",
+        smsr_oid="1.3.6.1.4.1.31746.1.500.200.101.5",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type DeviceManagementResult
@@ -26351,7 +29375,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[ProfileChangeStateRequest](verizon/models/profile_change_state_request.py) \| [ProfileChangeStateRequestDict](verizon/models/profile_change_state_request.py)</code> | Device Profile Query |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -26406,7 +29430,20 @@ Enable a local profile that has been downloaded to eUICC devices.
 **Sync**
 
 ```python
-result = client.e_uicc_device_profile_management.with_raw_response.enable_local_profile(body)
+result = client.e_uicc_device_profile_management.with_raw_response.enable_local_profile(
+    ProfileChangeStateRequest(
+        devices=[
+            DeviceList(
+                device_ids=[
+                    DeviceId(id="678912789123453456784008666456", kind="eid"),
+                    DeviceId(id="78425989148000000840", kind="iccid"),
+                ],
+            ),
+        ],
+        account_name="1223334444-00001",
+        smsr_oid="1.3.6.1.4.1.31746.1.500.200.101.5",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type RequestResponse
@@ -26417,7 +29454,20 @@ match result:
 **Async**
 
 ```python
-result = await async_client.e_uicc_device_profile_management.with_raw_response.enable_local_profile(body)
+result = await async_client.e_uicc_device_profile_management.with_raw_response.enable_local_profile(
+    ProfileChangeStateRequest(
+        devices=[
+            DeviceList(
+                device_ids=[
+                    DeviceId(id="678912789123453456784008666456", kind="eid"),
+                    DeviceId(id="78425989148000000840", kind="iccid"),
+                ],
+            ),
+        ],
+        account_name="1223334444-00001",
+        smsr_oid="1.3.6.1.4.1.31746.1.500.200.101.5",
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type RequestResponse
@@ -26436,7 +29486,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>body</code> | <code>[ProfileChangeStateRequest](verizon/models/profile_change_state_request.py) \| [ProfileChangeStateRequestDict](verizon/models/profile_change_state_request.py)</code> | Update state |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -26495,7 +29545,7 @@ Removes a map message for the specified region and intersection ID.
 **Sync**
 
 ```python
-result = client.map_message_controller.with_raw_response.delete_map_message(region_id, i10nid)
+result = client.map_message_controller.with_raw_response.delete_map_message("0", "58399")
 match result:
     case Success():
         ...  # 2xx, no content
@@ -26506,7 +29556,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.map_message_controller.with_raw_response.delete_map_message(region_id, i10nid)
+result = await async_client.map_message_controller.with_raw_response.delete_map_message("0", "58399")
 match result:
     case Success():
         ...  # 2xx, no content
@@ -26526,7 +29576,7 @@ match result:
 | --- | --- | --- |
 | <code>region_id</code> | <code>str</code> | Region ID to filter the map messages. |
 | <code>i10nid</code> | <code>str</code> | Intersection ID to filter the map messages. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -26588,7 +29638,19 @@ This endpoint allows user to download SAE J2735 or ETSI MAP messages in ASN.1 UP
 **Sync**
 
 ```python
-result = client.map_message_controller.with_raw_response.download_map_messages(geofence, vendor_id)
+result = client.map_message_controller.with_raw_response.download_map_messages(
+    GeofencePolygon(
+        type_=EtxMapMessageGeofenceGeometry.POLYGON,
+        coordinates=[
+            [-77.479395, 38.990773],
+            [-77.114566, 38.99944],
+            [-77.100228, 38.817204],
+            [-77.418059, 38.827754],
+            [-77.479395, 38.990773],
+        ],
+    ),
+    "VzMapManager",
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type str
@@ -26599,7 +29661,19 @@ match result:
 **Async**
 
 ```python
-result = await async_client.map_message_controller.with_raw_response.download_map_messages(geofence, vendor_id)
+result = await async_client.map_message_controller.with_raw_response.download_map_messages(
+    GeofencePolygon(
+        type_=EtxMapMessageGeofenceGeometry.POLYGON,
+        coordinates=[
+            [-77.479395, 38.990773],
+            [-77.114566, 38.99944],
+            [-77.100228, 38.817204],
+            [-77.418059, 38.827754],
+            [-77.479395, 38.990773],
+        ],
+    ),
+    "VzMapManager",
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type str
@@ -26619,7 +29693,7 @@ match result:
 | --- | --- | --- |
 | <code>geofence</code> | <code>[GeofencePolygon](verizon/models/geofence_polygon.py) \| [GeofencePolygonDict](verizon/models/geofence_polygon.py)</code> | GeoJSON Polygon defining the area to retrieve MAP messages for. |
 | <code>vendor_id</code> | <code>str</code> | The VendorID set during the Vendor registration call. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -26651,7 +29725,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def ingest_map_messages(vendor_id: str, map_data_message_standard: EtxmessageStandardEnumOrStr, body: EtxMapDataIngestRequest | EtxMapDataIngestRequestDict, *, request_options: RequestOptionsOrDict | None = None) -> ApiResult[str, IngestMapmessagesErrorBody]</code></summary>
+<summary><code>def ingest_map_messages(vendor_id: str, body: EtxMapDataIngestRequest | EtxMapDataIngestRequestDict, *, map_data_message_standard: EtxmessageStandardEnumOrStr = EtxmessageStandardEnum.SAE, request_options: RequestOptionsOrDict | None = None) -> ApiResult[str, IngestMapmessagesErrorBody]</code></summary>
 
 <dl>
 <dd>
@@ -26681,7 +29755,11 @@ Note: The user needs to authenticate with their ThingSpace credentials using the
 **Sync**
 
 ```python
-result = client.map_message_controller.with_raw_response.ingest_map_messages(vendor_id, map_data_message_standard, body)
+result = client.map_message_controller.with_raw_response.ingest_map_messages(
+    "VzMapManager",
+    EtxMapDataIngestRequest(message_id=1, value={}),
+    map_data_message_standard=EtxmessageStandardEnum.SAE,
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type str
@@ -26693,7 +29771,9 @@ match result:
 
 ```python
 result = await async_client.map_message_controller.with_raw_response.ingest_map_messages(
-    vendor_id, map_data_message_standard, body
+    "VzMapManager",
+    EtxMapDataIngestRequest(message_id=1, value={}),
+    map_data_message_standard=EtxmessageStandardEnum.SAE,
 )
 match result:
     case Success(payload=payload):
@@ -26713,9 +29793,9 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>vendor_id</code> | <code>str</code> | The VendorID set during the Vendor registration call. |
-| <code>map_data_message_standard</code> | <code>[EtxmessageStandardEnumOrStr](verizon/models/enums/etxmessage_standard_enum.py)</code> | Select which V2X messaging standard will be used for the message generation. The following options are supported:<br>- "etsi": The message will be generated using the ETSI (European) standard (e.g. MAPEM).<br>- "sae": The message will be generated using the SAE J2735 (North American) standard (e.g. MAP).<br>- if not sent while POST, defaults to "sae" |
 | <code>body</code> | <code>[EtxMapDataIngestRequest](verizon/models/etx_map_data_ingest_request.py) \| [EtxMapDataIngestRequestDict](verizon/models/etx_map_data_ingest_request.py)</code> | UPER/ASN.1 J2735/ETSI base64 encoded MapData message or JSON representation of the MapData message. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>map_data_message_standard</code> | <code>[EtxmessageStandardEnumOrStr](verizon/models/enums/etxmessage_standard_enum.py)</code> | Select which V2X messaging standard will be used for the message generation. The following options are supported:<br>- "etsi": The message will be generated using the ETSI (European) standard (e.g. MAPEM).<br>- "sae": The message will be generated using the SAE J2735 (North American) standard (e.g. MAP).<br>- if not sent while POST, defaults to "sae"<br>**Default**: <code>EtxmessageStandardEnum.SAE</code> |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -26773,7 +29853,15 @@ An array of region and intersection ID pairs, or a GeoJSON geofence specificatio
 **Sync**
 
 ```python
-result = client.map_message_controller.with_raw_response.query_map_messages(vendor_id, body)
+result = client.map_message_controller.with_raw_response.query_map_messages(
+    "VzMapManager",
+    EtxMapMessageIntersectionCoordinates(
+        message_standard=EtxmessageStandardEnum.SAE,
+        region_intersection_pairs=[RegionIntersectionPair(region_id=100, intersection_id=5233)],
+        expected_type=EtxexpectedTypeEnum.BASE64,
+        page_size=50,
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[Any]
@@ -26784,7 +29872,15 @@ match result:
 **Async**
 
 ```python
-result = await async_client.map_message_controller.with_raw_response.query_map_messages(vendor_id, body)
+result = await async_client.map_message_controller.with_raw_response.query_map_messages(
+    "VzMapManager",
+    EtxMapMessageIntersectionCoordinates(
+        message_standard=EtxmessageStandardEnum.SAE,
+        region_intersection_pairs=[RegionIntersectionPair(region_id=100, intersection_id=5233)],
+        expected_type=EtxexpectedTypeEnum.BASE64,
+        page_size=50,
+    ),
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type list[Any]
@@ -26804,7 +29900,7 @@ match result:
 | --- | --- | --- |
 | <code>vendor_id</code> | <code>str</code> | The VendorID set during the Vendor registration call. |
 | <code>body</code> | <code>[MapDataQueryRequest](verizon/models/unions/map_data_query_request.py) \| [MapDataQueryRequestDict](verizon/models/unions/map_data_query_request.py)</code> | The request body. |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](verizon/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>

@@ -3,13 +3,13 @@ from __future__ import annotations
 from pydantic import Field
 from typing_extensions import NotRequired, TypedDict
 
-from ..core import UNSET, Optional, SdkBaseModel
+from ..core import SdkBaseModel
 
 
 class RegionIntersectionPair(SdkBaseModel):
     """Specific region and intersection identification pair"""
 
-    region_id: Optional[int] = Field(default=UNSET, alias="regionId")
+    region_id: int = Field(default=0, alias="regionId")
     """The region identifier code (0-65535)"""
 
     intersection_id: int = Field(alias="intersectionId")

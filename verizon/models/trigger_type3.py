@@ -36,5 +36,5 @@ class TriggerType3Dict(TypedDict):
     trigger_name: NotRequired[str]
     trigger_category: NotRequired[str]
     account_name: NotRequired[str]
-    anomaly_trigger_request: NotRequired[AnomalyTriggerRequest | AnomalyTriggerRequestDict]
-    notification: NotRequired[TriggerNotification | TriggerNotificationDict]
+    anomaly_trigger_request: NotRequired[AnomalyTriggerRequestDict]
+    notification: NotRequired[TriggerNotificationDict]

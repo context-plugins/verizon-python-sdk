@@ -13,4 +13,4 @@ class DescriptionOfRoadSurfaceAsphaltOrTar(SdkBaseModel):
 
 
 class DescriptionOfRoadSurfaceAsphaltOrTarDict(TypedDict):
-    asphalt_or_tar: AsphaltOrTar | AsphaltOrTarDict
+    asphalt_or_tar: AsphaltOrTarDict

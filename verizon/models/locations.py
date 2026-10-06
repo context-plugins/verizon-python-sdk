@@ -14,4 +14,4 @@ class Locations(SdkBaseModel):
 
 
 class LocationsDict(TypedDict):
-    address_list: NotRequired[list[AddressItem | AddressItemDict]]
+    address_list: NotRequired[list[AddressItemDict]]

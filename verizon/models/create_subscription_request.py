@@ -44,7 +44,7 @@ class CreateSubscriptionRequest(SdkBaseModel):
 
 
 class CreateSubscriptionRequestDict(TypedDict):
-    accountidentifier: NotRequired[AccountIdentifier | AccountIdentifierDict]
+    accountidentifier: NotRequired[AccountIdentifierDict]
     description: NotRequired[str]
     disabled: NotRequired[bool]
     email: NotRequired[str]

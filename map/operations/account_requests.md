@@ -10,7 +10,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /m2m/v1/accounts/{aname}/requests/{requestId}/status`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def get_current_asynchronous_request_status(aname: str, request_id: str, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `aname`, `request_id`
 - **Params**: `aname` — path · `request_id` — path `requestId`

@@ -11,6 +11,8 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_decoder,
     param,
@@ -47,7 +49,8 @@ class ClientLogging:
         Args:
             account: Account identifier.
             device_id: Device IMEI identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Success.
@@ -66,7 +69,8 @@ class ClientLogging:
         Args:
             account: Account identifier.
             device_ids: The list of device IDs.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Success.
@@ -85,7 +89,8 @@ class ClientLogging:
         Args:
             account: Account identifier.
             device_id: Device IMEI identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Device logging status information.
@@ -103,7 +108,8 @@ class ClientLogging:
 
         Args:
             account: Account identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List containing device logging status information.
@@ -120,7 +126,8 @@ class ClientLogging:
         Args:
             account: Account identifier.
             device_id: Device IMEI identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of device logs.
@@ -136,7 +143,8 @@ class ClientLogging:
 
         Args:
             account: Account identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List containing device logging status information.
@@ -164,7 +172,8 @@ class AsyncClientLogging:
         Args:
             account: Account identifier.
             device_id: Device IMEI identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Success.
@@ -183,7 +192,8 @@ class AsyncClientLogging:
         Args:
             account: Account identifier.
             device_ids: The list of device IDs.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Success.
@@ -204,7 +214,8 @@ class AsyncClientLogging:
         Args:
             account: Account identifier.
             device_id: Device IMEI identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Device logging status information.
@@ -222,7 +233,8 @@ class AsyncClientLogging:
 
         Args:
             account: Account identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List containing device logging status information.
@@ -241,7 +253,8 @@ class AsyncClientLogging:
         Args:
             account: Account identifier.
             device_id: Device IMEI identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of device logs.
@@ -259,7 +272,8 @@ class AsyncClientLogging:
 
         Args:
             account: Account identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List containing device logging status information.
@@ -284,7 +298,8 @@ class ClientLoggingWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
         Args:
             account: Account identifier.
             device_id: Device IMEI identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -307,7 +322,8 @@ class ClientLoggingWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
         Args:
             account: Account identifier.
             device_ids: The list of device IDs.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -331,7 +347,8 @@ class ClientLoggingWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
         Args:
             account: Account identifier.
             device_id: Device IMEI identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -353,7 +370,8 @@ class ClientLoggingWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
 
         Args:
             account: Account identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -376,7 +394,8 @@ class ClientLoggingWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
         Args:
             account: Account identifier.
             device_id: Device IMEI identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -397,7 +416,8 @@ class ClientLoggingWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
 
         Args:
             account: Account identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -421,7 +441,8 @@ class AsyncClientLoggingWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
         Args:
             account: Account identifier.
             device_id: Device IMEI identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -431,7 +452,7 @@ class AsyncClientLoggingWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             path_params=[param[str]("account", account), param[str]("deviceId", device_id)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=disable_device_logging_error_mapper,
             request_options=request_options,
         )
@@ -444,7 +465,8 @@ class AsyncClientLoggingWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
         Args:
             account: Account identifier.
             device_ids: The list of device IDs.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -455,7 +477,7 @@ class AsyncClientLoggingWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             query_params=[param[str]("deviceIds", device_ids)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=disable_logging_for_devices_error_mapper,
             request_options=request_options,
         )
@@ -468,7 +490,8 @@ class AsyncClientLoggingWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
         Args:
             account: Account identifier.
             device_id: Device IMEI identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -478,7 +501,7 @@ class AsyncClientLoggingWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             path_params=[param[str]("account", account), param[str]("deviceId", device_id)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceLoggingStatus],
+            decoder=async_json_decoder[DeviceLoggingStatus],
             error_mapper=enable_device_logging_error_mapper,
             request_options=request_options,
         )
@@ -490,7 +513,8 @@ class AsyncClientLoggingWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
 
         Args:
             account: Account identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -500,7 +524,7 @@ class AsyncClientLoggingWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             path_params=[param[str]("account", account)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[list[DeviceLoggingStatus]],
+            decoder=async_json_decoder[list[DeviceLoggingStatus]],
             error_mapper=enable_logging_for_devices_error_mapper,
             request_options=request_options,
         )
@@ -513,7 +537,8 @@ class AsyncClientLoggingWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
         Args:
             account: Account identifier.
             device_id: Device IMEI identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -522,7 +547,7 @@ class AsyncClientLoggingWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             url_template=self._server.software_management_v2("/logging/{account}/devices/{deviceId}/logs"),
             path_params=[param[str]("account", account), param[str]("deviceId", device_id)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[list[DeviceLog]],
+            decoder=async_json_decoder[list[DeviceLog]],
             error_mapper=list_device_logs_error_mapper,
             request_options=request_options,
         )
@@ -534,7 +559,8 @@ class AsyncClientLoggingWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
 
         Args:
             account: Account identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -543,7 +569,7 @@ class AsyncClientLoggingWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             url_template=self._server.software_management_v2("/logging/{account}/devices"),
             path_params=[param[str]("account", account)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[list[DeviceLoggingStatus]],
+            decoder=async_json_decoder[list[DeviceLoggingStatus]],
             error_mapper=list_devices_with_logging_enabled_error_mapper,
             request_options=request_options,
         )

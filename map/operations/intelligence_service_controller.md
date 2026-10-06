@@ -10,7 +10,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `POST /v1/intelligence/device/connection-planner`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def set_connection_planner(*, body: GetDevicesWindowsRequestforplanner | GetDevicesWindowsRequestforplannerDict | None = None, request_options: RequestOptionsOrDict | None = None)`
 - **Params**: `body` — JSON body
 - **Returns (parsed)**: `AsynchronousRequestResultforplanner`
@@ -31,7 +31,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `POST /v1/intelligence/device/connection-planner/status`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def status_connection_planner(*, body: GetDeviceStatusesRequestforplanner | GetDeviceStatusesRequestforplannerDict | None = None, request_options: RequestOptionsOrDict | None = None)`
 - **Params**: `body` — JSON body
 - **Returns (parsed)**: `GetDeviceStatusesResponseforplanner`

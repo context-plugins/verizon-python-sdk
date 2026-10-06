@@ -22,7 +22,7 @@ class CampaignFirmwareUpgrade(SdkBaseModel):
     firmware_to: str = Field(alias="firmwareTo")
     """New firmware version."""
 
-    protocol: str
+    protocol: str = "LWM2M"
     """Valid values include: LWM2M, OMA and HTTP."""
 
     start_date: Date = Field(alias="startDate")
@@ -52,7 +52,7 @@ class CampaignFirmwareUpgradeDict(TypedDict):
     protocol: str
     start_date: Date
     end_date: Date
-    campaign_time_window_list: NotRequired[list[V3TimeWindow | V3TimeWindowDict]]
+    campaign_time_window_list: NotRequired[list[V3TimeWindowDict]]
     device_list: list[str]
     auto_assign_license_flag: bool
     auto_add_devices_flag: bool

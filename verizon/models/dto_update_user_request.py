@@ -19,4 +19,4 @@ class DtoUpdateUserRequest(SdkBaseModel):
 class DtoUpdateUserRequestDict(TypedDict):
     accountname: NotRequired[str]
     id: NotRequired[str]
-    user: NotRequired[DtoUserDto | DtoUserDtoDict]
+    user: NotRequired[DtoUserDtoDict]

@@ -20,4 +20,4 @@ class GetDeviceListWithProfilesRequestDict(TypedDict):
     provisioning_status_filter: NotRequired[str]
     profile_status_filter: NotRequired[str]
     carrier_name_filter: NotRequired[str]
-    device_filter: NotRequired[list[GiodeviceId | GiodeviceIdDict]]
+    device_filter: NotRequired[list[GiodeviceIdDict]]

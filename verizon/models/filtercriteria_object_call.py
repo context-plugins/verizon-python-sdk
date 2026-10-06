@@ -12,4 +12,4 @@ class FiltercriteriaObjectCall(SdkBaseModel):
 
 
 class FiltercriteriaObjectCallDict(TypedDict):
-    filter_criteria: NotRequired[FilterCriteria1 | FilterCriteria1Dict]
+    filter_criteria: NotRequired[FilterCriteria1Dict]

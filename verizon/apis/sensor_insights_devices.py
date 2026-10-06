@@ -11,6 +11,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -77,7 +78,8 @@ class SensorInsightsDevices:
 
         Args:
             body: Set device configuration
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -99,7 +101,8 @@ class SensorInsightsDevices:
 
         Args:
             body: Get the last reported information for a device
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -121,7 +124,8 @@ class SensorInsightsDevices:
 
         Args:
             body: List the device experience
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -144,7 +148,8 @@ class SensorInsightsDevices:
 
         Args:
             body: List all device details on an account
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -166,7 +171,8 @@ class SensorInsightsDevices:
 
         Args:
             body: List the network experience
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -189,7 +195,8 @@ class SensorInsightsDevices:
 
         Args:
             body: Partially update a device's details
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -221,7 +228,8 @@ class AsyncSensorInsightsDevices:
 
         Args:
             body: Set device configuration
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -245,7 +253,8 @@ class AsyncSensorInsightsDevices:
 
         Args:
             body: Get the last reported information for a device
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -269,7 +278,8 @@ class AsyncSensorInsightsDevices:
 
         Args:
             body: List the device experience
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -294,7 +304,8 @@ class AsyncSensorInsightsDevices:
 
         Args:
             body: List all device details on an account
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -316,7 +327,8 @@ class AsyncSensorInsightsDevices:
 
         Args:
             body: List the network experience
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -341,7 +353,8 @@ class AsyncSensorInsightsDevices:
 
         Args:
             body: Partially update a device's details
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -370,13 +383,14 @@ class SensorInsightsDevicesWithRawResponse(SecuredRawResponse[RawClient, Server,
 
         Args:
             body: Set device configuration
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/devices/actions/set"),
+            url_template=self._server.thingspace("/dm/v1/devices/actions/set"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DmV1DevicesActionsSetRequest | DmV1DevicesActionsSetRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -395,13 +409,14 @@ class SensorInsightsDevicesWithRawResponse(SecuredRawResponse[RawClient, Server,
 
         Args:
             body: Get the last reported information for a device
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/devices/lastreported"),
+            url_template=self._server.thingspace("/dm/v1/devices/lastreported"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoLastReportedTimeRequest | DtoLastReportedTimeRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -420,13 +435,14 @@ class SensorInsightsDevicesWithRawResponse(SecuredRawResponse[RawClient, Server,
 
         Args:
             body: List the device experience
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/devices/experience/actions/query"),
+            url_template=self._server.thingspace("/dm/v1/devices/experience/actions/query"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoListDeviceExperienceHistoryRequest | DtoListDeviceExperienceHistoryRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -445,13 +461,14 @@ class SensorInsightsDevicesWithRawResponse(SecuredRawResponse[RawClient, Server,
 
         Args:
             body: List all device details on an account
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/devices/actions/query"),
+            url_template=self._server.thingspace("/dm/v1/devices/actions/query"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoListDevicesRequest | DtoListDevicesRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -470,13 +487,14 @@ class SensorInsightsDevicesWithRawResponse(SecuredRawResponse[RawClient, Server,
 
         Args:
             body: List the network experience
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/devices/networkexperience/actions/query"),
+            url_template=self._server.thingspace("/dm/v1/devices/networkexperience/actions/query"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoListNetworkExperienceHistoryRequest | DtoListNetworkExperienceHistoryRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -495,13 +513,14 @@ class SensorInsightsDevicesWithRawResponse(SecuredRawResponse[RawClient, Server,
 
         Args:
             body: Partially update a device's details
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="PATCH",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/devices"),
+            url_template=self._server.thingspace("/dm/v1/devices"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoPatchDeviceRequest | DtoPatchDeviceRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -522,17 +541,18 @@ class AsyncSensorInsightsDevicesWithRawResponse(SecuredRawResponse[AsyncRawClien
 
         Args:
             body: Set device configuration
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/devices/actions/set"),
+            url_template=self._server.thingspace("/dm/v1/devices/actions/set"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DmV1DevicesActionsSetRequest | DmV1DevicesActionsSetRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DtoDeviceActionSetResponse],
+            decoder=async_json_decoder[DtoDeviceActionSetResponse],
             error_mapper=sensor_insights_device_action_set_request_error_mapper,
             request_options=request_options,
         )
@@ -547,17 +567,18 @@ class AsyncSensorInsightsDevicesWithRawResponse(SecuredRawResponse[AsyncRawClien
 
         Args:
             body: Get the last reported information for a device
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/devices/lastreported"),
+            url_template=self._server.thingspace("/dm/v1/devices/lastreported"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoLastReportedTimeRequest | DtoLastReportedTimeRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DtoLastReportedTimeResponse],
+            decoder=async_json_decoder[DtoLastReportedTimeResponse],
             error_mapper=sensor_insights_last_reported_time_request_error_mapper,
             request_options=request_options,
         )
@@ -572,17 +593,18 @@ class AsyncSensorInsightsDevicesWithRawResponse(SecuredRawResponse[AsyncRawClien
 
         Args:
             body: List the device experience
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/devices/experience/actions/query"),
+            url_template=self._server.thingspace("/dm/v1/devices/experience/actions/query"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoListDeviceExperienceHistoryRequest | DtoListDeviceExperienceHistoryRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[list[UserDeviceExperienceHistory]],
+            decoder=async_json_decoder[list[UserDeviceExperienceHistory]],
             error_mapper=sensor_insights_list_device_experience_history_request_error_mapper,
             request_options=request_options,
         )
@@ -597,17 +619,18 @@ class AsyncSensorInsightsDevicesWithRawResponse(SecuredRawResponse[AsyncRawClien
 
         Args:
             body: List all device details on an account
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/devices/actions/query"),
+            url_template=self._server.thingspace("/dm/v1/devices/actions/query"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoListDevicesRequest | DtoListDevicesRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[list[DtoExpandedDeviceResponse]],
+            decoder=async_json_decoder[list[DtoExpandedDeviceResponse]],
             error_mapper=sensor_insights_list_devices_request_error_mapper,
             request_options=request_options,
         )
@@ -622,17 +645,18 @@ class AsyncSensorInsightsDevicesWithRawResponse(SecuredRawResponse[AsyncRawClien
 
         Args:
             body: List the network experience
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/devices/networkexperience/actions/query"),
+            url_template=self._server.thingspace("/dm/v1/devices/networkexperience/actions/query"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoListNetworkExperienceHistoryRequest | DtoListNetworkExperienceHistoryRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[list[UserNetworkExperienceHistory]],
+            decoder=async_json_decoder[list[UserNetworkExperienceHistory]],
             error_mapper=sensor_insights_list_network_experience_history_request_error_mapper,
             request_options=request_options,
         )
@@ -647,17 +671,18 @@ class AsyncSensorInsightsDevicesWithRawResponse(SecuredRawResponse[AsyncRawClien
 
         Args:
             body: Partially update a device's details
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="PATCH",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/devices"),
+            url_template=self._server.thingspace("/dm/v1/devices"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoPatchDeviceRequest | DtoPatchDeviceRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[ResourceDevice],
+            decoder=async_json_decoder[ResourceDevice],
             error_mapper=sensor_insights_patch_device_request_error_mapper,
             request_options=request_options,
         )

@@ -12,6 +12,7 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -30,14 +31,15 @@ class DeviceSmsMessaging:
         self._with_raw_response = DeviceSmsMessagingWithRawResponse(client, server, auth)
 
     def get_sms_messages(
-        self, account_name: str, *, next: str | None = None, request_options: RequestOptionsOrDict | None = None
+        self, account_name: str, *, next_: str | None = None, request_options: RequestOptionsOrDict | None = None
     ) -> SmsMessagesResponse:
         """Retrieves queued SMS messages sent by all M2M MC devices associated with an account.
 
         Args:
             account_name: Numeric account name
-            next: Continue the previous query from the pageUrl in Location Header
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            next_: Continue the previous query from the pageUrl in Location Header
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful response
@@ -45,7 +47,7 @@ class DeviceSmsMessaging:
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
         return self._with_raw_response.get_sms_messages(
-            account_name, next=next, request_options=request_options
+            account_name, next_=next_, request_options=request_options
         ).unwrap()
 
     def list_sms_message_history(
@@ -58,7 +60,8 @@ class DeviceSmsMessaging:
 
         Args:
             body: Device Query
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -75,7 +78,8 @@ class DeviceSmsMessaging:
 
         Args:
             body: SMS message to an indiividual device.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -91,7 +95,8 @@ class DeviceSmsMessaging:
 
         Args:
             account_name: Numeric account name
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request Success Message
@@ -112,14 +117,15 @@ class AsyncDeviceSmsMessaging:
         self._with_raw_response = AsyncDeviceSmsMessagingWithRawResponse(client, server, auth)
 
     async def get_sms_messages(
-        self, account_name: str, *, next: str | None = None, request_options: RequestOptionsOrDict | None = None
+        self, account_name: str, *, next_: str | None = None, request_options: RequestOptionsOrDict | None = None
     ) -> SmsMessagesResponse:
         """Retrieves queued SMS messages sent by all M2M MC devices associated with an account.
 
         Args:
             account_name: Numeric account name
-            next: Continue the previous query from the pageUrl in Location Header
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            next_: Continue the previous query from the pageUrl in Location Header
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful response
@@ -127,7 +133,7 @@ class AsyncDeviceSmsMessaging:
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
         return (
-            await self._with_raw_response.get_sms_messages(account_name, next=next, request_options=request_options)
+            await self._with_raw_response.get_sms_messages(account_name, next_=next_, request_options=request_options)
         ).unwrap()
 
     async def list_sms_message_history(
@@ -140,7 +146,8 @@ class AsyncDeviceSmsMessaging:
 
         Args:
             body: Device Query
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -157,7 +164,8 @@ class AsyncDeviceSmsMessaging:
 
         Args:
             body: SMS message to an indiividual device.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -173,7 +181,8 @@ class AsyncDeviceSmsMessaging:
 
         Args:
             account_name: Numeric account name
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request Success Message
@@ -191,22 +200,23 @@ class AsyncDeviceSmsMessaging:
 
 class DeviceSmsMessagingWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes]):
     def get_sms_messages(
-        self, account_name: str, *, next: str | None = None, request_options: RequestOptionsOrDict | None = None
+        self, account_name: str, *, next_: str | None = None, request_options: RequestOptionsOrDict | None = None
     ) -> ApiResult[SmsMessagesResponse, RawError]:
         """Retrieves queued SMS messages sent by all M2M MC devices associated with an account.
 
         Args:
             account_name: Numeric account name
-            next: Continue the previous query from the pageUrl in Location Header
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            next_: Continue the previous query from the pageUrl in Location Header
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/sms/{accountName}/history"),
+            url_template=self._server.thingspace("/m2m/v1/sms/{accountName}/history"),
             path_params=[param[str]("accountName", account_name)],
-            query_params=[param[str | None]("next", next)],
+            query_params=[param[str | None]("next", next_)],
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
             decoder=json_decoder[SmsMessagesResponse],
             error_mapper=raw_error_response,
@@ -223,13 +233,14 @@ class DeviceSmsMessagingWithRawResponse(SecuredRawResponse[RawClient, Server, Au
 
         Args:
             body: Device Query
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/sms/history/actions/list"),
+            url_template=self._server.thingspace("/m2m/v1/devices/sms/history/actions/list"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[SmseventHistoryRequest | SmseventHistoryRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -246,13 +257,14 @@ class DeviceSmsMessagingWithRawResponse(SecuredRawResponse[RawClient, Server, Au
 
         Args:
             body: SMS message to an indiividual device.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/sms"),
+            url_template=self._server.thingspace("/m2m/v1/sms"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[GiosmssendRequest | GiosmssendRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -268,13 +280,14 @@ class DeviceSmsMessagingWithRawResponse(SecuredRawResponse[RawClient, Server, Au
 
         Args:
             account_name: Numeric account name
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="PUT",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/sms/{accountName}/startCallbacks"),
+            url_template=self._server.thingspace("/m2m/v1/sms/{accountName}/startCallbacks"),
             path_params=[param[str]("accountName", account_name)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -286,24 +299,25 @@ class DeviceSmsMessagingWithRawResponse(SecuredRawResponse[RawClient, Server, Au
 
 class AsyncDeviceSmsMessagingWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, AsyncAuthSchemes]):
     async def get_sms_messages(
-        self, account_name: str, *, next: str | None = None, request_options: RequestOptionsOrDict | None = None
+        self, account_name: str, *, next_: str | None = None, request_options: RequestOptionsOrDict | None = None
     ) -> ApiResult[SmsMessagesResponse, RawError]:
         """Retrieves queued SMS messages sent by all M2M MC devices associated with an account.
 
         Args:
             account_name: Numeric account name
-            next: Continue the previous query from the pageUrl in Location Header
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            next_: Continue the previous query from the pageUrl in Location Header
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/sms/{accountName}/history"),
+            url_template=self._server.thingspace("/m2m/v1/sms/{accountName}/history"),
             path_params=[param[str]("accountName", account_name)],
-            query_params=[param[str | None]("next", next)],
+            query_params=[param[str | None]("next", next_)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[SmsMessagesResponse],
+            decoder=async_json_decoder[SmsMessagesResponse],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -318,17 +332,18 @@ class AsyncDeviceSmsMessagingWithRawResponse(SecuredRawResponse[AsyncRawClient, 
 
         Args:
             body: Device Query
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/sms/history/actions/list"),
+            url_template=self._server.thingspace("/m2m/v1/devices/sms/history/actions/list"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[SmseventHistoryRequest | SmseventHistoryRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[GiorequestResponse],
+            decoder=async_json_decoder[GiorequestResponse],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -341,17 +356,18 @@ class AsyncDeviceSmsMessagingWithRawResponse(SecuredRawResponse[AsyncRawClient, 
 
         Args:
             body: SMS message to an indiividual device.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/sms"),
+            url_template=self._server.thingspace("/m2m/v1/sms"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[GiosmssendRequest | GiosmssendRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[GiorequestResponse],
+            decoder=async_json_decoder[GiorequestResponse],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -363,17 +379,18 @@ class AsyncDeviceSmsMessagingWithRawResponse(SecuredRawResponse[AsyncRawClient, 
 
         Args:
             account_name: Numeric account name
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="PUT",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/sms/{accountName}/startCallbacks"),
+            url_template=self._server.thingspace("/m2m/v1/sms/{accountName}/startCallbacks"),
             path_params=[param[str]("accountName", account_name)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[SuccessResponse],
+            decoder=async_json_decoder[SuccessResponse],
             error_mapper=raw_error_response,
             request_options=request_options,
         )

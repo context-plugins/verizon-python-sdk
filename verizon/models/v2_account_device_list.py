@@ -31,4 +31,4 @@ class V2AccountDeviceListDict(TypedDict):
     has_more_data: bool
     last_seen_device_id: NotRequired[str]
     max_page_size: int
-    device_list: list[V2AccountDevice | V2AccountDeviceDict]
+    device_list: list[V2AccountDeviceDict]

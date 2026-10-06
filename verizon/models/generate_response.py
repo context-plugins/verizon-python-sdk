@@ -11,4 +11,4 @@ class GenerateResponse(SdkBaseModel):
 
 
 class GenerateResponseDict(TypedDict):
-    items: NotRequired[list[GenerateResponseItem | GenerateResponseItemDict]]
+    items: NotRequired[list[GenerateResponseItemDict]]

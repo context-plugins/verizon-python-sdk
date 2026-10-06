@@ -10,7 +10,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `POST /m2m/v1/diagnostics/basic/devicereachability`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def device_reachability(body: NotificationReportRequest | NotificationReportRequestDict, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `body`
 - **Params**: `body` — JSON body
@@ -31,7 +31,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `DELETE /m2m/v1/diagnostics/basic/devicereachability`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def stop_device_reachability(stopreachabilitypayload: StopMonitorRequest | StopMonitorRequestDict, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `stopreachabilitypayload`
 - **Params**: `stopreachabilitypayload` — query

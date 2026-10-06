@@ -10,7 +10,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /v2/triggers/rateplanlist/{ecpdId}`
 - **Auth**: `thingspace_oauth1` OR `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def get_rate_plan_list(ecpd_id: str, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `ecpd_id`
 - **Params**: `ecpd_id` — path `ecpdId`

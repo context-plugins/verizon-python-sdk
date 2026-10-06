@@ -13,4 +13,4 @@ class DtoHealthScoreSummary(SdkBaseModel):
 
 
 class DtoHealthScoreSummaryDict(TypedDict):
-    overallsummary: NotRequired[list[DtoHealthScoreMetric | DtoHealthScoreMetricDict]]
+    overallsummary: NotRequired[list[DtoHealthScoreMetricDict]]

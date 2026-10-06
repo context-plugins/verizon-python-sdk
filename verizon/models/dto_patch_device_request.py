@@ -18,5 +18,5 @@ class DtoPatchDeviceRequest(SdkBaseModel):
 
 class DtoPatchDeviceRequestDict(TypedDict):
     accountname: NotRequired[str]
-    device: NotRequired[ResourceDevice | ResourceDeviceDict]
-    resourceidentifier: NotRequired[DtoDeviceResourceIdentifier | DtoDeviceResourceIdentifierDict]
+    device: NotRequired[ResourceDeviceDict]
+    resourceidentifier: NotRequired[DtoDeviceResourceIdentifierDict]

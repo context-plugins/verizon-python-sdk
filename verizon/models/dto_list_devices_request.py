@@ -18,5 +18,5 @@ class DtoListDevicesRequest(SdkBaseModel):
 
 class DtoListDevicesRequestDict(TypedDict):
     accountname: NotRequired[str]
-    filter: NotRequired[DtoFilter | DtoFilterDict]
-    resourceidentifier: NotRequired[DtoDeviceResourceIdentifier | DtoDeviceResourceIdentifierDict]
+    filter: NotRequired[DtoFilterDict]
+    resourceidentifier: NotRequired[DtoDeviceResourceIdentifierDict]

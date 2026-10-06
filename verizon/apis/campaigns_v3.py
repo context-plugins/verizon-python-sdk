@@ -11,6 +11,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -52,7 +53,8 @@ class CampaignsV3:
         Args:
             account_name: Account identifier.
             campaign_id: Firmware upgrade information.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Returns cancellation status.
@@ -71,7 +73,8 @@ class CampaignsV3:
         Args:
             account_name: Account identifier.
             campaign_id: Firmware upgrade identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Returns firmware upgrade information.
@@ -94,7 +97,8 @@ class CampaignsV3:
         Args:
             account_name: Account identifier.
             body: Firmware upgrade information.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Return upgrade information.
@@ -120,7 +124,8 @@ class CampaignsV3:
             acc: Account identifier.
             campaign_id: Firmware upgrade information.
             body: New dates and time windows.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Updated campaign information.
@@ -145,7 +150,8 @@ class CampaignsV3:
             acc: Account identifier.
             campaign_id: Unique identifier of a campaign.
             body: Add or remove device to existing upgrade information.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Returns add or remove devices to existing upgrade information.
@@ -174,7 +180,8 @@ class AsyncCampaignsV3:
         Args:
             account_name: Account identifier.
             campaign_id: Firmware upgrade information.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Returns cancellation status.
@@ -193,7 +200,8 @@ class AsyncCampaignsV3:
         Args:
             account_name: Account identifier.
             campaign_id: Firmware upgrade identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Returns firmware upgrade information.
@@ -218,7 +226,8 @@ class AsyncCampaignsV3:
         Args:
             account_name: Account identifier.
             body: Firmware upgrade information.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Return upgrade information.
@@ -246,7 +255,8 @@ class AsyncCampaignsV3:
             acc: Account identifier.
             campaign_id: Firmware upgrade information.
             body: New dates and time windows.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Updated campaign information.
@@ -273,7 +283,8 @@ class AsyncCampaignsV3:
             acc: Account identifier.
             campaign_id: Unique identifier of a campaign.
             body: Add or remove device to existing upgrade information.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Returns add or remove devices to existing upgrade information.
@@ -301,7 +312,8 @@ class CampaignsV3WithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchem
         Args:
             account_name: Account identifier.
             campaign_id: Firmware upgrade information.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -324,7 +336,8 @@ class CampaignsV3WithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchem
         Args:
             account_name: Account identifier.
             campaign_id: Firmware upgrade identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -350,7 +363,8 @@ class CampaignsV3WithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchem
         Args:
             account_name: Account identifier.
             body: Firmware upgrade information.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -381,7 +395,8 @@ class CampaignsV3WithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchem
             acc: Account identifier.
             campaign_id: Firmware upgrade information.
             body: New dates and time windows.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -411,7 +426,8 @@ class CampaignsV3WithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchem
             acc: Account identifier.
             campaign_id: Unique identifier of a campaign.
             body: Add or remove device to existing upgrade information.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -438,7 +454,8 @@ class AsyncCampaignsV3WithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
         Args:
             account_name: Account identifier.
             campaign_id: Firmware upgrade information.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -448,7 +465,7 @@ class AsyncCampaignsV3WithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
             path_params=[param[str]("accountName", account_name), param[str]("campaignId", campaign_id)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[FotaV3SuccessResult],
+            decoder=async_json_decoder[FotaV3SuccessResult],
             error_mapper=cancel_campaign2_error_mapper,
             request_options=request_options,
         )
@@ -461,7 +478,8 @@ class AsyncCampaignsV3WithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
         Args:
             account_name: Account identifier.
             campaign_id: Firmware upgrade identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -470,7 +488,7 @@ class AsyncCampaignsV3WithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
             url_template=self._server.software_management_v3("/campaigns/{accountName}/{campaignId}"),
             path_params=[param[str]("accountName", account_name), param[str]("campaignId", campaign_id)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[Campaign],
+            decoder=async_json_decoder[Campaign],
             error_mapper=get_campaign_information2_error_mapper,
             request_options=request_options,
         )
@@ -487,7 +505,8 @@ class AsyncCampaignsV3WithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
         Args:
             account_name: Account identifier.
             body: Firmware upgrade information.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -498,7 +517,7 @@ class AsyncCampaignsV3WithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[CampaignFirmwareUpgrade | CampaignFirmwareUpgradeDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[FirmwareCampaign],
+            decoder=async_json_decoder[FirmwareCampaign],
             error_mapper=schedule_campaign_firmware_upgrade2_error_mapper,
             request_options=request_options,
         )
@@ -518,7 +537,8 @@ class AsyncCampaignsV3WithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
             acc: Account identifier.
             campaign_id: Firmware upgrade information.
             body: New dates and time windows.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -529,7 +549,7 @@ class AsyncCampaignsV3WithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[V3ChangeCampaignDatesRequest | V3ChangeCampaignDatesRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[FirmwareCampaign],
+            decoder=async_json_decoder[FirmwareCampaign],
             error_mapper=update_campaign_dates2_error_mapper,
             request_options=request_options,
         )
@@ -548,7 +568,8 @@ class AsyncCampaignsV3WithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
             acc: Account identifier.
             campaign_id: Unique identifier of a campaign.
             body: Add or remove device to existing upgrade information.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -559,7 +580,7 @@ class AsyncCampaignsV3WithRawResponse(SecuredRawResponse[AsyncRawClient, Server,
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[V3AddOrRemoveDeviceRequest | V3AddOrRemoveDeviceRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[V3AddOrRemoveDeviceResult],
+            decoder=async_json_decoder[V3AddOrRemoveDeviceResult],
             error_mapper=update_campaign_firmware_devices2_error_mapper,
             request_options=request_options,
         )

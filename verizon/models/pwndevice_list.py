@@ -12,4 +12,4 @@ class PwndeviceList(SdkBaseModel):
 
 
 class PwndeviceListDict(TypedDict):
-    device_ids: list[PwndeviceId | PwndeviceIdDict]
+    device_ids: list[PwndeviceIdDict]

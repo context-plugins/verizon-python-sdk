@@ -16,4 +16,4 @@ class NodeLl(SdkBaseModel):
 
 
 class NodeLlDict(TypedDict):
-    delta: NodeOffsetPointLl | NodeOffsetPointLlDict
+    delta: NodeOffsetPointLlDict

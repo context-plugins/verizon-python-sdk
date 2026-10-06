@@ -12,4 +12,4 @@ class DtoDeviceConfig(SdkBaseModel):
 
 
 class DtoDeviceConfigDict(TypedDict):
-    ble: NotRequired[SensorInsightsBle | SensorInsightsBleDict]
+    ble: NotRequired[SensorInsightsBleDict]

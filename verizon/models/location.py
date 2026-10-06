@@ -22,5 +22,5 @@ class Location(SdkBaseModel):
 
 class LocationDict(TypedDict):
     msid: NotRequired[str]
-    pd: NotRequired[PositionData | PositionDataDict]
-    error: NotRequired[PositionError | PositionErrorDict]
+    pd: NotRequired[PositionDataDict]
+    error: NotRequired[PositionErrorDict]

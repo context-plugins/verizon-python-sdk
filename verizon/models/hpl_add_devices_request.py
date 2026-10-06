@@ -44,9 +44,9 @@ class HplAddDevicesRequest(SdkBaseModel):
 
 class HplAddDevicesRequestDict(TypedDict):
     state: NotRequired[str]
-    devices_to_add: NotRequired[list[HplAccountDeviceList | HplAccountDeviceListDict]]
+    devices_to_add: NotRequired[list[HplAccountDeviceListDict]]
     account_name: NotRequired[str]
-    custom_fields: NotRequired[list[HplCustomFields | HplCustomFieldsDict]]
+    custom_fields: NotRequired[list[HplCustomFieldsDict]]
     group_name: NotRequired[str]
     sku_number: NotRequired[str]
     smsr_oid: NotRequired[str]

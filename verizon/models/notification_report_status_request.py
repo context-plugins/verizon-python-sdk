@@ -23,6 +23,6 @@ class NotificationReportStatusRequest(SdkBaseModel):
 
 class NotificationReportStatusRequestDict(TypedDict):
     account_name: str
-    device: DeviceId | DeviceIdDict
+    device: DeviceIdDict
     request_type: str
     request_expiration_time: NotRequired[str]

@@ -11,6 +11,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -40,7 +41,8 @@ class GlobalReporting:
 
         Args:
             body: Device List
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -60,7 +62,8 @@ class GlobalReporting:
 
         Args:
             body: Device Provisioning History
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -89,7 +92,8 @@ class AsyncGlobalReporting:
 
         Args:
             body: Device List
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -109,7 +113,8 @@ class AsyncGlobalReporting:
 
         Args:
             body: Device Provisioning History
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -137,13 +142,14 @@ class GlobalReportingWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
 
         Args:
             body: Device List
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v2/devices/actions/list"),
+            url_template=self._server.thingspace("/m2m/v2/devices/actions/list"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ESimglobalDeviceList | ESimglobalDeviceListDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -162,13 +168,14 @@ class GlobalReportingWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
 
         Args:
             body: Device Provisioning History
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v2/devices/history/actions/list"),
+            url_template=self._server.thingspace("/m2m/v2/devices/history/actions/list"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ESimprovhistoryRequest | ESimprovhistoryRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -189,17 +196,18 @@ class AsyncGlobalReportingWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
 
         Args:
             body: Device List
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v2/devices/actions/list"),
+            url_template=self._server.thingspace("/m2m/v2/devices/actions/list"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ESimglobalDeviceList | ESimglobalDeviceListDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[ESimrequestResponse],
+            decoder=async_json_decoder[ESimrequestResponse],
             error_mapper=retrieve_global_list_error_mapper,
             request_options=request_options,
         )
@@ -214,17 +222,18 @@ class AsyncGlobalReportingWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
 
         Args:
             body: Device Provisioning History
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v2/devices/history/actions/list"),
+            url_template=self._server.thingspace("/m2m/v2/devices/history/actions/list"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ESimprovhistoryRequest | ESimprovhistoryRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[ESimrequestResponse],
+            decoder=async_json_decoder[ESimrequestResponse],
             error_mapper=deviceprovhistory_using_post_error_mapper,
             request_options=request_options,
         )

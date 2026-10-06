@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Final, TypeAlias
 
-from ..core import ErrorMapper, HttpResponse, RawError, decode_json
+from ..core import ErrorMapper, RawError, decode_json
 from ..models.connectivity_management_result import ConnectivityManagementResult
 
 GetDeviceGroupInformationErrorBody: TypeAlias = ConnectivityManagementResult | RawError
@@ -11,12 +11,12 @@ GetDeviceGroupInformationErrorBody: TypeAlias = ConnectivityManagementResult | R
 
 @dataclass(frozen=True, slots=True)
 class _GetDeviceGroupInformationError:
-    def map(self, response: HttpResponse) -> GetDeviceGroupInformationErrorBody:
-        match response.status_code:
+    def map(self, status_code: int, content: bytes) -> GetDeviceGroupInformationErrorBody:
+        match status_code:
             case 400:
-                return decode_json[ConnectivityManagementResult](response)
+                return decode_json[ConnectivityManagementResult](content)
             case _:
-                return RawError(response)
+                return RawError(status_code, content)
 
 
 get_device_group_information_error_mapper: Final[

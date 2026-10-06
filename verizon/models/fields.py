@@ -14,4 +14,4 @@ class Fields(SdkBaseModel):
 
 
 class FieldsDict(TypedDict):
-    configuration: NotRequired[Configuration | ConfigurationDict]
+    configuration: NotRequired[ConfigurationDict]

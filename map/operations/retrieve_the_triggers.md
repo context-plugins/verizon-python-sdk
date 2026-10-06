@@ -10,7 +10,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /m2m/v2/triggers`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def get_all_available_triggers(*, request_options: RequestOptionsOrDict | None = None)`
 - **Returns (parsed)**: `TriggerValueResponse`
 - **Returns (raw)**: `ApiResult[TriggerValueResponse, RawError]`
@@ -24,7 +24,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /m2m/v2/triggers/accounts/{accountName}`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def get_all_triggers_by_account_name(account_name: str, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `account_name`
 - **Params**: `account_name` — path `accountName`
@@ -40,7 +40,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /m2m/v2/triggers/categories/PromoAlerts`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def get_all_triggers_by_trigger_category(*, request_options: RequestOptionsOrDict | None = None)`
 - **Returns (parsed)**: `TriggerValueResponse2`
 - **Returns (raw)**: `ApiResult[TriggerValueResponse2, RawError]`
@@ -54,7 +54,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /m2m/v2/triggers/{triggerId}`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def get_triggers_by_id(trigger_id: str, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `trigger_id`
 - **Params**: `trigger_id` — path `triggerId`

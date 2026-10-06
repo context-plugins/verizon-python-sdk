@@ -21,6 +21,6 @@ class DeviceProvisioningHistoryListRequest(SdkBaseModel):
 
 
 class DeviceProvisioningHistoryListRequestDict(TypedDict):
-    device_id: DeviceId | DeviceIdDict
+    device_id: DeviceIdDict
     earliest: str
     latest: str

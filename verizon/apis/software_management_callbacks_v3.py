@@ -11,6 +11,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -43,7 +44,8 @@ class SoftwareManagementCallbacksV3:
 
         Args:
             acc: Account identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Delete request result.
@@ -59,7 +61,8 @@ class SoftwareManagementCallbacksV3:
 
         Args:
             acc: Account identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Return callback registration.
@@ -80,7 +83,8 @@ class SoftwareManagementCallbacksV3:
         Args:
             acc: Account identifier.
             body: Callback URL registration.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Return callback registration.
@@ -101,7 +105,8 @@ class SoftwareManagementCallbacksV3:
         Args:
             acc: Account identifier.
             body: Callback URL registration.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Return callback registration.
@@ -126,7 +131,8 @@ class AsyncSoftwareManagementCallbacksV3:
 
         Args:
             acc: Account identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Delete request result.
@@ -142,7 +148,8 @@ class AsyncSoftwareManagementCallbacksV3:
 
         Args:
             acc: Account identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Return callback registration.
@@ -163,7 +170,8 @@ class AsyncSoftwareManagementCallbacksV3:
         Args:
             acc: Account identifier.
             body: Callback URL registration.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Return callback registration.
@@ -184,7 +192,8 @@ class AsyncSoftwareManagementCallbacksV3:
         Args:
             acc: Account identifier.
             body: Callback URL registration.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Return callback registration.
@@ -206,7 +215,8 @@ class SoftwareManagementCallbacksV3WithRawResponse(SecuredRawResponse[RawClient,
 
         Args:
             acc: Account identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -228,7 +238,8 @@ class SoftwareManagementCallbacksV3WithRawResponse(SecuredRawResponse[RawClient,
 
         Args:
             acc: Account identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -254,7 +265,8 @@ class SoftwareManagementCallbacksV3WithRawResponse(SecuredRawResponse[RawClient,
         Args:
             acc: Account identifier.
             body: Callback URL registration.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -282,7 +294,8 @@ class SoftwareManagementCallbacksV3WithRawResponse(SecuredRawResponse[RawClient,
         Args:
             acc: Account identifier.
             body: Callback URL registration.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -307,7 +320,8 @@ class AsyncSoftwareManagementCallbacksV3WithRawResponse(SecuredRawResponse[Async
 
         Args:
             acc: Account identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -317,7 +331,7 @@ class AsyncSoftwareManagementCallbacksV3WithRawResponse(SecuredRawResponse[Async
             path_params=[param[str]("acc", acc)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[FotaV3SuccessResult],
+            decoder=async_json_decoder[FotaV3SuccessResult],
             error_mapper=deregister_callback5_error_mapper,
             request_options=request_options,
         )
@@ -329,7 +343,8 @@ class AsyncSoftwareManagementCallbacksV3WithRawResponse(SecuredRawResponse[Async
 
         Args:
             acc: Account identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -338,7 +353,7 @@ class AsyncSoftwareManagementCallbacksV3WithRawResponse(SecuredRawResponse[Async
             url_template=self._server.software_management_v3("/callbacks/{acc}"),
             path_params=[param[str]("acc", acc)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[FotaV3CallbackSummary],
+            decoder=async_json_decoder[FotaV3CallbackSummary],
             error_mapper=list_registered_callbacks5_error_mapper,
             request_options=request_options,
         )
@@ -355,7 +370,8 @@ class AsyncSoftwareManagementCallbacksV3WithRawResponse(SecuredRawResponse[Async
         Args:
             acc: Account identifier.
             body: Callback URL registration.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -366,7 +382,7 @@ class AsyncSoftwareManagementCallbacksV3WithRawResponse(SecuredRawResponse[Async
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[FotaV3CallbackRegistrationRequest | FotaV3CallbackRegistrationRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[FotaV3CallbackRegistrationResult],
+            decoder=async_json_decoder[FotaV3CallbackRegistrationResult],
             error_mapper=register_callback5_error_mapper,
             request_options=request_options,
         )
@@ -383,7 +399,8 @@ class AsyncSoftwareManagementCallbacksV3WithRawResponse(SecuredRawResponse[Async
         Args:
             acc: Account identifier.
             body: Callback URL registration.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -394,7 +411,7 @@ class AsyncSoftwareManagementCallbacksV3WithRawResponse(SecuredRawResponse[Async
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[FotaV3CallbackRegistrationRequest | FotaV3CallbackRegistrationRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[FotaV3CallbackRegistrationResult],
+            decoder=async_json_decoder[FotaV3CallbackRegistrationResult],
             error_mapper=update_callback2_error_mapper,
             request_options=request_options,
         )

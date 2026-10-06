@@ -24,10 +24,10 @@ class GiosmssendRequest(SdkBaseModel):
 
 class GiosmssendRequestDict(TypedDict):
     account_name: NotRequired[str]
-    custom_fields: NotRequired[list[KvPair | KvPairDict]]
+    custom_fields: NotRequired[list[KvPairDict]]
     data_encoding: NotRequired[str]
     group_name: NotRequired[str]
     service_plan: NotRequired[str]
     time_to_live: NotRequired[str]
-    device_ids: NotRequired[list[GiodeviceId | GiodeviceIdDict]]
+    device_ids: NotRequired[list[GiodeviceIdDict]]
     sms_message: str

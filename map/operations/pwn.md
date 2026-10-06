@@ -10,7 +10,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `PUT /m2m/v1/devices/pwn/actions/ipaddress`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def change_pwn_device_i_paddress(body: ChangePwndeviceIpaddressRequest | ChangePwndeviceIpaddressRequestDict, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `body`
 - **Params**: `body` — JSON body
@@ -28,7 +28,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `POST /m2m/v1/devices/pwn/actions/profile`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def change_pwn_device_profile(body: ChangePwndeviceProfileRequest | ChangePwndeviceProfileRequestDict, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `body`
 - **Params**: `body` — JSON body
@@ -46,7 +46,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `POST /m2m/v1/devices/pwn/actions/state/activate`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def change_pwn_device_state_activate(body: ChangePwndeviceStateActivateRequest | ChangePwndeviceStateActivateRequestDict, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `body`
 - **Params**: `body` — JSON body
@@ -64,7 +64,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `POST /m2m/v1/devices/pwn/actions/state/deactivate`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def change_pwn_device_state_deactivate(body: ChangePwndeviceStateDeactivateRequest | ChangePwndeviceStateDeactivateRequestDict, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `body`
 - **Params**: `body` — JSON body
@@ -82,7 +82,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /m2m/v1/devices/pwn/performance/consent/{aname}`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def get_pwn_performance_consent(aname: str, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `aname`
 - **Params**: `aname` — path
@@ -98,7 +98,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /m2m/v1/devices/pwn/profiles/list/{aname}`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def get_profile_list(aname: str, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `aname`
 - **Params**: `aname` — path
@@ -114,7 +114,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /m2m/v1/devices/pwn/kpi/list/{aname}`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def kpi_list(aname: str, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `aname`
 - **Params**: `aname` — path

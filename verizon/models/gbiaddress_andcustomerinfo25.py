@@ -12,4 +12,4 @@ class GbiaddressAndcustomerinfo25(SdkBaseModel):
 
 
 class GbiaddressAndcustomerinfo25Dict(TypedDict):
-    primary_placeofuse: NotRequired[GbiaddressAndcustomerinfo5 | GbiaddressAndcustomerinfo5Dict]
+    primary_placeofuse: NotRequired[GbiaddressAndcustomerinfo5Dict]

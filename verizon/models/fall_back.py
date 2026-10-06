@@ -16,5 +16,5 @@ class FallBack(SdkBaseModel):
 
 
 class FallBackDict(TypedDict):
-    devices: NotRequired[list[list[DeviceIdarray | DeviceIdarrayDict]]]
+    devices: NotRequired[list[list[DeviceIdarrayDict]]]
     account_name: NotRequired[str]

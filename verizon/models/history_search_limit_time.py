@@ -20,4 +20,4 @@ class HistorySearchLimitTime(SdkBaseModel):
 
 class HistorySearchLimitTimeDict(TypedDict):
     start_on: NotRequired[RFC3339DateTime]
-    duration: NotRequired[NumericalData | NumericalDataDict]
+    duration: NotRequired[NumericalDataDict]

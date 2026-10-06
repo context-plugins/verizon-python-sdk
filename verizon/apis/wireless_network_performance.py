@@ -12,6 +12,7 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -48,7 +49,8 @@ class WirelessNetworkPerformance:
 
         Args:
             body: Request for a device's 30 day experience.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -67,7 +69,8 @@ class WirelessNetworkPerformance:
 
         Args:
             body: Request for bulk latest history details.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -87,7 +90,8 @@ class WirelessNetworkPerformance:
 
         Args:
             body: Request for network coverage details.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -108,7 +112,8 @@ class WirelessNetworkPerformance:
 
         Args:
             body: Request for current network health.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -128,7 +133,8 @@ class WirelessNetworkPerformance:
 
         Args:
             body: Request for cell site proximity.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -156,7 +162,8 @@ class AsyncWirelessNetworkPerformance:
 
         Args:
             body: Request for a device's 30 day experience.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -177,7 +184,8 @@ class AsyncWirelessNetworkPerformance:
 
         Args:
             body: Request for bulk latest history details.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -199,7 +207,8 @@ class AsyncWirelessNetworkPerformance:
 
         Args:
             body: Request for network coverage details.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -222,7 +231,8 @@ class AsyncWirelessNetworkPerformance:
 
         Args:
             body: Request for current network health.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -244,7 +254,8 @@ class AsyncWirelessNetworkPerformance:
 
         Args:
             body: Request for cell site proximity.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -269,15 +280,14 @@ class WirelessNetworkPerformanceWithRawResponse(SecuredRawResponse[RawClient, Se
 
         Args:
             body: Request for a device's 30 day experience.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials(
-                "/m2m/v1/intelligence/device-experience/history/30-days"
-            ),
+            url_template=self._server.thingspace("/m2m/v1/intelligence/device-experience/history/30-days"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[GetDeviceExperienceScoreHistoryRequest | GetDeviceExperienceScoreHistoryRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -296,13 +306,14 @@ class WirelessNetworkPerformanceWithRawResponse(SecuredRawResponse[RawClient, Se
 
         Args:
             body: Request for bulk latest history details.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/intelligence/device-experience/bulk/latest"),
+            url_template=self._server.thingspace("/m2m/v1/intelligence/device-experience/bulk/latest"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[GetDeviceExperienceScoreBulkRequest | GetDeviceExperienceScoreBulkRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -322,13 +333,14 @@ class WirelessNetworkPerformanceWithRawResponse(SecuredRawResponse[RawClient, Se
 
         Args:
             body: Request for network coverage details.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/intelligence/wireless-coverage"),
+            url_template=self._server.thingspace("/m2m/v1/intelligence/wireless-coverage"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[M2MV1IntelligenceWirelessCoverageRequest | M2MV1IntelligenceWirelessCoverageRequestDict](
                 body
@@ -349,13 +361,14 @@ class WirelessNetworkPerformanceWithRawResponse(SecuredRawResponse[RawClient, Se
 
         Args:
             body: Request for current network health.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/intelligence/network-conditions"),
+            url_template=self._server.thingspace("/m2m/v1/intelligence/network-conditions"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[GetNetworkConditionsRequest | GetNetworkConditionsRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -375,13 +388,14 @@ class WirelessNetworkPerformanceWithRawResponse(SecuredRawResponse[RawClient, Se
 
         Args:
             body: Request for cell site proximity.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/intelligence/site-proximity/action/list"),
+            url_template=self._server.thingspace("/m2m/v1/intelligence/site-proximity/action/list"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[GetNetworkConditionsRequest | GetNetworkConditionsRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -402,19 +416,18 @@ class AsyncWirelessNetworkPerformanceWithRawResponse(SecuredRawResponse[AsyncRaw
 
         Args:
             body: Request for a device's 30 day experience.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials(
-                "/m2m/v1/intelligence/device-experience/history/30-days"
-            ),
+            url_template=self._server.thingspace("/m2m/v1/intelligence/device-experience/history/30-days"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[GetDeviceExperienceScoreHistoryRequest | GetDeviceExperienceScoreHistoryRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[WnprequestResponse],
+            decoder=async_json_decoder[WnprequestResponse],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -429,17 +442,18 @@ class AsyncWirelessNetworkPerformanceWithRawResponse(SecuredRawResponse[AsyncRaw
 
         Args:
             body: Request for bulk latest history details.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/intelligence/device-experience/bulk/latest"),
+            url_template=self._server.thingspace("/m2m/v1/intelligence/device-experience/bulk/latest"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[GetDeviceExperienceScoreBulkRequest | GetDeviceExperienceScoreBulkRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[WnprequestResponse],
+            decoder=async_json_decoder[WnprequestResponse],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -455,19 +469,20 @@ class AsyncWirelessNetworkPerformanceWithRawResponse(SecuredRawResponse[AsyncRaw
 
         Args:
             body: Request for network coverage details.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/intelligence/wireless-coverage"),
+            url_template=self._server.thingspace("/m2m/v1/intelligence/wireless-coverage"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[M2MV1IntelligenceWirelessCoverageRequest | M2MV1IntelligenceWirelessCoverageRequestDict](
                 body
             ),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[WnprequestResponse],
+            decoder=async_json_decoder[WnprequestResponse],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -482,17 +497,18 @@ class AsyncWirelessNetworkPerformanceWithRawResponse(SecuredRawResponse[AsyncRaw
 
         Args:
             body: Request for current network health.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/intelligence/network-conditions"),
+            url_template=self._server.thingspace("/m2m/v1/intelligence/network-conditions"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[GetNetworkConditionsRequest | GetNetworkConditionsRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[WnprequestResponse],
+            decoder=async_json_decoder[WnprequestResponse],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -508,17 +524,18 @@ class AsyncWirelessNetworkPerformanceWithRawResponse(SecuredRawResponse[AsyncRaw
 
         Args:
             body: Request for cell site proximity.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/intelligence/site-proximity/action/list"),
+            url_template=self._server.thingspace("/m2m/v1/intelligence/site-proximity/action/list"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[GetNetworkConditionsRequest | GetNetworkConditionsRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[WnprequestResponse],
+            decoder=async_json_decoder[WnprequestResponse],
             error_mapper=raw_error_response,
             request_options=request_options,
         )

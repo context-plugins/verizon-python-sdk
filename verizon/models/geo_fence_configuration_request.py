@@ -4,9 +4,9 @@ from pydantic import Field
 from typing_extensions import NotRequired, TypedDict
 
 from ..core import UNSET, Optional, SdkBaseModel
-from .enums.message_standard import MessageStandardOrStr
+from .enums.message_standard import MessageStandard, MessageStandardOrStr
 from .geo_fence import GeoFence, GeoFenceDict
-from .message import Message, MessageDict
+from .unions.message4 import Message4, Message4Dict
 
 
 class GeoFenceConfigurationRequest(SdkBaseModel):
@@ -24,14 +24,14 @@ class GeoFenceConfigurationRequest(SdkBaseModel):
     MultiLineString, and MultiPolygon. The system only supports a single Feature in the FeatureCollection, so only one
     Line, Polygon, MultiLine or MultiPolygon can be defined within one Geofencing configuration."""
 
-    message_standard: Optional[MessageStandardOrStr] = Field(default=UNSET, alias="messageStandard")
+    message_standard: MessageStandardOrStr = Field(default=MessageStandard.SAE, alias="messageStandard")
     """Select which V2X messaging standard will be used for the message generation. The following options are supported:
       - "etsi": The message will be generated using the ETSI (European) standard (e.g. DENM).
       - "sae": The message will be generated using the SAE J2735 (North American) standard (e.g. RSA, TIM).
       - if not sent while POST, defaults to "sae"
       - mandatory to send "etsi" standard here, if ETSI messages are being sent in config"""
 
-    messages: list[Message]
+    messages: list[Message4]
     """List of predefined messages that belongs to the geofence. These are the messages that are sent out by the system
     when the Trigger Condition for the message is met."""
 
@@ -41,7 +41,7 @@ class GeoFenceConfigurationRequest(SdkBaseModel):
 class GeoFenceConfigurationRequestDict(TypedDict):
     name: NotRequired[str]
     description: NotRequired[str]
-    geo_fence: GeoFence | GeoFenceDict
+    geo_fence: GeoFenceDict
     message_standard: NotRequired[MessageStandardOrStr]
-    messages: list[Message | MessageDict]
+    messages: list[Message4Dict]
     is_active: bool

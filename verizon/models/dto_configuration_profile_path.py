@@ -18,5 +18,5 @@ class DtoConfigurationProfilePath(SdkBaseModel):
 
 class DtoConfigurationProfilePathDict(TypedDict):
     account_name: NotRequired[str]
-    resourceidentifier: NotRequired[DtoResourceidentifier | DtoResourceidentifierDict]
-    profile: NotRequired[DtoProfile | DtoProfileDict]
+    resourceidentifier: NotRequired[DtoResourceidentifierDict]
+    profile: NotRequired[DtoProfileDict]

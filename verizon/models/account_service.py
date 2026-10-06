@@ -22,4 +22,4 @@ class AccountService(SdkBaseModel):
 class AccountServiceDict(TypedDict):
     name: NotRequired[str]
     description: NotRequired[str]
-    states: NotRequired[list[State | StateDict]]
+    states: NotRequired[list[StateDict]]

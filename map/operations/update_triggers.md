@@ -10,7 +10,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `PUT /m2m/v2/triggers`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def update_all_available_triggers(*, body: RequestTrigger | RequestTriggerDict | None = None, request_options: RequestOptionsOrDict | None = None)`
 - **Params**: `body` — JSON body
 - **Returns (parsed)**: `SuccessModel`

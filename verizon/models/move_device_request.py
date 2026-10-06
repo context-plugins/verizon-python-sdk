@@ -39,9 +39,9 @@ class MoveDeviceRequest(SdkBaseModel):
 
 class MoveDeviceRequestDict(TypedDict):
     account_name: str
-    filter: NotRequired[DeviceFilter | DeviceFilterDict]
-    custom_fields: NotRequired[list[CustomFields | CustomFieldsDict]]
-    devices: NotRequired[list[AccountDeviceList | AccountDeviceListDict]]
+    filter: NotRequired[DeviceFilterDict]
+    custom_fields: NotRequired[list[CustomFieldsDict]]
+    devices: NotRequired[list[AccountDeviceListDict]]
     group_name: NotRequired[str]
     carrier_ip_pool_name: NotRequired[str]
     service_plan: NotRequired[str]

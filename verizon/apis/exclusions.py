@@ -12,6 +12,7 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -44,7 +45,8 @@ class Exclusions:
         Args:
             account_name: The numeric name of the account.
             device_id: The IMEI of the device being queried
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of JSON objects, each containing the position data or an error for a device in the request.
@@ -65,7 +67,8 @@ class Exclusions:
 
         Args:
             body: Account details to create a consent record.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of JSON objects, each containing the position data or an error for a device in the request.
@@ -86,7 +89,8 @@ class Exclusions:
 
         Args:
             body: Account details to update a consent record.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of JSON objects, each containing the position data or an error for a device in the request.
@@ -101,7 +105,8 @@ class Exclusions:
         """This consents endpoint sets a new exclusion list.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Success response.
@@ -118,7 +123,8 @@ class Exclusions:
         Args:
             account_name: Account identifier in "##########-#####".
             start_index: Zero-based number of the first record to return.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Excluded devices result.
@@ -137,7 +143,8 @@ class Exclusions:
         Args:
             account_name: The numeric name of the account.
             device_list: A list of the device IDs to remove from the exclusion list.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Devices successfully removed from list.
@@ -165,7 +172,8 @@ class AsyncExclusions:
         Args:
             account_name: The numeric name of the account.
             device_id: The IMEI of the device being queried
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of JSON objects, each containing the position data or an error for a device in the request.
@@ -188,7 +196,8 @@ class AsyncExclusions:
 
         Args:
             body: Account details to create a consent record.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of JSON objects, each containing the position data or an error for a device in the request.
@@ -211,7 +220,8 @@ class AsyncExclusions:
 
         Args:
             body: Account details to update a consent record.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of JSON objects, each containing the position data or an error for a device in the request.
@@ -228,7 +238,8 @@ class AsyncExclusions:
         """This consents endpoint sets a new exclusion list.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Success response.
@@ -245,7 +256,8 @@ class AsyncExclusions:
         Args:
             account_name: Account identifier in "##########-#####".
             start_index: Zero-based number of the first record to return.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Excluded devices result.
@@ -266,7 +278,8 @@ class AsyncExclusions:
         Args:
             account_name: The numeric name of the account.
             device_list: A list of the device IDs to remove from the exclusion list.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Devices successfully removed from list.
@@ -293,7 +306,8 @@ class ExclusionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
         Args:
             account_name: The numeric name of the account.
             device_id: The IMEI of the device being queried
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -317,7 +331,8 @@ class ExclusionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
 
         Args:
             body: Account details to create a consent record.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -342,7 +357,8 @@ class ExclusionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
 
         Args:
             body: Account details to update a consent record.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -363,7 +379,8 @@ class ExclusionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
         """This consents endpoint sets a new exclusion list.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -385,7 +402,8 @@ class ExclusionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
         Args:
             account_name: Account identifier in "##########-#####".
             start_index: Zero-based number of the first record to return.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -407,7 +425,8 @@ class ExclusionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
         Args:
             account_name: The numeric name of the account.
             device_list: A list of the device IDs to remove from the exclusion list.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -432,7 +451,8 @@ class AsyncExclusionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
         Args:
             account_name: The numeric name of the account.
             device_id: The IMEI of the device being queried
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -441,7 +461,7 @@ class AsyncExclusionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
             url_template=self._server.device_location("/devicelocations/action/consents"),
             query_params=[param[str]("accountName", account_name), param[str | None]("deviceId", device_id)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[GetAccountDeviceConsent],
+            decoder=async_json_decoder[GetAccountDeviceConsent],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -456,7 +476,8 @@ class AsyncExclusionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
 
         Args:
             body: Account details to create a consent record.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -466,7 +487,7 @@ class AsyncExclusionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[AccountConsentCreate | AccountConsentCreateDict | None](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[ConsentTransactionId],
+            decoder=async_json_decoder[ConsentTransactionId],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -481,7 +502,8 @@ class AsyncExclusionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
 
         Args:
             body: Account details to update a consent record.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -491,7 +513,7 @@ class AsyncExclusionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[AccountConsentUpdate | AccountConsentUpdateDict | None](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[ConsentTransactionId],
+            decoder=async_json_decoder[ConsentTransactionId],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -502,7 +524,8 @@ class AsyncExclusionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
         """This consents endpoint sets a new exclusion list.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -511,7 +534,7 @@ class AsyncExclusionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
             url_template=self._server.device_location("/consents"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceLocationSuccessResult],
+            decoder=async_json_decoder[DeviceLocationSuccessResult],
             error_mapper=exclude_devices_error_mapper,
             request_options=request_options,
         )
@@ -524,7 +547,8 @@ class AsyncExclusionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
         Args:
             account_name: Account identifier in "##########-#####".
             start_index: Zero-based number of the first record to return.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -533,7 +557,7 @@ class AsyncExclusionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
             url_template=self._server.device_location("/consents/{accountName}/index/{startIndex}"),
             path_params=[param[str]("accountName", account_name), param[str]("startIndex", start_index)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DevicesConsentResult],
+            decoder=async_json_decoder[DevicesConsentResult],
             error_mapper=list_excluded_devices_error_mapper,
             request_options=request_options,
         )
@@ -546,7 +570,8 @@ class AsyncExclusionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
         Args:
             account_name: The numeric name of the account.
             device_list: A list of the device IDs to remove from the exclusion list.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -556,7 +581,7 @@ class AsyncExclusionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
             query_params=[param[str]("accountName", account_name), param[str]("deviceList", device_list)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceLocationSuccessResult],
+            decoder=async_json_decoder[DeviceLocationSuccessResult],
             error_mapper=remove_devices_from_exclusion_list_error_mapper,
             request_options=request_options,
         )

@@ -20,4 +20,4 @@ class DeviceProvisioningHistoryListResult(SdkBaseModel):
 
 class DeviceProvisioningHistoryListResultDict(TypedDict):
     has_more_data: NotRequired[bool]
-    provisioning_history: NotRequired[list[ProvisioningHistory | ProvisioningHistoryDict]]
+    provisioning_history: NotRequired[list[ProvisioningHistoryDict]]

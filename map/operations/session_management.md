@@ -10,7 +10,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `POST /m2m/v1/session/logout`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def end_connectivity_management_session(*, request_options: RequestOptionsOrDict | None = None)`
 - **Returns (parsed)**: `LogOutRequest`
 - **Returns (raw)**: `ApiResult[LogOutRequest, EndConnectivityManagementSessionErrorBody]`
@@ -27,7 +27,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `PUT /m2m/v1/session/password/actions/reset`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def reset_connectivity_management_password(body: SessionResetPasswordRequest | SessionResetPasswordRequestDict, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `body`
 - **Params**: `body` — JSON body
@@ -48,7 +48,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `POST /m2m/v1/session/login`
 - **Auth**: `thingspace_oauth`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def start_connectivity_management_session(*, body: LogInRequest | LogInRequestDict | None = None, request_options: RequestOptionsOrDict | None = None)`
 - **Params**: `body` — JSON body
 - **Returns (parsed)**: `LogInResult`

@@ -12,4 +12,4 @@ class Fields1(SdkBaseModel):
 
 
 class Fields1Dict(TypedDict):
-    item: NotRequired[SearchDeviceByPropertyFields | SearchDeviceByPropertyFieldsDict]
+    item: NotRequired[SearchDeviceByPropertyFieldsDict]

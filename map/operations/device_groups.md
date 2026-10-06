@@ -10,7 +10,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `POST /m2m/v1/groups`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def create_device_group(body: CreateDeviceGroupRequest | CreateDeviceGroupRequestDict, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `body`
 - **Params**: `body` — JSON body
@@ -31,7 +31,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `DELETE /m2m/v1/groups/{aname}/name/{gname}`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def delete_device_group(aname: str, gname: str, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `aname`, `gname`
 - **Params**: `aname` — path · `gname` — path
@@ -50,10 +50,10 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /m2m/v1/groups/{aname}/name/{gname}`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
-- **Signature**: `def get_device_group_information(aname: str, gname: str, *, next: int | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Server**: `thingspace`
+- **Signature**: `def get_device_group_information(aname: str, gname: str, *, next_: int | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `aname`, `gname`
-- **Params**: `aname` — path · `gname` — path · `next` — query
+- **Params**: `aname` — path · `gname` — path · `next_` — query `next`
 - **Returns (parsed)**: `DeviceGroupDevicesData`
 - **Returns (raw)**: `ApiResult[DeviceGroupDevicesData, GetDeviceGroupInformationErrorBody]`
 - **Error**: `GetDeviceGroupInformationErrorBody` — **Case A (typed)**
@@ -69,7 +69,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /m2m/v1/groups/{aname}`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def list_device_groups(aname: str, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `aname`
 - **Params**: `aname` — path
@@ -88,7 +88,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `PUT /m2m/v1/groups/{aname}/name/{gname}`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def update_device_group(aname: str, gname: str, body: DeviceGroupUpdateRequest | DeviceGroupUpdateRequestDict, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `aname`, `gname`, `body`
 - **Params**: `aname` — path · `gname` — path · `body` — JSON body

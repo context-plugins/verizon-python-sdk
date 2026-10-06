@@ -14,5 +14,5 @@ class GbiprimaryPlaceofuse5(SdkBaseModel):
 
 
 class GbiprimaryPlaceofuse5Dict(TypedDict):
-    address: NotRequired[GbiAddress5 | GbiAddress5Dict]
-    customer_name: NotRequired[GbiCustomerName5 | GbiCustomerName5Dict]
+    address: NotRequired[GbiAddress5Dict]
+    customer_name: NotRequired[GbiCustomerName5Dict]

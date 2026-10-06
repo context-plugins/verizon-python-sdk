@@ -27,6 +27,6 @@ class LocationRequest(SdkBaseModel):
 
 class LocationRequestDict(TypedDict):
     account_name: str
-    device_list: list[DeviceInfo | DeviceInfoDict]
+    device_list: list[DeviceInfoDict]
     accuracy_mode: NotRequired[AccuracyModeOrStr]
     cache_mode: NotRequired[CacheModeOrStr]

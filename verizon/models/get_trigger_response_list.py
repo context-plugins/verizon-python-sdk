@@ -11,4 +11,4 @@ class GetTriggerResponseList(SdkBaseModel):
 
 
 class GetTriggerResponseListDict(TypedDict):
-    triggers: NotRequired[list[GetTriggerResponse | GetTriggerResponseDict]]
+    triggers: NotRequired[list[GetTriggerResponseDict]]

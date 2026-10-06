@@ -15,4 +15,4 @@ class WorkZoneContent(SdkBaseModel):
 
 
 class WorkZoneContentDict(TypedDict):
-    work_zone: list[TextPhraseOrItis | TextPhraseOrItisDict]
+    work_zone: list[TextPhraseOrItisDict]

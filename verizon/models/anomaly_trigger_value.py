@@ -38,6 +38,6 @@ class AnomalyTriggerValueDict(TypedDict):
     trigger_name: NotRequired[str]
     organization_name: NotRequired[str]
     trigger_category: NotRequired[str]
-    trigger_attributes: NotRequired[list[TriggerAttributesOptions | TriggerAttributesOptionsDict]]
+    trigger_attributes: NotRequired[list[TriggerAttributesOptionsDict]]
     created_at: NotRequired[str]
     modified_at: NotRequired[str]

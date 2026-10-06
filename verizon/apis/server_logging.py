@@ -9,6 +9,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_decoder,
     param,
 )
@@ -33,7 +34,8 @@ class ServerLogging:
         Args:
             account: Account identifier.
             device_id: Device IMEI identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of check-in history entries.
@@ -62,7 +64,8 @@ class AsyncServerLogging:
         Args:
             account: Account identifier.
             device_id: Device IMEI identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of check-in history entries.
@@ -90,7 +93,8 @@ class ServerLoggingWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
         Args:
             account: Account identifier.
             device_id: Device IMEI identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -115,7 +119,8 @@ class AsyncServerLoggingWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
         Args:
             account: Account identifier.
             device_id: Device IMEI identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -124,7 +129,7 @@ class AsyncServerLoggingWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             url_template=self._server.software_management_v2("/logging/{account}/devices/{deviceId}/checkInHistory"),
             path_params=[param[str]("account", account), param[str]("deviceId", device_id)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[list[CheckInHistoryItem]],
+            decoder=async_json_decoder[list[CheckInHistoryItem]],
             error_mapper=get_device_check_in_history_error_mapper,
             request_options=request_options,
         )

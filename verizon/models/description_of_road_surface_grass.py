@@ -12,4 +12,4 @@ class DescriptionOfRoadSurfaceGrass(SdkBaseModel):
 
 
 class DescriptionOfRoadSurfaceGrassDict(TypedDict):
-    grass: Grass | GrassDict
+    grass: GrassDict

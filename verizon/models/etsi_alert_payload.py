@@ -18,5 +18,5 @@ class EtsiAlertPayload(SdkBaseModel):
 
 
 class EtsiAlertPayloadDict(TypedDict):
-    header: Header | HeaderDict
-    denm: DenmPayload | DenmPayloadDict
+    header: HeaderDict
+    denm: DenmPayloadDict

@@ -72,7 +72,7 @@ class CampaignSoftwareDict(TypedDict):
     start_date: Date
     end_date: Date
     download_after_date: NotRequired[Date]
-    download_time_window_list: NotRequired[list[V2TimeWindow | V2TimeWindowDict]]
+    download_time_window_list: NotRequired[list[V2TimeWindowDict]]
     install_after_date: NotRequired[Date]
-    install_time_window_list: NotRequired[list[V2TimeWindow | V2TimeWindowDict]]
+    install_time_window_list: NotRequired[list[V2TimeWindowDict]]
     status: str

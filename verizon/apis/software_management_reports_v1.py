@@ -9,6 +9,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_decoder,
     param,
 )
@@ -40,7 +41,8 @@ class SoftwareManagementReportsV1:
         Args:
             account: Account identifier in "##########-#####".
             device_id: The IMEI of the device.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Device upgrade history.
@@ -62,7 +64,8 @@ class SoftwareManagementReportsV1:
             start_index: Only return devices with IMEIs larger than this value. Use 0 for the first request. If
                 ``hasMoreData``=true in the response, use the ``lastSeenDeviceId`` value from the response as the
                 startIndex in the next request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of all devices in the specified account.
@@ -89,7 +92,8 @@ class SoftwareManagementReportsV1:
             start_index: The zero-based number of the first record to return. Set startIndex=0 for the first request. If
                 ``hasMoreFlag``=true in the response, use the ``lastSeenUpgradeId`` value from the response as the
                 startIndex in the next request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A list of all upgrades with a specified status.
@@ -117,7 +121,8 @@ class AsyncSoftwareManagementReportsV1:
         Args:
             account: Account identifier in "##########-#####".
             device_id: The IMEI of the device.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Device upgrade history.
@@ -141,7 +146,8 @@ class AsyncSoftwareManagementReportsV1:
             start_index: Only return devices with IMEIs larger than this value. Use 0 for the first request. If
                 ``hasMoreData``=true in the response, use the ``lastSeenDeviceId`` value from the response as the
                 startIndex in the next request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of all devices in the specified account.
@@ -168,7 +174,8 @@ class AsyncSoftwareManagementReportsV1:
             start_index: The zero-based number of the first record to return. Set startIndex=0 for the first request. If
                 ``hasMoreFlag``=true in the response, use the ``lastSeenUpgradeId`` value from the response as the
                 startIndex in the next request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A list of all upgrades with a specified status.
@@ -195,7 +202,8 @@ class SoftwareManagementReportsV1WithRawResponse(SecuredRawResponse[RawClient, S
         Args:
             account: Account identifier in "##########-#####".
             device_id: The IMEI of the device.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -220,7 +228,8 @@ class SoftwareManagementReportsV1WithRawResponse(SecuredRawResponse[RawClient, S
             start_index: Only return devices with IMEIs larger than this value. Use 0 for the first request. If
                 ``hasMoreData``=true in the response, use the ``lastSeenDeviceId`` value from the response as the
                 startIndex in the next request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -250,7 +259,8 @@ class SoftwareManagementReportsV1WithRawResponse(SecuredRawResponse[RawClient, S
             start_index: The zero-based number of the first record to return. Set startIndex=0 for the first request. If
                 ``hasMoreFlag``=true in the response, use the ``lastSeenUpgradeId`` value from the response as the
                 startIndex in the next request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -280,7 +290,8 @@ class AsyncSoftwareManagementReportsV1WithRawResponse(SecuredRawResponse[AsyncRa
         Args:
             account: Account identifier in "##########-#####".
             device_id: The IMEI of the device.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -289,7 +300,7 @@ class AsyncSoftwareManagementReportsV1WithRawResponse(SecuredRawResponse[AsyncRa
             url_template=self._server.software_management_v1("/reports/{account}/devices/{deviceId}"),
             path_params=[param[str]("account", account), param[str]("deviceId", device_id)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[list[DeviceUpgradeHistory]],
+            decoder=async_json_decoder[list[DeviceUpgradeHistory]],
             error_mapper=get_device_firmware_upgrade_history_error_mapper,
             request_options=request_options,
         )
@@ -305,7 +316,8 @@ class AsyncSoftwareManagementReportsV1WithRawResponse(SecuredRawResponse[AsyncRa
             start_index: Only return devices with IMEIs larger than this value. Use 0 for the first request. If
                 ``hasMoreData``=true in the response, use the ``lastSeenDeviceId`` value from the response as the
                 startIndex in the next request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -314,7 +326,7 @@ class AsyncSoftwareManagementReportsV1WithRawResponse(SecuredRawResponse[AsyncRa
             url_template=self._server.software_management_v1("/devices/{account}/index/{startIndex}"),
             path_params=[param[str]("account", account), param[str]("startIndex", start_index)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceListQueryResult],
+            decoder=async_json_decoder[DeviceListQueryResult],
             error_mapper=list_account_devices_error_mapper,
             request_options=request_options,
         )
@@ -335,7 +347,8 @@ class AsyncSoftwareManagementReportsV1WithRawResponse(SecuredRawResponse[AsyncRa
             start_index: The zero-based number of the first record to return. Set startIndex=0 for the first request. If
                 ``hasMoreFlag``=true in the response, use the ``lastSeenUpgradeId`` value from the response as the
                 startIndex in the next request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -350,7 +363,7 @@ class AsyncSoftwareManagementReportsV1WithRawResponse(SecuredRawResponse[AsyncRa
                 param[str]("startIndex", start_index),
             ],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[UpgradeListQueryResult],
+            decoder=async_json_decoder[UpgradeListQueryResult],
             error_mapper=list_upgrades_for_specified_status_error_mapper,
             request_options=request_options,
         )

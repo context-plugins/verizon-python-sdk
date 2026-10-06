@@ -16,4 +16,4 @@ class StatusResponse(SdkBaseModel):
 class StatusResponseDict(TypedDict):
     request_id: NotRequired[str]
     status: NotRequired[str]
-    subrequests: NotRequired[list[Subrequest | SubrequestDict]]
+    subrequests: NotRequired[list[SubrequestDict]]

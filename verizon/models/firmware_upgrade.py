@@ -40,4 +40,4 @@ class FirmwareUpgradeDict(TypedDict):
     firmware_to: NotRequired[str]
     start_date: NotRequired[str]
     status: NotRequired[str]
-    device_list: NotRequired[list[FirmwareUpgradeDeviceListItem | FirmwareUpgradeDeviceListItemDict]]
+    device_list: NotRequired[list[FirmwareUpgradeDeviceListItemDict]]

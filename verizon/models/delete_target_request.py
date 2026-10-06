@@ -18,5 +18,5 @@ class DeleteTargetRequest(SdkBaseModel):
 
 
 class DeleteTargetRequestDict(TypedDict):
-    accountidentifier: NotRequired[AccountIdentifier | AccountIdentifierDict]
-    resourceidentifier: NotRequired[ResourceIdentifier | ResourceIdentifierDict]
+    accountidentifier: NotRequired[AccountIdentifierDict]
+    resourceidentifier: NotRequired[ResourceIdentifierDict]

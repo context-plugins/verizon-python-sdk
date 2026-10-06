@@ -22,4 +22,4 @@ class RequestTriggerDict(TypedDict):
     account_name: NotRequired[str]
     organization_name: NotRequired[str]
     trigger_category: NotRequired[str]
-    promo_alerts: NotRequired[list[PromoAlert1 | PromoAlert1Dict]]
+    promo_alerts: NotRequired[list[PromoAlert1Dict]]

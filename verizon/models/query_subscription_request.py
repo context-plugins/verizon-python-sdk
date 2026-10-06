@@ -24,6 +24,6 @@ class QuerySubscriptionRequest(SdkBaseModel):
 
 
 class QuerySubscriptionRequestDict(TypedDict):
-    accountidentifier: NotRequired[AccountIdentifier | AccountIdentifierDict]
+    accountidentifier: NotRequired[AccountIdentifierDict]
     selection: NotRequired[dict[str, str]]
-    resourceidentifier: NotRequired[ResourceIdentifier | ResourceIdentifierDict]
+    resourceidentifier: NotRequired[ResourceIdentifierDict]

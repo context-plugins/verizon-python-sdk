@@ -9,6 +9,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_decoder,
     param,
 )
@@ -31,7 +32,8 @@ class DeviceRoleController:
 
         Args:
             vendor_id: The user's Vendor ID
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of Access Rules
@@ -57,7 +59,8 @@ class AsyncDeviceRoleController:
 
         Args:
             vendor_id: The user's Vendor ID
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of Access Rules
@@ -82,7 +85,8 @@ class DeviceRoleControllerWithRawResponse(SecuredRawResponse[RawClient, Server, 
 
         Args:
             vendor_id: The user's Vendor ID
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -105,7 +109,8 @@ class AsyncDeviceRoleControllerWithRawResponse(SecuredRawResponse[AsyncRawClient
 
         Args:
             vendor_id: The user's Vendor ID
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -114,7 +119,7 @@ class AsyncDeviceRoleControllerWithRawResponse(SecuredRawResponse[AsyncRawClient
             url_template=self._server.imp_server("/api/v1/device-roles/vendor"),
             query_params=[param[str]("VendorID", vendor_id)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.session_token),
-            decoder=json_decoder[list[DeviceRole]],
+            decoder=async_json_decoder[list[DeviceRole]],
             error_mapper=get_aclrules_by_vendor_id_error_mapper,
             request_options=request_options,
         )

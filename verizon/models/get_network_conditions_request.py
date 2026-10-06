@@ -23,4 +23,4 @@ class GetNetworkConditionsRequest(SdkBaseModel):
 class GetNetworkConditionsRequestDict(TypedDict):
     account_name: str
     location_type: str
-    coordinates: Coordinates | CoordinatesDict
+    coordinates: CoordinatesDict

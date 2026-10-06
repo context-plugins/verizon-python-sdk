@@ -11,6 +11,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_decoder,
     param,
 )
@@ -37,7 +38,8 @@ class SensorInsightsHealthScore:
         """Send a ``POST`` request.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Get a network health score
@@ -56,7 +58,8 @@ class SensorInsightsHealthScore:
         """Send a ``POST`` request.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Get health score summary
@@ -82,7 +85,8 @@ class AsyncSensorInsightsHealthScore:
         """Send a ``POST`` request.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Get a network health score
@@ -103,7 +107,8 @@ class AsyncSensorInsightsHealthScore:
         """Send a ``POST`` request.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Get health score summary
@@ -128,13 +133,14 @@ class SensorInsightsHealthScoreWithRawResponse(SecuredRawResponse[RawClient, Ser
         """Send a ``POST`` request.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/healthscore/network"),
+            url_template=self._server.thingspace("/dm/v1/healthscore/network"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
             decoder=json_decoder[DtoGetNetworkHealthScoreResponse],
@@ -148,13 +154,14 @@ class SensorInsightsHealthScoreWithRawResponse(SecuredRawResponse[RawClient, Ser
         """Send a ``POST`` request.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/healthscore/summary"),
+            url_template=self._server.thingspace("/dm/v1/healthscore/summary"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
             decoder=json_decoder[DtoHealthScoreSummary],
@@ -170,16 +177,17 @@ class AsyncSensorInsightsHealthScoreWithRawResponse(SecuredRawResponse[AsyncRawC
         """Send a ``POST`` request.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/healthscore/network"),
+            url_template=self._server.thingspace("/dm/v1/healthscore/network"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DtoGetNetworkHealthScoreResponse],
+            decoder=async_json_decoder[DtoGetNetworkHealthScoreResponse],
             error_mapper=sensor_insights_get_network_health_score_response_error_mapper,
             request_options=request_options,
         )
@@ -190,16 +198,17 @@ class AsyncSensorInsightsHealthScoreWithRawResponse(SecuredRawResponse[AsyncRawC
         """Send a ``POST`` request.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/healthscore/summary"),
+            url_template=self._server.thingspace("/dm/v1/healthscore/summary"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DtoHealthScoreSummary],
+            decoder=async_json_decoder[DtoHealthScoreSummary],
             error_mapper=sensor_insights_health_score_summary_error_mapper,
             request_options=request_options,
         )

@@ -45,7 +45,7 @@ class ActionResultwithDeviceConfigDict(TypedDict):
     description: NotRequired[str]
     deviceid: NotRequired[str]
     errmsg: NotRequired[str]
-    fields: NotRequired[DtoDeviceActionSetConfiguration | DtoDeviceActionSetConfigurationDict]
+    fields: NotRequired[DtoDeviceActionSetConfigurationDict]
     foreignid: NotRequired[str]
     id: NotRequired[str]
     lastupdated: NotRequired[RFC3339DateTime]

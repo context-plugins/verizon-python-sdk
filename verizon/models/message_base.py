@@ -39,6 +39,6 @@ class MessageBaseDict(TypedDict):
     is_private: bool
     road_user_type: list[RoadUserTypesOrStr]
     trigger_conditions: NotRequired[list[TriggerConditionOrStr]]
-    limits: NotRequired[list[Limit | LimitDict]]
+    limits: NotRequired[list[LimitDict]]
     distribution_type: NotRequired[list[DistributionTypesOrStr]]
-    distribution_schedule: NotRequired[DistributionSchedule | DistributionScheduleDict]
+    distribution_schedule: NotRequired[DistributionScheduleDict]

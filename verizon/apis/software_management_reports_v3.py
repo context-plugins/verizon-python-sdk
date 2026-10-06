@@ -9,6 +9,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_decoder,
     param,
 )
@@ -49,7 +50,8 @@ class SoftwareManagementReportsV3:
             acc: Account identifier.
             campaign_id: Campaign identifier.
             last_seen_device_id: Last seen device identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Returns an array of campaign history.
@@ -74,7 +76,8 @@ class SoftwareManagementReportsV3:
             acc: Account identifier.
             campaign_status: Campaign status.
             last_seen_campaign_id: Last seen campaign Id.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Return array of campaign history.
@@ -93,7 +96,8 @@ class SoftwareManagementReportsV3:
         Args:
             acc: Account identifier.
             device_id: Device IMEI identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Returns a list of firmware upgrades.
@@ -127,7 +131,8 @@ class AsyncSoftwareManagementReportsV3:
             acc: Account identifier.
             campaign_id: Campaign identifier.
             last_seen_device_id: Last seen device identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Returns an array of campaign history.
@@ -154,7 +159,8 @@ class AsyncSoftwareManagementReportsV3:
             acc: Account identifier.
             campaign_status: Campaign status.
             last_seen_campaign_id: Last seen campaign Id.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Return array of campaign history.
@@ -175,7 +181,8 @@ class AsyncSoftwareManagementReportsV3:
         Args:
             acc: Account identifier.
             device_id: Device IMEI identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Returns a list of firmware upgrades.
@@ -208,7 +215,8 @@ class SoftwareManagementReportsV3WithRawResponse(SecuredRawResponse[RawClient, S
             acc: Account identifier.
             campaign_id: Campaign identifier.
             last_seen_device_id: Last seen device identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -237,7 +245,8 @@ class SoftwareManagementReportsV3WithRawResponse(SecuredRawResponse[RawClient, S
             acc: Account identifier.
             campaign_status: Campaign status.
             last_seen_campaign_id: Last seen campaign Id.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -263,7 +272,8 @@ class SoftwareManagementReportsV3WithRawResponse(SecuredRawResponse[RawClient, S
         Args:
             acc: Account identifier.
             device_id: Device IMEI identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -293,7 +303,8 @@ class AsyncSoftwareManagementReportsV3WithRawResponse(SecuredRawResponse[AsyncRa
             acc: Account identifier.
             campaign_id: Campaign identifier.
             last_seen_device_id: Last seen device identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -303,7 +314,7 @@ class AsyncSoftwareManagementReportsV3WithRawResponse(SecuredRawResponse[AsyncRa
             path_params=[param[str]("acc", acc), param[str]("campaignId", campaign_id)],
             query_params=[param[str | None]("lastSeenDeviceId", last_seen_device_id)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[V3CampaignDevice],
+            decoder=async_json_decoder[V3CampaignDevice],
             error_mapper=get_campaign_device_status2_error_mapper,
             request_options=request_options,
         )
@@ -322,7 +333,8 @@ class AsyncSoftwareManagementReportsV3WithRawResponse(SecuredRawResponse[AsyncRa
             acc: Account identifier.
             campaign_status: Campaign status.
             last_seen_campaign_id: Last seen campaign Id.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -335,7 +347,7 @@ class AsyncSoftwareManagementReportsV3WithRawResponse(SecuredRawResponse[AsyncRa
                 param[str | None]("lastSeenCampaignId", last_seen_campaign_id),
             ],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[V3CampaignHistory],
+            decoder=async_json_decoder[V3CampaignHistory],
             error_mapper=get_campaign_history_by_status2_error_mapper,
             request_options=request_options,
         )
@@ -348,7 +360,8 @@ class AsyncSoftwareManagementReportsV3WithRawResponse(SecuredRawResponse[AsyncRa
         Args:
             acc: Account identifier.
             device_id: Device IMEI identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -357,7 +370,7 @@ class AsyncSoftwareManagementReportsV3WithRawResponse(SecuredRawResponse[AsyncRa
             url_template=self._server.software_management_v3("/reports/{acc}/devices/{deviceId}"),
             path_params=[param[str]("acc", acc), param[str]("deviceId", device_id)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[list[DeviceFirmwareUpgrade]],
+            decoder=async_json_decoder[list[DeviceFirmwareUpgrade]],
             error_mapper=get_device_firmware_upgrade_history3_error_mapper,
             request_options=request_options,
         )

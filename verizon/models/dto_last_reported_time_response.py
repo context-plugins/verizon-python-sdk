@@ -12,5 +12,5 @@ class DtoLastReportedTimeResponse(SdkBaseModel):
 
 
 class DtoLastReportedTimeResponseDict(TypedDict):
-    event: NotRequired[ResourceEvent | ResourceEventDict]
+    event: NotRequired[ResourceEventDict]
     timestamp: NotRequired[str]

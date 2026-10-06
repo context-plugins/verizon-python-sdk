@@ -14,4 +14,4 @@ class Rbstiltconfig(SdkBaseModel):
 
 
 class RbstiltconfigDict(TypedDict):
-    rbs_high_precision_tilt_config: NotRequired[RbsHighPrecisionTiltConfig | RbsHighPrecisionTiltConfigDict]
+    rbs_high_precision_tilt_config: NotRequired[RbsHighPrecisionTiltConfigDict]

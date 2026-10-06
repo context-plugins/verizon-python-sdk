@@ -52,6 +52,6 @@ class TriggerNotificationDict(TypedDict):
     notification_frequency_interval: NotRequired[str]
     external_email_recipients: NotRequired[str]
     sms_notification: NotRequired[bool]
-    sms_numbers: NotRequired[list[Smsnumber | SmsnumberDict]]
+    sms_numbers: NotRequired[list[SmsnumberDict]]
     reminder: NotRequired[bool]
     severity: NotRequired[str]

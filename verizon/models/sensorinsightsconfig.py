@@ -14,4 +14,4 @@ class Sensorinsightsconfig(SdkBaseModel):
 
 
 class SensorinsightsconfigDict(TypedDict):
-    removesensor: NotRequired[DtoOffBoardSensor | DtoOffBoardSensorDict]
+    removesensor: NotRequired[DtoOffBoardSensorDict]

@@ -30,7 +30,7 @@ class SecuritySubscription(SdkBaseModel):
 
 
 class SecuritySubscriptionDict(TypedDict):
-    extended_attributes: NotRequired[list[ExtendedAttributes | ExtendedAttributesDict]]
+    extended_attributes: NotRequired[list[ExtendedAttributesDict]]
     license_assigned: NotRequired[int]
     license_available: NotRequired[int]
     license_purchased: NotRequired[int]

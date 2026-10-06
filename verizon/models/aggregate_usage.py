@@ -22,7 +22,7 @@ class AggregateUsage(SdkBaseModel):
 
 
 class AggregateUsageDict(TypedDict):
-    device_id: NotRequired[GiodeviceId | GiodeviceIdDict]
+    device_id: NotRequired[GiodeviceIdDict]
     account_name: NotRequired[str]
     start_time: NotRequired[str]
     end_time: NotRequired[str]

@@ -12,4 +12,4 @@ class DeviceGroupObject(SdkBaseModel):
 
 
 class DeviceGroupObjectDict(TypedDict):
-    device_group: NotRequired[DeviceGroupFilterCriteria | DeviceGroupFilterCriteriaDict]
+    device_group: NotRequired[DeviceGroupFilterCriteriaDict]

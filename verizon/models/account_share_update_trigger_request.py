@@ -34,6 +34,6 @@ class AccountShareUpdateTriggerRequestDict(TypedDict):
     trigger_name: NotRequired[str]
     ecpd_id: NotRequired[str]
     trigger_category: NotRequired[TriggerCategoryOrStr]
-    price_plan_trigger: NotRequired[AccountSharePricePlanTrigger | AccountSharePricePlanTriggerDict]
-    notification: NotRequired[Notificationarray | NotificationarrayDict]
+    price_plan_trigger: NotRequired[AccountSharePricePlanTriggerDict]
+    notification: NotRequired[NotificationarrayDict]
     active: NotRequired[ActiveOrStr]

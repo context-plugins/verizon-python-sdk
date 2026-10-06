@@ -20,4 +20,4 @@ class DeviceExtendedDiagnosticsRequest(SdkBaseModel):
 
 class DeviceExtendedDiagnosticsRequestDict(TypedDict):
     account_name: str
-    device_list: list[DeviceId | DeviceIdDict]
+    device_list: list[DeviceIdDict]

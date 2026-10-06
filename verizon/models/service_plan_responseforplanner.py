@@ -27,6 +27,6 @@ class ServicePlanResponseforplanner(SdkBaseModel):
 class ServicePlanResponseforplannerDict(TypedDict):
     carrier_service_plan_code: NotRequired[str]
     code: NotRequired[str]
-    extended_attributes: NotRequired[list[KvPairforplanner | KvPairforplannerDict]]
+    extended_attributes: NotRequired[list[KvPairforplannerDict]]
     name: NotRequired[str]
     size_kb: NotRequired[int]

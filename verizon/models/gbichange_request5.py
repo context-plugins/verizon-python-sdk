@@ -19,5 +19,5 @@ class GbichangeRequest5(SdkBaseModel):
 class GbichangeRequest5Dict(TypedDict):
     account_name: NotRequired[str]
     service_plan: NotRequired[str]
-    device_list_with_service_address: NotRequired[list[DeviceListWithServiceAddress | DeviceListWithServiceAddressDict]]
+    device_list_with_service_address: NotRequired[list[DeviceListWithServiceAddressDict]]
     current_service_plan: NotRequired[str]

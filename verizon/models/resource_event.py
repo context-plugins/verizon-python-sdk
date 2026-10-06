@@ -69,7 +69,7 @@ class ResourceEventDict(TypedDict):
     deviceid: NotRequired[str]
     errmsg: NotRequired[str]
     fieldid: str
-    fields: NotRequired[DtoFields | DtoFieldsDict]
+    fields: NotRequired[DtoFieldsDict]
     fieldvalue: NotRequired[list[int]]
     foreignid: str
     id: NotRequired[str]

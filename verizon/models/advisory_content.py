@@ -14,4 +14,4 @@ class AdvisoryContent(SdkBaseModel):
 
 
 class AdvisoryContentDict(TypedDict):
-    advisory: list[AdvisoryItem | AdvisoryItemDict]
+    advisory: list[AdvisoryItemDict]

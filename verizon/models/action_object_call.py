@@ -11,4 +11,4 @@ class ActionObjectCall(SdkBaseModel):
 
 
 class ActionObjectCallDict(TypedDict):
-    action: NotRequired[Actionobject | ActionobjectDict]
+    action: NotRequired[ActionobjectDict]

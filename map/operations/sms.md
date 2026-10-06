@@ -10,10 +10,10 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /m2m/v1/sms/{aname}/history`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
-- **Signature**: `def list_devices_sms_messages(aname: str, *, next: int | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Server**: `thingspace`
+- **Signature**: `def list_devices_sms_messages(aname: str, *, next_: int | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `aname`
-- **Params**: `aname` — path · `next` — query
+- **Params**: `aname` — path · `next_` — query `next`
 - **Returns (parsed)**: `SmsmessagesQueryResult`
 - **Returns (raw)**: `ApiResult[SmsmessagesQueryResult, ListDevicesSmsmessagesErrorBody]`
 - **Error**: `ListDevicesSmsmessagesErrorBody` — **Case A (typed)**
@@ -29,7 +29,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `POST /m2m/v1/sms`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def send_sms_to_device(body: SmssendRequest | SmssendRequestDict, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `body`
 - **Params**: `body` — JSON body
@@ -50,7 +50,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `PUT /m2m/v1/sms/{aname}/startCallbacks`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def start_queued_sms_delivery(aname: str, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `aname`
 - **Params**: `aname` — path

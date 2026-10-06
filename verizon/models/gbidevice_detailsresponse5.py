@@ -14,4 +14,4 @@ class GbideviceDetailsresponse5(SdkBaseModel):
 
 class GbideviceDetailsresponse5Dict(TypedDict):
     has_more_data: NotRequired[bool]
-    devices: NotRequired[list[GbiaccountNameobject5 | GbiaccountNameobject5Dict]]
+    devices: NotRequired[list[GbiaccountNameobject5Dict]]

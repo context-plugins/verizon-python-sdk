@@ -13,5 +13,5 @@ class Devicepropertyfilter(SdkBaseModel):
 
 
 class DevicepropertyfilterDict(TypedDict):
-    selection: NotRequired[Devicepropertyselection | DevicepropertyselectionDict]
+    selection: NotRequired[DevicepropertyselectionDict]
     querytotalcount: NotRequired[bool]

@@ -12,4 +12,4 @@ class DescriptionOfRoadSurfaceCinders(SdkBaseModel):
 
 
 class DescriptionOfRoadSurfaceCindersDict(TypedDict):
-    cinders: Cinders | CindersDict
+    cinders: CindersDict

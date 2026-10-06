@@ -15,4 +15,4 @@ class NodeListLl(SdkBaseModel):
 
 
 class NodeListLlDict(TypedDict):
-    nodes: list[NodeLl | NodeLlDict]
+    nodes: list[NodeLlDict]

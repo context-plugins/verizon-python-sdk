@@ -23,4 +23,4 @@ class Engagement(SdkBaseModel):
 class EngagementDict(TypedDict):
     engagement_id: NotRequired[str]
     charging_group: NotRequired[str]
-    services: NotRequired[list[AccountService | AccountServiceDict]]
+    services: NotRequired[list[AccountServiceDict]]

@@ -60,9 +60,9 @@ class Management(SdkBaseModel):
 
 
 class ManagementDict(TypedDict):
-    action_id: ActionId | ActionIdDict
+    action_id: ActionIdDict
     detection_time: int
     reference_time: int
-    event_position: EventPosition | EventPositionDict
+    event_position: EventPositionDict
     awareness_distance: NotRequired[AwarenessDistanceOrStr]
     station_type: int

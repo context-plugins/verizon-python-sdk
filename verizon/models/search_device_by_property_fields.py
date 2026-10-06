@@ -22,11 +22,11 @@ class SearchDeviceByPropertyFields(SdkBaseModel):
 
 
 class SearchDeviceByPropertyFieldsDict(TypedDict):
-    acceleration: NotRequired[Acceleration | AccelerationDict]
+    acceleration: NotRequired[AccelerationDict]
     battery: NotRequired[str]
     humidity: NotRequired[str]
     light: NotRequired[str]
     pressure: NotRequired[str]
     signal_strength: NotRequired[str]
     temperature: NotRequired[str]
-    device_propertylocation: NotRequired[DevicePropertylocation | DevicePropertylocationDict]
+    device_propertylocation: NotRequired[DevicePropertylocationDict]

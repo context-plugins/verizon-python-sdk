@@ -20,4 +20,4 @@ class Situation(SdkBaseModel):
 
 class SituationDict(TypedDict):
     information_quality: int
-    event_type: EventType | EventTypeDict
+    event_type: EventTypeDict

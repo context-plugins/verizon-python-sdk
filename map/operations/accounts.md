@@ -10,7 +10,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /m2m/v1/accounts/{aname}`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def get_account_information(aname: str, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `aname`
 - **Params**: `aname` — path
@@ -29,10 +29,10 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /m2m/v1/leads/{aname}`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
-- **Signature**: `def list_account_leads(aname: str, *, next: int | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Server**: `thingspace`
+- **Signature**: `def list_account_leads(aname: str, *, next_: int | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `aname`
-- **Params**: `aname` — path · `next` — query
+- **Params**: `aname` — path · `next_` — query `next`
 - **Returns (parsed)**: `AccountLeadsResult`
 - **Returns (raw)**: `ApiResult[AccountLeadsResult, ListAccountLeadsErrorBody]`
 - **Error**: `ListAccountLeadsErrorBody` — **Case A (typed)**
@@ -48,7 +48,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /m2m/v1/accounts/{aname}/statesandservices`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def list_account_states_and_services(aname: str, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `aname`
 - **Params**: `aname` — path

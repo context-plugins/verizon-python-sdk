@@ -21,6 +21,6 @@ class ConnectionEvent(SdkBaseModel):
 
 
 class ConnectionEventDict(TypedDict):
-    connection_event_attributes: NotRequired[list[CustomFields | CustomFieldsDict]]
-    extended_attributes: NotRequired[list[CustomFields | CustomFieldsDict]]
+    connection_event_attributes: NotRequired[list[CustomFieldsDict]]
+    extended_attributes: NotRequired[list[CustomFieldsDict]]
     occurred_at: NotRequired[str]

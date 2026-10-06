@@ -14,4 +14,4 @@ class AccountStatesAndServices(SdkBaseModel):
 
 
 class AccountStatesAndServicesDict(TypedDict):
-    engagement: list[Engagement | EngagementDict]
+    engagement: list[EngagementDict]

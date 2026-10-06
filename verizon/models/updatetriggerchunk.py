@@ -34,6 +34,6 @@ class UpdatetriggerchunkDict(TypedDict):
     trigger_name: NotRequired[str]
     ecpd_id: NotRequired[str]
     trigger_category: NotRequired[TriggerCategoryOrStr]
-    price_plan_trigger: NotRequired[PricePlanTrigger | PricePlanTriggerDict]
-    notification: NotRequired[Notificationarray | NotificationarrayDict]
+    price_plan_trigger: NotRequired[PricePlanTriggerDict]
+    notification: NotRequired[NotificationarrayDict]
     active: NotRequired[ActiveOrStr]

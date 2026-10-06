@@ -17,4 +17,4 @@ class SaeAlertMessage(SdkBaseModel):
 
 
 class SaeAlertMessageDict(TypedDict):
-    sae_alert: SaeAlertPayload | SaeAlertPayloadDict
+    sae_alert: SaeAlertPayloadDict

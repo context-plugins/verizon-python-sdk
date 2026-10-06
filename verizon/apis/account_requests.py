@@ -9,6 +9,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_decoder,
     param,
 )
@@ -32,7 +33,8 @@ class AccountRequests:
         Args:
             aname: Account name.
             request_id: UUID from synchronous response.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The asynchronous request status.
@@ -60,7 +62,8 @@ class AsyncAccountRequests:
         Args:
             aname: Account name.
             request_id: UUID from synchronous response.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The asynchronous request status.
@@ -87,13 +90,14 @@ class AccountRequestsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
         Args:
             aname: Account name.
             request_id: UUID from synchronous response.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/accounts/{aname}/requests/{requestId}/status"),
+            url_template=self._server.thingspace("/m2m/v1/accounts/{aname}/requests/{requestId}/status"),
             path_params=[param[str]("aname", aname), param[str]("requestId", request_id)],
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
             decoder=json_decoder[AsynchronousRequestResult],
@@ -111,16 +115,17 @@ class AsyncAccountRequestsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
         Args:
             aname: Account name.
             request_id: UUID from synchronous response.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/accounts/{aname}/requests/{requestId}/status"),
+            url_template=self._server.thingspace("/m2m/v1/accounts/{aname}/requests/{requestId}/status"),
             path_params=[param[str]("aname", aname), param[str]("requestId", request_id)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[AsynchronousRequestResult],
+            decoder=async_json_decoder[AsynchronousRequestResult],
             error_mapper=get_current_asynchronous_request_status_error_mapper,
             request_options=request_options,
         )

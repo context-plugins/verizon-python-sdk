@@ -12,6 +12,7 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -42,7 +43,8 @@ class DeviceActions:
 
         Args:
             account_name: Value sent with the request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Account details **Note:** The response will have placeholders. You can identify the placeholders by
@@ -59,7 +61,8 @@ class DeviceActions:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -75,7 +78,8 @@ class DeviceActions:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Syncronous response of device usage
@@ -92,7 +96,8 @@ class DeviceActions:
         Args:
             account_name: Value sent with the request.
             request_id: Value sent with the request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -110,7 +115,8 @@ class DeviceActions:
 
         Args:
             body: Device Provisioning History
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -131,7 +137,8 @@ class DeviceActions:
 
         Args:
             body: Device Profile Query
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -147,7 +154,8 @@ class DeviceActions:
 
         Args:
             account_name: Value sent with the request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Account details **Note:** The response will have placeholders. You can identify the placeholders by
@@ -173,7 +181,8 @@ class AsyncDeviceActions:
 
         Args:
             account_name: Value sent with the request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Account details **Note:** The response will have placeholders. You can identify the placeholders by
@@ -192,7 +201,8 @@ class AsyncDeviceActions:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -208,7 +218,8 @@ class AsyncDeviceActions:
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Syncronous response of device usage
@@ -225,7 +236,8 @@ class AsyncDeviceActions:
         Args:
             account_name: Value sent with the request.
             request_id: Value sent with the request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -245,7 +257,8 @@ class AsyncDeviceActions:
 
         Args:
             body: Device Provisioning History
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -266,7 +279,8 @@ class AsyncDeviceActions:
 
         Args:
             body: Device Profile Query
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -284,7 +298,8 @@ class AsyncDeviceActions:
 
         Args:
             account_name: Value sent with the request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Account details **Note:** The response will have placeholders. You can identify the placeholders by
@@ -307,13 +322,14 @@ class DeviceActionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
 
         Args:
             account_name: Value sent with the request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/v1/accounts/{accountName}"),
+            url_template=self._server.thingspace("/v1/accounts/{accountName}"),
             path_params=[param[str]("accountName", account_name)],
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
             decoder=json_decoder[AccountDetails],
@@ -328,13 +344,14 @@ class DeviceActionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/v1/devices/usage/actions/list/aggregate"),
+            url_template=self._server.thingspace("/v1/devices/usage/actions/list/aggregate"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[AggregateUsage | AggregateUsageDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -350,13 +367,14 @@ class DeviceActionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/v1/devices/usage/actions/list"),
+            url_template=self._server.thingspace("/v1/devices/usage/actions/list"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DailyUsage | DailyUsageDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -373,15 +391,14 @@ class DeviceActionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
         Args:
             account_name: Value sent with the request.
             request_id: Value sent with the request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials(
-                "/m2m/v2/accounts/{accountName}/requests/{requestID}/status"
-            ),
+            url_template=self._server.thingspace("/m2m/v2/accounts/{accountName}/requests/{requestID}/status"),
             path_params=[param[str]("accountName", account_name), param[str]("requestID", request_id)],
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
             decoder=json_decoder[StatusResponse],
@@ -396,13 +413,14 @@ class DeviceActionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
 
         Args:
             body: Device Provisioning History
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v2/devices/history/actions/list"),
+            url_template=self._server.thingspace("/m2m/v2/devices/history/actions/list"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ProvhistoryRequest | ProvhistoryRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -421,13 +439,14 @@ class DeviceActionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
 
         Args:
             body: Device Profile Query
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v2/devices/actions/list"),
+            url_template=self._server.thingspace("/m2m/v2/devices/actions/list"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[GetDeviceListWithProfilesRequest | GetDeviceListWithProfilesRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -443,13 +462,14 @@ class DeviceActionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
 
         Args:
             account_name: Value sent with the request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/v1/plans/{accountName}"),
+            url_template=self._server.thingspace("/v1/plans/{accountName}"),
             path_params=[param[str]("accountName", account_name)],
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
             decoder=json_decoder[AccountDetails],
@@ -466,16 +486,17 @@ class AsyncDeviceActionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
 
         Args:
             account_name: Value sent with the request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/v1/accounts/{accountName}"),
+            url_template=self._server.thingspace("/v1/accounts/{accountName}"),
             path_params=[param[str]("accountName", account_name)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[AccountDetails],
+            decoder=async_json_decoder[AccountDetails],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -487,17 +508,18 @@ class AsyncDeviceActionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/v1/devices/usage/actions/list/aggregate"),
+            url_template=self._server.thingspace("/v1/devices/usage/actions/list/aggregate"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[AggregateUsage | AggregateUsageDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[GiorequestResponse],
+            decoder=async_json_decoder[GiorequestResponse],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -509,17 +531,18 @@ class AsyncDeviceActionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
 
         Args:
             body: The request body.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/v1/devices/usage/actions/list"),
+            url_template=self._server.thingspace("/v1/devices/usage/actions/list"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DailyUsage | DailyUsageDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DailyUsageResponse],
+            decoder=async_json_decoder[DailyUsageResponse],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -532,18 +555,17 @@ class AsyncDeviceActionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
         Args:
             account_name: Value sent with the request.
             request_id: Value sent with the request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials(
-                "/m2m/v2/accounts/{accountName}/requests/{requestID}/status"
-            ),
+            url_template=self._server.thingspace("/m2m/v2/accounts/{accountName}/requests/{requestID}/status"),
             path_params=[param[str]("accountName", account_name), param[str]("requestID", request_id)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[StatusResponse],
+            decoder=async_json_decoder[StatusResponse],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -555,17 +577,18 @@ class AsyncDeviceActionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
 
         Args:
             body: Device Provisioning History
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v2/devices/history/actions/list"),
+            url_template=self._server.thingspace("/m2m/v2/devices/history/actions/list"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ProvhistoryRequest | ProvhistoryRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[GiorequestResponse],
+            decoder=async_json_decoder[GiorequestResponse],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -580,17 +603,18 @@ class AsyncDeviceActionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
 
         Args:
             body: Device Profile Query
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v2/devices/actions/list"),
+            url_template=self._server.thingspace("/m2m/v2/devices/actions/list"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[GetDeviceListWithProfilesRequest | GetDeviceListWithProfilesRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[GiorequestResponse],
+            decoder=async_json_decoder[GiorequestResponse],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -602,16 +626,17 @@ class AsyncDeviceActionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
 
         Args:
             account_name: Value sent with the request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/v1/plans/{accountName}"),
+            url_template=self._server.thingspace("/v1/plans/{accountName}"),
             path_params=[param[str]("accountName", account_name)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[AccountDetails],
+            decoder=async_json_decoder[AccountDetails],
             error_mapper=raw_error_response,
             request_options=request_options,
         )

@@ -12,6 +12,7 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -33,7 +34,8 @@ class DiagnosticsFactoryReset:
 
         Args:
             body: A request to perform a device reboot.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Diagnostics observation result.
@@ -58,7 +60,8 @@ class AsyncDiagnosticsFactoryReset:
 
         Args:
             body: A request to perform a device reboot.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Diagnostics observation result.
@@ -80,7 +83,8 @@ class DiagnosticsFactoryResetWithRawResponse(SecuredRawResponse[RawClient, Serve
 
         Args:
             body: A request to perform a device reboot.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -104,7 +108,8 @@ class AsyncDiagnosticsFactoryResetWithRawResponse(SecuredRawResponse[AsyncRawCli
 
         Args:
             body: A request to perform a device reboot.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -114,7 +119,7 @@ class AsyncDiagnosticsFactoryResetWithRawResponse(SecuredRawResponse[AsyncRawCli
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DeviceResetRequest | DeviceResetRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DiagnosticsObservationResult],
+            decoder=async_json_decoder[DiagnosticsObservationResult],
             error_mapper=raw_error_response,
             request_options=request_options,
         )

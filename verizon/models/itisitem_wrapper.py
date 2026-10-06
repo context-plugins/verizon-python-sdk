@@ -14,4 +14,4 @@ class ItisitemWrapper(SdkBaseModel):
 
 
 class ItisitemWrapperDict(TypedDict):
-    item: ItisitemContent | ItisitemContentDict
+    item: ItisitemContentDict

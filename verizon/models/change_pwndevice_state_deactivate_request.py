@@ -14,4 +14,4 @@ class ChangePwndeviceStateDeactivateRequest(SdkBaseModel):
 
 class ChangePwndeviceStateDeactivateRequestDict(TypedDict):
     account_name: str
-    device_list: list[PwndeviceList | PwndeviceListDict]
+    device_list: list[PwndeviceListDict]

@@ -6,26 +6,26 @@ from pydantic import Field
 from typing_extensions import NotRequired, TypedDict
 
 from ..core import UNSET, Optional, SdkBaseModel
-from .enums.etxexpected_type_enum import EtxexpectedTypeEnumOrStr
-from .enums.etxmessage_standard_enum import EtxmessageStandardEnumOrStr
+from .enums.etxexpected_type_enum import EtxexpectedTypeEnum, EtxexpectedTypeEnumOrStr
+from .enums.etxmessage_standard_enum import EtxmessageStandardEnum, EtxmessageStandardEnumOrStr
 
 
 class EtxMapMessageGeoJsonPolygon(SdkBaseModel):
     """Query MAP records using a GeoJSON polygon to define the spatial area"""
 
-    message_standard: Optional[EtxmessageStandardEnumOrStr] = Field(default=UNSET, alias="messageStandard")
+    message_standard: EtxmessageStandardEnumOrStr = Field(default=EtxmessageStandardEnum.SAE, alias="messageStandard")
     """V2X messaging standard selection. Accepted values are 'sae' (SAE J2735) and 'etsi' (ETSI TS 103 301)."""
 
     geo_json: Any = Field(alias="geoJson")
     """GeoJSON Polygon defining the area to retrieve MAP messages for."""
 
-    expected_type: Optional[EtxexpectedTypeEnumOrStr] = Field(default=UNSET, alias="expectedType")
+    expected_type: EtxexpectedTypeEnumOrStr = Field(default=EtxexpectedTypeEnum.BASE64, alias="expectedType")
     """The format of the payload in the response body."""
 
     page_token: Optional[str] = Field(default=UNSET, alias="pageToken")
     """Base64 encoded token used to retrieve the next page of results"""
 
-    page_size: Optional[int] = Field(default=UNSET, alias="pageSize")
+    page_size: int = Field(default=200, alias="pageSize")
     """Maximum number of records to return in a single page"""
 
 

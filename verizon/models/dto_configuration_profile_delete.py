@@ -16,4 +16,4 @@ class DtoConfigurationProfileDelete(SdkBaseModel):
 
 class DtoConfigurationProfileDeleteDict(TypedDict):
     account_name: NotRequired[str]
-    resourceidentifier: NotRequired[DtoResourceidentifier | DtoResourceidentifierDict]
+    resourceidentifier: NotRequired[DtoResourceidentifierDict]

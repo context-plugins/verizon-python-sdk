@@ -16,4 +16,4 @@ class EtsiAlertMessage(SdkBaseModel):
 
 
 class EtsiAlertMessageDict(TypedDict):
-    etsi_alert: EtsiAlertPayload | EtsiAlertPayloadDict
+    etsi_alert: EtsiAlertPayloadDict

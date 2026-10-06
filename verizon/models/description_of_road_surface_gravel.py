@@ -12,4 +12,4 @@ class DescriptionOfRoadSurfaceGravel(SdkBaseModel):
 
 
 class DescriptionOfRoadSurfaceGravelDict(TypedDict):
-    gravel: Gravel | GravelDict
+    gravel: GravelDict

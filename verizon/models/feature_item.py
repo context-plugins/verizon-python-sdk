@@ -19,5 +19,5 @@ class FeatureItem(SdkBaseModel):
 
 class FeatureItemDict(TypedDict):
     type_: Type1OrStr
-    geometry: Geometry | GeometryDict
+    geometry: GeometryDict
     properties: Any

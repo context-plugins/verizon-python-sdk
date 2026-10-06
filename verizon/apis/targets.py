@@ -12,6 +12,8 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
@@ -47,7 +49,8 @@ class Targets:
             billingaccount_id: TThe ThingSpace ID of the authenticating billing account.
             body: The request body must include the UUID of the subscription that you want to update plus any properties
                 that you want to change.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A success response includes the full subscription resource definition.
@@ -69,7 +72,8 @@ class Targets:
 
         Args:
             body: The request body provides the details of the target that you want to create.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A success response includes the full target resource definition.
@@ -88,7 +92,8 @@ class Targets:
 
         Args:
             body: The request body identifies the target to delete.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Target deleted successfully.
@@ -107,7 +112,8 @@ class Targets:
 
         Args:
             body: The request body only contains the authenticating account.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Returns a new external ID.
@@ -123,7 +129,8 @@ class Targets:
 
         Args:
             body: Search for targets by property values.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A success response includes an array of all matching targets. Each target includes the full target resource
@@ -156,7 +163,8 @@ class AsyncTargets:
             billingaccount_id: TThe ThingSpace ID of the authenticating billing account.
             body: The request body must include the UUID of the subscription that you want to update plus any properties
                 that you want to change.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A success response includes the full subscription resource definition.
@@ -180,7 +188,8 @@ class AsyncTargets:
 
         Args:
             body: The request body provides the details of the target that you want to create.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A success response includes the full target resource definition.
@@ -199,7 +208,8 @@ class AsyncTargets:
 
         Args:
             body: The request body identifies the target to delete.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Target deleted successfully.
@@ -218,7 +228,8 @@ class AsyncTargets:
 
         Args:
             body: The request body only contains the authenticating account.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Returns a new external ID.
@@ -236,7 +247,8 @@ class AsyncTargets:
 
         Args:
             body: Search for targets by property values.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A success response includes an array of all matching targets. Each target includes the full target resource
@@ -266,7 +278,8 @@ class TargetsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes])
             billingaccount_id: TThe ThingSpace ID of the authenticating billing account.
             body: The request body must include the UUID of the subscription that you want to update plus any properties
                 that you want to change.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -292,7 +305,8 @@ class TargetsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes])
 
         Args:
             body: The request body provides the details of the target that you want to create.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -317,7 +331,8 @@ class TargetsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes])
 
         Args:
             body: The request body identifies the target to delete.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -342,7 +357,8 @@ class TargetsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes])
 
         Args:
             body: The request body only contains the authenticating account.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -364,7 +380,8 @@ class TargetsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes])
 
         Args:
             body: Search for targets by property values.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -395,7 +412,8 @@ class AsyncTargetsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, Asy
             billingaccount_id: TThe ThingSpace ID of the authenticating billing account.
             body: The request body must include the UUID of the subscription that you want to update plus any properties
                 that you want to change.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -405,7 +423,7 @@ class AsyncTargetsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, Asy
             headers=[param[str]("BillingaccountID", billingaccount_id), param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[CreateIoTapplicationRequest | CreateIoTapplicationRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[CreateIoTapplicationResponse],
+            decoder=async_json_decoder[CreateIoTapplicationResponse],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -421,7 +439,8 @@ class AsyncTargetsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, Asy
 
         Args:
             body: The request body provides the details of the target that you want to create.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -431,7 +450,7 @@ class AsyncTargetsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, Asy
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[CreateTargetRequest | CreateTargetRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[Target],
+            decoder=async_json_decoder[Target],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -446,7 +465,8 @@ class AsyncTargetsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, Asy
 
         Args:
             body: The request body identifies the target to delete.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -456,7 +476,7 @@ class AsyncTargetsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, Asy
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DeleteTargetRequest | DeleteTargetRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -471,7 +491,8 @@ class AsyncTargetsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, Asy
 
         Args:
             body: The request body only contains the authenticating account.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -481,7 +502,7 @@ class AsyncTargetsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, Asy
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[GenerateExternalIdrequest | GenerateExternalIdrequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[GenerateExternalIdresult],
+            decoder=async_json_decoder[GenerateExternalIdresult],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -493,7 +514,8 @@ class AsyncTargetsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, Asy
 
         Args:
             body: Search for targets by property values.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -503,7 +525,7 @@ class AsyncTargetsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, Asy
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[QueryTargetRequest | QueryTargetRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[list[Target]],
+            decoder=async_json_decoder[list[Target]],
             error_mapper=raw_error_response,
             request_options=request_options,
         )

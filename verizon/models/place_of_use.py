@@ -22,5 +22,5 @@ class PlaceOfUse(SdkBaseModel):
 
 
 class PlaceOfUseDict(TypedDict):
-    address: Address | AddressDict
-    customer_name: CustomerName | CustomerNameDict
+    address: AddressDict
+    customer_name: CustomerNameDict

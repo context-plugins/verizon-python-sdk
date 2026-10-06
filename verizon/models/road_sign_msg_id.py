@@ -15,4 +15,4 @@ class RoadSignMsgId(SdkBaseModel):
 
 
 class RoadSignMsgIdDict(TypedDict):
-    road_sign_id: RoadSignId | RoadSignIdDict
+    road_sign_id: RoadSignIdDict

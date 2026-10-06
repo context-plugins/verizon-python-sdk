@@ -15,4 +15,4 @@ class GenericSignContent(SdkBaseModel):
 
 
 class GenericSignContentDict(TypedDict):
-    generic_sign: list[TextPhraseOrItis | TextPhraseOrItisDict]
+    generic_sign: list[TextPhraseOrItisDict]

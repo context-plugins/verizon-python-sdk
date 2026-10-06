@@ -32,7 +32,7 @@ class DeviceAggregateUsageListRequest(SdkBaseModel):
 class DeviceAggregateUsageListRequestDict(TypedDict):
     start_time: str
     end_time: str
-    device_ids: NotRequired[list[DeviceId | DeviceIdDict]]
+    device_ids: NotRequired[list[DeviceIdDict]]
     account_name: NotRequired[str]
     group_name: NotRequired[str]
-    label: NotRequired[list[Label | LabelDict]]
+    label: NotRequired[list[LabelDict]]

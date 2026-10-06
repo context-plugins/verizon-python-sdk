@@ -11,6 +11,8 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
@@ -63,7 +65,8 @@ class SoftwareManagementLicensesV1:
         Args:
             account: Account identifier in "##########-#####".
             body: IMEIs of the devices to assign licenses to.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of licenses assigned.
@@ -87,7 +90,8 @@ class SoftwareManagementLicensesV1:
         Args:
             account: Account identifier in "##########-#####".
             body: Cancellation candidate device list.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of licenses assigned.
@@ -105,7 +109,8 @@ class SoftwareManagementLicensesV1:
 
         Args:
             account: Account identifier in "##########-#####".
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Upgrade canceled.
@@ -127,7 +132,8 @@ class SoftwareManagementLicensesV1:
             start_index: The zero-based number of the first record to return. Set startIndex=0 for the first request. If
                 there are more than 1,000 devices in the response, set startIndex=1000 for the second request, 2000 for
                 the third request, etc.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of cancellation candidate devices.
@@ -150,7 +156,8 @@ class SoftwareManagementLicensesV1:
         Args:
             account: Account identifier in "##########-#####".
             body: IMEIs of the devices to remove licenses from.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of devices with license removal status.
@@ -182,7 +189,8 @@ class AsyncSoftwareManagementLicensesV1:
         Args:
             account: Account identifier in "##########-#####".
             body: IMEIs of the devices to assign licenses to.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of licenses assigned.
@@ -206,7 +214,8 @@ class AsyncSoftwareManagementLicensesV1:
         Args:
             account: Account identifier in "##########-#####".
             body: Cancellation candidate device list.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of licenses assigned.
@@ -226,7 +235,8 @@ class AsyncSoftwareManagementLicensesV1:
 
         Args:
             account: Account identifier in "##########-#####".
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Upgrade canceled.
@@ -248,7 +258,8 @@ class AsyncSoftwareManagementLicensesV1:
             start_index: The zero-based number of the first record to return. Set startIndex=0 for the first request. If
                 there are more than 1,000 devices in the response, set startIndex=1000 for the second request, 2000 for
                 the third request, etc.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of cancellation candidate devices.
@@ -271,7 +282,8 @@ class AsyncSoftwareManagementLicensesV1:
         Args:
             account: Account identifier in "##########-#####".
             body: IMEIs of the devices to remove licenses from.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of devices with license removal status.
@@ -300,7 +312,8 @@ class SoftwareManagementLicensesV1WithRawResponse(SecuredRawResponse[RawClient, 
         Args:
             account: Account identifier in "##########-#####".
             body: IMEIs of the devices to assign licenses to.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -329,7 +342,8 @@ class SoftwareManagementLicensesV1WithRawResponse(SecuredRawResponse[RawClient, 
         Args:
             account: Account identifier in "##########-#####".
             body: Cancellation candidate device list.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -352,7 +366,8 @@ class SoftwareManagementLicensesV1WithRawResponse(SecuredRawResponse[RawClient, 
 
         Args:
             account: Account identifier in "##########-#####".
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -378,7 +393,8 @@ class SoftwareManagementLicensesV1WithRawResponse(SecuredRawResponse[RawClient, 
             start_index: The zero-based number of the first record to return. Set startIndex=0 for the first request. If
                 there are more than 1,000 devices in the response, set startIndex=1000 for the second request, 2000 for
                 the third request, etc.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -404,7 +420,8 @@ class SoftwareManagementLicensesV1WithRawResponse(SecuredRawResponse[RawClient, 
         Args:
             account: Account identifier in "##########-#####".
             body: IMEIs of the devices to remove licenses from.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -434,7 +451,8 @@ class AsyncSoftwareManagementLicensesV1WithRawResponse(SecuredRawResponse[AsyncR
         Args:
             account: Account identifier in "##########-#####".
             body: IMEIs of the devices to assign licenses to.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -445,7 +463,7 @@ class AsyncSoftwareManagementLicensesV1WithRawResponse(SecuredRawResponse[AsyncR
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[V1LicensesAssignedRemovedRequest | V1LicensesAssignedRemovedRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[V1LicensesAssignedRemovedResult],
+            decoder=async_json_decoder[V1LicensesAssignedRemovedResult],
             error_mapper=assign_licenses_to_devices_error_mapper,
             request_options=request_options,
         )
@@ -463,7 +481,8 @@ class AsyncSoftwareManagementLicensesV1WithRawResponse(SecuredRawResponse[AsyncR
         Args:
             account: Account identifier in "##########-#####".
             body: Cancellation candidate device list.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -474,7 +493,7 @@ class AsyncSoftwareManagementLicensesV1WithRawResponse(SecuredRawResponse[AsyncR
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[V1ListOfLicensesToRemoveRequest | V1ListOfLicensesToRemoveRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[V1ListOfLicensesToRemoveResult],
+            decoder=async_json_decoder[V1ListOfLicensesToRemoveResult],
             error_mapper=create_list_of_licenses_to_remove_error_mapper,
             request_options=request_options,
         )
@@ -486,7 +505,8 @@ class AsyncSoftwareManagementLicensesV1WithRawResponse(SecuredRawResponse[AsyncR
 
         Args:
             account: Account identifier in "##########-#####".
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -496,7 +516,7 @@ class AsyncSoftwareManagementLicensesV1WithRawResponse(SecuredRawResponse[AsyncR
             path_params=[param[str]("account", account)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_list_of_licenses_to_remove_error_mapper,
             request_options=request_options,
         )
@@ -512,7 +532,8 @@ class AsyncSoftwareManagementLicensesV1WithRawResponse(SecuredRawResponse[AsyncR
             start_index: The zero-based number of the first record to return. Set startIndex=0 for the first request. If
                 there are more than 1,000 devices in the response, set startIndex=1000 for the second request, 2000 for
                 the third request, etc.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -521,7 +542,7 @@ class AsyncSoftwareManagementLicensesV1WithRawResponse(SecuredRawResponse[AsyncR
             url_template=self._server.software_management_v1("/licenses/{account}/cancel/index/{startIndex}"),
             path_params=[param[str]("account", account), param[str]("startIndex", start_index)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[V1ListOfLicensesToRemove],
+            decoder=async_json_decoder[V1ListOfLicensesToRemove],
             error_mapper=list_licenses_to_remove_error_mapper,
             request_options=request_options,
         )
@@ -538,7 +559,8 @@ class AsyncSoftwareManagementLicensesV1WithRawResponse(SecuredRawResponse[AsyncR
         Args:
             account: Account identifier in "##########-#####".
             body: IMEIs of the devices to remove licenses from.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -549,7 +571,7 @@ class AsyncSoftwareManagementLicensesV1WithRawResponse(SecuredRawResponse[AsyncR
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[V1LicensesAssignedRemovedRequest | V1LicensesAssignedRemovedRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[V1LicensesAssignedRemovedResult],
+            decoder=async_json_decoder[V1LicensesAssignedRemovedResult],
             error_mapper=remove_licenses_from_devices_error_mapper,
             request_options=request_options,
         )

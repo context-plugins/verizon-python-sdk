@@ -44,4 +44,4 @@ class UploadsActivatesDeviceRequestDict(TypedDict):
     service_plan: str
     carrier_ip_pool_name: NotRequired[str]
     mdn_zip_code: str
-    devices: list[DeviceList | DeviceListDict]
+    devices: list[DeviceListDict]

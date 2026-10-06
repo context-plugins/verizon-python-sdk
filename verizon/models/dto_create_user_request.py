@@ -15,4 +15,4 @@ class DtoCreateUserRequest(SdkBaseModel):
 
 class DtoCreateUserRequestDict(TypedDict):
     accountname: NotRequired[str]
-    user: NotRequired[DtoUserDto | DtoUserDtoDict]
+    user: NotRequired[DtoUserDtoDict]

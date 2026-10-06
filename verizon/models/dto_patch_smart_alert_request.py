@@ -17,5 +17,5 @@ class DtoPatchSmartAlertRequest(SdkBaseModel):
 
 class DtoPatchSmartAlertRequestDict(TypedDict):
     accountname: NotRequired[str]
-    resourceidentifier: NotRequired[DtoResourceidentifier | DtoResourceidentifierDict]
-    smartalert: NotRequired[UserSmartAlert | UserSmartAlertDict]
+    resourceidentifier: NotRequired[DtoResourceidentifierDict]
+    smartalert: NotRequired[UserSmartAlertDict]

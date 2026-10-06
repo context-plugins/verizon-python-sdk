@@ -27,4 +27,4 @@ class V3LicenseAssignedRemovedResultDict(TypedDict):
     account_name: str
     lic_count: int
     lic_used_count: int
-    device_list: list[V3DeviceStatus | V3DeviceStatusDict]
+    device_list: list[V3DeviceStatusDict]

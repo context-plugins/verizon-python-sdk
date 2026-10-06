@@ -23,5 +23,5 @@ class HistorySearchFilter(SdkBaseModel):
 
 class HistorySearchFilterDict(TypedDict):
     account_name: str
-    device: Device | DeviceDict
-    attributes: NotRequired[HistorySearchFilterAttributes | HistorySearchFilterAttributesDict]
+    device: DeviceDict
+    attributes: NotRequired[HistorySearchFilterAttributesDict]

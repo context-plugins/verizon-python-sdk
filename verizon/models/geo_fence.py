@@ -19,4 +19,4 @@ class GeoFence(SdkBaseModel):
 
 class GeoFenceDict(TypedDict):
     type_: TypeOrStr
-    features: list[FeatureItem | FeatureItemDict]
+    features: list[FeatureItemDict]

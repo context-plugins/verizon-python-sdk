@@ -21,4 +21,4 @@ class CredentialsRequest(SdkBaseModel):
 class CredentialsRequestDict(TypedDict):
     ecpd: str
     account_number: str
-    items: list[DeviceCredentialRequestItem | DeviceCredentialRequestItemDict]
+    items: list[DeviceCredentialRequestItemDict]

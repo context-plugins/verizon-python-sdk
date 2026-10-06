@@ -14,4 +14,4 @@ class GeographicalPathDescription(SdkBaseModel):
 
 
 class GeographicalPathDescriptionDict(TypedDict):
-    path: OffsetSystem | OffsetSystemDict
+    path: OffsetSystemDict

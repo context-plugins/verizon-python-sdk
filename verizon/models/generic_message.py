@@ -17,4 +17,4 @@ class GenericMessage(SdkBaseModel):
 
 
 class GenericMessageDict(TypedDict):
-    generic: GenericPayload | GenericPayloadDict
+    generic: GenericPayloadDict

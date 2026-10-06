@@ -15,4 +15,4 @@ class DtoListDeviceExperienceHistoryRequest(SdkBaseModel):
 
 class DtoListDeviceExperienceHistoryRequestDict(TypedDict):
     accountname: NotRequired[str]
-    filter: NotRequired[DtoFilter | DtoFilterDict]
+    filter: NotRequired[DtoFilterDict]

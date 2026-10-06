@@ -24,5 +24,5 @@ class History(SdkBaseModel):
 
 class HistoryDict(TypedDict):
     account_name: str
-    device: Device | DeviceDict
-    attributes: NotRequired[HistoryAttributeValue | HistoryAttributeValueDict]
+    device: DeviceDict
+    attributes: NotRequired[HistoryAttributeValueDict]

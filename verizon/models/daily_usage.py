@@ -19,6 +19,6 @@ class DailyUsage(SdkBaseModel):
 
 
 class DailyUsageDict(TypedDict):
-    device_id: NotRequired[GiodeviceId | GiodeviceIdDict]
+    device_id: NotRequired[GiodeviceIdDict]
     earliest: NotRequired[str]
     latest: NotRequired[str]

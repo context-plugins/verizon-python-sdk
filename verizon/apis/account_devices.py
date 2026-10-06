@@ -11,6 +11,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -25,7 +26,7 @@ from ..errors.list_account_devices_information_error import (
 )
 from ..models.device_imei import DeviceImei, DeviceImeiDict
 from ..models.device_list_result import DeviceListResult
-from ..models.enums.devices_protocol import DevicesProtocolOrStr
+from ..models.enums.devices_protocol import DevicesProtocol, DevicesProtocolOrStr
 from ..models.v3_account_device_list import V3AccountDeviceList
 from ..server.server import Server
 
@@ -39,7 +40,7 @@ class AccountDevices:
         acc: str,
         *,
         last_seen_device_id: str | None = None,
-        protocol: DevicesProtocolOrStr | None = None,
+        protocol: DevicesProtocolOrStr | None = DevicesProtocol.LWM2_M,
         request_options: RequestOptionsOrDict | None = None,
     ) -> V3AccountDeviceList:
         """Retrieve account device information such as reported firmware on the devices.
@@ -48,7 +49,8 @@ class AccountDevices:
             acc: Account identifier.
             last_seen_device_id: Last seen device identifier.
             protocol: Filter to retrieve a specific protocol type used.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Returns an array of devices.
@@ -67,7 +69,8 @@ class AccountDevices:
         Args:
             acc: Account identifier.
             body: Request device list information.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Get device list information.
@@ -92,7 +95,7 @@ class AsyncAccountDevices:
         acc: str,
         *,
         last_seen_device_id: str | None = None,
-        protocol: DevicesProtocolOrStr | None = None,
+        protocol: DevicesProtocolOrStr | None = DevicesProtocol.LWM2_M,
         request_options: RequestOptionsOrDict | None = None,
     ) -> V3AccountDeviceList:
         """Retrieve account device information such as reported firmware on the devices.
@@ -101,7 +104,8 @@ class AsyncAccountDevices:
             acc: Account identifier.
             last_seen_device_id: Last seen device identifier.
             protocol: Filter to retrieve a specific protocol type used.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Returns an array of devices.
@@ -122,7 +126,8 @@ class AsyncAccountDevices:
         Args:
             acc: Account identifier.
             body: Request device list information.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Get device list information.
@@ -144,7 +149,7 @@ class AccountDevicesWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         acc: str,
         *,
         last_seen_device_id: str | None = None,
-        protocol: DevicesProtocolOrStr | None = None,
+        protocol: DevicesProtocolOrStr | None = DevicesProtocol.LWM2_M,
         request_options: RequestOptionsOrDict | None = None,
     ) -> ApiResult[V3AccountDeviceList, GetAccountDeviceInformationErrorBody]:
         """Retrieve account device information such as reported firmware on the devices.
@@ -153,7 +158,8 @@ class AccountDevicesWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
             acc: Account identifier.
             last_seen_device_id: Last seen device identifier.
             protocol: Filter to retrieve a specific protocol type used.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -179,7 +185,8 @@ class AccountDevicesWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSc
         Args:
             acc: Account identifier.
             body: Request device list information.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -202,7 +209,7 @@ class AsyncAccountDevicesWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         acc: str,
         *,
         last_seen_device_id: str | None = None,
-        protocol: DevicesProtocolOrStr | None = None,
+        protocol: DevicesProtocolOrStr | None = DevicesProtocol.LWM2_M,
         request_options: RequestOptionsOrDict | None = None,
     ) -> ApiResult[V3AccountDeviceList, GetAccountDeviceInformationErrorBody]:
         """Retrieve account device information such as reported firmware on the devices.
@@ -211,7 +218,8 @@ class AsyncAccountDevicesWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             acc: Account identifier.
             last_seen_device_id: Last seen device identifier.
             protocol: Filter to retrieve a specific protocol type used.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -224,7 +232,7 @@ class AsyncAccountDevicesWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
                 param[DevicesProtocolOrStr | None]("protocol", protocol),
             ],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[V3AccountDeviceList],
+            decoder=async_json_decoder[V3AccountDeviceList],
             error_mapper=get_account_device_information_error_mapper,
             request_options=request_options,
         )
@@ -237,7 +245,8 @@ class AsyncAccountDevicesWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
         Args:
             acc: Account identifier.
             body: Request device list information.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -248,7 +257,7 @@ class AsyncAccountDevicesWithRawResponse(SecuredRawResponse[AsyncRawClient, Serv
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DeviceImei | DeviceImeiDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceListResult],
+            decoder=async_json_decoder[DeviceListResult],
             error_mapper=list_account_devices_information_error_mapper,
             request_options=request_options,
         )

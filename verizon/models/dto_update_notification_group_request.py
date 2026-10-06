@@ -22,6 +22,6 @@ class DtoUpdateNotificationGroupRequest(SdkBaseModel):
 
 class DtoUpdateNotificationGroupRequestDict(TypedDict):
     accountname: NotRequired[str]
-    group: DtoNotificationGroupRequestEntity | DtoNotificationGroupRequestEntityDict
+    group: DtoNotificationGroupRequestEntityDict
     id: NotRequired[str]
     userids: NotRequired[list[str]]

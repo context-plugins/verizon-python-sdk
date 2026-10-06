@@ -14,10 +14,10 @@ class DeviceRole(SdkBaseModel):
     name: str
     """The unique name of the access rule."""
 
-    subscribe_limit: Optional[int] = Field(default=UNSET, alias="subscribeLimit")
+    subscribe_limit: int = Field(default=50, alias="subscribeLimit")
     """The maximum number of subscriptions that one application or device can make."""
 
-    publish_rate_limit: Optional[int] = Field(default=UNSET, alias="publishRateLimit")
+    publish_rate_limit: int = Field(default=15, alias="publishRateLimit")
     """The maximum rate that one application or device can publish messages per seconds."""
 
     publish: Optional[list[str]] = UNSET

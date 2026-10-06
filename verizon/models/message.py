@@ -46,7 +46,7 @@ class MessageDict(TypedDict):
     is_private: bool
     road_user_type: list[RoadUserTypesOrStr]
     trigger_conditions: list[TriggerConditionOrStr]
-    limits: NotRequired[list[Limit | LimitDict]]
+    limits: NotRequired[list[LimitDict]]
     distribution_type: NotRequired[list[DistributionTypesOrStr]]
-    distribution_schedule: NotRequired[DistributionSchedule | DistributionScheduleDict]
-    generic: GenericPayload | GenericPayloadDict
+    distribution_schedule: NotRequired[DistributionScheduleDict]
+    generic: GenericPayloadDict

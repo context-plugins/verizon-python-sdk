@@ -31,5 +31,5 @@ class AccountGroupShareUpdateTriggerDict(TypedDict):
     trigger_name: NotRequired[str]
     account_name: NotRequired[str]
     trigger_category: NotRequired[TriggerCategoryOrStr]
-    data_trigger: NotRequired[AccountGroupShareObject | AccountGroupShareObjectDict]
-    notification: NotRequired[Notificationarray | NotificationarrayDict]
+    data_trigger: NotRequired[AccountGroupShareObjectDict]
+    notification: NotRequired[NotificationarrayDict]

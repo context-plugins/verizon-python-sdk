@@ -27,4 +27,4 @@ class Rateplantype2Dict(TypedDict):
     promotion_offered: NotRequired[bool]
     promotion_days: NotRequired[int]
     rate_plan_type: NotRequired[str]
-    account: NotRequired[list[Accountid | AccountidDict]]
+    account: NotRequired[list[AccountidDict]]

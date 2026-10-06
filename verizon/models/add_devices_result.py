@@ -18,5 +18,5 @@ class AddDevicesResult(SdkBaseModel):
 
 
 class AddDevicesResultDict(TypedDict):
-    device_ids: NotRequired[list[DeviceId | DeviceIdDict]]
+    device_ids: NotRequired[list[DeviceIdDict]]
     response: NotRequired[str]

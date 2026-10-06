@@ -4,7 +4,7 @@ from pydantic import Field
 from typing_extensions import TypedDict
 
 from ..core import SdkBaseModel
-from .enums.service_name import ServiceNameOrStr
+from .enums.service_name import ServiceName, ServiceNameOrStr
 
 
 class ManagedAccountCancelResponse(SdkBaseModel):
@@ -17,7 +17,7 @@ class ManagedAccountCancelResponse(SdkBaseModel):
     paccount_name: str = Field(alias="paccountName")
     """Primary account identifier"""
 
-    service_name: ServiceNameOrStr = Field(alias="serviceName")
+    service_name: ServiceNameOrStr = Field(default=ServiceName.LOCATION, alias="serviceName")
     """Service name"""
 
     status: str

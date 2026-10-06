@@ -11,6 +11,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -174,7 +175,8 @@ class DeviceManagement:
 
         Args:
             body: Request for activating a service on devices.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -191,7 +193,8 @@ class DeviceManagement:
 
         Args:
             body: Devices to add.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             For each device in the request, contains device identifiers and a success or failure response.
@@ -210,7 +213,8 @@ class DeviceManagement:
 
         Args:
             body: Request to list devices with mismatched IMEIs and ICCIDs.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -229,7 +233,8 @@ class DeviceManagement:
 
         Args:
             body: Request to change device service plan.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -249,7 +254,8 @@ class DeviceManagement:
 
         Args:
             body: Request to check if devices can be activated or not.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -272,7 +278,8 @@ class DeviceManagement:
 
         Args:
             body: Request to deactivate service for one or more devices.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -291,7 +298,8 @@ class DeviceManagement:
 
         Args:
             body: Devices to delete.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             For each device in the request, contains device identifiers and a success or failure response.
@@ -310,7 +318,8 @@ class DeviceManagement:
 
         Args:
             body: Device Upload Query
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -329,7 +338,8 @@ class DeviceManagement:
 
         Args:
             body: The request body identifies the device and reporting period that you want included in the report.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -349,7 +359,8 @@ class DeviceManagement:
 
         Args:
             body: Request to query extended diagnostics information for a device.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Device diagnostic information.
@@ -371,7 +382,8 @@ class DeviceManagement:
 
         Args:
             body: Request to obtain service suspenstion status for a device.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -392,7 +404,8 @@ class DeviceManagement:
 
         Args:
             body: Request to query device PRL.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -412,7 +425,8 @@ class DeviceManagement:
 
         Args:
             body: Device information query.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of devices that match the request parameters, ordered by device creation date, oldest first.
@@ -431,7 +445,8 @@ class DeviceManagement:
 
         Args:
             body: Query to obtain device provisioning history.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of Device Provision History events, sorted by the timestamp, oldest first.
@@ -450,7 +465,8 @@ class DeviceManagement:
 
         Args:
             body: Request to obtain usage history for a specific device.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of device usage events, sorted by the timestamp, oldest first.
@@ -470,7 +486,8 @@ class DeviceManagement:
 
         Args:
             body: Request to list devices with mismatched IMEIs and ICCIDs.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of devices that have mismatched IMEIs and ICCIDs.
@@ -488,7 +505,8 @@ class DeviceManagement:
 
         Args:
             body: Request to move devices between accounts.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -509,7 +527,8 @@ class DeviceManagement:
 
         Args:
             body: Request to restore services of one or more suspended devices.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -531,7 +550,8 @@ class DeviceManagement:
 
         Args:
             body: A request to retrieve aggregated device usage history information.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A unique string that associates the request with the results that are sent via a callback service.
@@ -553,7 +573,8 @@ class DeviceManagement:
 
         Args:
             body: Query to retrieve device connection history.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of device connection events, sorted by the occurredAt timestamp, oldest first.
@@ -574,7 +595,8 @@ class DeviceManagement:
 
         Args:
             body: Request to suspend service for one or more devices.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -596,7 +618,8 @@ class DeviceManagement:
         Args:
             service_type: Identifier type.
             body: Request to update device id.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A unique string that associates the request with the results that are sent via a callback service.
@@ -616,7 +639,8 @@ class DeviceManagement:
 
         Args:
             body: Request to update contact information for devices.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID returned in a success response.
@@ -638,7 +662,8 @@ class DeviceManagement:
 
         Args:
             body: Request to update cost center code value for one or more devices.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -658,7 +683,8 @@ class DeviceManagement:
 
         Args:
             body: Request to update custom field of devices.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -674,7 +700,8 @@ class DeviceManagement:
 
         Args:
             body: Request to change device state to one defined by the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -693,7 +720,8 @@ class DeviceManagement:
 
         Args:
             body: Request to Upload and Activate device.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -712,7 +740,8 @@ class DeviceManagement:
 
         Args:
             body: Request to associate a label to a device.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -735,7 +764,8 @@ class DeviceManagement:
         Args:
             account_name: The numeric name of the account.
             label_list: A list of the Label IDs to remove from the exclusion list.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -765,7 +795,8 @@ class AsyncDeviceManagement:
 
         Args:
             body: Request for activating a service on devices.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -784,7 +815,8 @@ class AsyncDeviceManagement:
 
         Args:
             body: Devices to add.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             For each device in the request, contains device identifiers and a success or failure response.
@@ -803,7 +835,8 @@ class AsyncDeviceManagement:
 
         Args:
             body: Request to list devices with mismatched IMEIs and ICCIDs.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -822,7 +855,8 @@ class AsyncDeviceManagement:
 
         Args:
             body: Request to change device service plan.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -844,7 +878,8 @@ class AsyncDeviceManagement:
 
         Args:
             body: Request to check if devices can be activated or not.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -869,7 +904,8 @@ class AsyncDeviceManagement:
 
         Args:
             body: Request to deactivate service for one or more devices.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -890,7 +926,8 @@ class AsyncDeviceManagement:
 
         Args:
             body: Devices to delete.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             For each device in the request, contains device identifiers and a success or failure response.
@@ -911,7 +948,8 @@ class AsyncDeviceManagement:
 
         Args:
             body: Device Upload Query
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -930,7 +968,8 @@ class AsyncDeviceManagement:
 
         Args:
             body: The request body identifies the device and reporting period that you want included in the report.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -950,7 +989,8 @@ class AsyncDeviceManagement:
 
         Args:
             body: Request to query extended diagnostics information for a device.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Device diagnostic information.
@@ -974,7 +1014,8 @@ class AsyncDeviceManagement:
 
         Args:
             body: Request to obtain service suspenstion status for a device.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -995,7 +1036,8 @@ class AsyncDeviceManagement:
 
         Args:
             body: Request to query device PRL.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -1017,7 +1059,8 @@ class AsyncDeviceManagement:
 
         Args:
             body: Device information query.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of devices that match the request parameters, ordered by device creation date, oldest first.
@@ -1036,7 +1079,8 @@ class AsyncDeviceManagement:
 
         Args:
             body: Query to obtain device provisioning history.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of Device Provision History events, sorted by the timestamp, oldest first.
@@ -1057,7 +1101,8 @@ class AsyncDeviceManagement:
 
         Args:
             body: Request to obtain usage history for a specific device.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of device usage events, sorted by the timestamp, oldest first.
@@ -1079,7 +1124,8 @@ class AsyncDeviceManagement:
 
         Args:
             body: Request to list devices with mismatched IMEIs and ICCIDs.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of devices that have mismatched IMEIs and ICCIDs.
@@ -1097,7 +1143,8 @@ class AsyncDeviceManagement:
 
         Args:
             body: Request to move devices between accounts.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -1118,7 +1165,8 @@ class AsyncDeviceManagement:
 
         Args:
             body: Request to restore services of one or more suspended devices.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -1140,7 +1188,8 @@ class AsyncDeviceManagement:
 
         Args:
             body: A request to retrieve aggregated device usage history information.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A unique string that associates the request with the results that are sent via a callback service.
@@ -1162,7 +1211,8 @@ class AsyncDeviceManagement:
 
         Args:
             body: Query to retrieve device connection history.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of device connection events, sorted by the occurredAt timestamp, oldest first.
@@ -1183,7 +1233,8 @@ class AsyncDeviceManagement:
 
         Args:
             body: Request to suspend service for one or more devices.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -1207,7 +1258,8 @@ class AsyncDeviceManagement:
         Args:
             service_type: Identifier type.
             body: Request to update device id.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A unique string that associates the request with the results that are sent via a callback service.
@@ -1229,7 +1281,8 @@ class AsyncDeviceManagement:
 
         Args:
             body: Request to update contact information for devices.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID returned in a success response.
@@ -1251,7 +1304,8 @@ class AsyncDeviceManagement:
 
         Args:
             body: Request to update cost center code value for one or more devices.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -1273,7 +1327,8 @@ class AsyncDeviceManagement:
 
         Args:
             body: Request to update custom field of devices.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -1291,7 +1346,8 @@ class AsyncDeviceManagement:
 
         Args:
             body: Request to change device state to one defined by the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -1310,7 +1366,8 @@ class AsyncDeviceManagement:
 
         Args:
             body: Request to Upload and Activate device.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -1329,7 +1386,8 @@ class AsyncDeviceManagement:
 
         Args:
             body: Request to associate a label to a device.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -1352,7 +1410,8 @@ class AsyncDeviceManagement:
         Args:
             account_name: The numeric name of the account.
             label_list: A list of the Label IDs to remove from the exclusion list.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -1381,13 +1440,14 @@ class DeviceManagementWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
 
         Args:
             body: Request for activating a service on devices.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/activate"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/activate"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[CarrierActivateRequest | CarrierActivateRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -1404,13 +1464,14 @@ class DeviceManagementWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
 
         Args:
             body: Devices to add.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/add"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/add"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[AddDevicesRequest | AddDevicesRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -1429,13 +1490,14 @@ class DeviceManagementWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
 
         Args:
             body: Request to list devices with mismatched IMEIs and ICCIDs.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/usage/actions/billedusage/list"),
+            url_template=self._server.thingspace("/m2m/v1/devices/usage/actions/billedusage/list"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[BilledusageListRequest | BilledusageListRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -1454,13 +1516,14 @@ class DeviceManagementWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
 
         Args:
             body: Request to change device service plan.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="PUT",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/plan"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/plan"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ServicePlanUpdateRequest | ServicePlanUpdateRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -1480,13 +1543,14 @@ class DeviceManagementWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
 
         Args:
             body: Request to check if devices can be activated or not.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/availability/actions/list"),
+            url_template=self._server.thingspace("/m2m/v1/devices/availability/actions/list"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DeviceActivationRequest | DeviceActivationRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -1507,13 +1571,14 @@ class DeviceManagementWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
 
         Args:
             body: Request to deactivate service for one or more devices.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/deactivate"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/deactivate"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[CarrierDeactivateRequest | CarrierDeactivateRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -1532,13 +1597,14 @@ class DeviceManagementWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
 
         Args:
             body: Devices to delete.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/delete"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/delete"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DeleteDevicesRequest | DeleteDevicesRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -1557,13 +1623,14 @@ class DeviceManagementWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
 
         Args:
             body: Device Upload Query
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/upload"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/upload"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DeviceUploadRequest | DeviceUploadRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -1582,13 +1649,14 @@ class DeviceManagementWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
 
         Args:
             body: The request body identifies the device and reporting period that you want included in the report.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/requests/status"),
+            url_template=self._server.thingspace("/m2m/v1/devices/requests/status"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[CheckOrderStatusRequest | CheckOrderStatusRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -1608,13 +1676,14 @@ class DeviceManagementWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
 
         Args:
             body: Request to query extended diagnostics information for a device.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/extendeddiagnostics/actions/list"),
+            url_template=self._server.thingspace("/m2m/v1/devices/extendeddiagnostics/actions/list"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DeviceExtendedDiagnosticsRequest | DeviceExtendedDiagnosticsRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -1634,13 +1703,14 @@ class DeviceManagementWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
 
         Args:
             body: Request to obtain service suspenstion status for a device.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/suspension/status"),
+            url_template=self._server.thingspace("/m2m/v1/devices/suspension/status"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DeviceSuspensionStatusRequest | DeviceSuspensionStatusRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -1659,13 +1729,14 @@ class DeviceManagementWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
 
         Args:
             body: Request to query device PRL.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/prl/actions/list"),
+            url_template=self._server.thingspace("/m2m/v1/devices/prl/actions/list"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DevicePrlListRequest | DevicePrlListRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -1685,13 +1756,14 @@ class DeviceManagementWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
 
         Args:
             body: Device information query.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/list"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/list"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[AccountDeviceListRequest | AccountDeviceListRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -1710,13 +1782,14 @@ class DeviceManagementWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
 
         Args:
             body: Query to obtain device provisioning history.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/history/actions/list"),
+            url_template=self._server.thingspace("/m2m/v1/devices/history/actions/list"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DeviceProvisioningHistoryListRequest | DeviceProvisioningHistoryListRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -1735,13 +1808,14 @@ class DeviceManagementWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
 
         Args:
             body: Request to obtain usage history for a specific device.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/usage/actions/list"),
+            url_template=self._server.thingspace("/m2m/v1/devices/usage/actions/list"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DeviceUsageListRequest | DeviceUsageListRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -1761,13 +1835,14 @@ class DeviceManagementWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
 
         Args:
             body: Request to list devices with mismatched IMEIs and ICCIDs.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/list/imeiiccidmismatch"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/list/imeiiccidmismatch"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DeviceMismatchListRequest | DeviceMismatchListRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -1783,13 +1858,14 @@ class DeviceManagementWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
 
         Args:
             body: Request to move devices between accounts.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="PUT",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/move"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/move"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[MoveDeviceRequest | MoveDeviceRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -1808,13 +1884,14 @@ class DeviceManagementWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
 
         Args:
             body: Request to restore services of one or more suspended devices.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/restore"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/restore"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[CarrierActionsRequest | CarrierActionsRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -1834,13 +1911,14 @@ class DeviceManagementWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
 
         Args:
             body: A request to retrieve aggregated device usage history information.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/usage/actions/list/aggregate"),
+            url_template=self._server.thingspace("/m2m/v1/devices/usage/actions/list/aggregate"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DeviceAggregateUsageListRequest | DeviceAggregateUsageListRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -1860,13 +1938,14 @@ class DeviceManagementWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
 
         Args:
             body: Query to retrieve device connection history.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/connections/actions/listHistory"),
+            url_template=self._server.thingspace("/m2m/v1/devices/connections/actions/listHistory"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DeviceConnectionListRequest | DeviceConnectionListRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -1885,13 +1964,14 @@ class DeviceManagementWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
 
         Args:
             body: Request to suspend service for one or more devices.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/suspend"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/suspend"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[CarrierActionsRequest | CarrierActionsRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -1913,13 +1993,14 @@ class DeviceManagementWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         Args:
             service_type: Identifier type.
             body: Request to update device id.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="PUT",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/{serviceType}/actions/deviceId"),
+            url_template=self._server.thingspace("/m2m/v1/devices/{serviceType}/actions/deviceId"),
             path_params=[param[str]("serviceType", service_type)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ChangeDeviceIdRequest | ChangeDeviceIdRequestDict](body),
@@ -1940,13 +2021,14 @@ class DeviceManagementWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
 
         Args:
             body: Request to update contact information for devices.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="PUT",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/contactInfo"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/contactInfo"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ContactInfoUpdateRequest | ContactInfoUpdateRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -1966,13 +2048,14 @@ class DeviceManagementWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
 
         Args:
             body: Request to update cost center code value for one or more devices.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="PUT",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/costCenter"),
+            url_template=self._server.thingspace("/m2m/v1/devices/costCenter"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DeviceCostCenterRequest | DeviceCostCenterRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -1992,13 +2075,14 @@ class DeviceManagementWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
 
         Args:
             body: Request to update custom field of devices.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="PUT",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/customFields"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/customFields"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[CustomFieldsUpdateRequest | CustomFieldsUpdateRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -2014,13 +2098,14 @@ class DeviceManagementWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
 
         Args:
             body: Request to change device state to one defined by the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="PUT",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/gotostate"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/gotostate"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[GoToStateRequest | GoToStateRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -2039,13 +2124,14 @@ class DeviceManagementWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
 
         Args:
             body: Request to Upload and Activate device.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/uploadactivate"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/uploadactivate"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[UploadsActivatesDeviceRequest | UploadsActivatesDeviceRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -2064,13 +2150,14 @@ class DeviceManagementWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
 
         Args:
             body: Request to associate a label to a device.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/usagesegmentationlabels"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/usagesegmentationlabels"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[AssociateLabelRequest | AssociateLabelRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -2091,13 +2178,14 @@ class DeviceManagementWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         Args:
             account_name: The numeric name of the account.
             label_list: A list of the Label IDs to remove from the exclusion list.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="DELETE",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/usagesegmentationlabels"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/usagesegmentationlabels"),
             query_params=[
                 param[str]("accountName", account_name), param[LabelsList | LabelsListDict]("LabelList", label_list)
             ],
@@ -2120,17 +2208,18 @@ class AsyncDeviceManagementWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
 
         Args:
             body: Request for activating a service on devices.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/activate"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/activate"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[CarrierActivateRequest | CarrierActivateRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceManagementResult],
+            decoder=async_json_decoder[DeviceManagementResult],
             error_mapper=activate_service_for_devices_error_mapper,
             request_options=request_options,
         )
@@ -2143,17 +2232,18 @@ class AsyncDeviceManagementWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
 
         Args:
             body: Devices to add.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/add"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/add"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[AddDevicesRequest | AddDevicesRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[list[AddDevicesResult]],
+            decoder=async_json_decoder[list[AddDevicesResult]],
             error_mapper=add_devices_error_mapper,
             request_options=request_options,
         )
@@ -2168,17 +2258,18 @@ class AsyncDeviceManagementWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
 
         Args:
             body: Request to list devices with mismatched IMEIs and ICCIDs.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/usage/actions/billedusage/list"),
+            url_template=self._server.thingspace("/m2m/v1/devices/usage/actions/billedusage/list"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[BilledusageListRequest | BilledusageListRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceManagementResult],
+            decoder=async_json_decoder[DeviceManagementResult],
             error_mapper=billed_usage_info_error_mapper,
             request_options=request_options,
         )
@@ -2193,17 +2284,18 @@ class AsyncDeviceManagementWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
 
         Args:
             body: Request to change device service plan.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="PUT",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/plan"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/plan"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ServicePlanUpdateRequest | ServicePlanUpdateRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceManagementResult],
+            decoder=async_json_decoder[DeviceManagementResult],
             error_mapper=change_devices_service_plan_error_mapper,
             request_options=request_options,
         )
@@ -2219,17 +2311,18 @@ class AsyncDeviceManagementWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
 
         Args:
             body: Request to check if devices can be activated or not.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/availability/actions/list"),
+            url_template=self._server.thingspace("/m2m/v1/devices/availability/actions/list"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DeviceActivationRequest | DeviceActivationRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceManagementResult],
+            decoder=async_json_decoder[DeviceManagementResult],
             error_mapper=check_devices_availability_for_activation_error_mapper,
             request_options=request_options,
         )
@@ -2246,17 +2339,18 @@ class AsyncDeviceManagementWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
 
         Args:
             body: Request to deactivate service for one or more devices.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/deactivate"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/deactivate"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[CarrierDeactivateRequest | CarrierDeactivateRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceManagementResult],
+            decoder=async_json_decoder[DeviceManagementResult],
             error_mapper=deactivate_service_for_devices_error_mapper,
             request_options=request_options,
         )
@@ -2271,17 +2365,18 @@ class AsyncDeviceManagementWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
 
         Args:
             body: Devices to delete.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/delete"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/delete"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DeleteDevicesRequest | DeleteDevicesRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[list[DeleteDevicesResult]],
+            decoder=async_json_decoder[list[DeleteDevicesResult]],
             error_mapper=delete_deactivated_devices_error_mapper,
             request_options=request_options,
         )
@@ -2296,17 +2391,18 @@ class AsyncDeviceManagementWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
 
         Args:
             body: Device Upload Query
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/upload"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/upload"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DeviceUploadRequest | DeviceUploadRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[RequestResponse],
+            decoder=async_json_decoder[RequestResponse],
             error_mapper=device_upload_error_mapper,
             request_options=request_options,
         )
@@ -2321,17 +2417,18 @@ class AsyncDeviceManagementWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
 
         Args:
             body: The request body identifies the device and reporting period that you want included in the report.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/requests/status"),
+            url_template=self._server.thingspace("/m2m/v1/devices/requests/status"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[CheckOrderStatusRequest | CheckOrderStatusRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceManagementResult],
+            decoder=async_json_decoder[DeviceManagementResult],
             error_mapper=device_upload_status_error_mapper,
             request_options=request_options,
         )
@@ -2347,17 +2444,18 @@ class AsyncDeviceManagementWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
 
         Args:
             body: Request to query extended diagnostics information for a device.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/extendeddiagnostics/actions/list"),
+            url_template=self._server.thingspace("/m2m/v1/devices/extendeddiagnostics/actions/list"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DeviceExtendedDiagnosticsRequest | DeviceExtendedDiagnosticsRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceExtendedDiagnosticsResult],
+            decoder=async_json_decoder[DeviceExtendedDiagnosticsResult],
             error_mapper=get_device_extended_diagnostic_information_error_mapper,
             request_options=request_options,
         )
@@ -2373,17 +2471,18 @@ class AsyncDeviceManagementWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
 
         Args:
             body: Request to obtain service suspenstion status for a device.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/suspension/status"),
+            url_template=self._server.thingspace("/m2m/v1/devices/suspension/status"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DeviceSuspensionStatusRequest | DeviceSuspensionStatusRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceManagementResult],
+            decoder=async_json_decoder[DeviceManagementResult],
             error_mapper=get_device_service_suspension_status_error_mapper,
             request_options=request_options,
         )
@@ -2398,17 +2497,18 @@ class AsyncDeviceManagementWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
 
         Args:
             body: Request to query device PRL.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/prl/actions/list"),
+            url_template=self._server.thingspace("/m2m/v1/devices/prl/actions/list"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DevicePrlListRequest | DevicePrlListRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceManagementResult],
+            decoder=async_json_decoder[DeviceManagementResult],
             error_mapper=list_current_devices_prlversion_error_mapper,
             request_options=request_options,
         )
@@ -2424,17 +2524,18 @@ class AsyncDeviceManagementWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
 
         Args:
             body: Device information query.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/list"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/list"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[AccountDeviceListRequest | AccountDeviceListRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[AccountDeviceListResult],
+            decoder=async_json_decoder[AccountDeviceListResult],
             error_mapper=list_devices_information_error_mapper,
             request_options=request_options,
         )
@@ -2449,17 +2550,18 @@ class AsyncDeviceManagementWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
 
         Args:
             body: Query to obtain device provisioning history.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/history/actions/list"),
+            url_template=self._server.thingspace("/m2m/v1/devices/history/actions/list"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DeviceProvisioningHistoryListRequest | DeviceProvisioningHistoryListRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[list[DeviceProvisioningHistoryListResult]],
+            decoder=async_json_decoder[list[DeviceProvisioningHistoryListResult]],
             error_mapper=list_devices_provisioning_history_error_mapper,
             request_options=request_options,
         )
@@ -2474,17 +2576,18 @@ class AsyncDeviceManagementWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
 
         Args:
             body: Request to obtain usage history for a specific device.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/usage/actions/list"),
+            url_template=self._server.thingspace("/m2m/v1/devices/usage/actions/list"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DeviceUsageListRequest | DeviceUsageListRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceUsageListResult],
+            decoder=async_json_decoder[DeviceUsageListResult],
             error_mapper=list_devices_usage_history_error_mapper,
             request_options=request_options,
         )
@@ -2500,17 +2603,18 @@ class AsyncDeviceManagementWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
 
         Args:
             body: Request to list devices with mismatched IMEIs and ICCIDs.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/list/imeiiccidmismatch"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/list/imeiiccidmismatch"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DeviceMismatchListRequest | DeviceMismatchListRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceMismatchListResult],
+            decoder=async_json_decoder[DeviceMismatchListResult],
             error_mapper=list_devices_with_imei_iccid_mismatch_error_mapper,
             request_options=request_options,
         )
@@ -2522,17 +2626,18 @@ class AsyncDeviceManagementWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
 
         Args:
             body: Request to move devices between accounts.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="PUT",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/move"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/move"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[MoveDeviceRequest | MoveDeviceRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceManagementResult],
+            decoder=async_json_decoder[DeviceManagementResult],
             error_mapper=move_devices_within_accounts_of_profile_error_mapper,
             request_options=request_options,
         )
@@ -2547,17 +2652,18 @@ class AsyncDeviceManagementWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
 
         Args:
             body: Request to restore services of one or more suspended devices.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/restore"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/restore"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[CarrierActionsRequest | CarrierActionsRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceManagementResult],
+            decoder=async_json_decoder[DeviceManagementResult],
             error_mapper=restore_service_for_suspended_devices_error_mapper,
             request_options=request_options,
         )
@@ -2573,17 +2679,18 @@ class AsyncDeviceManagementWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
 
         Args:
             body: A request to retrieve aggregated device usage history information.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/usage/actions/list/aggregate"),
+            url_template=self._server.thingspace("/m2m/v1/devices/usage/actions/list/aggregate"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DeviceAggregateUsageListRequest | DeviceAggregateUsageListRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceManagementResult],
+            decoder=async_json_decoder[DeviceManagementResult],
             error_mapper=retrieve_aggregate_device_usage_history_error_mapper,
             request_options=request_options,
         )
@@ -2599,17 +2706,18 @@ class AsyncDeviceManagementWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
 
         Args:
             body: Query to retrieve device connection history.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/connections/actions/listHistory"),
+            url_template=self._server.thingspace("/m2m/v1/devices/connections/actions/listHistory"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DeviceConnectionListRequest | DeviceConnectionListRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[ConnectionHistoryResult],
+            decoder=async_json_decoder[ConnectionHistoryResult],
             error_mapper=retrieve_device_connection_history_error_mapper,
             request_options=request_options,
         )
@@ -2624,17 +2732,18 @@ class AsyncDeviceManagementWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
 
         Args:
             body: Request to suspend service for one or more devices.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/suspend"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/suspend"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[CarrierActionsRequest | CarrierActionsRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceManagementResult],
+            decoder=async_json_decoder[DeviceManagementResult],
             error_mapper=suspend_service_for_devices_error_mapper,
             request_options=request_options,
         )
@@ -2652,18 +2761,19 @@ class AsyncDeviceManagementWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         Args:
             service_type: Identifier type.
             body: Request to update device id.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="PUT",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/{serviceType}/actions/deviceId"),
+            url_template=self._server.thingspace("/m2m/v1/devices/{serviceType}/actions/deviceId"),
             path_params=[param[str]("serviceType", service_type)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ChangeDeviceIdRequest | ChangeDeviceIdRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceManagementResult],
+            decoder=async_json_decoder[DeviceManagementResult],
             error_mapper=update_device_id_error_mapper,
             request_options=request_options,
         )
@@ -2679,17 +2789,18 @@ class AsyncDeviceManagementWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
 
         Args:
             body: Request to update contact information for devices.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="PUT",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/contactInfo"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/contactInfo"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ContactInfoUpdateRequest | ContactInfoUpdateRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceManagementResult],
+            decoder=async_json_decoder[DeviceManagementResult],
             error_mapper=update_devices_contact_information_error_mapper,
             request_options=request_options,
         )
@@ -2705,17 +2816,18 @@ class AsyncDeviceManagementWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
 
         Args:
             body: Request to update cost center code value for one or more devices.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="PUT",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/costCenter"),
+            url_template=self._server.thingspace("/m2m/v1/devices/costCenter"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DeviceCostCenterRequest | DeviceCostCenterRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceManagementResult],
+            decoder=async_json_decoder[DeviceManagementResult],
             error_mapper=update_devices_cost_center_code_error_mapper,
             request_options=request_options,
         )
@@ -2731,17 +2843,18 @@ class AsyncDeviceManagementWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
 
         Args:
             body: Request to update custom field of devices.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="PUT",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/customFields"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/customFields"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[CustomFieldsUpdateRequest | CustomFieldsUpdateRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceManagementResult],
+            decoder=async_json_decoder[DeviceManagementResult],
             error_mapper=update_devices_custom_fields_error_mapper,
             request_options=request_options,
         )
@@ -2753,17 +2866,18 @@ class AsyncDeviceManagementWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
 
         Args:
             body: Request to change device state to one defined by the user.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="PUT",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/gotostate"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/gotostate"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[GoToStateRequest | GoToStateRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceManagementResult],
+            decoder=async_json_decoder[DeviceManagementResult],
             error_mapper=update_devices_state_error_mapper,
             request_options=request_options,
         )
@@ -2778,17 +2892,18 @@ class AsyncDeviceManagementWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
 
         Args:
             body: Request to Upload and Activate device.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/uploadactivate"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/uploadactivate"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[UploadsActivatesDeviceRequest | UploadsActivatesDeviceRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceManagementResult],
+            decoder=async_json_decoder[DeviceManagementResult],
             error_mapper=upload_activate_device_error_mapper,
             request_options=request_options,
         )
@@ -2803,17 +2918,18 @@ class AsyncDeviceManagementWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
 
         Args:
             body: Request to associate a label to a device.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/usagesegmentationlabels"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/usagesegmentationlabels"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[AssociateLabelRequest | AssociateLabelRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceManagementResult],
+            decoder=async_json_decoder[DeviceManagementResult],
             error_mapper=usage_segmentation_label_association_error_mapper,
             request_options=request_options,
         )
@@ -2830,19 +2946,20 @@ class AsyncDeviceManagementWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         Args:
             account_name: The numeric name of the account.
             label_list: A list of the Label IDs to remove from the exclusion list.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="DELETE",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/usagesegmentationlabels"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/usagesegmentationlabels"),
             query_params=[
                 param[str]("accountName", account_name), param[LabelsList | LabelsListDict]("LabelList", label_list)
             ],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceManagementResult],
+            decoder=async_json_decoder[DeviceManagementResult],
             error_mapper=usage_segmentation_label_deletion_error_mapper,
             request_options=request_options,
         )

@@ -12,6 +12,8 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
@@ -48,7 +50,8 @@ class CloudConnectorDevices:
 
         Args:
             body: The request body identifies the device to delete.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Target deleted successfully.
@@ -67,7 +70,8 @@ class CloudConnectorDevices:
 
         Args:
             body: The request body specifies fields and values to match.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A success response includes an array of all matching devices. Each device includes the full device resource
@@ -88,7 +92,8 @@ class CloudConnectorDevices:
 
         Args:
             body: The device identifier and fields to match in the search.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A success response includes an array of all matching devices.
@@ -107,7 +112,8 @@ class CloudConnectorDevices:
 
         Args:
             body: The request body specifies fields and values to match.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A success response includes an array of all matching devices.
@@ -131,7 +137,8 @@ class CloudConnectorDevices:
         Args:
             fieldname: The name of the sensor.
             body: The device identifier and fields to match in the search.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A success response includes an array of all matching devices.
@@ -151,7 +158,8 @@ class CloudConnectorDevices:
 
         Args:
             body: The request body changes configuration values on a device.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A success response contains the ts.event.configuration event that was created to record the change.
@@ -181,7 +189,8 @@ class AsyncCloudConnectorDevices:
 
         Args:
             body: The request body identifies the device to delete.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Target deleted successfully.
@@ -202,7 +211,8 @@ class AsyncCloudConnectorDevices:
 
         Args:
             body: The request body specifies fields and values to match.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A success response includes an array of all matching devices. Each device includes the full device resource
@@ -225,7 +235,8 @@ class AsyncCloudConnectorDevices:
 
         Args:
             body: The device identifier and fields to match in the search.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A success response includes an array of all matching devices.
@@ -246,7 +257,8 @@ class AsyncCloudConnectorDevices:
 
         Args:
             body: The request body specifies fields and values to match.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A success response includes an array of all matching devices.
@@ -272,7 +284,8 @@ class AsyncCloudConnectorDevices:
         Args:
             fieldname: The name of the sensor.
             body: The device identifier and fields to match in the search.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A success response includes an array of all matching devices.
@@ -294,7 +307,8 @@ class AsyncCloudConnectorDevices:
 
         Args:
             body: The request body changes configuration values on a device.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A success response contains the ts.event.configuration event that was created to record the change.
@@ -321,7 +335,8 @@ class CloudConnectorDevicesWithRawResponse(SecuredRawResponse[RawClient, Server,
 
         Args:
             body: The request body identifies the device to delete.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -346,7 +361,8 @@ class CloudConnectorDevicesWithRawResponse(SecuredRawResponse[RawClient, Server,
 
         Args:
             body: The request body specifies fields and values to match.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -372,7 +388,8 @@ class CloudConnectorDevicesWithRawResponse(SecuredRawResponse[RawClient, Server,
 
         Args:
             body: The device identifier and fields to match in the search.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -397,7 +414,8 @@ class CloudConnectorDevicesWithRawResponse(SecuredRawResponse[RawClient, Server,
 
         Args:
             body: The request body specifies fields and values to match.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -425,7 +443,8 @@ class CloudConnectorDevicesWithRawResponse(SecuredRawResponse[RawClient, Server,
         Args:
             fieldname: The name of the sensor.
             body: The device identifier and fields to match in the search.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -452,7 +471,8 @@ class CloudConnectorDevicesWithRawResponse(SecuredRawResponse[RawClient, Server,
 
         Args:
             body: The request body changes configuration values on a device.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -479,7 +499,8 @@ class AsyncCloudConnectorDevicesWithRawResponse(SecuredRawResponse[AsyncRawClien
 
         Args:
             body: The request body identifies the device to delete.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -489,7 +510,7 @@ class AsyncCloudConnectorDevicesWithRawResponse(SecuredRawResponse[AsyncRawClien
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[RemoveDeviceRequest | RemoveDeviceRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -504,7 +525,8 @@ class AsyncCloudConnectorDevicesWithRawResponse(SecuredRawResponse[AsyncRawClien
 
         Args:
             body: The request body specifies fields and values to match.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -514,7 +536,7 @@ class AsyncCloudConnectorDevicesWithRawResponse(SecuredRawResponse[AsyncRawClien
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[QuerySubscriptionRequest | QuerySubscriptionRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[FindDeviceByPropertyResponseList],
+            decoder=async_json_decoder[FindDeviceByPropertyResponseList],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -530,7 +552,8 @@ class AsyncCloudConnectorDevicesWithRawResponse(SecuredRawResponse[AsyncRawClien
 
         Args:
             body: The device identifier and fields to match in the search.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -540,7 +563,7 @@ class AsyncCloudConnectorDevicesWithRawResponse(SecuredRawResponse[AsyncRawClien
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[SearchDeviceEventHistoryRequest | SearchDeviceEventHistoryRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[SearchDeviceEventHistoryResponseList],
+            decoder=async_json_decoder[SearchDeviceEventHistoryResponseList],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -555,7 +578,8 @@ class AsyncCloudConnectorDevicesWithRawResponse(SecuredRawResponse[AsyncRawClien
 
         Args:
             body: The request body specifies fields and values to match.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -565,7 +589,7 @@ class AsyncCloudConnectorDevicesWithRawResponse(SecuredRawResponse[AsyncRawClien
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[QuerySubscriptionRequest | QuerySubscriptionRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[SearchDeviceByPropertyResponseList],
+            decoder=async_json_decoder[SearchDeviceByPropertyResponseList],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -583,7 +607,8 @@ class AsyncCloudConnectorDevicesWithRawResponse(SecuredRawResponse[AsyncRawClien
         Args:
             fieldname: The name of the sensor.
             body: The device identifier and fields to match in the search.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -594,7 +619,7 @@ class AsyncCloudConnectorDevicesWithRawResponse(SecuredRawResponse[AsyncRawClien
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[SearchSensorHistoryRequest | SearchSensorHistoryRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[SearchSensorHistoryResponseList],
+            decoder=async_json_decoder[SearchSensorHistoryResponseList],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -610,7 +635,8 @@ class AsyncCloudConnectorDevicesWithRawResponse(SecuredRawResponse[AsyncRawClien
 
         Args:
             body: The request body changes configuration values on a device.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -620,7 +646,7 @@ class AsyncCloudConnectorDevicesWithRawResponse(SecuredRawResponse[AsyncRawClien
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ChangeConfigurationRequest | ChangeConfigurationRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[ChangeConfigurationResponse],
+            decoder=async_json_decoder[ChangeConfigurationResponse],
             error_mapper=raw_error_response,
             request_options=request_options,
         )

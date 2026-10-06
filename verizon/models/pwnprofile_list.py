@@ -11,4 +11,4 @@ class PwnprofileList(SdkBaseModel):
 
 
 class PwnprofileListDict(TypedDict):
-    profiles: NotRequired[list[Pwnprofile | PwnprofileDict]]
+    profiles: NotRequired[list[PwnprofileDict]]

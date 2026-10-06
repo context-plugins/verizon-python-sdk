@@ -36,5 +36,5 @@ class BillableUsageReportDict(TypedDict):
     sku_name: NotRequired[str]
     transactions_allowed: NotRequired[str]
     total_transaction_count: NotRequired[str]
-    primary_account: NotRequired[ServiceUsage | ServiceUsageDict]
-    managed_accounts: NotRequired[list[ServiceUsage | ServiceUsageDict]]
+    primary_account: NotRequired[ServiceUsageDict]
+    managed_accounts: NotRequired[list[ServiceUsageDict]]

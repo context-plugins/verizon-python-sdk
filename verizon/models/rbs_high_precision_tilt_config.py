@@ -30,8 +30,8 @@ class RbsHighPrecisionTiltConfig(SdkBaseModel):
 
 class RbsHighPrecisionTiltConfigDict(TypedDict):
     mode: NotRequired[ModeOrStr]
-    periodic_reporting: NotRequired[PeriodicReporting | PeriodicReportingDict]
+    periodic_reporting: NotRequired[PeriodicReportingDict]
     hold_time: NotRequired[int]
     angle_away: NotRequired[int]
     angle_toward: NotRequired[int]
-    tscore: NotRequired[Tscore | TscoreDict]
+    tscore: NotRequired[TscoreDict]

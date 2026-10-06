@@ -46,10 +46,10 @@ class AccountDeviceListRequest(SdkBaseModel):
 
 class AccountDeviceListRequestDict(TypedDict):
     account_name: NotRequired[str]
-    device_id: NotRequired[DeviceId | DeviceIdDict]
-    filter: NotRequired[AccountDeviceListFilter | AccountDeviceListFilterDict]
+    device_id: NotRequired[DeviceIdDict]
+    filter: NotRequired[AccountDeviceListFilterDict]
     current_state: NotRequired[str]
-    custom_fields: NotRequired[list[CustomFields | CustomFieldsDict]]
+    custom_fields: NotRequired[list[CustomFieldsDict]]
     earliest: NotRequired[str]
     group_name: NotRequired[str]
     latest: NotRequired[str]

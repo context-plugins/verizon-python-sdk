@@ -29,6 +29,6 @@ class ServicePlan(SdkBaseModel):
 class ServicePlanDict(TypedDict):
     carrier_service_plan_code: NotRequired[str]
     code: NotRequired[str]
-    extended_attributes: NotRequired[list[CustomFields | CustomFieldsDict]]
+    extended_attributes: NotRequired[list[CustomFieldsDict]]
     name: NotRequired[str]
     size_kb: NotRequired[int]

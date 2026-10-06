@@ -19,4 +19,4 @@ class SecuritySubscriptionResult(SdkBaseModel):
 
 class SecuritySubscriptionResultDict(TypedDict):
     account_name: NotRequired[str]
-    subscription_list: NotRequired[list[SecuritySubscription | SecuritySubscriptionDict]]
+    subscription_list: NotRequired[list[SecuritySubscriptionDict]]

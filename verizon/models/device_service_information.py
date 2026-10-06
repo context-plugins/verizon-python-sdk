@@ -22,6 +22,6 @@ class DeviceServiceInformation(SdkBaseModel):
 
 
 class DeviceServiceInformationDict(TypedDict):
-    response_type: NotRequired[ApiResponseCode | ApiResponseCodeDict]
+    response_type: NotRequired[ApiResponseCodeDict]
     imei: str
-    bullseye_enable: HplBullseyeEnable | HplBullseyeEnableDict
+    bullseye_enable: HplBullseyeEnableDict

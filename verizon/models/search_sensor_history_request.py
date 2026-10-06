@@ -25,7 +25,7 @@ class SearchSensorHistoryRequest(SdkBaseModel):
 
 
 class SearchSensorHistoryRequestDict(TypedDict):
-    accountidentifier: AccountIdentifier | AccountIdentifierDict
-    resourceidentifier: ResourceIdentifier | ResourceIdentifierDict
+    accountidentifier: AccountIdentifierDict
+    resourceidentifier: ResourceIdentifierDict
     limitnumber: NotRequired[int]
     page: NotRequired[str]

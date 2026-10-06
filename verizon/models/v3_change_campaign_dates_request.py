@@ -23,4 +23,4 @@ class V3ChangeCampaignDatesRequest(SdkBaseModel):
 class V3ChangeCampaignDatesRequestDict(TypedDict):
     start_date: Date
     end_date: Date
-    campaign_time_window_list: NotRequired[list[V3TimeWindow | V3TimeWindowDict]]
+    campaign_time_window_list: NotRequired[list[V3TimeWindowDict]]

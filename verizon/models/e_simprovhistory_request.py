@@ -16,6 +16,6 @@ class ESimprovhistoryRequest(SdkBaseModel):
 
 class ESimprovhistoryRequestDict(TypedDict):
     account_name: NotRequired[str]
-    device_filter: NotRequired[list[DeviceId2 | DeviceId2Dict]]
+    device_filter: NotRequired[list[DeviceId2Dict]]
     earliest: NotRequired[RFC3339DateTime]
     latest: NotRequired[RFC3339DateTime]

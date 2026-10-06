@@ -29,7 +29,7 @@ class LocationReport(SdkBaseModel):
 
 
 class LocationReportDict(TypedDict):
-    dev_location_list: NotRequired[list[Location | LocationDict]]
+    dev_location_list: NotRequired[list[LocationDict]]
     has_more_data: NotRequired[bool]
     start_index: NotRequired[str]
     total_count: NotRequired[int]

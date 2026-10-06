@@ -20,5 +20,5 @@ class RetrieveMonitorsRequest(SdkBaseModel):
 
 class RetrieveMonitorsRequestDict(TypedDict):
     account_name: str
-    devices: list[AccountDeviceList | AccountDeviceListDict]
+    devices: list[AccountDeviceListDict]
     monitor_type: NotRequired[str]

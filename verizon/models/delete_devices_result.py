@@ -22,6 +22,6 @@ class DeleteDevicesResult(SdkBaseModel):
 
 
 class DeleteDevicesResultDict(TypedDict):
-    device_ids: NotRequired[DeviceIds | DeviceIdsDict]
+    device_ids: NotRequired[DeviceIdsDict]
     status: NotRequired[str]
     message: NotRequired[str]

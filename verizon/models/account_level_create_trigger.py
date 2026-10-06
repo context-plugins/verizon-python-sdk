@@ -27,5 +27,5 @@ class AccountLevelCreateTriggerDict(TypedDict):
     trigger_name: NotRequired[str]
     ecpd_id: NotRequired[str]
     trigger_category: NotRequired[TriggerCategoryOrStr]
-    data_trigger: NotRequired[DataTrigger | DataTriggerDict]
-    notification: NotRequired[Notificationarray | NotificationarrayDict]
+    data_trigger: NotRequired[DataTriggerDict]
+    notification: NotRequired[NotificationarrayDict]

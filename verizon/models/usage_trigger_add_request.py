@@ -4,7 +4,7 @@ from pydantic import Field
 from typing_extensions import NotRequired, TypedDict
 
 from ..core import UNSET, Optional, SdkBaseModel
-from .enums.service_name import ServiceNameOrStr
+from .enums.service_name import ServiceName, ServiceNameOrStr
 
 
 class UsageTriggerAddRequest(SdkBaseModel):
@@ -14,7 +14,7 @@ class UsageTriggerAddRequest(SdkBaseModel):
     account_name: str = Field(alias="accountName")
     """Account name"""
 
-    service_name: ServiceNameOrStr = Field(alias="serviceName")
+    service_name: ServiceNameOrStr = Field(default=ServiceName.LOCATION, alias="serviceName")
     """Service name"""
 
     threshold_value: str = Field(alias="thresholdValue")

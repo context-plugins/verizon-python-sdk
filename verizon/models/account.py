@@ -44,5 +44,5 @@ class AccountDict(TypedDict):
     is_provisioning_allowed: NotRequired[bool]
     carriers: NotRequired[list[str]]
     features: NotRequired[list[str]]
-    i_p_pools: NotRequired[list[Ippool | IppoolDict]]
-    service_plans: NotRequired[list[ServicePlan | ServicePlanDict]]
+    i_p_pools: NotRequired[list[IppoolDict]]
+    service_plans: NotRequired[list[ServicePlanDict]]

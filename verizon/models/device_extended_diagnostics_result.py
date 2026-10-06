@@ -15,4 +15,4 @@ class DeviceExtendedDiagnosticsResult(SdkBaseModel):
 
 
 class DeviceExtendedDiagnosticsResultDict(TypedDict):
-    categories: NotRequired[list[DiagnosticsCategory | DiagnosticsCategoryDict]]
+    categories: NotRequired[list[DiagnosticsCategoryDict]]

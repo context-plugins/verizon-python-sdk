@@ -23,6 +23,6 @@ class DeviceSuspensionStatusRequest(SdkBaseModel):
 
 
 class DeviceSuspensionStatusRequestDict(TypedDict):
-    device_ids: NotRequired[list[DeviceId | DeviceIdDict]]
-    filter: NotRequired[DeviceFilterWithoutAccount | DeviceFilterWithoutAccountDict]
+    device_ids: NotRequired[list[DeviceIdDict]]
+    filter: NotRequired[DeviceFilterWithoutAccountDict]
     account_name: NotRequired[str]

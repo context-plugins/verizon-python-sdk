@@ -16,6 +16,6 @@ class AccountGroupShareFilterCriteria(SdkBaseModel):
 
 
 class AccountGroupShareFilterCriteriaDict(TypedDict):
-    filter_criteria: NotRequired[AccountGroupShareFilter | AccountGroupShareFilterDict]
-    condition: NotRequired[AccountGroupShareCondition | AccountGroupShareConditionDict]
-    action: NotRequired[AccountGroupShareAction | AccountGroupShareActionDict]
+    filter_criteria: NotRequired[AccountGroupShareFilterDict]
+    condition: NotRequired[AccountGroupShareConditionDict]
+    action: NotRequired[AccountGroupShareActionDict]

@@ -15,4 +15,4 @@ class DtoOnBoardSensorRequest(SdkBaseModel):
 
 class DtoOnBoardSensorRequestDict(TypedDict):
     accountname: NotRequired[str]
-    payload: NotRequired[Payload | PayloadDict]
+    payload: NotRequired[PayloadDict]

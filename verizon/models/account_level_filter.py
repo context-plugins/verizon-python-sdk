@@ -17,4 +17,4 @@ class AccountLevelFilter(SdkBaseModel):
 
 class AccountLevelFilterDict(TypedDict):
     separate_or_combined: NotRequired[str]
-    account_names: NotRequired[Accountnames | AccountnamesDict]
+    account_names: NotRequired[AccountnamesDict]

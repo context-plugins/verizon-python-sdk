@@ -12,5 +12,5 @@ class Subrequest(SdkBaseModel):
 
 
 class SubrequestDict(TypedDict):
-    ids: NotRequired[GiodeviceId | GiodeviceIdDict]
+    ids: NotRequired[GiodeviceIdDict]
     status: NotRequired[str]

@@ -12,6 +12,7 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -34,7 +35,8 @@ class UpdatePricePlanTriggers:
 
         Args:
             body: Update a trigger
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful request
@@ -60,7 +62,8 @@ class AsyncUpdatePricePlanTriggers:
 
         Args:
             body: Update a trigger
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Successful request
@@ -83,13 +86,14 @@ class UpdatePricePlanTriggersWithRawResponse(SecuredRawResponse[RawClient, Serve
 
         Args:
             body: Update a trigger
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="PUT",
-            url_template=self._server.hyper_precise_credentials("/v2/triggers"),
+            url_template=self._server.thingspace("/v2/triggers"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[V2TriggersRequest1 | V2TriggersRequest1Dict](body),
             auth_scheme=AnySchemes(self._auth.thingspace_oauth1, self._auth.vz_m2_m_token),
@@ -108,17 +112,18 @@ class AsyncUpdatePricePlanTriggersWithRawResponse(SecuredRawResponse[AsyncRawCli
 
         Args:
             body: Update a trigger
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="PUT",
-            url_template=self._server.hyper_precise_credentials("/v2/triggers"),
+            url_template=self._server.thingspace("/v2/triggers"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[V2TriggersRequest1 | V2TriggersRequest1Dict](body),
             auth_scheme=AsyncAnySchemes(self._auth.thingspace_oauth1, self._auth.vz_m2_m_token),
-            decoder=json_decoder[TriggerResponse],
+            decoder=async_json_decoder[TriggerResponse],
             error_mapper=raw_error_response,
             request_options=request_options,
         )

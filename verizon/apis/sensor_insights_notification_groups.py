@@ -11,6 +11,8 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
@@ -82,7 +84,8 @@ class SensorInsightsNotificationGroups:
 
         Args:
             body: Add users to a notification group
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -105,7 +108,8 @@ class SensorInsightsNotificationGroups:
 
         Args:
             body: Create a notification group
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -128,7 +132,8 @@ class SensorInsightsNotificationGroups:
 
         Args:
             payload: Payload for the delete request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             No Content
@@ -150,7 +155,8 @@ class SensorInsightsNotificationGroups:
 
         Args:
             body: Retrieve a notification group
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -173,7 +179,8 @@ class SensorInsightsNotificationGroups:
 
         Args:
             body: Remove users from a notification group
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -196,7 +203,8 @@ class SensorInsightsNotificationGroups:
 
         Args:
             body: Partially update a notification group
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -228,7 +236,8 @@ class AsyncSensorInsightsNotificationGroups:
 
         Args:
             body: Add users to a notification group
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -253,7 +262,8 @@ class AsyncSensorInsightsNotificationGroups:
 
         Args:
             body: Create a notification group
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -278,7 +288,8 @@ class AsyncSensorInsightsNotificationGroups:
 
         Args:
             payload: Payload for the delete request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             No Content
@@ -302,7 +313,8 @@ class AsyncSensorInsightsNotificationGroups:
 
         Args:
             body: Retrieve a notification group
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -327,7 +339,8 @@ class AsyncSensorInsightsNotificationGroups:
 
         Args:
             body: Remove users from a notification group
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -352,7 +365,8 @@ class AsyncSensorInsightsNotificationGroups:
 
         Args:
             body: Partially update a notification group
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -383,13 +397,14 @@ class SensorInsightsNotificationGroupsWithRawResponse(SecuredRawResponse[RawClie
 
         Args:
             body: Add users to a notification group
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/notificationGroups/actions/add-users"),
+            url_template=self._server.thingspace("/dm/v1/notificationGroups/actions/add-users"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoAddUsersToNotificationGroupRequest | DtoAddUsersToNotificationGroupRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -408,13 +423,14 @@ class SensorInsightsNotificationGroupsWithRawResponse(SecuredRawResponse[RawClie
 
         Args:
             body: Create a notification group
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/notificationGroups"),
+            url_template=self._server.thingspace("/dm/v1/notificationGroups"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoCreateNotificationGroupRequest | DtoCreateNotificationGroupRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -433,13 +449,14 @@ class SensorInsightsNotificationGroupsWithRawResponse(SecuredRawResponse[RawClie
 
         Args:
             payload: Payload for the delete request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="DELETE",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/notificationGroups"),
+            url_template=self._server.thingspace("/dm/v1/notificationGroups"),
             query_params=[
                 param[DtoDeleteNotificationGroupRequest | DtoDeleteNotificationGroupRequestDict]("payload", payload)
             ],
@@ -460,13 +477,14 @@ class SensorInsightsNotificationGroupsWithRawResponse(SecuredRawResponse[RawClie
 
         Args:
             body: Retrieve a notification group
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/notificationGroups/actions/query"),
+            url_template=self._server.thingspace("/dm/v1/notificationGroups/actions/query"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoListNotificationGroupRequest | DtoListNotificationGroupRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -485,13 +503,14 @@ class SensorInsightsNotificationGroupsWithRawResponse(SecuredRawResponse[RawClie
 
         Args:
             body: Remove users from a notification group
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/notificationGroups/actions/remove-users"),
+            url_template=self._server.thingspace("/dm/v1/notificationGroups/actions/remove-users"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoRemoveUsersFromNotificationGroupRequest | DtoRemoveUsersFromNotificationGroupRequestDict](
                 body
@@ -512,13 +531,14 @@ class SensorInsightsNotificationGroupsWithRawResponse(SecuredRawResponse[RawClie
 
         Args:
             body: Partially update a notification group
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="PATCH",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/notificationGroups"),
+            url_template=self._server.thingspace("/dm/v1/notificationGroups"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoUpdateNotificationGroupRequest | DtoUpdateNotificationGroupRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -541,17 +561,18 @@ class AsyncSensorInsightsNotificationGroupsWithRawResponse(
 
         Args:
             body: Add users to a notification group
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/notificationGroups/actions/add-users"),
+            url_template=self._server.thingspace("/dm/v1/notificationGroups/actions/add-users"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoAddUsersToNotificationGroupRequest | DtoAddUsersToNotificationGroupRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=sensor_insights_add_users_to_notification_group_request_error_mapper,
             request_options=request_options,
         )
@@ -566,17 +587,18 @@ class AsyncSensorInsightsNotificationGroupsWithRawResponse(
 
         Args:
             body: Create a notification group
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/notificationGroups"),
+            url_template=self._server.thingspace("/dm/v1/notificationGroups"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoCreateNotificationGroupRequest | DtoCreateNotificationGroupRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DtoNotificationGroupResponseEntity],
+            decoder=async_json_decoder[DtoNotificationGroupResponseEntity],
             error_mapper=sensor_insights_create_notification_group_request_error_mapper,
             request_options=request_options,
         )
@@ -591,19 +613,20 @@ class AsyncSensorInsightsNotificationGroupsWithRawResponse(
 
         Args:
             payload: Payload for the delete request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="DELETE",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/notificationGroups"),
+            url_template=self._server.thingspace("/dm/v1/notificationGroups"),
             query_params=[
                 param[DtoDeleteNotificationGroupRequest | DtoDeleteNotificationGroupRequestDict]("payload", payload)
             ],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=sensor_insights_delete_notification_group_error_mapper,
             request_options=request_options,
         )
@@ -618,17 +641,18 @@ class AsyncSensorInsightsNotificationGroupsWithRawResponse(
 
         Args:
             body: Retrieve a notification group
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/notificationGroups/actions/query"),
+            url_template=self._server.thingspace("/dm/v1/notificationGroups/actions/query"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoListNotificationGroupRequest | DtoListNotificationGroupRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[list[DtoNotificationGroupResponseEntity]],
+            decoder=async_json_decoder[list[DtoNotificationGroupResponseEntity]],
             error_mapper=sensor_insights_list_notification_group_request_error_mapper,
             request_options=request_options,
         )
@@ -643,19 +667,20 @@ class AsyncSensorInsightsNotificationGroupsWithRawResponse(
 
         Args:
             body: Remove users from a notification group
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/notificationGroups/actions/remove-users"),
+            url_template=self._server.thingspace("/dm/v1/notificationGroups/actions/remove-users"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoRemoveUsersFromNotificationGroupRequest | DtoRemoveUsersFromNotificationGroupRequestDict](
                 body
             ),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=sensor_insights_remove_users_from_notification_group_request_error_mapper,
             request_options=request_options,
         )
@@ -670,17 +695,18 @@ class AsyncSensorInsightsNotificationGroupsWithRawResponse(
 
         Args:
             body: Partially update a notification group
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="PATCH",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/notificationGroups"),
+            url_template=self._server.thingspace("/dm/v1/notificationGroups"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoUpdateNotificationGroupRequest | DtoUpdateNotificationGroupRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DtoNotificationGroupResponseEntity],
+            decoder=async_json_decoder[DtoNotificationGroupResponseEntity],
             error_mapper=sensor_insights_update_notification_group_request_error_mapper,
             request_options=request_options,
         )

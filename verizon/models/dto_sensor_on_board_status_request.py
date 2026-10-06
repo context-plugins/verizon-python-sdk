@@ -17,5 +17,5 @@ class DtoSensorOnBoardStatusRequest(SdkBaseModel):
 
 class DtoSensorOnBoardStatusRequestDict(TypedDict):
     accountname: NotRequired[str]
-    gatewayidentifier: NotRequired[Gatewayidentifier | GatewayidentifierDict]
-    onboarding: NotRequired[Onboarding | OnboardingDict]
+    gatewayidentifier: NotRequired[GatewayidentifierDict]
+    onboarding: NotRequired[OnboardingDict]

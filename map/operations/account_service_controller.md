@@ -10,7 +10,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `GET /v1/accounts/{accountName}`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def get_account_information_using_get(account_name: str, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `account_name`
 - **Params**: `account_name` — path `accountName`

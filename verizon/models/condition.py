@@ -11,4 +11,4 @@ class Condition(SdkBaseModel):
 
 
 class ConditionDict(TypedDict):
-    condition: NotRequired[list[Keyschunk2 | Keyschunk2Dict]]
+    condition: NotRequired[list[Keyschunk2Dict]]

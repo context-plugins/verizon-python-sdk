@@ -12,6 +12,7 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -33,7 +34,8 @@ class ThingSpaceQualityOfServiceApiActions:
 
         Args:
             body: The request details to create a ThingSpace Quality of Service API subscription.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Success Response
@@ -53,7 +55,8 @@ class ThingSpaceQualityOfServiceApiActions:
         Args:
             account_name: Value sent with the request.
             qos_subscription_id: Value sent with the request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Success Response
@@ -80,7 +83,8 @@ class AsyncThingSpaceQualityOfServiceApiActions:
 
         Args:
             body: The request details to create a ThingSpace Quality of Service API subscription.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Success Response
@@ -102,7 +106,8 @@ class AsyncThingSpaceQualityOfServiceApiActions:
         Args:
             account_name: Value sent with the request.
             qos_subscription_id: Value sent with the request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Success Response
@@ -128,13 +133,14 @@ class ThingSpaceQualityOfServiceApiActionsWithRawResponse(SecuredRawResponse[Raw
 
         Args:
             body: The request details to create a ThingSpace Quality of Service API subscription.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/enhanceQoS"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/enhanceQoS"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[SubscribeRequest | SubscribeRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -152,13 +158,14 @@ class ThingSpaceQualityOfServiceApiActionsWithRawResponse(SecuredRawResponse[Raw
         Args:
             account_name: Value sent with the request.
             qos_subscription_id: Value sent with the request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="DELETE",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/enhanceQoS"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/enhanceQoS"),
             query_params=[
                 param[str]("accountName", account_name), param[str]("qosSubscriptionId", qos_subscription_id)
             ],
@@ -180,17 +187,18 @@ class AsyncThingSpaceQualityOfServiceApiActionsWithRawResponse(
 
         Args:
             body: The request details to create a ThingSpace Quality of Service API subscription.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/enhanceQoS"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/enhanceQoS"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[SubscribeRequest | SubscribeRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[Success201],
+            decoder=async_json_decoder[Success201],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -204,19 +212,20 @@ class AsyncThingSpaceQualityOfServiceApiActionsWithRawResponse(
         Args:
             account_name: Value sent with the request.
             qos_subscription_id: Value sent with the request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="DELETE",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/actions/enhanceQoS"),
+            url_template=self._server.thingspace("/m2m/v1/devices/actions/enhanceQoS"),
             query_params=[
                 param[str]("accountName", account_name), param[str]("qosSubscriptionId", qos_subscription_id)
             ],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[Success201],
+            decoder=async_json_decoder[Success201],
             error_mapper=raw_error_response,
             request_options=request_options,
         )

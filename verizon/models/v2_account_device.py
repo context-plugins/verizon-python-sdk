@@ -59,7 +59,7 @@ class V2AccountDeviceDict(TypedDict):
     app_fota_eligible: bool
     license_assigned: bool
     distribution_type: str
-    software_list: list[V2SoftwareInfo | V2SoftwareInfoDict]
+    software_list: list[V2SoftwareInfoDict]
     create_time: NotRequired[str]
     upgrade_time: NotRequired[str]
     update_time: NotRequired[str]

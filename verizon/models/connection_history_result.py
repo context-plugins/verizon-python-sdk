@@ -20,5 +20,5 @@ class ConnectionHistoryResult(SdkBaseModel):
 
 
 class ConnectionHistoryResultDict(TypedDict):
-    connection_history: NotRequired[list[ConnectionEvent | ConnectionEventDict]]
+    connection_history: NotRequired[list[ConnectionEventDict]]
     has_more_data: NotRequired[bool]

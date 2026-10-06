@@ -26,6 +26,6 @@ class DtoSensorBoardingEvent(SdkBaseModel):
 class DtoSensorBoardingEventDict(TypedDict):
     createdon: NotRequired[RFC3339DateTime]
     errmsg: NotRequired[str]
-    fields: NotRequired[DtoFields | DtoFieldsDict]
+    fields: NotRequired[DtoFieldsDict]
     state: NotRequired[str]
     transactionid: NotRequired[str]

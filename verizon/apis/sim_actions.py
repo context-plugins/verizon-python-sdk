@@ -11,6 +11,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -43,7 +44,8 @@ class SimActions:
 
         Args:
             body: Device Profile Query
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -60,7 +62,8 @@ class SimActions:
 
         Args:
             body: Device Profile Query
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -77,7 +80,8 @@ class SimActions:
 
         Args:
             body: Device Profile Query
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -107,7 +111,8 @@ class AsyncSimActions:
 
         Args:
             body: Device Profile Query
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -124,7 +129,8 @@ class AsyncSimActions:
 
         Args:
             body: Device Profile Query
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -141,7 +147,8 @@ class AsyncSimActions:
 
         Args:
             body: Device Profile Query
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID
@@ -168,15 +175,14 @@ class SimActionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
 
         Args:
             body: Device Profile Query
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials(
-                "/m2m/v1/devices/profile/actions/renew_activation_code"
-            ),
+            url_template=self._server.thingspace("/m2m/v1/devices/profile/actions/renew_activation_code"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ESimprofileRequest2 | ESimprofileRequest2Dict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -192,13 +198,14 @@ class SimActionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
 
         Args:
             body: Device Profile Query
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/profile/actions/activate"),
+            url_template=self._server.thingspace("/m2m/v1/devices/profile/actions/activate"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ESimprofileRequest | ESimprofileRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -214,13 +221,14 @@ class SimActionsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthScheme
 
         Args:
             body: Device Profile Query
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/profile/actions/deactivate"),
+            url_template=self._server.thingspace("/m2m/v1/devices/profile/actions/deactivate"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ProfileRequest2 | ProfileRequest2Dict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -242,19 +250,18 @@ class AsyncSimActionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
 
         Args:
             body: Device Profile Query
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials(
-                "/m2m/v1/devices/profile/actions/renew_activation_code"
-            ),
+            url_template=self._server.thingspace("/m2m/v1/devices/profile/actions/renew_activation_code"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ESimprofileRequest2 | ESimprofileRequest2Dict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[ESimrequestResponse],
+            decoder=async_json_decoder[ESimrequestResponse],
             error_mapper=newactivatecode_error_mapper,
             request_options=request_options,
         )
@@ -266,17 +273,18 @@ class AsyncSimActionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
 
         Args:
             body: Device Profile Query
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/profile/actions/activate"),
+            url_template=self._server.thingspace("/m2m/v1/devices/profile/actions/activate"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ESimprofileRequest | ESimprofileRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[ESimrequestResponse],
+            decoder=async_json_decoder[ESimrequestResponse],
             error_mapper=setactivate_using_post_error_mapper,
             request_options=request_options,
         )
@@ -288,17 +296,18 @@ class AsyncSimActionsWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, 
 
         Args:
             body: Device Profile Query
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/devices/profile/actions/deactivate"),
+            url_template=self._server.thingspace("/m2m/v1/devices/profile/actions/deactivate"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[ProfileRequest2 | ProfileRequest2Dict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[ESimrequestResponse],
+            decoder=async_json_decoder[ESimrequestResponse],
             error_mapper=setdeactivate_using_post_error_mapper,
             request_options=request_options,
         )

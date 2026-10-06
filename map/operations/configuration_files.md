@@ -30,9 +30,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 - **Route**: `POST /files/{acc}`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
 - **Server**: `software_management_v2`
-- **Signature**: `def upload_config_file(acc: str, *, file_version: str | None = None, make: str | None = None, model: str | None = None, local_target_path: str | None = None, fileupload: bytes | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Signature**: `def upload_config_file(acc: str, *, fileupload: FileInput | None = None, file_version: str | None = None, make: str | None = None, model: str | None = None, local_target_path: str | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `acc`
-- **Params**: `acc` — path · `file_version` — multipart field `fileVersion` · `make` — multipart field · `model` — multipart field · `local_target_path` — multipart field `localTargetPath` · `fileupload` — multipart file
+- **Params**: `acc` — path · `fileupload` — multipart file · `file_version` — multipart field `fileVersion` · `make` — multipart field · `model` — multipart field · `local_target_path` — multipart field `localTargetPath`
 - **Returns (parsed)**: `UploadConfigurationFilesResponse`
 - **Returns (raw)**: `ApiResult[UploadConfigurationFilesResponse, UploadConfigFileErrorBody]`
 - **Error**: `UploadConfigFileErrorBody` — **Case A (typed)**

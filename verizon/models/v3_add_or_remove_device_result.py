@@ -23,4 +23,4 @@ class V3AddOrRemoveDeviceResult(SdkBaseModel):
 class V3AddOrRemoveDeviceResultDict(TypedDict):
     account_name: str
     campaign_id: str
-    device_list: list[V3DeviceListItem | V3DeviceListItemDict]
+    device_list: list[V3DeviceListItemDict]

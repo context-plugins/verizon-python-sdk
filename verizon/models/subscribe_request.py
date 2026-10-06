@@ -14,4 +14,4 @@ class SubscribeRequest(SdkBaseModel):
 
 class SubscribeRequestDict(TypedDict):
     account_name: str
-    device_info: list[QosdeviceInfo | QosdeviceInfoDict]
+    device_info: list[QosdeviceInfoDict]

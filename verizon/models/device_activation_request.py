@@ -19,4 +19,4 @@ class DeviceActivationRequest(SdkBaseModel):
 
 class DeviceActivationRequestDict(TypedDict):
     account_name: str
-    devices: list[AccountDeviceList | AccountDeviceListDict]
+    devices: list[AccountDeviceListDict]

@@ -11,6 +11,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_decoder,
     param,
 )
@@ -41,7 +42,8 @@ class DiagnosticsCallbacks:
 
         Args:
             account_name: Account identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Returns callback registration.
@@ -58,7 +60,8 @@ class DiagnosticsCallbacks:
         """This endpoint allows user update the callback HTTPS address of an existing diagnostics subscription.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Returns callback registration.
@@ -75,7 +78,8 @@ class DiagnosticsCallbacks:
         Args:
             account_name: Account identifier.
             service_name: Service name for callback notification.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Device diagnostics callback registration.
@@ -102,7 +106,8 @@ class AsyncDiagnosticsCallbacks:
 
         Args:
             account_name: Account identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Returns callback registration.
@@ -121,7 +126,8 @@ class AsyncDiagnosticsCallbacks:
         """This endpoint allows user update the callback HTTPS address of an existing diagnostics subscription.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Returns callback registration.
@@ -140,7 +146,8 @@ class AsyncDiagnosticsCallbacks:
         Args:
             account_name: Account identifier.
             service_name: Service name for callback notification.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Device diagnostics callback registration.
@@ -166,7 +173,8 @@ class DiagnosticsCallbacksWithRawResponse(SecuredRawResponse[RawClient, Server, 
 
         Args:
             account_name: Account identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -186,7 +194,8 @@ class DiagnosticsCallbacksWithRawResponse(SecuredRawResponse[RawClient, Server, 
         """This endpoint allows user update the callback HTTPS address of an existing diagnostics subscription.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -208,7 +217,8 @@ class DiagnosticsCallbacksWithRawResponse(SecuredRawResponse[RawClient, Server, 
         Args:
             account_name: Account identifier.
             service_name: Service name for callback notification.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -232,7 +242,8 @@ class AsyncDiagnosticsCallbacksWithRawResponse(SecuredRawResponse[AsyncRawClient
 
         Args:
             account_name: Account identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -241,7 +252,7 @@ class AsyncDiagnosticsCallbacksWithRawResponse(SecuredRawResponse[AsyncRawClient
             url_template=self._server.device_diagnostics("/callbacks"),
             query_params=[param[str]("accountName", account_name)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[list[DeviceDiagnosticsCallback]],
+            decoder=async_json_decoder[list[DeviceDiagnosticsCallback]],
             error_mapper=get_diagnostics_subscription_callback_info_error_mapper,
             request_options=request_options,
         )
@@ -252,7 +263,8 @@ class AsyncDiagnosticsCallbacksWithRawResponse(SecuredRawResponse[AsyncRawClient
         """This endpoint allows user update the callback HTTPS address of an existing diagnostics subscription.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -261,7 +273,7 @@ class AsyncDiagnosticsCallbacksWithRawResponse(SecuredRawResponse[AsyncRawClient
             url_template=self._server.device_diagnostics("/callbacks"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceDiagnosticsCallback],
+            decoder=async_json_decoder[DeviceDiagnosticsCallback],
             error_mapper=register_diagnostics_callback_url_error_mapper,
             request_options=request_options,
         )
@@ -274,7 +286,8 @@ class AsyncDiagnosticsCallbacksWithRawResponse(SecuredRawResponse[AsyncRawClient
         Args:
             account_name: Account identifier.
             service_name: Service name for callback notification.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -284,7 +297,7 @@ class AsyncDiagnosticsCallbacksWithRawResponse(SecuredRawResponse[AsyncRawClient
             query_params=[param[str]("accountName", account_name), param[str]("serviceName", service_name)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceDiagnosticsCallback],
+            decoder=async_json_decoder[DeviceDiagnosticsCallback],
             error_mapper=unregister_diagnostics_callback_error_mapper,
             request_options=request_options,
         )

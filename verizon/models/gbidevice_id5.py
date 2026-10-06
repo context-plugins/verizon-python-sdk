@@ -12,4 +12,4 @@ class GbideviceId5(SdkBaseModel):
 
 
 class GbideviceId5Dict(TypedDict):
-    device_id: NotRequired[GbideviceId15 | GbideviceId15Dict]
+    device_id: NotRequired[GbideviceId15Dict]

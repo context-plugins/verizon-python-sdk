@@ -12,4 +12,4 @@ class DtoDeviceActionSetConfiguration(SdkBaseModel):
 
 
 class DtoDeviceActionSetConfigurationDict(TypedDict):
-    device_config: NotRequired[DtoDeviceConfig | DtoDeviceConfigDict]
+    device_config: NotRequired[DtoDeviceConfigDict]

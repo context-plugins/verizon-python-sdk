@@ -11,4 +11,4 @@ class DtoDeviceActionSetResponse(SdkBaseModel):
 
 
 class DtoDeviceActionSetResponseDict(TypedDict):
-    actionresult: NotRequired[list[ActionResultwithDeviceConfig | ActionResultwithDeviceConfigDict]]
+    actionresult: NotRequired[list[ActionResultwithDeviceConfigDict]]

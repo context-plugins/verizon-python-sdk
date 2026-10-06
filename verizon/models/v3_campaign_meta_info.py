@@ -4,7 +4,7 @@ from pydantic import Field
 from typing_extensions import NotRequired, TypedDict
 
 from ..core import UNSET, Date, Optional, SdkBaseModel
-from .enums.campaign_meta_info_protocol import CampaignMetaInfoProtocolOrStr
+from .enums.campaign_meta_info_protocol import CampaignMetaInfoProtocol, CampaignMetaInfoProtocolOrStr
 from .v3_time_window import V3TimeWindow, V3TimeWindowDict
 
 
@@ -29,7 +29,7 @@ class V3CampaignMetaInfo(SdkBaseModel):
     firmware_to: Optional[str] = Field(default=UNSET, alias="firmwareTo")
     """New software version."""
 
-    protocol: Optional[CampaignMetaInfoProtocolOrStr] = UNSET
+    protocol: CampaignMetaInfoProtocolOrStr = CampaignMetaInfoProtocol.LWM2_M
     """Firmware protocol. Valid values include: LWM2M, OMD-DM."""
 
     make: str
@@ -63,5 +63,5 @@ class V3CampaignMetaInfoDict(TypedDict):
     model: str
     start_date: Date
     end_date: Date
-    campaign_time_window_list: NotRequired[list[V3TimeWindow | V3TimeWindowDict]]
+    campaign_time_window_list: NotRequired[list[V3TimeWindowDict]]
     status: str

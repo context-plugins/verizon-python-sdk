@@ -64,16 +64,16 @@ class CarrierActivateRequest(SdkBaseModel):
 
 
 class CarrierActivateRequestDict(TypedDict):
-    devices: list[AccountDeviceList | AccountDeviceListDict]
+    devices: list[AccountDeviceListDict]
     service_plan: str
     mdn_zip_code: str
     account_name: NotRequired[str]
     carrier_ip_pool_name: NotRequired[str]
     carrier_name: NotRequired[str]
     cost_center_code: NotRequired[str]
-    custom_fields: NotRequired[list[CustomFields | CustomFieldsDict]]
+    custom_fields: NotRequired[list[CustomFieldsDict]]
     group_name: NotRequired[str]
     lead_id: NotRequired[str]
-    primary_place_of_use: NotRequired[PlaceOfUse | PlaceOfUseDict]
+    primary_place_of_use: NotRequired[PlaceOfUseDict]
     public_ip_restriction: NotRequired[str]
     sku_number: NotRequired[str]

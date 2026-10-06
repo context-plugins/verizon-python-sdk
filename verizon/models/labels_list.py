@@ -12,4 +12,4 @@ class LabelsList(SdkBaseModel):
 
 
 class LabelsListDict(TypedDict):
-    device_ids: NotRequired[list[DeviceLabels | DeviceLabelsDict]]
+    device_ids: NotRequired[list[DeviceLabelsDict]]

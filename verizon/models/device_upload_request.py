@@ -17,7 +17,7 @@ class DeviceUploadRequest(SdkBaseModel):
 
 class DeviceUploadRequestDict(TypedDict):
     account_name: str
-    devices: list[DeviceList | DeviceListDict]
+    devices: list[DeviceListDict]
     email_address: str
     device_sku: str
     upload_type: str

@@ -27,7 +27,7 @@ class DeviceMismatchListRequest(SdkBaseModel):
 
 
 class DeviceMismatchListRequestDict(TypedDict):
-    filter: DateFilter | DateFilterDict
-    devices: NotRequired[list[AccountDeviceList | AccountDeviceListDict]]
+    filter: DateFilterDict
+    devices: NotRequired[list[AccountDeviceListDict]]
     account_name: NotRequired[str]
     group_name: NotRequired[str]

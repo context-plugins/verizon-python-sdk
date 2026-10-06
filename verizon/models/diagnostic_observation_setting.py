@@ -23,5 +23,5 @@ class DiagnosticObservationSetting(SdkBaseModel):
 
 class DiagnosticObservationSettingDict(TypedDict):
     account_name: NotRequired[str]
-    device: NotRequired[Device | DeviceDict]
-    attributes: NotRequired[list[AttributeSetting | AttributeSettingDict]]
+    device: NotRequired[DeviceDict]
+    attributes: NotRequired[list[AttributeSettingDict]]

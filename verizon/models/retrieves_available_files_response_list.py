@@ -14,4 +14,4 @@ class RetrievesAvailableFilesResponseList(SdkBaseModel):
 
 
 class RetrievesAvailableFilesResponseListDict(TypedDict):
-    available_files_response: NotRequired[list[RetrievesAvailableFilesResponse | RetrievesAvailableFilesResponseDict]]
+    available_files_response: NotRequired[list[RetrievesAvailableFilesResponseDict]]

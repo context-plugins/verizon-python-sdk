@@ -19,6 +19,6 @@ class PayAsYouGoPricePlanTrigger(SdkBaseModel):
 
 
 class PayAsYouGoPricePlanTriggerDict(TypedDict):
-    pay_as_you_go: NotRequired[PayAsYouGoFilterCriteria | PayAsYouGoFilterCriteriaDict]
-    condition: NotRequired[PayAsYouGoPricePlanTriggerCondition | PayAsYouGoPricePlanTriggerConditionDict]
-    action: NotRequired[Actionobject | ActionobjectDict]
+    pay_as_you_go: NotRequired[PayAsYouGoFilterCriteriaDict]
+    condition: NotRequired[PayAsYouGoPricePlanTriggerConditionDict]
+    action: NotRequired[ActionobjectDict]

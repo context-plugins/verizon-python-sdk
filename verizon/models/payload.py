@@ -11,4 +11,4 @@ class Payload(SdkBaseModel):
 
 
 class PayloadDict(TypedDict):
-    addsensor: NotRequired[ResourceOnBoardSensor | ResourceOnBoardSensorDict]
+    addsensor: NotRequired[ResourceOnBoardSensorDict]

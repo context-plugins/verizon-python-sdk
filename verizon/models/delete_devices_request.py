@@ -20,5 +20,5 @@ class DeleteDevicesRequest(SdkBaseModel):
 
 
 class DeleteDevicesRequestDict(TypedDict):
-    devices_to_delete: list[AccountDeviceList | AccountDeviceListDict]
+    devices_to_delete: list[AccountDeviceListDict]
     account_name: NotRequired[str]

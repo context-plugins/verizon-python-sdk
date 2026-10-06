@@ -17,6 +17,6 @@ class AccountLevelObject(SdkBaseModel):
 
 
 class AccountLevelObjectDict(TypedDict):
-    filter_criteria: NotRequired[AccountLevelFilter | AccountLevelFilterDict]
-    condition: NotRequired[AccountLevelObjectcondition | AccountLevelObjectconditionDict]
+    filter_criteria: NotRequired[AccountLevelFilterDict]
+    condition: NotRequired[AccountLevelObjectconditionDict]
     action: NotRequired[AccountLevelActionOrStr]

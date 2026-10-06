@@ -39,4 +39,4 @@ class V3LicenseSummaryDict(TypedDict):
     has_more_data: bool
     last_seen_device_id: NotRequired[str]
     max_page_size: int
-    device_list: NotRequired[list[V3LicenseDevice | V3LicenseDeviceDict]]
+    device_list: NotRequired[list[V3LicenseDeviceDict]]

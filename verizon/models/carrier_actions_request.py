@@ -32,8 +32,8 @@ class CarrierActionsRequest(SdkBaseModel):
 
 class CarrierActionsRequestDict(TypedDict):
     account_name: NotRequired[str]
-    custom_fields: NotRequired[list[CustomFields | CustomFieldsDict]]
-    devices: NotRequired[list[AccountDeviceList | AccountDeviceListDict]]
+    custom_fields: NotRequired[list[CustomFieldsDict]]
+    devices: NotRequired[list[AccountDeviceListDict]]
     with_billing: NotRequired[bool]
     group_name: NotRequired[str]
     service_plan: NotRequired[str]

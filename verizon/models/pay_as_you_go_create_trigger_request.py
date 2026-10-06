@@ -30,6 +30,6 @@ class PayAsYouGoCreateTriggerRequestDict(TypedDict):
     trigger_name: NotRequired[str]
     ecpd_id: NotRequired[str]
     trigger_category: NotRequired[TriggerCategoryOrStr]
-    price_plan_trigger: NotRequired[PayAsYouGoPricePlanTrigger | PayAsYouGoPricePlanTriggerDict]
-    notification: NotRequired[Notificationarray | NotificationarrayDict]
+    price_plan_trigger: NotRequired[PayAsYouGoPricePlanTriggerDict]
+    notification: NotRequired[NotificationarrayDict]
     active: NotRequired[ActiveOrStr]

@@ -15,4 +15,4 @@ class DtoListUserRequest(SdkBaseModel):
 
 class DtoListUserRequestDict(TypedDict):
     accountname: NotRequired[str]
-    filter: NotRequired[DtoFilter | DtoFilterDict]
+    filter: NotRequired[DtoFilterDict]

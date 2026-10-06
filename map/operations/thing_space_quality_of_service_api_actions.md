@@ -10,7 +10,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `POST /m2m/v1/devices/actions/enhanceQoS`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def create_a_thing_space_quality_of_service_api_subscription(body: SubscribeRequest | SubscribeRequestDict, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `body`
 - **Params**: `body` — JSON body
@@ -28,7 +28,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `DELETE /m2m/v1/devices/actions/enhanceQoS`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
-- **Server**: `hyper_precise_credentials`
+- **Server**: `thingspace`
 - **Signature**: `def stop_a_thing_space_quality_of_service_api_subscription(account_name: str, qos_subscription_id: str, *, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `account_name`, `qos_subscription_id`
 - **Params**: `account_name` — query `accountName` · `qos_subscription_id` — query `qosSubscriptionId`

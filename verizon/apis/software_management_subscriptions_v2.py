@@ -9,6 +9,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_decoder,
     param,
 )
@@ -31,7 +32,8 @@ class SoftwareManagementSubscriptionsV2:
 
         Args:
             account: Account identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             FOTA Subscription.
@@ -58,7 +60,8 @@ class AsyncSoftwareManagementSubscriptionsV2:
 
         Args:
             account: Account identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             FOTA Subscription.
@@ -82,7 +85,8 @@ class SoftwareManagementSubscriptionsV2WithRawResponse(SecuredRawResponse[RawCli
 
         Args:
             account: Account identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -107,7 +111,8 @@ class AsyncSoftwareManagementSubscriptionsV2WithRawResponse(
 
         Args:
             account: Account identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -116,7 +121,7 @@ class AsyncSoftwareManagementSubscriptionsV2WithRawResponse(
             url_template=self._server.software_management_v2("/subscriptions/{account}"),
             path_params=[param[str]("account", account)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[FotaV2Subscription],
+            decoder=async_json_decoder[FotaV2Subscription],
             error_mapper=get_account_subscription_status2_error_mapper,
             request_options=request_options,
         )

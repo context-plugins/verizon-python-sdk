@@ -14,4 +14,4 @@ class OffsetSystem(SdkBaseModel):
 
 
 class OffsetSystemDict(TypedDict):
-    offset: Offset | OffsetDict
+    offset: OffsetDict

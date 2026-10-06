@@ -41,11 +41,11 @@ class DevicesResponse(SdkBaseModel):
     if the client is a passenger car or a truck. See the ClientType description for the supported Subtypes for each
     client type."""
 
-    mec_ids: list[str | None] = Field(alias="MecIds")
+    mec_ids: list[str] | None = Field(alias="MecIds")
 
 
 class DevicesResponseDict(TypedDict):
     device_id: UUID
     client_type: EtxClientTypeOrStr
     client_subtype: ClientSubtypeOrStr
-    mec_ids: list[str | None]
+    mec_ids: list[str] | None

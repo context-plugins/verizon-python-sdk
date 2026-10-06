@@ -18,5 +18,5 @@ class RemoveDeviceRequest(SdkBaseModel):
 
 
 class RemoveDeviceRequestDict(TypedDict):
-    accountidentifier: AccountIdentifier | AccountIdentifierDict
-    resourceidentifier: ResourceIdentifier | ResourceIdentifierDict
+    accountidentifier: AccountIdentifierDict
+    resourceidentifier: ResourceIdentifierDict

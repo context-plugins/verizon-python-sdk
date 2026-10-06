@@ -19,4 +19,4 @@ class GetDeviceExperienceScoreHistoryRequest(SdkBaseModel):
 
 class GetDeviceExperienceScoreHistoryRequestDict(TypedDict):
     account_name: str
-    device_id: DeviceIdentifier | DeviceIdentifierDict
+    device_id: DeviceIdentifierDict

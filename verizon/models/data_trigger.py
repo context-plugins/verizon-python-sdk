@@ -12,4 +12,4 @@ class DataTrigger(SdkBaseModel):
 
 
 class DataTriggerDict(TypedDict):
-    account_level: NotRequired[AccountLevelObject | AccountLevelObjectDict]
+    account_level: NotRequired[AccountLevelObjectDict]

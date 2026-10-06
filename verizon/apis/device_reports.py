@@ -11,6 +11,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -47,7 +48,8 @@ class DeviceReports:
 
         Args:
             body: Aggregated session report request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A successful response shows the request is queued with a unique ``txid`` to identify the report data with.
@@ -71,7 +73,8 @@ class DeviceReports:
 
         Args:
             body: Aggregated report request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A successful response shows session and usage details for up to 10 devices.
@@ -94,7 +97,8 @@ class DeviceReports:
 
         Args:
             body: Request for sessions report.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A successful response includes the session information for an individual device.
@@ -125,7 +129,8 @@ class AsyncDeviceReports:
 
         Args:
             body: Aggregated session report request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A successful response shows the request is queued with a unique ``txid`` to identify the report data with.
@@ -151,7 +156,8 @@ class AsyncDeviceReports:
 
         Args:
             body: Aggregated report request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A successful response shows session and usage details for up to 10 devices.
@@ -174,7 +180,8 @@ class AsyncDeviceReports:
 
         Args:
             body: Request for sessions report.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A successful response includes the session information for an individual device.
@@ -202,7 +209,8 @@ class DeviceReportsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
 
         Args:
             body: Aggregated session report request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -228,7 +236,8 @@ class DeviceReportsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
 
         Args:
             body: Aggregated report request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -253,7 +262,8 @@ class DeviceReportsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSch
 
         Args:
             body: Request for sessions report.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -281,7 +291,8 @@ class AsyncDeviceReportsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
 
         Args:
             body: Aggregated session report request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -291,7 +302,7 @@ class AsyncDeviceReportsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[AggregateSessionReportRequest | AggregateSessionReportRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[AggregatedReportCallbackResult],
+            decoder=async_json_decoder[AggregatedReportCallbackResult],
             error_mapper=calculate_aggregated_report_asynchronous_error_mapper,
             request_options=request_options,
         )
@@ -307,7 +318,8 @@ class AsyncDeviceReportsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
 
         Args:
             body: Aggregated report request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -317,7 +329,7 @@ class AsyncDeviceReportsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[AggregateSessionReportRequest | AggregateSessionReportRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[AggregateSessionReport],
+            decoder=async_json_decoder[AggregateSessionReport],
             error_mapper=calculate_aggregated_report_synchronous_error_mapper,
             request_options=request_options,
         )
@@ -332,7 +344,8 @@ class AsyncDeviceReportsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
 
         Args:
             body: Request for sessions report.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -342,7 +355,7 @@ class AsyncDeviceReportsWithRawResponse(SecuredRawResponse[AsyncRawClient, Serve
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[SessionReportRequest | SessionReportRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[SessionReport],
+            decoder=async_json_decoder[SessionReport],
             error_mapper=get_sessions_report_error_mapper,
             request_options=request_options,
         )

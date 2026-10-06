@@ -24,5 +24,5 @@ class AnomalyDetectionSettings(SdkBaseModel):
 
 class AnomalyDetectionSettingsDict(TypedDict):
     account_name: NotRequired[str]
-    sensitivity_parameter: NotRequired[SensitivityParameters | SensitivityParametersDict]
+    sensitivity_parameter: NotRequired[SensitivityParametersDict]
     status: NotRequired[str]

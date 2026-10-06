@@ -12,6 +12,7 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_decoder,
     param,
     raw_error_response,
@@ -42,7 +43,8 @@ class DeviceLocationCallbacks:
         Args:
             txid: The ``transactionId`` value.
             account_name: Account identifier in "##########-#####".
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request canceled.
@@ -63,7 +65,8 @@ class DeviceLocationCallbacks:
         Args:
             account_name: Account number.
             service: Callback service name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Deregistration successful.
@@ -81,7 +84,8 @@ class DeviceLocationCallbacks:
 
         Args:
             account_name: Account number.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of all registered callback URLs.
@@ -99,7 +103,8 @@ class DeviceLocationCallbacks:
 
         Args:
             account_name: Account number.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Callback registration response.
@@ -125,7 +130,8 @@ class AsyncDeviceLocationCallbacks:
         Args:
             txid: The ``transactionId`` value.
             account_name: Account identifier in "##########-#####".
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request canceled.
@@ -148,7 +154,8 @@ class AsyncDeviceLocationCallbacks:
         Args:
             account_name: Account number.
             service: Callback service name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Deregistration successful.
@@ -166,7 +173,8 @@ class AsyncDeviceLocationCallbacks:
 
         Args:
             account_name: Account number.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of all registered callback URLs.
@@ -184,7 +192,8 @@ class AsyncDeviceLocationCallbacks:
 
         Args:
             account_name: Account number.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Callback registration response.
@@ -209,7 +218,8 @@ class DeviceLocationCallbacksWithRawResponse(SecuredRawResponse[RawClient, Serve
         Args:
             txid: The ``transactionId`` value.
             account_name: Account identifier in "##########-#####".
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -237,7 +247,8 @@ class DeviceLocationCallbacksWithRawResponse(SecuredRawResponse[RawClient, Serve
         Args:
             account_name: Account number.
             service: Callback service name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -259,7 +270,8 @@ class DeviceLocationCallbacksWithRawResponse(SecuredRawResponse[RawClient, Serve
 
         Args:
             account_name: Account number.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -280,7 +292,8 @@ class DeviceLocationCallbacksWithRawResponse(SecuredRawResponse[RawClient, Serve
 
         Args:
             account_name: Account number.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -305,7 +318,8 @@ class AsyncDeviceLocationCallbacksWithRawResponse(SecuredRawResponse[AsyncRawCli
         Args:
             txid: The ``transactionId`` value.
             account_name: Account identifier in "##########-#####".
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -316,7 +330,7 @@ class AsyncDeviceLocationCallbacksWithRawResponse(SecuredRawResponse[AsyncRawCli
             query_params=[param[str]("accountName", account_name)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[TransactionId],
+            decoder=async_json_decoder[TransactionId],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -333,7 +347,8 @@ class AsyncDeviceLocationCallbacksWithRawResponse(SecuredRawResponse[AsyncRawCli
         Args:
             account_name: Account number.
             service: Callback service name.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -343,7 +358,7 @@ class AsyncDeviceLocationCallbacksWithRawResponse(SecuredRawResponse[AsyncRawCli
             path_params=[param[str]("accountName", account_name), param[CallbackServiceNameOrStr]("service", service)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceLocationSuccessResult],
+            decoder=async_json_decoder[DeviceLocationSuccessResult],
             error_mapper=deregister_callback2_error_mapper,
             request_options=request_options,
         )
@@ -355,7 +370,8 @@ class AsyncDeviceLocationCallbacksWithRawResponse(SecuredRawResponse[AsyncRawCli
 
         Args:
             account_name: Account number.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -364,7 +380,7 @@ class AsyncDeviceLocationCallbacksWithRawResponse(SecuredRawResponse[AsyncRawCli
             url_template=self._server.device_location("/callbacks/{accountName}"),
             path_params=[param[str]("accountName", account_name)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[list[DeviceLocationCallback]],
+            decoder=async_json_decoder[list[DeviceLocationCallback]],
             error_mapper=list_registered_callbacks2_error_mapper,
             request_options=request_options,
         )
@@ -376,7 +392,8 @@ class AsyncDeviceLocationCallbacksWithRawResponse(SecuredRawResponse[AsyncRawCli
 
         Args:
             account_name: Account number.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -386,7 +403,7 @@ class AsyncDeviceLocationCallbacksWithRawResponse(SecuredRawResponse[AsyncRawCli
             path_params=[param[str]("accountName", account_name)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[CallbackRegistrationResult],
+            decoder=async_json_decoder[CallbackRegistrationResult],
             error_mapper=register_callback2_error_mapper,
             request_options=request_options,
         )

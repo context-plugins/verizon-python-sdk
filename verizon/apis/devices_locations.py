@@ -12,6 +12,7 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -39,7 +40,8 @@ class DevicesLocations:
         Args:
             account_name: Account identifier in "##########-#####".
             txid: Transaction ID of the report to cancel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Report generation cancelled.
@@ -56,7 +58,8 @@ class DevicesLocations:
         """Request an asynchronous device location report.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request accepted; location report in progress.
@@ -73,7 +76,8 @@ class DevicesLocations:
         Args:
             account_name: Account identifier in "##########-#####".
             txid: Transaction ID of the report.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Location report status.
@@ -92,7 +96,8 @@ class DevicesLocations:
         asynchronously as a DeviceLocation callback message.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request accepted; location report in progress
@@ -108,7 +113,8 @@ class DevicesLocations:
 
         Args:
             body: Request to obtain location of devices.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of JSON objects, each containing the position data or an error for a device in the request.
@@ -128,7 +134,8 @@ class DevicesLocations:
             account_name: Account identifier in "##########-#####".
             txid: Transaction ID from POST /locationreports response.
             startindex: Zero-based number of the first record to return.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Location information for up to 1,000 devices.
@@ -156,7 +163,8 @@ class AsyncDevicesLocations:
         Args:
             account_name: Account identifier in "##########-#####".
             txid: Transaction ID of the report to cancel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Report generation cancelled.
@@ -175,7 +183,8 @@ class AsyncDevicesLocations:
         """Request an asynchronous device location report.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request accepted; location report in progress.
@@ -192,7 +201,8 @@ class AsyncDevicesLocations:
         Args:
             account_name: Account identifier in "##########-#####".
             txid: Transaction ID of the report.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Location report status.
@@ -213,7 +223,8 @@ class AsyncDevicesLocations:
         asynchronously as a DeviceLocation callback message.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request accepted; location report in progress
@@ -231,7 +242,8 @@ class AsyncDevicesLocations:
 
         Args:
             body: Request to obtain location of devices.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             List of JSON objects, each containing the position data or an error for a device in the request.
@@ -251,7 +263,8 @@ class AsyncDevicesLocations:
             account_name: Account identifier in "##########-#####".
             txid: Transaction ID from POST /locationreports response.
             startindex: Zero-based number of the first record to return.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Location information for up to 1,000 devices.
@@ -278,7 +291,8 @@ class DevicesLocationsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         Args:
             account_name: Account identifier in "##########-#####".
             txid: Transaction ID of the report to cancel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -299,7 +313,8 @@ class DevicesLocationsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         """Request an asynchronous device location report.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -321,7 +336,8 @@ class DevicesLocationsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         Args:
             account_name: Account identifier in "##########-#####".
             txid: Transaction ID of the report.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -343,7 +359,8 @@ class DevicesLocationsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
         asynchronously as a DeviceLocation callback message.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -364,7 +381,8 @@ class DevicesLocationsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
 
         Args:
             body: Request to obtain location of devices.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -388,7 +406,8 @@ class DevicesLocationsWithRawResponse(SecuredRawResponse[RawClient, Server, Auth
             account_name: Account identifier in "##########-#####".
             txid: Transaction ID from POST /locationreports response.
             startindex: Zero-based number of the first record to return.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -416,7 +435,8 @@ class AsyncDevicesLocationsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         Args:
             account_name: Account identifier in "##########-#####".
             txid: Transaction ID of the report to cancel.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -426,7 +446,7 @@ class AsyncDevicesLocationsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             path_params=[param[str]("accountName", account_name), param[str]("txid", txid)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[TransactionId],
+            decoder=async_json_decoder[TransactionId],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -437,7 +457,8 @@ class AsyncDevicesLocationsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         """Request an asynchronous device location report.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -446,7 +467,7 @@ class AsyncDevicesLocationsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             url_template=self._server.device_location("/locationreports"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[AsynchronousLocationRequestResult],
+            decoder=async_json_decoder[AsynchronousLocationRequestResult],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -459,7 +480,8 @@ class AsyncDevicesLocationsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         Args:
             account_name: Account identifier in "##########-#####".
             txid: Transaction ID of the report.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -468,7 +490,7 @@ class AsyncDevicesLocationsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             url_template=self._server.device_location("/locationreports/{accountName}/report/{txid}/status"),
             path_params=[param[str]("accountName", account_name), param[str]("txid", txid)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[LocationReportStatus],
+            decoder=async_json_decoder[LocationReportStatus],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -481,7 +503,8 @@ class AsyncDevicesLocationsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
         asynchronously as a DeviceLocation callback message.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -490,7 +513,7 @@ class AsyncDevicesLocationsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             url_template=self._server.device_location("/devicelocations"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[SynchronousLocationRequestResult],
+            decoder=async_json_decoder[SynchronousLocationRequestResult],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -502,7 +525,8 @@ class AsyncDevicesLocationsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
 
         Args:
             body: Request to obtain location of devices.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -512,7 +536,7 @@ class AsyncDevicesLocationsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[LocationRequest | LocationRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[list[Location]],
+            decoder=async_json_decoder[list[Location]],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -526,7 +550,8 @@ class AsyncDevicesLocationsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
             account_name: Account identifier in "##########-#####".
             txid: Transaction ID from POST /locationreports response.
             startindex: Zero-based number of the first record to return.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -539,7 +564,7 @@ class AsyncDevicesLocationsWithRawResponse(SecuredRawResponse[AsyncRawClient, Se
                 param[str]("accountName", account_name), param[str]("txid", txid), param[int]("startindex", startindex)
             ],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[LocationReport],
+            decoder=async_json_decoder[LocationReport],
             error_mapper=raw_error_response,
             request_options=request_options,
         )

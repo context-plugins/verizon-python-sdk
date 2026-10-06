@@ -16,6 +16,6 @@ class ProvhistoryRequest(SdkBaseModel):
 
 class ProvhistoryRequestDict(TypedDict):
     account_name: NotRequired[str]
-    device_filter: NotRequired[list[GiodeviceId | GiodeviceIdDict]]
+    device_filter: NotRequired[list[GiodeviceIdDict]]
     earliest: NotRequired[RFC3339DateTime]
     latest: NotRequired[RFC3339DateTime]

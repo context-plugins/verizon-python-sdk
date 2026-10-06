@@ -16,4 +16,4 @@ class DtoLastReportedTimeRequest(SdkBaseModel):
 
 class DtoLastReportedTimeRequestDict(TypedDict):
     accountname: NotRequired[str]
-    resourceidentifier: NotRequired[DtoDeviceResourceIdentifier | DtoDeviceResourceIdentifierDict]
+    resourceidentifier: NotRequired[DtoDeviceResourceIdentifierDict]

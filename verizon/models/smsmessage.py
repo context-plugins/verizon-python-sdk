@@ -21,6 +21,6 @@ class Smsmessage(SdkBaseModel):
 
 
 class SmsmessageDict(TypedDict):
-    device_ids: NotRequired[list[DeviceId | DeviceIdDict]]
+    device_ids: NotRequired[list[DeviceIdDict]]
     message: NotRequired[str]
     timestamp: NotRequired[str]

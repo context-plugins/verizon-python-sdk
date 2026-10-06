@@ -13,4 +13,4 @@ class FrictionInformation(SdkBaseModel):
 
 
 class FrictionInformationDict(TypedDict):
-    road_surface_description: DescriptionOfRoadSurface | DescriptionOfRoadSurfaceDict
+    road_surface_description: DescriptionOfRoadSurfaceDict

@@ -12,6 +12,7 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -37,7 +38,8 @@ class AnomalySettings:
 
         Args:
             body: Request to activate anomaly detection.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Success response.
@@ -53,7 +55,8 @@ class AnomalySettings:
 
         Args:
             account_name: The name of the subscribed account.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Retrieve the settings for anomaly detection.
@@ -71,7 +74,8 @@ class AnomalySettings:
 
         Args:
             account_name: The name of the subscribed account.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Success response.
@@ -101,7 +105,8 @@ class AsyncAnomalySettings:
 
         Args:
             body: Request to activate anomaly detection.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Success response.
@@ -119,7 +124,8 @@ class AsyncAnomalySettings:
 
         Args:
             account_name: The name of the subscribed account.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Retrieve the settings for anomaly detection.
@@ -137,7 +143,8 @@ class AsyncAnomalySettings:
 
         Args:
             account_name: The name of the subscribed account.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Success response.
@@ -166,13 +173,14 @@ class AnomalySettingsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
 
         Args:
             body: Request to activate anomaly detection.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/intelligence/anomaly/settings"),
+            url_template=self._server.thingspace("/m2m/v1/intelligence/anomaly/settings"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[AnomalyDetectionRequest | AnomalyDetectionRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -188,13 +196,14 @@ class AnomalySettingsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
 
         Args:
             account_name: The name of the subscribed account.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/intelligence/{accountName}/anomaly/settings"),
+            url_template=self._server.thingspace("/m2m/v1/intelligence/{accountName}/anomaly/settings"),
             path_params=[param[str]("accountName", account_name)],
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
             decoder=json_decoder[AnomalyDetectionSettings],
@@ -209,15 +218,14 @@ class AnomalySettingsWithRawResponse(SecuredRawResponse[RawClient, Server, AuthS
 
         Args:
             account_name: The name of the subscribed account.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="PUT",
-            url_template=self._server.hyper_precise_credentials(
-                "/m2m/v1/intelligence/{accountName}/anomaly/settings/reset"
-            ),
+            url_template=self._server.thingspace("/m2m/v1/intelligence/{accountName}/anomaly/settings/reset"),
             path_params=[param[str]("accountName", account_name)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -238,17 +246,18 @@ class AsyncAnomalySettingsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
 
         Args:
             body: Request to activate anomaly detection.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/intelligence/anomaly/settings"),
+            url_template=self._server.thingspace("/m2m/v1/intelligence/anomaly/settings"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[AnomalyDetectionRequest | AnomalyDetectionRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[IntelligenceSuccessResult],
+            decoder=async_json_decoder[IntelligenceSuccessResult],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -260,16 +269,17 @@ class AsyncAnomalySettingsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
 
         Args:
             account_name: The name of the subscribed account.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="GET",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/intelligence/{accountName}/anomaly/settings"),
+            url_template=self._server.thingspace("/m2m/v1/intelligence/{accountName}/anomaly/settings"),
             path_params=[param[str]("accountName", account_name)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[AnomalyDetectionSettings],
+            decoder=async_json_decoder[AnomalyDetectionSettings],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -281,19 +291,18 @@ class AsyncAnomalySettingsWithRawResponse(SecuredRawResponse[AsyncRawClient, Ser
 
         Args:
             account_name: The name of the subscribed account.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="PUT",
-            url_template=self._server.hyper_precise_credentials(
-                "/m2m/v1/intelligence/{accountName}/anomaly/settings/reset"
-            ),
+            url_template=self._server.thingspace("/m2m/v1/intelligence/{accountName}/anomaly/settings/reset"),
             path_params=[param[str]("accountName", account_name)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[IntelligenceSuccessResult],
+            decoder=async_json_decoder[IntelligenceSuccessResult],
             error_mapper=raw_error_response,
             request_options=request_options,
         )

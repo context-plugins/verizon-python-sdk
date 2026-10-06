@@ -12,6 +12,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_decoder,
     param,
 )
@@ -38,7 +39,8 @@ class DevicesLocationSubscriptions:
 
         Args:
             account_name: Account identifier in "##########-#####".
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Device location subscription information.
@@ -53,7 +55,8 @@ class DevicesLocationSubscriptions:
         """This endpoint allows user to search for billable usage for accounts based on the provided date range.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Billable usage report.
@@ -78,7 +81,8 @@ class AsyncDevicesLocationSubscriptions:
 
         Args:
             account_name: Account identifier in "##########-#####".
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Device location subscription information.
@@ -95,7 +99,8 @@ class AsyncDevicesLocationSubscriptions:
         """This endpoint allows user to search for billable usage for accounts based on the provided date range.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Billable usage report.
@@ -117,7 +122,8 @@ class DevicesLocationSubscriptionsWithRawResponse(SecuredRawResponse[RawClient, 
 
         Args:
             account_name: Account identifier in "##########-#####".
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -137,7 +143,8 @@ class DevicesLocationSubscriptionsWithRawResponse(SecuredRawResponse[RawClient, 
         """This endpoint allows user to search for billable usage for accounts based on the provided date range.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -160,7 +167,8 @@ class AsyncDevicesLocationSubscriptionsWithRawResponse(SecuredRawResponse[AsyncR
 
         Args:
             account_name: Account identifier in "##########-#####".
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -169,7 +177,7 @@ class AsyncDevicesLocationSubscriptionsWithRawResponse(SecuredRawResponse[AsyncR
             url_template=self._server.device_location("/subscriptions/{accountName}"),
             path_params=[param[str]("accountName", account_name)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceLocationSubscription],
+            decoder=async_json_decoder[DeviceLocationSubscription],
             error_mapper=get_location_service_subscription_status_error_mapper,
             request_options=request_options,
         )
@@ -180,7 +188,8 @@ class AsyncDevicesLocationSubscriptionsWithRawResponse(SecuredRawResponse[AsyncR
         """This endpoint allows user to search for billable usage for accounts based on the provided date range.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -189,7 +198,7 @@ class AsyncDevicesLocationSubscriptionsWithRawResponse(SecuredRawResponse[AsyncR
             url_template=self._server.device_location("/usage"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[Any],
+            decoder=async_json_decoder[Any],
             error_mapper=get_location_service_usage_error_mapper,
             request_options=request_options,
         )

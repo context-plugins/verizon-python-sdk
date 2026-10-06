@@ -24,4 +24,4 @@ class FirmwareUpgradeChangeResult(SdkBaseModel):
 class FirmwareUpgradeChangeResultDict(TypedDict):
     account_name: NotRequired[str]
     id: NotRequired[str]
-    device_list: NotRequired[list[V1DeviceListItem | V1DeviceListItemDict]]
+    device_list: NotRequired[list[V1DeviceListItemDict]]

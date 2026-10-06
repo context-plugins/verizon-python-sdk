@@ -12,5 +12,5 @@ class DtoSensorOffBoardingStatusResponse(SdkBaseModel):
 
 
 class DtoSensorOffBoardingStatusResponseDict(TypedDict):
-    events: NotRequired[list[DtoSensorBoardingEvent | DtoSensorBoardingEventDict]]
+    events: NotRequired[list[DtoSensorBoardingEventDict]]
     isstillregistered: NotRequired[bool]

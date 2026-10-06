@@ -22,10 +22,10 @@ class ProfileRequest(SdkBaseModel):
 
 class ProfileRequestDict(TypedDict):
     account_name: str
-    devices: list[DeviceList | DeviceListDict]
+    devices: list[DeviceListDict]
     carrier_name: NotRequired[str]
     service_plan: NotRequired[str]
     mdn_zip_code: NotRequired[str]
-    primary_place_of_use: NotRequired[list[PrimaryPlaceOfUse | PrimaryPlaceOfUseDict]]
+    primary_place_of_use: NotRequired[list[PrimaryPlaceOfUseDict]]
     smsr_oid: NotRequired[str]
     carrier_ip_pool_name: NotRequired[str]

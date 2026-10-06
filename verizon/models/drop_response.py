@@ -11,4 +11,4 @@ class DropResponse(SdkBaseModel):
 
 
 class DropResponseDict(TypedDict):
-    items: NotRequired[list[DropResponseItem | DropResponseItemDict]]
+    items: NotRequired[list[DropResponseItemDict]]

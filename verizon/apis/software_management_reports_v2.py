@@ -9,6 +9,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_decoder,
     param,
 )
@@ -52,7 +53,8 @@ class SoftwareManagementReportsV2:
             account: Account identifier.
             campaign_id: Campaign identifier.
             last_seen_device_id: Last seen device identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Return list of campaign history.
@@ -77,7 +79,8 @@ class SoftwareManagementReportsV2:
             account: Account identifier.
             campaign_status: Status of the campaign.
             last_seen_campaign_id: Last seen campaign Id.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Return list of campaign history.
@@ -96,7 +99,8 @@ class SoftwareManagementReportsV2:
         Args:
             account: Account identifier.
             device_id: Device IMEI identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Return array of upgrades.
@@ -121,7 +125,8 @@ class SoftwareManagementReportsV2:
             account: Account identifier.
             last_seen_device_id: Last seen device identifier.
             distribution_type: Filter distributionType to get specific type of devices. Values is LWM2M, OMD-DM or HTTP.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Return array of devices.
@@ -143,7 +148,8 @@ class SoftwareManagementReportsV2:
         Args:
             account: Account identifier.
             distribution_type: Filter distributionType to get specific type of software. Value is LWM2M, OMD-DM or HTTP.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Return array of software.
@@ -177,7 +183,8 @@ class AsyncSoftwareManagementReportsV2:
             account: Account identifier.
             campaign_id: Campaign identifier.
             last_seen_device_id: Last seen device identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Return list of campaign history.
@@ -204,7 +211,8 @@ class AsyncSoftwareManagementReportsV2:
             account: Account identifier.
             campaign_status: Status of the campaign.
             last_seen_campaign_id: Last seen campaign Id.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Return list of campaign history.
@@ -225,7 +233,8 @@ class AsyncSoftwareManagementReportsV2:
         Args:
             account: Account identifier.
             device_id: Device IMEI identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Return array of upgrades.
@@ -252,7 +261,8 @@ class AsyncSoftwareManagementReportsV2:
             account: Account identifier.
             last_seen_device_id: Last seen device identifier.
             distribution_type: Filter distributionType to get specific type of devices. Values is LWM2M, OMD-DM or HTTP.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Return array of devices.
@@ -276,7 +286,8 @@ class AsyncSoftwareManagementReportsV2:
         Args:
             account: Account identifier.
             distribution_type: Filter distributionType to get specific type of software. Value is LWM2M, OMD-DM or HTTP.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Return array of software.
@@ -309,7 +320,8 @@ class SoftwareManagementReportsV2WithRawResponse(SecuredRawResponse[RawClient, S
             account: Account identifier.
             campaign_id: Campaign identifier.
             last_seen_device_id: Last seen device identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -338,7 +350,8 @@ class SoftwareManagementReportsV2WithRawResponse(SecuredRawResponse[RawClient, S
             account: Account identifier.
             campaign_status: Status of the campaign.
             last_seen_campaign_id: Last seen campaign Id.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -364,7 +377,8 @@ class SoftwareManagementReportsV2WithRawResponse(SecuredRawResponse[RawClient, S
         Args:
             account: Account identifier.
             device_id: Device IMEI identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -392,7 +406,8 @@ class SoftwareManagementReportsV2WithRawResponse(SecuredRawResponse[RawClient, S
             account: Account identifier.
             last_seen_device_id: Last seen device identifier.
             distribution_type: Filter distributionType to get specific type of devices. Values is LWM2M, OMD-DM or HTTP.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -418,7 +433,8 @@ class SoftwareManagementReportsV2WithRawResponse(SecuredRawResponse[RawClient, S
         Args:
             account: Account identifier.
             distribution_type: Filter distributionType to get specific type of software. Value is LWM2M, OMD-DM or HTTP.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -449,7 +465,8 @@ class AsyncSoftwareManagementReportsV2WithRawResponse(SecuredRawResponse[AsyncRa
             account: Account identifier.
             campaign_id: Campaign identifier.
             last_seen_device_id: Last seen device identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -459,7 +476,7 @@ class AsyncSoftwareManagementReportsV2WithRawResponse(SecuredRawResponse[AsyncRa
             path_params=[param[str]("account", account), param[str]("campaignId", campaign_id)],
             query_params=[param[str | None]("lastSeenDeviceId", last_seen_device_id)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[V2CampaignDevice],
+            decoder=async_json_decoder[V2CampaignDevice],
             error_mapper=get_campaign_device_status_error_mapper,
             request_options=request_options,
         )
@@ -478,7 +495,8 @@ class AsyncSoftwareManagementReportsV2WithRawResponse(SecuredRawResponse[AsyncRa
             account: Account identifier.
             campaign_status: Status of the campaign.
             last_seen_campaign_id: Last seen campaign Id.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -491,7 +509,7 @@ class AsyncSoftwareManagementReportsV2WithRawResponse(SecuredRawResponse[AsyncRa
                 param[str | None]("lastSeenCampaignId", last_seen_campaign_id),
             ],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[V2CampaignHistory],
+            decoder=async_json_decoder[V2CampaignHistory],
             error_mapper=get_campaign_history_by_status_error_mapper,
             request_options=request_options,
         )
@@ -504,7 +522,8 @@ class AsyncSoftwareManagementReportsV2WithRawResponse(SecuredRawResponse[AsyncRa
         Args:
             account: Account identifier.
             device_id: Device IMEI identifier.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -513,7 +532,7 @@ class AsyncSoftwareManagementReportsV2WithRawResponse(SecuredRawResponse[AsyncRa
             url_template=self._server.software_management_v2("/reports/{account}/devices/{deviceId}"),
             path_params=[param[str]("account", account), param[str]("deviceId", device_id)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[list[DeviceSoftwareUpgrade]],
+            decoder=async_json_decoder[list[DeviceSoftwareUpgrade]],
             error_mapper=get_device_firmware_upgrade_history2_error_mapper,
             request_options=request_options,
         )
@@ -532,7 +551,8 @@ class AsyncSoftwareManagementReportsV2WithRawResponse(SecuredRawResponse[AsyncRa
             account: Account identifier.
             last_seen_device_id: Last seen device identifier.
             distribution_type: Filter distributionType to get specific type of devices. Values is LWM2M, OMD-DM or HTTP.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -545,7 +565,7 @@ class AsyncSoftwareManagementReportsV2WithRawResponse(SecuredRawResponse[AsyncRa
                 param[str | None]("distributionType", distribution_type),
             ],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[V2AccountDeviceList],
+            decoder=async_json_decoder[V2AccountDeviceList],
             error_mapper=list_account_devices2_error_mapper,
             request_options=request_options,
         )
@@ -558,7 +578,8 @@ class AsyncSoftwareManagementReportsV2WithRawResponse(SecuredRawResponse[AsyncRa
         Args:
             account: Account identifier.
             distribution_type: Filter distributionType to get specific type of software. Value is LWM2M, OMD-DM or HTTP.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
@@ -568,7 +589,7 @@ class AsyncSoftwareManagementReportsV2WithRawResponse(SecuredRawResponse[AsyncRa
             path_params=[param[str]("account", account)],
             query_params=[param[str | None]("distributionType", distribution_type)],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[list[SoftwarePackage]],
+            decoder=async_json_decoder[list[SoftwarePackage]],
             error_mapper=list_available_software_error_mapper,
             request_options=request_options,
         )

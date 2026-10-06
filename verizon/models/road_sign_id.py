@@ -20,5 +20,5 @@ class RoadSignId(SdkBaseModel):
 
 
 class RoadSignIdDict(TypedDict):
-    position: RoadSignPosition | RoadSignPositionDict
+    position: RoadSignPositionDict
     view_angle: str

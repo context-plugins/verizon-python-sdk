@@ -15,4 +15,4 @@ class Offset(SdkBaseModel):
 
 
 class OffsetDict(TypedDict):
-    ll: NodeListLl | NodeListLlDict
+    ll: NodeListLlDict

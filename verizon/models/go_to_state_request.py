@@ -73,13 +73,13 @@ class GoToStateRequestDict(TypedDict):
     state_name: str
     service_plan: str
     mdn_zip_code: str
-    devices: NotRequired[list[AccountDeviceList | AccountDeviceListDict]]
-    filter: NotRequired[DeviceFilter | DeviceFilterDict]
+    devices: NotRequired[list[AccountDeviceListDict]]
+    filter: NotRequired[DeviceFilterDict]
     carrier_ip_pool_name: NotRequired[str]
     public_ip_restriction: NotRequired[str]
     sku_number: NotRequired[str]
-    custom_fields: NotRequired[list[CustomFields | CustomFieldsDict]]
+    custom_fields: NotRequired[list[CustomFieldsDict]]
     devices_with_service_address: NotRequired[list[Any]]
     ip_address: NotRequired[str]
     group_name: NotRequired[str]
-    primary_place_of_use: NotRequired[PlaceOfUse | PlaceOfUseDict]
+    primary_place_of_use: NotRequired[PlaceOfUseDict]

@@ -11,6 +11,8 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     json_body,
     json_decoder,
@@ -54,7 +56,8 @@ class SensorInsightsUsers:
 
         Args:
             body: Create a user profile
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -77,7 +80,8 @@ class SensorInsightsUsers:
 
         Args:
             deleterequestpayload: Payload for the delete user request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             No Content
@@ -96,7 +100,8 @@ class SensorInsightsUsers:
 
         Args:
             body: A summary of user profile records on an account
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -117,7 +122,8 @@ class SensorInsightsUsers:
 
         Args:
             body: Partially update a user profile
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -149,7 +155,8 @@ class AsyncSensorInsightsUsers:
 
         Args:
             body: Create a user profile
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -172,7 +179,8 @@ class AsyncSensorInsightsUsers:
 
         Args:
             deleterequestpayload: Payload for the delete user request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             No Content
@@ -193,7 +201,8 @@ class AsyncSensorInsightsUsers:
 
         Args:
             body: A summary of user profile records on an account
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -216,7 +225,8 @@ class AsyncSensorInsightsUsers:
 
         Args:
             body: Partially update a user profile
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             OK
@@ -245,13 +255,14 @@ class SensorInsightsUsersWithRawResponse(SecuredRawResponse[RawClient, Server, A
 
         Args:
             body: Create a user profile
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/users"),
+            url_template=self._server.thingspace("/dm/v1/users"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoCreateUserRequest | DtoCreateUserRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -270,13 +281,14 @@ class SensorInsightsUsersWithRawResponse(SecuredRawResponse[RawClient, Server, A
 
         Args:
             deleterequestpayload: Payload for the delete user request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="DELETE",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/users"),
+            url_template=self._server.thingspace("/dm/v1/users"),
             query_params=[
                 param[DtoDeleteUserRequest | DtoDeleteUserRequestDict]("deleterequestpayload", deleterequestpayload)
             ],
@@ -294,13 +306,14 @@ class SensorInsightsUsersWithRawResponse(SecuredRawResponse[RawClient, Server, A
 
         Args:
             body: A summary of user profile records on an account
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/users/actions/query"),
+            url_template=self._server.thingspace("/dm/v1/users/actions/query"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoListUserRequest | DtoListUserRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -319,13 +332,14 @@ class SensorInsightsUsersWithRawResponse(SecuredRawResponse[RawClient, Server, A
 
         Args:
             body: Partially update a user profile
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="PATCH",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/users"),
+            url_template=self._server.thingspace("/dm/v1/users"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoUpdateUserRequest | DtoUpdateUserRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -346,17 +360,18 @@ class AsyncSensorInsightsUsersWithRawResponse(SecuredRawResponse[AsyncRawClient,
 
         Args:
             body: Create a user profile
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/users"),
+            url_template=self._server.thingspace("/dm/v1/users"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoCreateUserRequest | DtoCreateUserRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[ResourceUser],
+            decoder=async_json_decoder[ResourceUser],
             error_mapper=sensor_insights_create_user_request_error_mapper,
             request_options=request_options,
         )
@@ -371,19 +386,20 @@ class AsyncSensorInsightsUsersWithRawResponse(SecuredRawResponse[AsyncRawClient,
 
         Args:
             deleterequestpayload: Payload for the delete user request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="DELETE",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/users"),
+            url_template=self._server.thingspace("/dm/v1/users"),
             query_params=[
                 param[DtoDeleteUserRequest | DtoDeleteUserRequestDict]("deleterequestpayload", deleterequestpayload)
             ],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=sensor_insights_delete_user_error_mapper,
             request_options=request_options,
         )
@@ -395,17 +411,18 @@ class AsyncSensorInsightsUsersWithRawResponse(SecuredRawResponse[AsyncRawClient,
 
         Args:
             body: A summary of user profile records on an account
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/users/actions/query"),
+            url_template=self._server.thingspace("/dm/v1/users/actions/query"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoListUserRequest | DtoListUserRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[list[ResourceUser]],
+            decoder=async_json_decoder[list[ResourceUser]],
             error_mapper=sensor_insights_list_user_request_error_mapper,
             request_options=request_options,
         )
@@ -420,17 +437,18 @@ class AsyncSensorInsightsUsersWithRawResponse(SecuredRawResponse[AsyncRawClient,
 
         Args:
             body: Partially update a user profile
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="PATCH",
-            url_template=self._server.hyper_precise_credentials("/dm/v1/users"),
+            url_template=self._server.thingspace("/dm/v1/users"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[DtoUpdateUserRequest | DtoUpdateUserRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[ResourceUser],
+            decoder=async_json_decoder[ResourceUser],
             error_mapper=sensor_insights_update_user_request_error_mapper,
             request_options=request_options,
         )

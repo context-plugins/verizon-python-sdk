@@ -17,5 +17,5 @@ class PromoAlert1(SdkBaseModel):
 
 class PromoAlert1Dict(TypedDict):
     filter_criteria: NotRequired[list[Any]]
-    condition: NotRequired[list[Keyschunk2 | Keyschunk2Dict]]
+    condition: NotRequired[list[Keyschunk2Dict]]
     enable_promo_exp: NotRequired[bool]

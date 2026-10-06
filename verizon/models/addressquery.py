@@ -11,4 +11,4 @@ class Addressquery(SdkBaseModel):
 
 
 class AddressqueryDict(TypedDict):
-    address: NotRequired[list[Address | AddressDict]]
+    address: NotRequired[list[AddressDict]]

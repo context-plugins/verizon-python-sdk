@@ -20,4 +20,4 @@ class SpeedItem(SdkBaseModel):
 
 
 class SpeedItemDict(TypedDict):
-    speed: SpeedRange | SpeedRangeDict | None
+    speed: SpeedRangeDict | None

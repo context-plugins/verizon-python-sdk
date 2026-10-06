@@ -14,4 +14,4 @@ class AuthRestErrorResponseforplannerError(SdkBaseModel):
 
 
 class AuthRestErrorResponseforplannerErrorDict(TypedDict):
-    fault: NotRequired[AuthSubRestErrorResponseforplanner | AuthSubRestErrorResponseforplannerDict]
+    fault: NotRequired[AuthSubRestErrorResponseforplannerDict]

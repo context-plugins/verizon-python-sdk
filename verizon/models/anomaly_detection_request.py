@@ -23,4 +23,4 @@ class AnomalyDetectionRequest(SdkBaseModel):
 class AnomalyDetectionRequestDict(TypedDict):
     account_name: NotRequired[str]
     request_type: NotRequired[str]
-    sensitivity_parameter: NotRequired[SensitivityParameters | SensitivityParametersDict]
+    sensitivity_parameter: NotRequired[SensitivityParametersDict]

@@ -11,6 +11,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -46,7 +47,8 @@ class DeviceDiagnostics:
 
         Args:
             body: Retrieve Reachability Report Status for a device.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -67,7 +69,8 @@ class DeviceDiagnostics:
 
         Args:
             body: Retrieve Monitor Request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -97,7 +100,8 @@ class AsyncDeviceDiagnostics:
 
         Args:
             body: Retrieve Reachability Report Status for a device.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -118,7 +122,8 @@ class AsyncDeviceDiagnostics:
 
         Args:
             body: Retrieve Monitor Request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Request ID received on a successful response.
@@ -145,13 +150,14 @@ class DeviceDiagnosticsWithRawResponse(SecuredRawResponse[RawClient, Server, Aut
 
         Args:
             body: Retrieve Reachability Report Status for a device.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/diagnostics/basic/devicereachability/status"),
+            url_template=self._server.thingspace("/m2m/v1/diagnostics/basic/devicereachability/status"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[NotificationReportStatusRequest | NotificationReportStatusRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -170,15 +176,14 @@ class DeviceDiagnosticsWithRawResponse(SecuredRawResponse[RawClient, Server, Aut
 
         Args:
             body: Retrieve Monitor Request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials(
-                "/m2m/v1/diagnostics/basic/devicereachability/monitors"
-            ),
+            url_template=self._server.thingspace("/m2m/v1/diagnostics/basic/devicereachability/monitors"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[RetrieveMonitorsRequest | RetrieveMonitorsRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -199,17 +204,18 @@ class AsyncDeviceDiagnosticsWithRawResponse(SecuredRawResponse[AsyncRawClient, S
 
         Args:
             body: Retrieve Reachability Report Status for a device.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/diagnostics/basic/devicereachability/status"),
+            url_template=self._server.thingspace("/m2m/v1/diagnostics/basic/devicereachability/status"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[NotificationReportStatusRequest | NotificationReportStatusRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceManagementResult],
+            decoder=async_json_decoder[DeviceManagementResult],
             error_mapper=device_reachability_status_using_post_error_mapper,
             request_options=request_options,
         )
@@ -224,19 +230,18 @@ class AsyncDeviceDiagnosticsWithRawResponse(SecuredRawResponse[AsyncRawClient, S
 
         Args:
             body: Retrieve Monitor Request.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials(
-                "/m2m/v1/diagnostics/basic/devicereachability/monitors"
-            ),
+            url_template=self._server.thingspace("/m2m/v1/diagnostics/basic/devicereachability/monitors"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[RetrieveMonitorsRequest | RetrieveMonitorsRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[DeviceManagementResult],
+            decoder=async_json_decoder[DeviceManagementResult],
             error_mapper=retrieve_active_monitors_using_post_error_mapper,
             request_options=request_options,
         )

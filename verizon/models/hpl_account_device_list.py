@@ -14,4 +14,4 @@ class HplAccountDeviceList(SdkBaseModel):
 
 
 class HplAccountDeviceListDict(TypedDict):
-    device_ids: NotRequired[list[HplDeviceId | HplDeviceIdDict]]
+    device_ids: NotRequired[list[HplDeviceIdDict]]

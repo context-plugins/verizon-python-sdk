@@ -25,6 +25,6 @@ class DeviceGroup(SdkBaseModel):
 
 class DeviceGroupDict(TypedDict):
     description: NotRequired[str]
-    extended_attributes: NotRequired[list[CustomFields | CustomFieldsDict]]
+    extended_attributes: NotRequired[list[CustomFieldsDict]]
     is_default_group: NotRequired[bool]
     name: NotRequired[str]

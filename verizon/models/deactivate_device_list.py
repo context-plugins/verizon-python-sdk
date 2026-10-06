@@ -11,4 +11,4 @@ class DeactivateDeviceList(SdkBaseModel):
 
 
 class DeactivateDeviceListDict(TypedDict):
-    ids: NotRequired[list[Id | IdDict]]
+    ids: NotRequired[list[IdDict]]

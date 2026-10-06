@@ -12,4 +12,4 @@ class Filtercriteria(SdkBaseModel):
 
 
 class FiltercriteriaDict(TypedDict):
-    filter_criteria: NotRequired[list[ReadySimServicePlan | ReadySimServicePlanDict]]
+    filter_criteria: NotRequired[list[ReadySimServicePlanDict]]

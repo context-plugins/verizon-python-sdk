@@ -16,4 +16,4 @@ class SearchDeviceEventHistoryResponseList(SdkBaseModel):
 
 
 class SearchDeviceEventHistoryResponseListDict(TypedDict):
-    search_device_event_history: NotRequired[list[SearchDeviceResponse | SearchDeviceResponseDict]]
+    search_device_event_history: NotRequired[list[SearchDeviceResponseDict]]

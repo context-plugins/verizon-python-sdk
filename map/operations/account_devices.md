@@ -11,7 +11,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 - **Route**: `GET /devices/{acc}`
 - **Auth**: `thingspace_oauth` AND `vz_m2_m_token`
 - **Server**: `software_management_v3`
-- **Signature**: `def get_account_device_information(acc: str, *, last_seen_device_id: str | None = None, protocol: DevicesProtocolOrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Signature**: `def get_account_device_information(acc: str, *, last_seen_device_id: str | None = None, protocol: DevicesProtocolOrStr | None = DevicesProtocol.LWM2_M, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `acc`
 - **Params**: `acc` — path · `last_seen_device_id` — query `lastSeenDeviceId` · `protocol` — query
 - **Returns (parsed)**: `V3AccountDeviceList`

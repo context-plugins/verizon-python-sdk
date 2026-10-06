@@ -12,6 +12,7 @@ from ..core import (
     RawError,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -38,7 +39,8 @@ class GbiDeviceActions5:
             body: This endpoint is for use when changing a device's service plan to a 5G BI service plan. The service
                 plan can change for an active device up to four times per month but will require address validation for
                 each change. The service plan cannot be changed for a device while its service is suspended.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A request ID is returned as a successful response. Use a callback to see the details associated with the
@@ -63,7 +65,8 @@ class GbiDeviceActions5:
                 required for activating as Public Static. Leave <code>publicIpRestriction</code> undefined to activate
                 as Public Dynamic. Removing <code>publicIpRestriction</code> from the request will activate as Mobile
                 Private Network (MPN).
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A request ID is returned as a successful response. Use a callback to see the details associated with the
@@ -83,7 +86,8 @@ class GbiDeviceActions5:
 
         Args:
             body: Device Profile Query
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The device's details will be returned from a successful request.
@@ -112,7 +116,8 @@ class AsyncGbiDeviceActions5:
             body: This endpoint is for use when changing a device's service plan to a 5G BI service plan. The service
                 plan can change for an active device up to four times per month but will require address validation for
                 each change. The service plan cannot be changed for a device while its service is suspended.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A request ID is returned as a successful response. Use a callback to see the details associated with the
@@ -137,7 +142,8 @@ class AsyncGbiDeviceActions5:
                 required for activating as Public Static. Leave <code>publicIpRestriction</code> undefined to activate
                 as Public Dynamic. Removing <code>publicIpRestriction</code> from the request will activate as Mobile
                 Private Network (MPN).
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             A request ID is returned as a successful response. Use a callback to see the details associated with the
@@ -157,7 +163,8 @@ class AsyncGbiDeviceActions5:
 
         Args:
             body: Device Profile Query
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             The device's details will be returned from a successful request.
@@ -185,13 +192,14 @@ class GbiDeviceActions5WithRawResponse(SecuredRawResponse[RawClient, Server, Aut
             body: This endpoint is for use when changing a device's service plan to a 5G BI service plan. The service
                 plan can change for an active device up to four times per month but will require address validation for
                 each change. The service plan cannot be changed for a device while its service is suspended.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="PUT",
-            url_template=self._server.hyper_precise_credentials("/actions/plan"),
+            url_template=self._server.thingspace("/actions/plan"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[GbichangeRequest5 | GbichangeRequest5Dict](body),
             auth_scheme=AnySchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -213,13 +221,14 @@ class GbiDeviceActions5WithRawResponse(SecuredRawResponse[RawClient, Server, Aut
                 required for activating as Public Static. Leave <code>publicIpRestriction</code> undefined to activate
                 as Public Dynamic. Removing <code>publicIpRestriction</code> from the request will activate as Mobile
                 Private Network (MPN).
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/actions/activate"),
+            url_template=self._server.thingspace("/actions/activate"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[GbiactivateRequest5 | GbiactivateRequest5Dict](body),
             auth_scheme=AnySchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -236,13 +245,14 @@ class GbiDeviceActions5WithRawResponse(SecuredRawResponse[RawClient, Server, Aut
 
         Args:
             body: Device Profile Query
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/actions/list"),
+            url_template=self._server.thingspace("/actions/list"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[GbideviceId5 | GbideviceId5Dict](body),
             auth_scheme=AnySchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -262,17 +272,18 @@ class AsyncGbiDeviceActions5WithRawResponse(SecuredRawResponse[AsyncRawClient, S
             body: This endpoint is for use when changing a device's service plan to a 5G BI service plan. The service
                 plan can change for an active device up to four times per month but will require address validation for
                 each change. The service plan cannot be changed for a device while its service is suspended.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="PUT",
-            url_template=self._server.hyper_precise_credentials("/actions/plan"),
+            url_template=self._server.thingspace("/actions/plan"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[GbichangeRequest5 | GbichangeRequest5Dict](body),
             auth_scheme=AsyncAnySchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[GbiRequestResponse5],
+            decoder=async_json_decoder[GbiRequestResponse5],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -290,17 +301,18 @@ class AsyncGbiDeviceActions5WithRawResponse(SecuredRawResponse[AsyncRawClient, S
                 required for activating as Public Static. Leave <code>publicIpRestriction</code> undefined to activate
                 as Public Dynamic. Removing <code>publicIpRestriction</code> from the request will activate as Mobile
                 Private Network (MPN).
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/actions/activate"),
+            url_template=self._server.thingspace("/actions/activate"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[GbiactivateRequest5 | GbiactivateRequest5Dict](body),
             auth_scheme=AsyncAnySchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[GbiRequestResponse5],
+            decoder=async_json_decoder[GbiRequestResponse5],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -313,17 +325,18 @@ class AsyncGbiDeviceActions5WithRawResponse(SecuredRawResponse[AsyncRawClient, S
 
         Args:
             body: Device Profile Query
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/actions/list"),
+            url_template=self._server.thingspace("/actions/list"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[GbideviceId5 | GbideviceId5Dict](body),
             auth_scheme=AsyncAnySchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[GbideviceDetailsresponse5],
+            decoder=async_json_decoder[GbideviceDetailsresponse5],
             error_mapper=raw_error_response,
             request_options=request_options,
         )

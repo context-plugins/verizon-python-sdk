@@ -14,5 +14,5 @@ class DtoGetNetworkHealthScoreResponse(SdkBaseModel):
 
 
 class DtoGetNetworkHealthScoreResponseDict(TypedDict):
-    networksummary: NotRequired[list[DtoHealthScoreMetric | DtoHealthScoreMetricDict]]
-    overallsummary: NotRequired[list[DtoHealthScoreMetric | DtoHealthScoreMetricDict]]
+    networksummary: NotRequired[list[DtoHealthScoreMetricDict]]
+    overallsummary: NotRequired[list[DtoHealthScoreMetricDict]]

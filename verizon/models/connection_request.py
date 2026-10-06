@@ -35,5 +35,5 @@ class ConnectionRequest(SdkBaseModel):
 
 class ConnectionRequestDict(TypedDict):
     device_id: UUID
-    geolocation: Geolocation | GeolocationDict
+    geolocation: GeolocationDict
     network_type: NetworkTypeOrStr

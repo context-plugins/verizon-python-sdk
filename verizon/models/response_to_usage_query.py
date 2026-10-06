@@ -16,5 +16,5 @@ class ResponseToUsageQuery(SdkBaseModel):
 
 class ResponseToUsageQueryDict(TypedDict):
     hasmoredata: NotRequired[bool]
-    device_id: NotRequired[ReadySimDeviceId | ReadySimDeviceIdDict]
-    usage_history: NotRequired[list[UsageHistory | UsageHistoryDict]]
+    device_id: NotRequired[ReadySimDeviceIdDict]
+    usage_history: NotRequired[list[UsageHistoryDict]]

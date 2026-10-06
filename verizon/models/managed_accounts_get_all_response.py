@@ -20,5 +20,5 @@ class ManagedAccountsGetAllResponse(SdkBaseModel):
 
 class ManagedAccountsGetAllResponseDict(TypedDict):
     account_name: NotRequired[str]
-    managed_acc_added_list: NotRequired[list[ManagedAccAddedList | ManagedAccAddedListDict]]
-    managed_acc_provisioned_list: NotRequired[list[ManagedAccProvisionedList | ManagedAccProvisionedListDict]]
+    managed_acc_added_list: NotRequired[list[ManagedAccAddedListDict]]
+    managed_acc_provisioned_list: NotRequired[list[ManagedAccProvisionedListDict]]

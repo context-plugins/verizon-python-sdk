@@ -36,4 +36,4 @@ class ConditionObjectCallDict(TypedDict):
     threshold: NotRequired[int]
     threshold_unit: NotRequired[ThresholdUnitOrStr]
     cycle_type: NotRequired[RulesCycleTypeOrStr]
-    allowance_threshold: NotRequired[AllowanceThreshold | AllowanceThresholdDict]
+    allowance_threshold: NotRequired[AllowanceThresholdDict]

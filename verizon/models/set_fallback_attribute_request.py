@@ -14,6 +14,6 @@ class SetFallbackAttributeRequest(SdkBaseModel):
 
 
 class SetFallbackAttributeRequestDict(TypedDict):
-    devices: list[DeviceList | DeviceListDict]
+    devices: list[DeviceListDict]
     account_name: str
     carrier_name: NotRequired[str]

@@ -31,7 +31,7 @@ class Usage(SdkBaseModel):
 
 class UsageDict(TypedDict):
     bytes_used: NotRequired[int]
-    extended_attributes: NotRequired[list[CustomFields | CustomFieldsDict]]
+    extended_attributes: NotRequired[list[CustomFieldsDict]]
     service_plan: NotRequired[str]
     sms_used: NotRequired[int]
     source: NotRequired[str]

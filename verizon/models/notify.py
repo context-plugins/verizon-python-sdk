@@ -14,4 +14,4 @@ class Notify(SdkBaseModel):
 
 class NotifyDict(TypedDict):
     alert_type: NotRequired[str]
-    threshold: NotRequired[list[AccountGroupShareThreshold | AccountGroupShareThresholdDict]]
+    threshold: NotRequired[list[AccountGroupShareThresholdDict]]

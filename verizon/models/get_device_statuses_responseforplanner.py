@@ -3,7 +3,7 @@ from __future__ import annotations
 from pydantic import Field
 from typing_extensions import NotRequired, TypedDict
 
-from ..core import UNSET, Optional, OptionalNullable, SdkBaseModel
+from ..core import UNSET, OptionalNullable, SdkBaseModel
 from .device_status_itemforplanner import DeviceStatusItemforplanner, DeviceStatusItemforplannerDict
 
 
@@ -12,7 +12,7 @@ class GetDeviceStatusesResponseforplanner(SdkBaseModel):
     """The numeric name of the account, including leading zeros."""
 
     request_id: OptionalNullable[str] = Field(default=UNSET, alias="requestId")
-    device_status_list: Optional[list[DeviceStatusItemforplanner | None]] = Field(
+    device_status_list: OptionalNullable[list[DeviceStatusItemforplanner]] = Field(
         default=UNSET, alias="deviceStatusList"
     )
 
@@ -20,4 +20,4 @@ class GetDeviceStatusesResponseforplanner(SdkBaseModel):
 class GetDeviceStatusesResponseforplannerDict(TypedDict):
     account_number: NotRequired[str | None]
     request_id: NotRequired[str | None]
-    device_status_list: NotRequired[list[DeviceStatusItemforplanner | DeviceStatusItemforplannerDict | None]]
+    device_status_list: NotRequired[list[DeviceStatusItemforplannerDict] | None]

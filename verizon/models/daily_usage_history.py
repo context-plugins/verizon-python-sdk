@@ -25,7 +25,7 @@ class DailyUsageHistory(SdkBaseModel):
 
 class DailyUsageHistoryDict(TypedDict):
     bytes_used: NotRequired[str]
-    extended_attributes: NotRequired[list[ExtendedAttribute | ExtendedAttributeDict]]
+    extended_attributes: NotRequired[list[ExtendedAttributeDict]]
     service_plan: NotRequired[str]
     sms_used: NotRequired[str]
     source: NotRequired[str]

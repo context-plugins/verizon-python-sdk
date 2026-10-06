@@ -27,5 +27,5 @@ class AssignLicenseRequest(SdkBaseModel):
 
 class AssignLicenseRequestDict(TypedDict):
     account_name: NotRequired[str]
-    devices: NotRequired[list[LicenseDeviceList | LicenseDeviceListDict]]
+    devices: NotRequired[list[LicenseDeviceListDict]]
     sku_number: NotRequired[str]

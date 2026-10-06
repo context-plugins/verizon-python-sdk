@@ -11,6 +11,7 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_json_decoder,
     json_body,
     json_decoder,
     param,
@@ -45,7 +46,8 @@ class SessionManagement:
         """Ends a Connectivity Management session.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             VZ-M2M session token.
@@ -65,7 +67,8 @@ class SessionManagement:
 
         Args:
             body: Request with current password that needs to be reset.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Returns a new, randomly generated password for the current username.
@@ -87,7 +90,8 @@ class SessionManagement:
 
         Args:
             body: Request to initiate a session.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             VZ-M2M session token.
@@ -113,7 +117,8 @@ class AsyncSessionManagement:
         """Ends a Connectivity Management session.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             VZ-M2M session token.
@@ -135,7 +140,8 @@ class AsyncSessionManagement:
 
         Args:
             body: Request with current password that needs to be reset.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             Returns a new, randomly generated password for the current username.
@@ -157,7 +163,8 @@ class AsyncSessionManagement:
 
         Args:
             body: Request to initiate a session.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             VZ-M2M session token.
@@ -182,13 +189,14 @@ class SessionManagementWithRawResponse(SecuredRawResponse[RawClient, Server, Aut
         """Ends a Connectivity Management session.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/session/logout"),
+            url_template=self._server.thingspace("/m2m/v1/session/logout"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
             decoder=json_decoder[LogOutRequest],
@@ -207,13 +215,14 @@ class SessionManagementWithRawResponse(SecuredRawResponse[RawClient, Server, Aut
 
         Args:
             body: Request with current password that needs to be reset.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="PUT",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/session/password/actions/reset"),
+            url_template=self._server.thingspace("/m2m/v1/session/password/actions/reset"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[SessionResetPasswordRequest | SessionResetPasswordRequestDict](body),
             auth_scheme=AllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
@@ -233,13 +242,14 @@ class SessionManagementWithRawResponse(SecuredRawResponse[RawClient, Server, Aut
 
         Args:
             body: Request to initiate a session.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/session/login"),
+            url_template=self._server.thingspace("/m2m/v1/session/login"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[LogInRequest | LogInRequestDict | None](body),
             auth_scheme=self._auth.thingspace_oauth,
@@ -256,16 +266,17 @@ class AsyncSessionManagementWithRawResponse(SecuredRawResponse[AsyncRawClient, S
         """Ends a Connectivity Management session.
 
         Args:
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/session/logout"),
+            url_template=self._server.thingspace("/m2m/v1/session/logout"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[LogOutRequest],
+            decoder=async_json_decoder[LogOutRequest],
             error_mapper=end_connectivity_management_session_error_mapper,
             request_options=request_options,
         )
@@ -281,17 +292,18 @@ class AsyncSessionManagementWithRawResponse(SecuredRawResponse[AsyncRawClient, S
 
         Args:
             body: Request with current password that needs to be reset.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="PUT",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/session/password/actions/reset"),
+            url_template=self._server.thingspace("/m2m/v1/session/password/actions/reset"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[SessionResetPasswordRequest | SessionResetPasswordRequestDict](body),
             auth_scheme=AsyncAllSchemes(self._auth.thingspace_oauth, self._auth.vz_m2_m_token),
-            decoder=json_decoder[SessionResetPasswordResult],
+            decoder=async_json_decoder[SessionResetPasswordResult],
             error_mapper=reset_connectivity_management_password_error_mapper,
             request_options=request_options,
         )
@@ -307,17 +319,18 @@ class AsyncSessionManagementWithRawResponse(SecuredRawResponse[AsyncRawClient, S
 
         Args:
             body: Request to initiate a session.
-            request_options: Per-call overrides for this one request, such as a timeout or extra headers.
+            request_options: Per-call overrides for this one request, such as a timeout, extra headers, or its retry
+                count and statuses.
 
         Returns:
             An ``ApiResult`` holding the deserialized response or the error body."""
         return await self._client.execute(
             http_method="POST",
-            url_template=self._server.hyper_precise_credentials("/m2m/v1/session/login"),
+            url_template=self._server.thingspace("/m2m/v1/session/login"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[LogInRequest | LogInRequestDict | None](body),
             auth_scheme=self._auth.thingspace_oauth,
-            decoder=json_decoder[LogInResult],
+            decoder=async_json_decoder[LogInResult],
             error_mapper=start_connectivity_management_session_error_mapper,
             request_options=request_options,
         )

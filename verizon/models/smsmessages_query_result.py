@@ -20,4 +20,4 @@ class SmsmessagesQueryResult(SdkBaseModel):
 
 class SmsmessagesQueryResultDict(TypedDict):
     has_more_data: NotRequired[bool]
-    messages: NotRequired[list[Smsmessage | SmsmessageDict]]
+    messages: NotRequired[list[SmsmessageDict]]

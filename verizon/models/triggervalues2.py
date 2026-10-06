@@ -25,7 +25,7 @@ class Triggervalues2Dict(TypedDict):
     account_name: NotRequired[str]
     organization_name: NotRequired[str]
     trigger_category: NotRequired[str]
-    promo_alerts: NotRequired[list[PromoAlert | PromoAlertDict]]
+    promo_alerts: NotRequired[list[PromoAlertDict]]
     active: NotRequired[bool]
     created_at: NotRequired[RFC3339DateTime]
     modified_at: NotRequired[RFC3339DateTime]
