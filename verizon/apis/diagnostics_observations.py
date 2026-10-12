@@ -16,6 +16,7 @@ from ..core import (
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..models.diagnostics_observation_result import DiagnosticsObservationResult
 from ..server.server import Server
@@ -39,7 +40,7 @@ class DiagnosticsObservations:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.start_diagnostics_observation(request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.start_diagnostics_observation(request_options=request_options))
 
     def stop_diagnostics_observation(
         self, transaction_id: str, account_name: str, *, request_options: RequestOptionsOrDict | None = None
@@ -57,9 +58,11 @@ class DiagnosticsObservations:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.stop_diagnostics_observation(
-            transaction_id, account_name, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.stop_diagnostics_observation(
+                transaction_id, account_name, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> DiagnosticsObservationsWithRawResponse:
@@ -84,7 +87,7 @@ class AsyncDiagnosticsObservations:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.start_diagnostics_observation(request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.start_diagnostics_observation(request_options=request_options))
 
     async def stop_diagnostics_observation(
         self, transaction_id: str, account_name: str, *, request_options: RequestOptionsOrDict | None = None
@@ -102,11 +105,11 @@ class AsyncDiagnosticsObservations:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.stop_diagnostics_observation(
                 transaction_id, account_name, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncDiagnosticsObservationsWithRawResponse:

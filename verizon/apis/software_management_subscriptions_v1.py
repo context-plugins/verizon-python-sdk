@@ -12,6 +12,7 @@ from ..core import (
     async_json_decoder,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.get_account_license_status_error import (
     GetAccountLicenseStatusErrorBody,
@@ -48,9 +49,9 @@ class SoftwareManagementSubscriptionsV1:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV1Result | RawError``."""
-        return self._with_raw_response.get_account_license_status(
-            account, start_index, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_account_license_status(account, start_index, request_options=request_options)
+        )
 
     def get_account_subscription_status(
         self, account: str, *, request_options: RequestOptionsOrDict | None = None
@@ -67,9 +68,7 @@ class SoftwareManagementSubscriptionsV1:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV1Result | RawError``."""
-        return self._with_raw_response.get_account_subscription_status(
-            account, request_options=request_options
-        ).unwrap()
+        return unwrap(self._with_raw_response.get_account_subscription_status(account, request_options=request_options))
 
     @property
     def with_raw_response(self) -> SoftwareManagementSubscriptionsV1WithRawResponse:
@@ -98,11 +97,11 @@ class AsyncSoftwareManagementSubscriptionsV1:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV1Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_account_license_status(
                 account, start_index, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_account_subscription_status(
         self, account: str, *, request_options: RequestOptionsOrDict | None = None
@@ -119,9 +118,9 @@ class AsyncSoftwareManagementSubscriptionsV1:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV1Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_account_subscription_status(account, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncSoftwareManagementSubscriptionsV1WithRawResponse:

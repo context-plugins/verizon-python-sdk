@@ -12,6 +12,7 @@ from ..core import (
     async_json_decoder,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.get_campaign_device_status_error import (
     GetCampaignDeviceStatusErrorBody,
@@ -61,9 +62,11 @@ class SoftwareManagementReportsV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return self._with_raw_response.get_campaign_device_status(
-            account, campaign_id, last_seen_device_id=last_seen_device_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_campaign_device_status(
+                account, campaign_id, last_seen_device_id=last_seen_device_id, request_options=request_options
+            ),
+        )
 
     def get_campaign_history_by_status(
         self,
@@ -87,9 +90,11 @@ class SoftwareManagementReportsV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return self._with_raw_response.get_campaign_history_by_status(
-            account, campaign_status, last_seen_campaign_id=last_seen_campaign_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_campaign_history_by_status(
+                account, campaign_status, last_seen_campaign_id=last_seen_campaign_id, request_options=request_options
+            ),
+        )
 
     def get_device_firmware_upgrade_history2(
         self, account: str, device_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -107,9 +112,11 @@ class SoftwareManagementReportsV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return self._with_raw_response.get_device_firmware_upgrade_history2(
-            account, device_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_device_firmware_upgrade_history2(
+                account, device_id, request_options=request_options
+            ),
+        )
 
     def list_account_devices2(
         self,
@@ -133,12 +140,14 @@ class SoftwareManagementReportsV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return self._with_raw_response.list_account_devices2(
-            account,
-            last_seen_device_id=last_seen_device_id,
-            distribution_type=distribution_type,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.list_account_devices2(
+                account,
+                last_seen_device_id=last_seen_device_id,
+                distribution_type=distribution_type,
+                request_options=request_options,
+            ),
+        )
 
     def list_available_software(
         self, account: str, *, distribution_type: str | None = None, request_options: RequestOptionsOrDict | None = None
@@ -156,9 +165,11 @@ class SoftwareManagementReportsV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return self._with_raw_response.list_available_software(
-            account, distribution_type=distribution_type, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.list_available_software(
+                account, distribution_type=distribution_type, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> SoftwareManagementReportsV2WithRawResponse:
@@ -191,11 +202,11 @@ class AsyncSoftwareManagementReportsV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_campaign_device_status(
                 account, campaign_id, last_seen_device_id=last_seen_device_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_campaign_history_by_status(
         self,
@@ -219,11 +230,11 @@ class AsyncSoftwareManagementReportsV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_campaign_history_by_status(
                 account, campaign_status, last_seen_campaign_id=last_seen_campaign_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_device_firmware_upgrade_history2(
         self, account: str, device_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -241,11 +252,11 @@ class AsyncSoftwareManagementReportsV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_device_firmware_upgrade_history2(
                 account, device_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def list_account_devices2(
         self,
@@ -269,14 +280,14 @@ class AsyncSoftwareManagementReportsV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.list_account_devices2(
                 account,
                 last_seen_device_id=last_seen_device_id,
                 distribution_type=distribution_type,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     async def list_available_software(
         self, account: str, *, distribution_type: str | None = None, request_options: RequestOptionsOrDict | None = None
@@ -294,11 +305,11 @@ class AsyncSoftwareManagementReportsV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.list_available_software(
                 account, distribution_type=distribution_type, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncSoftwareManagementReportsV2WithRawResponse:

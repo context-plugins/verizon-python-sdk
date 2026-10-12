@@ -12,6 +12,7 @@ from ..core import (
     async_json_decoder,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.get_current_asynchronous_request_status_error import (
     GetCurrentAsynchronousRequestStatusErrorBody,
@@ -41,9 +42,11 @@ class AccountRequests:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.get_current_asynchronous_request_status(
-            aname, request_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_current_asynchronous_request_status(
+                aname, request_id, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AccountRequestsWithRawResponse:
@@ -70,11 +73,11 @@ class AsyncAccountRequests:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_current_asynchronous_request_status(
                 aname, request_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncAccountRequestsWithRawResponse:

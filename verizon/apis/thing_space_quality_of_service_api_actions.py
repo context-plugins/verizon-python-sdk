@@ -17,6 +17,7 @@ from ..core import (
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..models.subscribe_request import SubscribeRequest, SubscribeRequestDict
 from ..models.success201 import Success201
@@ -42,9 +43,11 @@ class ThingSpaceQualityOfServiceApiActions:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.create_a_thing_space_quality_of_service_api_subscription(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.create_a_thing_space_quality_of_service_api_subscription(
+                body, request_options=request_options
+            ),
+        )
 
     def stop_a_thing_space_quality_of_service_api_subscription(
         self, account_name: str, qos_subscription_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -63,9 +66,11 @@ class ThingSpaceQualityOfServiceApiActions:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.stop_a_thing_space_quality_of_service_api_subscription(
-            account_name, qos_subscription_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.stop_a_thing_space_quality_of_service_api_subscription(
+                account_name, qos_subscription_id, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> ThingSpaceQualityOfServiceApiActionsWithRawResponse:
@@ -91,11 +96,11 @@ class AsyncThingSpaceQualityOfServiceApiActions:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.create_a_thing_space_quality_of_service_api_subscription(
                 body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def stop_a_thing_space_quality_of_service_api_subscription(
         self, account_name: str, qos_subscription_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -114,11 +119,11 @@ class AsyncThingSpaceQualityOfServiceApiActions:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.stop_a_thing_space_quality_of_service_api_subscription(
                 account_name, qos_subscription_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncThingSpaceQualityOfServiceApiActionsWithRawResponse:

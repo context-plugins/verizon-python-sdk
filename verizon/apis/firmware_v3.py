@@ -15,6 +15,7 @@ from ..core import (
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.list_available_firmware2_error import (
     ListAvailableFirmware2ErrorBody,
@@ -57,9 +58,9 @@ class FirmwareV3:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV3Result | RawError``."""
-        return self._with_raw_response.list_available_firmware2(
-            acc, protocol=protocol, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.list_available_firmware2(acc, protocol=protocol, request_options=request_options)
+        )
 
     def report_device_firmware(
         self, acc: str, device_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -77,7 +78,7 @@ class FirmwareV3:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV3Result | RawError``."""
-        return self._with_raw_response.report_device_firmware(acc, device_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.report_device_firmware(acc, device_id, request_options=request_options))
 
     def synchronize_device_firmware(
         self, acc: str, body: FirmwareImei | FirmwareImeiDict, *, request_options: RequestOptionsOrDict | None = None
@@ -95,7 +96,7 @@ class FirmwareV3:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV3Result | RawError``."""
-        return self._with_raw_response.synchronize_device_firmware(acc, body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.synchronize_device_firmware(acc, body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> FirmwareV3WithRawResponse:
@@ -126,11 +127,11 @@ class AsyncFirmwareV3:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV3Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.list_available_firmware2(
                 acc, protocol=protocol, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def report_device_firmware(
         self, acc: str, device_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -148,9 +149,9 @@ class AsyncFirmwareV3:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV3Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.report_device_firmware(acc, device_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def synchronize_device_firmware(
         self, acc: str, body: FirmwareImei | FirmwareImeiDict, *, request_options: RequestOptionsOrDict | None = None
@@ -168,9 +169,9 @@ class AsyncFirmwareV3:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV3Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.synchronize_device_firmware(acc, body, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncFirmwareV3WithRawResponse:

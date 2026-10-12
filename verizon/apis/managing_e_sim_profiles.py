@@ -17,6 +17,7 @@ from ..core import (
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..models.device_profile_request import DeviceProfileRequest, DeviceProfileRequestDict
 from ..models.fall_back import FallBack, FallBackDict
@@ -48,7 +49,7 @@ class ManagingESimProfiles:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.activate_a_device_profile(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.activate_a_device_profile(body, request_options=request_options))
 
     def deactivate_a_device_profile(
         self,
@@ -69,7 +70,7 @@ class ManagingESimProfiles:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.deactivate_a_device_profile(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.deactivate_a_device_profile(body, request_options=request_options))
 
     def delete_a_device_profile(
         self,
@@ -89,7 +90,7 @@ class ManagingESimProfiles:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.delete_a_device_profile(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_a_device_profile(body, request_options=request_options))
 
     def device_suspend(
         self, body: GioprofileRequest | GioprofileRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -106,7 +107,7 @@ class ManagingESimProfiles:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.device_suspend(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.device_suspend(body, request_options=request_options))
 
     def download_a_device_profile(
         self,
@@ -126,7 +127,7 @@ class ManagingESimProfiles:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.download_a_device_profile(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.download_a_device_profile(body, request_options=request_options))
 
     def enable_a_device_profile(
         self,
@@ -146,7 +147,7 @@ class ManagingESimProfiles:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.enable_a_device_profile(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.enable_a_device_profile(body, request_options=request_options))
 
     def enable_a_device_profile_for_download(
         self,
@@ -166,9 +167,9 @@ class ManagingESimProfiles:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.enable_a_device_profile_for_download(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.enable_a_device_profile_for_download(body, request_options=request_options)
+        )
 
     def profile_suspend(
         self, body: GioprofileRequest | GioprofileRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -185,7 +186,7 @@ class ManagingESimProfiles:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.profile_suspend(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.profile_suspend(body, request_options=request_options))
 
     def resume_profile(
         self, body: GioprofileRequest | GioprofileRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -202,7 +203,7 @@ class ManagingESimProfiles:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.resume_profile(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.resume_profile(body, request_options=request_options))
 
     def set_fallback(
         self, body: FallBack | FallBackDict, *, request_options: RequestOptionsOrDict | None = None
@@ -219,7 +220,7 @@ class ManagingESimProfiles:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.set_fallback(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.set_fallback(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> ManagingESimProfilesWithRawResponse:
@@ -245,7 +246,7 @@ class AsyncManagingESimProfiles:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.activate_a_device_profile(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.activate_a_device_profile(body, request_options=request_options))
 
     async def deactivate_a_device_profile(
         self,
@@ -266,9 +267,7 @@ class AsyncManagingESimProfiles:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
-            await self._with_raw_response.deactivate_a_device_profile(body, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.deactivate_a_device_profile(body, request_options=request_options))
 
     async def delete_a_device_profile(
         self,
@@ -288,7 +287,7 @@ class AsyncManagingESimProfiles:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.delete_a_device_profile(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.delete_a_device_profile(body, request_options=request_options))
 
     async def device_suspend(
         self, body: GioprofileRequest | GioprofileRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -305,7 +304,7 @@ class AsyncManagingESimProfiles:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.device_suspend(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.device_suspend(body, request_options=request_options))
 
     async def download_a_device_profile(
         self,
@@ -325,7 +324,7 @@ class AsyncManagingESimProfiles:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.download_a_device_profile(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.download_a_device_profile(body, request_options=request_options))
 
     async def enable_a_device_profile(
         self,
@@ -345,7 +344,7 @@ class AsyncManagingESimProfiles:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.enable_a_device_profile(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.enable_a_device_profile(body, request_options=request_options))
 
     async def enable_a_device_profile_for_download(
         self,
@@ -365,9 +364,9 @@ class AsyncManagingESimProfiles:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.enable_a_device_profile_for_download(body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def profile_suspend(
         self, body: GioprofileRequest | GioprofileRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -384,7 +383,7 @@ class AsyncManagingESimProfiles:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.profile_suspend(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.profile_suspend(body, request_options=request_options))
 
     async def resume_profile(
         self, body: GioprofileRequest | GioprofileRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -401,7 +400,7 @@ class AsyncManagingESimProfiles:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.resume_profile(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.resume_profile(body, request_options=request_options))
 
     async def set_fallback(
         self, body: FallBack | FallBackDict, *, request_options: RequestOptionsOrDict | None = None
@@ -418,7 +417,7 @@ class AsyncManagingESimProfiles:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.set_fallback(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.set_fallback(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncManagingESimProfilesWithRawResponse:

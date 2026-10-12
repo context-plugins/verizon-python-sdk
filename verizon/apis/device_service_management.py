@@ -15,6 +15,7 @@ from ..core import (
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.get_device_hyper_precise_status_error import (
     GetDeviceHyperPreciseStatusErrorBody,
@@ -51,9 +52,11 @@ class DeviceServiceManagement:
             ApiError: Bad request. Unauthorized request. Access token is missing or invalid. Forbidden request. Bad
                 request. Not found. Bad request. Conflict state. Internal Server Error. ``error`` is
                 ``HyperPreciseLocationResult | RawError``."""
-        return self._with_raw_response.get_device_hyper_precise_status(
-            imei, account_number, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_device_hyper_precise_status(
+                imei, account_number, request_options=request_options
+            ),
+        )
 
     def update_device_hyper_precise_status(
         self,
@@ -75,9 +78,7 @@ class DeviceServiceManagement:
             ApiError: Bad request. Unauthorized request. Access token is missing or invalid. Forbidden request. Bad
                 request. Not found. Bad request. Conflict state. Internal Server Error. ``error`` is
                 ``HyperPreciseLocationResult | RawError``."""
-        return self._with_raw_response.update_device_hyper_precise_status(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(self._with_raw_response.update_device_hyper_precise_status(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> DeviceServiceManagementWithRawResponse:
@@ -106,11 +107,11 @@ class AsyncDeviceServiceManagement:
             ApiError: Bad request. Unauthorized request. Access token is missing or invalid. Forbidden request. Bad
                 request. Not found. Bad request. Conflict state. Internal Server Error. ``error`` is
                 ``HyperPreciseLocationResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_device_hyper_precise_status(
                 imei, account_number, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def update_device_hyper_precise_status(
         self,
@@ -132,9 +133,9 @@ class AsyncDeviceServiceManagement:
             ApiError: Bad request. Unauthorized request. Access token is missing or invalid. Forbidden request. Bad
                 request. Not found. Bad request. Conflict state. Internal Server Error. ``error`` is
                 ``HyperPreciseLocationResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.update_device_hyper_precise_status(body, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncDeviceServiceManagementWithRawResponse:

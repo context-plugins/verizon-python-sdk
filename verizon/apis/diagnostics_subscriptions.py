@@ -14,6 +14,7 @@ from ..core import (
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..models.diagnostics_subscription import DiagnosticsSubscription
 from ..server.server import Server
@@ -38,9 +39,9 @@ class DiagnosticsSubscriptions:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_diagnostics_subscription(
-            account_name, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_diagnostics_subscription(account_name, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> DiagnosticsSubscriptionsWithRawResponse:
@@ -66,9 +67,9 @@ class AsyncDiagnosticsSubscriptions:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_diagnostics_subscription(account_name, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncDiagnosticsSubscriptionsWithRawResponse:

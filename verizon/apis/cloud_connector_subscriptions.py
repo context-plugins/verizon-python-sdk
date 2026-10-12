@@ -19,6 +19,7 @@ from ..core import (
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..models.create_subscription_request import CreateSubscriptionRequest, CreateSubscriptionRequestDict
 from ..models.delete_subscription_request import DeleteSubscriptionRequest, DeleteSubscriptionRequestDict
@@ -50,7 +51,7 @@ class CloudConnectorSubscriptions:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.create_subscription(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.create_subscription(body, request_options=request_options))
 
     def delete_subscription(
         self,
@@ -70,7 +71,7 @@ class CloudConnectorSubscriptions:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.delete_subscription(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_subscription(body, request_options=request_options))
 
     def query_subscription(
         self,
@@ -91,7 +92,7 @@ class CloudConnectorSubscriptions:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.query_subscription(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.query_subscription(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> CloudConnectorSubscriptionsWithRawResponse:
@@ -121,7 +122,7 @@ class AsyncCloudConnectorSubscriptions:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.create_subscription(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.create_subscription(body, request_options=request_options))
 
     async def delete_subscription(
         self,
@@ -141,7 +142,7 @@ class AsyncCloudConnectorSubscriptions:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.delete_subscription(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.delete_subscription(body, request_options=request_options))
 
     async def query_subscription(
         self,
@@ -162,7 +163,7 @@ class AsyncCloudConnectorSubscriptions:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.query_subscription(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.query_subscription(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncCloudConnectorSubscriptionsWithRawResponse:

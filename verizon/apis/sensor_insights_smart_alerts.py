@@ -15,6 +15,7 @@ from ..core import (
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.sensor_insights_bulk_update_error import (
     SensorInsightsBulkUpdateErrorBody,
@@ -56,7 +57,7 @@ class SensorInsightsSmartAlerts:
             ApiError: Bad Request UnAuthorized Forbidden Not Found Not Acceptable Unsupported media type Too many
                 requests Internal server error. ``error`` is ``ManagementError400 | ManagementError | ManagementError403
                 | ManagementError404 | ManagementError500 | RawError``."""
-        return self._with_raw_response.sensor_insights_bulk_update(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.sensor_insights_bulk_update(body, request_options=request_options))
 
     def sensor_insights_list_smart_alerts_request(
         self,
@@ -78,9 +79,9 @@ class SensorInsightsSmartAlerts:
             ApiError: Bad Request UnAuthorized Forbidden Not Found Not Acceptable Unsupported media type Too many
                 requests Internal server error. ``error`` is ``ManagementError400 | ManagementError | ManagementError403
                 | ManagementError404 | ManagementError500 | RawError``."""
-        return self._with_raw_response.sensor_insights_list_smart_alerts_request(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.sensor_insights_list_smart_alerts_request(body, request_options=request_options)
+        )
 
     def sensor_insights_patch_smart_alert_request(
         self,
@@ -102,9 +103,9 @@ class SensorInsightsSmartAlerts:
             ApiError: Bad Request UnAuthorized Forbidden Not Found Not Acceptable Unsupported media type Too many
                 requests Internal server error. ``error`` is ``ManagementError400 | ManagementError | ManagementError403
                 | ManagementError404 | ManagementError500 | RawError``."""
-        return self._with_raw_response.sensor_insights_patch_smart_alert_request(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.sensor_insights_patch_smart_alert_request(body, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> SensorInsightsSmartAlertsWithRawResponse:
@@ -132,9 +133,7 @@ class AsyncSensorInsightsSmartAlerts:
             ApiError: Bad Request UnAuthorized Forbidden Not Found Not Acceptable Unsupported media type Too many
                 requests Internal server error. ``error`` is ``ManagementError400 | ManagementError | ManagementError403
                 | ManagementError404 | ManagementError500 | RawError``."""
-        return (
-            await self._with_raw_response.sensor_insights_bulk_update(body, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.sensor_insights_bulk_update(body, request_options=request_options))
 
     async def sensor_insights_list_smart_alerts_request(
         self,
@@ -156,11 +155,11 @@ class AsyncSensorInsightsSmartAlerts:
             ApiError: Bad Request UnAuthorized Forbidden Not Found Not Acceptable Unsupported media type Too many
                 requests Internal server error. ``error`` is ``ManagementError400 | ManagementError | ManagementError403
                 | ManagementError404 | ManagementError500 | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.sensor_insights_list_smart_alerts_request(
                 body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def sensor_insights_patch_smart_alert_request(
         self,
@@ -182,11 +181,11 @@ class AsyncSensorInsightsSmartAlerts:
             ApiError: Bad Request UnAuthorized Forbidden Not Found Not Acceptable Unsupported media type Too many
                 requests Internal server error. ``error`` is ``ManagementError400 | ManagementError | ManagementError403
                 | ManagementError404 | ManagementError500 | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.sensor_insights_patch_smart_alert_request(
                 body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncSensorInsightsSmartAlertsWithRawResponse:

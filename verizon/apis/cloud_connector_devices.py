@@ -19,6 +19,7 @@ from ..core import (
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..models.change_configuration_request import ChangeConfigurationRequest, ChangeConfigurationRequestDict
 from ..models.change_configuration_response import ChangeConfigurationResponse
@@ -58,7 +59,7 @@ class CloudConnectorDevices:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.delete_device_from_account(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_device_from_account(body, request_options=request_options))
 
     def find_device_by_property_values(
         self,
@@ -79,7 +80,7 @@ class CloudConnectorDevices:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.find_device_by_property_values(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.find_device_by_property_values(body, request_options=request_options))
 
     def search_device_event_history(
         self,
@@ -100,7 +101,7 @@ class CloudConnectorDevices:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.search_device_event_history(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.search_device_event_history(body, request_options=request_options))
 
     def search_devices_resources_by_property_values(
         self,
@@ -120,9 +121,9 @@ class CloudConnectorDevices:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.search_devices_resources_by_property_values(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.search_devices_resources_by_property_values(body, request_options=request_options)
+        )
 
     def search_sensor_readings(
         self,
@@ -145,7 +146,7 @@ class CloudConnectorDevices:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.search_sensor_readings(fieldname, body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.search_sensor_readings(fieldname, body, request_options=request_options))
 
     def update_devices_configuration_value(
         self,
@@ -166,9 +167,7 @@ class CloudConnectorDevices:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.update_devices_configuration_value(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(self._with_raw_response.update_devices_configuration_value(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> CloudConnectorDevicesWithRawResponse:
@@ -197,9 +196,7 @@ class AsyncCloudConnectorDevices:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
-            await self._with_raw_response.delete_device_from_account(body, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.delete_device_from_account(body, request_options=request_options))
 
     async def find_device_by_property_values(
         self,
@@ -220,9 +217,9 @@ class AsyncCloudConnectorDevices:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.find_device_by_property_values(body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def search_device_event_history(
         self,
@@ -243,9 +240,7 @@ class AsyncCloudConnectorDevices:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
-            await self._with_raw_response.search_device_event_history(body, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.search_device_event_history(body, request_options=request_options))
 
     async def search_devices_resources_by_property_values(
         self,
@@ -265,11 +260,11 @@ class AsyncCloudConnectorDevices:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.search_devices_resources_by_property_values(
                 body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def search_sensor_readings(
         self,
@@ -292,9 +287,9 @@ class AsyncCloudConnectorDevices:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.search_sensor_readings(fieldname, body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def update_devices_configuration_value(
         self,
@@ -315,9 +310,9 @@ class AsyncCloudConnectorDevices:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.update_devices_configuration_value(body, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncCloudConnectorDevicesWithRawResponse:

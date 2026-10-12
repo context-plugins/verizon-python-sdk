@@ -15,6 +15,7 @@ from ..core import (
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.deviceprovhistory_using_post_error import (
     DeviceprovhistoryUsingPostErrorBody,
@@ -50,7 +51,7 @@ class GlobalReporting:
         Raises:
             ApiError: Bad request Unauthorized Forbidden Not Found / Does not exist Format / Request Unacceptable Too
                 many requests ``error`` is ``ESimrestErrorResponse | RawError``."""
-        return self._with_raw_response.retrieve_global_list(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.retrieve_global_list(body, request_options=request_options))
 
     def deviceprovhistory_using_post(
         self,
@@ -71,7 +72,7 @@ class GlobalReporting:
         Raises:
             ApiError: Bad request Unauthorized Forbidden Not Found / Does not exist Format / Request Unacceptable Too
                 many requests ``error`` is ``ESimrestErrorResponse | RawError``."""
-        return self._with_raw_response.deviceprovhistory_using_post(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.deviceprovhistory_using_post(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> GlobalReportingWithRawResponse:
@@ -101,7 +102,7 @@ class AsyncGlobalReporting:
         Raises:
             ApiError: Bad request Unauthorized Forbidden Not Found / Does not exist Format / Request Unacceptable Too
                 many requests ``error`` is ``ESimrestErrorResponse | RawError``."""
-        return (await self._with_raw_response.retrieve_global_list(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.retrieve_global_list(body, request_options=request_options))
 
     async def deviceprovhistory_using_post(
         self,
@@ -122,9 +123,7 @@ class AsyncGlobalReporting:
         Raises:
             ApiError: Bad request Unauthorized Forbidden Not Found / Does not exist Format / Request Unacceptable Too
                 many requests ``error`` is ``ESimrestErrorResponse | RawError``."""
-        return (
-            await self._with_raw_response.deviceprovhistory_using_post(body, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.deviceprovhistory_using_post(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncGlobalReportingWithRawResponse:

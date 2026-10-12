@@ -12,6 +12,7 @@ from ..core import (
     async_json_decoder,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.get_account_information_using_get_error import (
     GetAccountInformationUsingGetErrorBody,
@@ -42,9 +43,9 @@ class AccountServiceController:
             ApiError: Bad request Unauthorized Forbidden Not Found / Does not exist Format / Request Unacceptable Too
                 many requests ``error`` is ``RestErrorResponseforplanner | AuthRestErrorResponseforplanner |
                 RawError``."""
-        return self._with_raw_response.get_account_information_using_get(
-            account_name, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_account_information_using_get(account_name, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> AccountServiceControllerWithRawResponse:
@@ -72,11 +73,11 @@ class AsyncAccountServiceController:
             ApiError: Bad request Unauthorized Forbidden Not Found / Does not exist Format / Request Unacceptable Too
                 many requests ``error`` is ``RestErrorResponseforplanner | AuthRestErrorResponseforplanner |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_account_information_using_get(
                 account_name, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncAccountServiceControllerWithRawResponse:

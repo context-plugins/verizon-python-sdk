@@ -14,6 +14,7 @@ from ..core import (
     async_json_decoder,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.sensor_insights_get_network_health_score_response_error import (
     SensorInsightsGetNetworkHealthScoreResponseErrorBody,
@@ -48,9 +49,9 @@ class SensorInsightsHealthScore:
             ApiError: Bad Request UnAuthorized Forbidden Not Acceptable Unsupported media type Too many requests
                 Internal server error. ``error`` is ``ManagementError400 | ManagementError | ManagementError403 |
                 ManagementError500 | RawError``."""
-        return self._with_raw_response.sensor_insights_get_network_health_score_response(
-            request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.sensor_insights_get_network_health_score_response(request_options=request_options)
+        )
 
     def sensor_insights_health_score_summary(
         self, *, request_options: RequestOptionsOrDict | None = None
@@ -68,7 +69,7 @@ class SensorInsightsHealthScore:
             ApiError: Bad Request UnAuthorized Forbidden Not Acceptable Unsupported media type Too many requests
                 Internal server error. ``error`` is ``ManagementError400 | ManagementError | ManagementError403 |
                 ManagementError500 | RawError``."""
-        return self._with_raw_response.sensor_insights_health_score_summary(request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.sensor_insights_health_score_summary(request_options=request_options))
 
     @property
     def with_raw_response(self) -> SensorInsightsHealthScoreWithRawResponse:
@@ -95,11 +96,11 @@ class AsyncSensorInsightsHealthScore:
             ApiError: Bad Request UnAuthorized Forbidden Not Acceptable Unsupported media type Too many requests
                 Internal server error. ``error`` is ``ManagementError400 | ManagementError | ManagementError403 |
                 ManagementError500 | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.sensor_insights_get_network_health_score_response(
                 request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def sensor_insights_health_score_summary(
         self, *, request_options: RequestOptionsOrDict | None = None
@@ -117,9 +118,9 @@ class AsyncSensorInsightsHealthScore:
             ApiError: Bad Request UnAuthorized Forbidden Not Acceptable Unsupported media type Too many requests
                 Internal server error. ``error`` is ``ManagementError400 | ManagementError | ManagementError403 |
                 ManagementError500 | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.sensor_insights_health_score_summary(request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncSensorInsightsHealthScoreWithRawResponse:

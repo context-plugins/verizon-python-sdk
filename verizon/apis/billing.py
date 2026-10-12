@@ -15,6 +15,7 @@ from ..core import (
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.add_account_error import AddAccountErrorBody, add_account_error_mapper
 from ..errors.cancel_managed_account_action_error import (
@@ -58,7 +59,7 @@ class Billing:
 
         Raises:
             ApiError: Unexpected error ``error`` is ``DeviceLocationResult | RawError``."""
-        return self._with_raw_response.add_account(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.add_account(body, request_options=request_options))
 
     def cancel_managed_account_action(
         self,
@@ -78,7 +79,7 @@ class Billing:
 
         Raises:
             ApiError: Unexpected error ``error`` is ``DeviceLocationResult | RawError``."""
-        return self._with_raw_response.cancel_managed_account_action(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.cancel_managed_account_action(body, request_options=request_options))
 
     def list_managed_account(
         self, account_name: str, service_name: str, *, request_options: RequestOptionsOrDict | None = None
@@ -96,9 +97,9 @@ class Billing:
 
         Raises:
             ApiError: Unexpected error ``error`` is ``DeviceLocationResult | RawError``."""
-        return self._with_raw_response.list_managed_account(
-            account_name, service_name, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.list_managed_account(account_name, service_name, request_options=request_options)
+        )
 
     def managed_account_action(
         self,
@@ -118,7 +119,7 @@ class Billing:
 
         Raises:
             ApiError: Unexpected error ``error`` is ``DeviceLocationResult | RawError``."""
-        return self._with_raw_response.managed_account_action(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.managed_account_action(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> BillingWithRawResponse:
@@ -147,7 +148,7 @@ class AsyncBilling:
 
         Raises:
             ApiError: Unexpected error ``error`` is ``DeviceLocationResult | RawError``."""
-        return (await self._with_raw_response.add_account(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.add_account(body, request_options=request_options))
 
     async def cancel_managed_account_action(
         self,
@@ -167,9 +168,9 @@ class AsyncBilling:
 
         Raises:
             ApiError: Unexpected error ``error`` is ``DeviceLocationResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.cancel_managed_account_action(body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def list_managed_account(
         self, account_name: str, service_name: str, *, request_options: RequestOptionsOrDict | None = None
@@ -187,11 +188,11 @@ class AsyncBilling:
 
         Raises:
             ApiError: Unexpected error ``error`` is ``DeviceLocationResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.list_managed_account(
                 account_name, service_name, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def managed_account_action(
         self,
@@ -211,7 +212,7 @@ class AsyncBilling:
 
         Raises:
             ApiError: Unexpected error ``error`` is ``DeviceLocationResult | RawError``."""
-        return (await self._with_raw_response.managed_account_action(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.managed_account_action(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncBillingWithRawResponse:

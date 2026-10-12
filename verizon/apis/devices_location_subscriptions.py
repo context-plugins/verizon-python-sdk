@@ -15,6 +15,7 @@ from ..core import (
     async_json_decoder,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.get_location_service_subscription_status_error import (
     GetLocationServiceSubscriptionStatusErrorBody,
@@ -47,9 +48,11 @@ class DevicesLocationSubscriptions:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``DeviceLocationResult | RawError``."""
-        return self._with_raw_response.get_location_service_subscription_status(
-            account_name, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_location_service_subscription_status(
+                account_name, request_options=request_options
+            ),
+        )
 
     def get_location_service_usage(self, *, request_options: RequestOptionsOrDict | None = None) -> Any:
         """This endpoint allows user to search for billable usage for accounts based on the provided date range.
@@ -63,7 +66,7 @@ class DevicesLocationSubscriptions:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``DeviceLocationResult | RawError``."""
-        return self._with_raw_response.get_location_service_usage(request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_location_service_usage(request_options=request_options))
 
     @property
     def with_raw_response(self) -> DevicesLocationSubscriptionsWithRawResponse:
@@ -89,11 +92,11 @@ class AsyncDevicesLocationSubscriptions:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``DeviceLocationResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_location_service_subscription_status(
                 account_name, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_location_service_usage(self, *, request_options: RequestOptionsOrDict | None = None) -> Any:
         """This endpoint allows user to search for billable usage for accounts based on the provided date range.
@@ -107,7 +110,7 @@ class AsyncDevicesLocationSubscriptions:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``DeviceLocationResult | RawError``."""
-        return (await self._with_raw_response.get_location_service_usage(request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.get_location_service_usage(request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncDevicesLocationSubscriptionsWithRawResponse:

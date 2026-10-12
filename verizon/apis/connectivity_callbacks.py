@@ -15,6 +15,7 @@ from ..core import (
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.deregister_callback_error import DeregisterCallbackErrorBody, deregister_callback_error_mapper
 from ..errors.list_registered_callbacks_error import (
@@ -48,7 +49,7 @@ class ConnectivityCallbacks:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.deregister_callback(aname, sname, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.deregister_callback(aname, sname, request_options=request_options))
 
     def list_registered_callbacks(
         self, aname: str, *, request_options: RequestOptionsOrDict | None = None
@@ -65,7 +66,7 @@ class ConnectivityCallbacks:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.list_registered_callbacks(aname, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.list_registered_callbacks(aname, request_options=request_options))
 
     def register_callback(
         self,
@@ -87,7 +88,7 @@ class ConnectivityCallbacks:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.register_callback(aname, body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.register_callback(aname, body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> ConnectivityCallbacksWithRawResponse:
@@ -114,9 +115,7 @@ class AsyncConnectivityCallbacks:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
-            await self._with_raw_response.deregister_callback(aname, sname, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.deregister_callback(aname, sname, request_options=request_options))
 
     async def list_registered_callbacks(
         self, aname: str, *, request_options: RequestOptionsOrDict | None = None
@@ -133,9 +132,7 @@ class AsyncConnectivityCallbacks:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
-            await self._with_raw_response.list_registered_callbacks(aname, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.list_registered_callbacks(aname, request_options=request_options))
 
     async def register_callback(
         self,
@@ -157,7 +154,7 @@ class AsyncConnectivityCallbacks:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (await self._with_raw_response.register_callback(aname, body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.register_callback(aname, body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncConnectivityCallbacksWithRawResponse:

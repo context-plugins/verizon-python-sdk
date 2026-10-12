@@ -17,6 +17,7 @@ from ..core import (
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.sensor_insights_list_sensor_devices_request_error import (
     SensorInsightsListSensorDevicesRequestErrorBody,
@@ -76,9 +77,9 @@ class SensorInsightsSensors:
             ApiError: Bad Request UnAuthorized Forbidden Not Found Not Acceptable Unsupported media type Too many
                 requests Internal server error. ``error`` is ``ManagementError400 | ManagementError | ManagementError403
                 | ManagementError404 | ManagementError500 | RawError``."""
-        return self._with_raw_response.sensor_insights_list_sensor_devices_request(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.sensor_insights_list_sensor_devices_request(body, request_options=request_options)
+        )
 
     def sensor_insights_off_board_sensor_request(
         self,
@@ -99,9 +100,9 @@ class SensorInsightsSensors:
         Raises:
             ApiError: Bad Request UnAuthorized Forbidden ``error`` is ``ManagementError400 | ManagementError |
                 ManagementError403 | RawError``."""
-        return self._with_raw_response.sensor_insights_off_board_sensor_request(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.sensor_insights_off_board_sensor_request(body, request_options=request_options)
+        )
 
     def sensor_insights_on_board_sensor_request(
         self,
@@ -123,9 +124,9 @@ class SensorInsightsSensors:
             ApiError: Bad Request UnAuthorized Forbidden Not Acceptable Unsupported media type Too many requests
                 Internal server error. ``error`` is ``ManagementError400 | ManagementError | ManagementError403 |
                 ManagementError500 | RawError``."""
-        return self._with_raw_response.sensor_insights_on_board_sensor_request(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.sensor_insights_on_board_sensor_request(body, request_options=request_options)
+        )
 
     def sensor_insights_sensor_off_boarding_status_request(
         self,
@@ -147,9 +148,11 @@ class SensorInsightsSensors:
             ApiError: Bad Request UnAuthorized Forbidden Not Found Not Acceptable Unsupported media type Too many
                 requests Internal server error. ``error`` is ``ManagementError400 | ManagementError | ManagementError403
                 | ManagementError404 | ManagementError500 | RawError``."""
-        return self._with_raw_response.sensor_insights_sensor_off_boarding_status_request(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.sensor_insights_sensor_off_boarding_status_request(
+                body, request_options=request_options
+            ),
+        )
 
     def sensor_insights_sensor_on_board_status_request(
         self,
@@ -171,9 +174,11 @@ class SensorInsightsSensors:
             ApiError: Bad Request UnAuthorized Forbidden Not Found Not Acceptable Unsupported media type Too many
                 requests Internal server error. ``error`` is ``ManagementError400 | ManagementError | ManagementError403
                 | ManagementError404 | ManagementError500 | RawError``."""
-        return self._with_raw_response.sensor_insights_sensor_on_board_status_request(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.sensor_insights_sensor_on_board_status_request(
+                body, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> SensorInsightsSensorsWithRawResponse:
@@ -204,11 +209,11 @@ class AsyncSensorInsightsSensors:
             ApiError: Bad Request UnAuthorized Forbidden Not Found Not Acceptable Unsupported media type Too many
                 requests Internal server error. ``error`` is ``ManagementError400 | ManagementError | ManagementError403
                 | ManagementError404 | ManagementError500 | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.sensor_insights_list_sensor_devices_request(
                 body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def sensor_insights_off_board_sensor_request(
         self,
@@ -229,11 +234,11 @@ class AsyncSensorInsightsSensors:
         Raises:
             ApiError: Bad Request UnAuthorized Forbidden ``error`` is ``ManagementError400 | ManagementError |
                 ManagementError403 | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.sensor_insights_off_board_sensor_request(
                 body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def sensor_insights_on_board_sensor_request(
         self,
@@ -255,9 +260,9 @@ class AsyncSensorInsightsSensors:
             ApiError: Bad Request UnAuthorized Forbidden Not Acceptable Unsupported media type Too many requests
                 Internal server error. ``error`` is ``ManagementError400 | ManagementError | ManagementError403 |
                 ManagementError500 | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.sensor_insights_on_board_sensor_request(body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def sensor_insights_sensor_off_boarding_status_request(
         self,
@@ -279,11 +284,11 @@ class AsyncSensorInsightsSensors:
             ApiError: Bad Request UnAuthorized Forbidden Not Found Not Acceptable Unsupported media type Too many
                 requests Internal server error. ``error`` is ``ManagementError400 | ManagementError | ManagementError403
                 | ManagementError404 | ManagementError500 | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.sensor_insights_sensor_off_boarding_status_request(
                 body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def sensor_insights_sensor_on_board_status_request(
         self,
@@ -305,11 +310,11 @@ class AsyncSensorInsightsSensors:
             ApiError: Bad Request UnAuthorized Forbidden Not Found Not Acceptable Unsupported media type Too many
                 requests Internal server error. ``error`` is ``ManagementError400 | ManagementError | ManagementError403
                 | ManagementError404 | ManagementError500 | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.sensor_insights_sensor_on_board_status_request(
                 body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncSensorInsightsSensorsWithRawResponse:

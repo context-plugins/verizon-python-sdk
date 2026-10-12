@@ -12,6 +12,7 @@ from ..core import (
     async_json_decoder,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.get_device_check_in_history_error import (
     GetDeviceCheckInHistoryErrorBody,
@@ -42,9 +43,9 @@ class ServerLogging:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return self._with_raw_response.get_device_check_in_history(
-            account, device_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_device_check_in_history(account, device_id, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> ServerLoggingWithRawResponse:
@@ -72,11 +73,11 @@ class AsyncServerLogging:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_device_check_in_history(
                 account, device_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncServerLoggingWithRawResponse:

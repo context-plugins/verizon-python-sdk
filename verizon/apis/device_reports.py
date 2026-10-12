@@ -15,6 +15,7 @@ from ..core import (
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.calculate_aggregated_report_asynchronous_error import (
     CalculateAggregatedReportAsynchronousErrorBody,
@@ -58,9 +59,9 @@ class DeviceReports:
             ApiError: Bad request. Unauthorized request. Access token is missing or invalid. Forbidden request. Bad
                 request. Not found. Bad request. Conflict state. Internal Server Error. ``error`` is
                 ``HyperPreciseLocationResult | RawError``."""
-        return self._with_raw_response.calculate_aggregated_report_asynchronous(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.calculate_aggregated_report_asynchronous(body, request_options=request_options)
+        )
 
     def calculate_aggregated_report_synchronous(
         self,
@@ -83,9 +84,9 @@ class DeviceReports:
             ApiError: Bad request. Unauthorized request. Access token is missing or invalid. Forbidden request. Bad
                 request. Not found. Bad request. Conflict state. Internal Server Error. ``error`` is
                 ``HyperPreciseLocationResult | RawError``."""
-        return self._with_raw_response.calculate_aggregated_report_synchronous(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.calculate_aggregated_report_synchronous(body, request_options=request_options)
+        )
 
     def get_sessions_report(
         self,
@@ -107,7 +108,7 @@ class DeviceReports:
             ApiError: Bad request. Unauthorized request. Access token is missing or invalid. Forbidden request. Bad
                 request. Not found. Bad request. Conflict state. Internal Server Error. ``error`` is
                 ``HyperPreciseLocationResult | RawError``."""
-        return self._with_raw_response.get_sessions_report(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_sessions_report(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> DeviceReportsWithRawResponse:
@@ -139,11 +140,11 @@ class AsyncDeviceReports:
             ApiError: Bad request. Unauthorized request. Access token is missing or invalid. Forbidden request. Bad
                 request. Not found. Bad request. Conflict state. Internal Server Error. ``error`` is
                 ``HyperPreciseLocationResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.calculate_aggregated_report_asynchronous(
                 body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def calculate_aggregated_report_synchronous(
         self,
@@ -166,9 +167,9 @@ class AsyncDeviceReports:
             ApiError: Bad request. Unauthorized request. Access token is missing or invalid. Forbidden request. Bad
                 request. Not found. Bad request. Conflict state. Internal Server Error. ``error`` is
                 ``HyperPreciseLocationResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.calculate_aggregated_report_synchronous(body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_sessions_report(
         self,
@@ -190,7 +191,7 @@ class AsyncDeviceReports:
             ApiError: Bad request. Unauthorized request. Access token is missing or invalid. Forbidden request. Bad
                 request. Not found. Bad request. Conflict state. Internal Server Error. ``error`` is
                 ``HyperPreciseLocationResult | RawError``."""
-        return (await self._with_raw_response.get_sessions_report(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.get_sessions_report(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncDeviceReportsWithRawResponse:

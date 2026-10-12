@@ -15,6 +15,7 @@ from ..core import (
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.assign_licenses_to_devices3_error import (
     AssignLicensesToDevices3ErrorBody,
@@ -54,7 +55,7 @@ class SoftwareManagementLicensesV3:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV3Result | RawError``."""
-        return self._with_raw_response.assign_licenses_to_devices3(acc, body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.assign_licenses_to_devices3(acc, body, request_options=request_options))
 
     def get_account_licenses_status(
         self, acc: str, *, last_seen_device_id: str | None = None, request_options: RequestOptionsOrDict | None = None
@@ -72,9 +73,11 @@ class SoftwareManagementLicensesV3:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV3Result | RawError``."""
-        return self._with_raw_response.get_account_licenses_status(
-            acc, last_seen_device_id=last_seen_device_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_account_licenses_status(
+                acc, last_seen_device_id=last_seen_device_id, request_options=request_options
+            ),
+        )
 
     def remove_licenses_from_devices3(
         self, acc: str, body: V3LicenseImei | V3LicenseImeiDict, *, request_options: RequestOptionsOrDict | None = None
@@ -92,9 +95,7 @@ class SoftwareManagementLicensesV3:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV3Result | RawError``."""
-        return self._with_raw_response.remove_licenses_from_devices3(
-            acc, body, request_options=request_options
-        ).unwrap()
+        return unwrap(self._with_raw_response.remove_licenses_from_devices3(acc, body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> SoftwareManagementLicensesV3WithRawResponse:
@@ -121,9 +122,9 @@ class AsyncSoftwareManagementLicensesV3:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV3Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.assign_licenses_to_devices3(acc, body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_account_licenses_status(
         self, acc: str, *, last_seen_device_id: str | None = None, request_options: RequestOptionsOrDict | None = None
@@ -141,11 +142,11 @@ class AsyncSoftwareManagementLicensesV3:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV3Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_account_licenses_status(
                 acc, last_seen_device_id=last_seen_device_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def remove_licenses_from_devices3(
         self, acc: str, body: V3LicenseImei | V3LicenseImeiDict, *, request_options: RequestOptionsOrDict | None = None
@@ -163,9 +164,9 @@ class AsyncSoftwareManagementLicensesV3:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV3Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.remove_licenses_from_devices3(acc, body, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncSoftwareManagementLicensesV3WithRawResponse:

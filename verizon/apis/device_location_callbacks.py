@@ -16,6 +16,7 @@ from ..core import (
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..errors.deregister_callback2_error import DeregisterCallback2ErrorBody, deregister_callback2_error_mapper
 from ..errors.list_registered_callbacks2_error import (
@@ -51,7 +52,7 @@ class DeviceLocationCallbacks:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.cancel_async_report(txid, account_name, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.cancel_async_report(txid, account_name, request_options=request_options))
 
     def deregister_callback2(
         self,
@@ -73,9 +74,9 @@ class DeviceLocationCallbacks:
 
         Raises:
             ApiError: Error response. ``error`` is ``DeviceLocationResult | RawError``."""
-        return self._with_raw_response.deregister_callback2(
-            account_name, service, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.deregister_callback2(account_name, service, request_options=request_options)
+        )
 
     def list_registered_callbacks2(
         self, account_name: str, *, request_options: RequestOptionsOrDict | None = None
@@ -92,9 +93,7 @@ class DeviceLocationCallbacks:
 
         Raises:
             ApiError: Error response. ``error`` is ``DeviceLocationResult | RawError``."""
-        return self._with_raw_response.list_registered_callbacks2(
-            account_name, request_options=request_options
-        ).unwrap()
+        return unwrap(self._with_raw_response.list_registered_callbacks2(account_name, request_options=request_options))
 
     def register_callback2(
         self, account_name: str, *, request_options: RequestOptionsOrDict | None = None
@@ -111,7 +110,7 @@ class DeviceLocationCallbacks:
 
         Raises:
             ApiError: Error response. ``error`` is ``DeviceLocationResult | RawError``."""
-        return self._with_raw_response.register_callback2(account_name, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.register_callback2(account_name, request_options=request_options))
 
     @property
     def with_raw_response(self) -> DeviceLocationCallbacksWithRawResponse:
@@ -138,9 +137,9 @@ class AsyncDeviceLocationCallbacks:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.cancel_async_report(txid, account_name, request_options=request_options)
-        ).unwrap()
+        )
 
     async def deregister_callback2(
         self,
@@ -162,9 +161,9 @@ class AsyncDeviceLocationCallbacks:
 
         Raises:
             ApiError: Error response. ``error`` is ``DeviceLocationResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.deregister_callback2(account_name, service, request_options=request_options)
-        ).unwrap()
+        )
 
     async def list_registered_callbacks2(
         self, account_name: str, *, request_options: RequestOptionsOrDict | None = None
@@ -181,9 +180,9 @@ class AsyncDeviceLocationCallbacks:
 
         Raises:
             ApiError: Error response. ``error`` is ``DeviceLocationResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.list_registered_callbacks2(account_name, request_options=request_options)
-        ).unwrap()
+        )
 
     async def register_callback2(
         self, account_name: str, *, request_options: RequestOptionsOrDict | None = None
@@ -200,9 +199,7 @@ class AsyncDeviceLocationCallbacks:
 
         Raises:
             ApiError: Error response. ``error`` is ``DeviceLocationResult | RawError``."""
-        return (
-            await self._with_raw_response.register_callback2(account_name, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.register_callback2(account_name, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncDeviceLocationCallbacksWithRawResponse:

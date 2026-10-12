@@ -20,6 +20,7 @@ from ..core import (
     json_decoder,
     param,
     text_decoder,
+    unwrap,
 )
 from ..errors.delete_map_message_error import DeleteMapMessageErrorBody, delete_map_message_error_mapper
 from ..errors.download_mapmessages_error import DownloadMapmessagesErrorBody, download_mapmessages_error_mapper
@@ -53,7 +54,7 @@ class MapMessageController:
         Raises:
             ApiError: Bad Request Unauthorized Forbidden Not found Too many requests Internal server error ``error`` is
                 ``MdmErrorResponse | RawError``."""
-        return self._with_raw_response.delete_map_message(region_id, i10nid, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_map_message(region_id, i10nid, request_options=request_options))
 
     def download_map_messages(
         self,
@@ -85,9 +86,9 @@ class MapMessageController:
         Raises:
             ApiError: Bad Request Unauthorized Forbidden Not found Too many requests Internal server error ``error`` is
                 ``MdmErrorResponse | RawError``."""
-        return self._with_raw_response.download_map_messages(
-            geofence, vendor_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.download_map_messages(geofence, vendor_id, request_options=request_options)
+        )
 
     def ingest_map_messages(
         self,
@@ -125,9 +126,11 @@ class MapMessageController:
         Raises:
             ApiError: Bad Request Unauthorized Forbidden Method not allowed Too many requests Internal server error
                 ``error`` is ``MdmErrorResponse | RawError``."""
-        return self._with_raw_response.ingest_map_messages(
-            vendor_id, body, map_data_message_standard=map_data_message_standard, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.ingest_map_messages(
+                vendor_id, body, map_data_message_standard=map_data_message_standard, request_options=request_options
+            ),
+        )
 
     def query_map_messages(
         self,
@@ -155,7 +158,7 @@ class MapMessageController:
         Raises:
             ApiError: Bad Request Unauthorized Forbidden Method not allowed Too many requests Internal server error
                 ``error`` is ``MdmErrorResponse | RawError``."""
-        return self._with_raw_response.query_map_messages(vendor_id, body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.query_map_messages(vendor_id, body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> MapMessageControllerWithRawResponse:
@@ -183,9 +186,9 @@ class AsyncMapMessageController:
         Raises:
             ApiError: Bad Request Unauthorized Forbidden Not found Too many requests Internal server error ``error`` is
                 ``MdmErrorResponse | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_map_message(region_id, i10nid, request_options=request_options)
-        ).unwrap()
+        )
 
     async def download_map_messages(
         self,
@@ -217,9 +220,9 @@ class AsyncMapMessageController:
         Raises:
             ApiError: Bad Request Unauthorized Forbidden Not found Too many requests Internal server error ``error`` is
                 ``MdmErrorResponse | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.download_map_messages(geofence, vendor_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def ingest_map_messages(
         self,
@@ -257,11 +260,11 @@ class AsyncMapMessageController:
         Raises:
             ApiError: Bad Request Unauthorized Forbidden Method not allowed Too many requests Internal server error
                 ``error`` is ``MdmErrorResponse | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.ingest_map_messages(
                 vendor_id, body, map_data_message_standard=map_data_message_standard, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def query_map_messages(
         self,
@@ -289,9 +292,9 @@ class AsyncMapMessageController:
         Raises:
             ApiError: Bad Request Unauthorized Forbidden Method not allowed Too many requests Internal server error
                 ``error`` is ``MdmErrorResponse | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.query_map_messages(vendor_id, body, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncMapMessageControllerWithRawResponse:

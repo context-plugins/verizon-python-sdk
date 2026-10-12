@@ -12,6 +12,7 @@ from ..core import (
     async_json_decoder,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.get_account_subscription_status2_error import (
     GetAccountSubscriptionStatus2ErrorBody,
@@ -40,9 +41,9 @@ class SoftwareManagementSubscriptionsV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return self._with_raw_response.get_account_subscription_status2(
-            account, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_account_subscription_status2(account, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> SoftwareManagementSubscriptionsV2WithRawResponse:
@@ -68,9 +69,9 @@ class AsyncSoftwareManagementSubscriptionsV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_account_subscription_status2(account, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncSoftwareManagementSubscriptionsV2WithRawResponse:

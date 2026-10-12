@@ -14,6 +14,7 @@ from ..core import (
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..models.trigger_value_response import TriggerValueResponse
 from ..models.trigger_value_response2 import TriggerValueResponse2
@@ -38,7 +39,7 @@ class RetrieveTheTriggers:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_all_available_triggers(request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_all_available_triggers(request_options=request_options))
 
     def get_all_triggers_by_account_name(
         self, account_name: str, *, request_options: RequestOptionsOrDict | None = None
@@ -55,9 +56,9 @@ class RetrieveTheTriggers:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_all_triggers_by_account_name(
-            account_name, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_all_triggers_by_account_name(account_name, request_options=request_options)
+        )
 
     def get_all_triggers_by_trigger_category(
         self, *, request_options: RequestOptionsOrDict | None = None
@@ -73,7 +74,7 @@ class RetrieveTheTriggers:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_all_triggers_by_trigger_category(request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_all_triggers_by_trigger_category(request_options=request_options))
 
     def get_triggers_by_id(
         self, trigger_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -90,7 +91,7 @@ class RetrieveTheTriggers:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_triggers_by_id(trigger_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_triggers_by_id(trigger_id, request_options=request_options))
 
     @property
     def with_raw_response(self) -> RetrieveTheTriggersWithRawResponse:
@@ -115,7 +116,7 @@ class AsyncRetrieveTheTriggers:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.get_all_available_triggers(request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.get_all_available_triggers(request_options=request_options))
 
     async def get_all_triggers_by_account_name(
         self, account_name: str, *, request_options: RequestOptionsOrDict | None = None
@@ -132,11 +133,11 @@ class AsyncRetrieveTheTriggers:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_all_triggers_by_account_name(
                 account_name, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_all_triggers_by_trigger_category(
         self, *, request_options: RequestOptionsOrDict | None = None
@@ -152,9 +153,9 @@ class AsyncRetrieveTheTriggers:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_all_triggers_by_trigger_category(request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_triggers_by_id(
         self, trigger_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -171,7 +172,7 @@ class AsyncRetrieveTheTriggers:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.get_triggers_by_id(trigger_id, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.get_triggers_by_id(trigger_id, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncRetrieveTheTriggersWithRawResponse:

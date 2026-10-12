@@ -17,6 +17,7 @@ from ..core import (
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..errors.create_anomaly_detection_trigger_error import (
     CreateAnomalyDetectionTriggerErrorBody,
@@ -64,7 +65,7 @@ class AnomalyTriggers:
         Raises:
             ApiError: Bad request Unauthorized Forbidden Not Found / Does not exist Format / Request Unacceptable Too
                 many requests ``error`` is ``IntelligenceResult | RawError``."""
-        return self._with_raw_response.create_anomaly_detection_trigger(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.create_anomaly_detection_trigger(body, request_options=request_options))
 
     def delete_anomaly_detection_trigger(
         self, trigger_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -81,9 +82,9 @@ class AnomalyTriggers:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.delete_anomaly_detection_trigger(
-            trigger_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.delete_anomaly_detection_trigger(trigger_id, request_options=request_options)
+        )
 
     def list_anomaly_detection_trigger_settings(
         self, trigger_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -101,9 +102,9 @@ class AnomalyTriggers:
         Raises:
             ApiError: Bad request Unauthorized Forbidden Not Found / Does not exist Format / Request Unacceptable Too
                 many requests ``error`` is ``IntelligenceResult | RawError``."""
-        return self._with_raw_response.list_anomaly_detection_trigger_settings(
-            trigger_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.list_anomaly_detection_trigger_settings(trigger_id, request_options=request_options)
+        )
 
     def list_anomaly_detection_triggers(
         self, *, request_options: RequestOptionsOrDict | None = None
@@ -120,7 +121,7 @@ class AnomalyTriggers:
         Raises:
             ApiError: Bad request Unauthorized Forbidden Not Found / Does not exist Format / Request Unacceptable Too
                 many requests ``error`` is ``IntelligenceResult | RawError``."""
-        return self._with_raw_response.list_anomaly_detection_triggers(request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.list_anomaly_detection_triggers(request_options=request_options))
 
     def update_anomaly_detection_trigger(
         self,
@@ -141,7 +142,7 @@ class AnomalyTriggers:
         Raises:
             ApiError: Bad request Unauthorized Forbidden Not Found / Does not exist Format / Request Unacceptable Too
                 many requests ``error`` is ``IntelligenceResult | RawError``."""
-        return self._with_raw_response.update_anomaly_detection_trigger(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.update_anomaly_detection_trigger(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AnomalyTriggersWithRawResponse:
@@ -171,9 +172,9 @@ class AsyncAnomalyTriggers:
         Raises:
             ApiError: Bad request Unauthorized Forbidden Not Found / Does not exist Format / Request Unacceptable Too
                 many requests ``error`` is ``IntelligenceResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.create_anomaly_detection_trigger(body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def delete_anomaly_detection_trigger(
         self, trigger_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -190,9 +191,9 @@ class AsyncAnomalyTriggers:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_anomaly_detection_trigger(trigger_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def list_anomaly_detection_trigger_settings(
         self, trigger_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -210,11 +211,11 @@ class AsyncAnomalyTriggers:
         Raises:
             ApiError: Bad request Unauthorized Forbidden Not Found / Does not exist Format / Request Unacceptable Too
                 many requests ``error`` is ``IntelligenceResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.list_anomaly_detection_trigger_settings(
                 trigger_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def list_anomaly_detection_triggers(
         self, *, request_options: RequestOptionsOrDict | None = None
@@ -231,7 +232,7 @@ class AsyncAnomalyTriggers:
         Raises:
             ApiError: Bad request Unauthorized Forbidden Not Found / Does not exist Format / Request Unacceptable Too
                 many requests ``error`` is ``IntelligenceResult | RawError``."""
-        return (await self._with_raw_response.list_anomaly_detection_triggers(request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.list_anomaly_detection_triggers(request_options=request_options))
 
     async def update_anomaly_detection_trigger(
         self,
@@ -252,9 +253,9 @@ class AsyncAnomalyTriggers:
         Raises:
             ApiError: Bad request Unauthorized Forbidden Not Found / Does not exist Format / Request Unacceptable Too
                 many requests ``error`` is ``IntelligenceResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.update_anomaly_detection_trigger(body, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncAnomalyTriggersWithRawResponse:

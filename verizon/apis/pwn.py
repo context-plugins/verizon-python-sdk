@@ -17,6 +17,7 @@ from ..core import (
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..models.change_pwndevice_ipaddress_request import (
     ChangePwndeviceIpaddressRequest,
@@ -62,7 +63,7 @@ class Pwn:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.change_pwn_device_i_paddress(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.change_pwn_device_i_paddress(body, request_options=request_options))
 
     def change_pwn_device_profile(
         self,
@@ -82,7 +83,7 @@ class Pwn:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.change_pwn_device_profile(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.change_pwn_device_profile(body, request_options=request_options))
 
     def change_pwn_device_state_activate(
         self,
@@ -102,7 +103,7 @@ class Pwn:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.change_pwn_device_state_activate(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.change_pwn_device_state_activate(body, request_options=request_options))
 
     def change_pwn_device_state_deactivate(
         self,
@@ -122,9 +123,7 @@ class Pwn:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.change_pwn_device_state_deactivate(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(self._with_raw_response.change_pwn_device_state_deactivate(body, request_options=request_options))
 
     def get_pwn_performance_consent(
         self, aname: str, *, request_options: RequestOptionsOrDict | None = None
@@ -141,7 +140,7 @@ class Pwn:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_pwn_performance_consent(aname, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_pwn_performance_consent(aname, request_options=request_options))
 
     def get_profile_list(self, aname: str, *, request_options: RequestOptionsOrDict | None = None) -> PwnprofileList:
         """Send a ``GET`` request.
@@ -156,7 +155,7 @@ class Pwn:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_profile_list(aname, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_profile_list(aname, request_options=request_options))
 
     def kpi_list(self, aname: str, *, request_options: RequestOptionsOrDict | None = None) -> KpiinfoList:
         """Send a ``GET`` request.
@@ -171,7 +170,7 @@ class Pwn:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.kpi_list(aname, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.kpi_list(aname, request_options=request_options))
 
     @property
     def with_raw_response(self) -> PwnWithRawResponse:
@@ -200,9 +199,7 @@ class AsyncPwn:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
-            await self._with_raw_response.change_pwn_device_i_paddress(body, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.change_pwn_device_i_paddress(body, request_options=request_options))
 
     async def change_pwn_device_profile(
         self,
@@ -222,7 +219,7 @@ class AsyncPwn:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.change_pwn_device_profile(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.change_pwn_device_profile(body, request_options=request_options))
 
     async def change_pwn_device_state_activate(
         self,
@@ -242,9 +239,9 @@ class AsyncPwn:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.change_pwn_device_state_activate(body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def change_pwn_device_state_deactivate(
         self,
@@ -264,9 +261,9 @@ class AsyncPwn:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.change_pwn_device_state_deactivate(body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_pwn_performance_consent(
         self, aname: str, *, request_options: RequestOptionsOrDict | None = None
@@ -283,9 +280,7 @@ class AsyncPwn:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
-            await self._with_raw_response.get_pwn_performance_consent(aname, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.get_pwn_performance_consent(aname, request_options=request_options))
 
     async def get_profile_list(
         self, aname: str, *, request_options: RequestOptionsOrDict | None = None
@@ -302,7 +297,7 @@ class AsyncPwn:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.get_profile_list(aname, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.get_profile_list(aname, request_options=request_options))
 
     async def kpi_list(self, aname: str, *, request_options: RequestOptionsOrDict | None = None) -> KpiinfoList:
         """Send a ``GET`` request.
@@ -317,7 +312,7 @@ class AsyncPwn:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.kpi_list(aname, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.kpi_list(aname, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncPwnWithRawResponse:

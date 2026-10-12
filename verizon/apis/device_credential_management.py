@@ -15,6 +15,7 @@ from ..core import (
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.drop_credentials_error import DropCredentialsErrorBody, drop_credentials_error_mapper
 from ..errors.generate_credentials_error import GenerateCredentialsErrorBody, generate_credentials_error_mapper
@@ -46,7 +47,7 @@ class DeviceCredentialManagement:
 
         Raises:
             ApiError: Bad Request ``error`` is ``ErrorResponse | RawError``."""
-        return self._with_raw_response.drop_credentials(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.drop_credentials(body, request_options=request_options))
 
     def generate_credentials(
         self, body: CredentialsRequest | CredentialsRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -63,7 +64,7 @@ class DeviceCredentialManagement:
 
         Raises:
             ApiError: Bad Request ``error`` is ``ErrorResponse | RawError``."""
-        return self._with_raw_response.generate_credentials(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.generate_credentials(body, request_options=request_options))
 
     def reset_credentials(
         self, body: CredentialsRequest | CredentialsRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -80,7 +81,7 @@ class DeviceCredentialManagement:
 
         Raises:
             ApiError: Bad Request ``error`` is ``ErrorResponse | RawError``."""
-        return self._with_raw_response.reset_credentials(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.reset_credentials(body, request_options=request_options))
 
     def retrieve_credentials(
         self, body: CredentialsRequest | CredentialsRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -97,7 +98,7 @@ class DeviceCredentialManagement:
 
         Raises:
             ApiError: Bad Request / Verification Failure Unauthorized ``error`` is ``ErrorResponse | RawError``."""
-        return self._with_raw_response.retrieve_credentials(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.retrieve_credentials(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> DeviceCredentialManagementWithRawResponse:
@@ -123,7 +124,7 @@ class AsyncDeviceCredentialManagement:
 
         Raises:
             ApiError: Bad Request ``error`` is ``ErrorResponse | RawError``."""
-        return (await self._with_raw_response.drop_credentials(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.drop_credentials(body, request_options=request_options))
 
     async def generate_credentials(
         self, body: CredentialsRequest | CredentialsRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -140,7 +141,7 @@ class AsyncDeviceCredentialManagement:
 
         Raises:
             ApiError: Bad Request ``error`` is ``ErrorResponse | RawError``."""
-        return (await self._with_raw_response.generate_credentials(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.generate_credentials(body, request_options=request_options))
 
     async def reset_credentials(
         self, body: CredentialsRequest | CredentialsRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -157,7 +158,7 @@ class AsyncDeviceCredentialManagement:
 
         Raises:
             ApiError: Bad Request ``error`` is ``ErrorResponse | RawError``."""
-        return (await self._with_raw_response.reset_credentials(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.reset_credentials(body, request_options=request_options))
 
     async def retrieve_credentials(
         self, body: CredentialsRequest | CredentialsRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -174,7 +175,7 @@ class AsyncDeviceCredentialManagement:
 
         Raises:
             ApiError: Bad Request / Verification Failure Unauthorized ``error`` is ``ErrorResponse | RawError``."""
-        return (await self._with_raw_response.retrieve_credentials(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.retrieve_credentials(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncDeviceCredentialManagementWithRawResponse:

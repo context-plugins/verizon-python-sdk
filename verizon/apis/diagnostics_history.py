@@ -16,6 +16,7 @@ from ..core import (
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..models.history import History
 from ..server.server import Server
@@ -37,7 +38,7 @@ class DiagnosticsHistory:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_diagnostics_history(request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_diagnostics_history(request_options=request_options))
 
     @property
     def with_raw_response(self) -> DiagnosticsHistoryWithRawResponse:
@@ -60,7 +61,7 @@ class AsyncDiagnosticsHistory:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.get_diagnostics_history(request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.get_diagnostics_history(request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncDiagnosticsHistoryWithRawResponse:

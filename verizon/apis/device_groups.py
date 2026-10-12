@@ -15,6 +15,7 @@ from ..core import (
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.create_device_group_error import CreateDeviceGroupErrorBody, create_device_group_error_mapper
 from ..errors.delete_device_group_error import DeleteDeviceGroupErrorBody, delete_device_group_error_mapper
@@ -55,7 +56,7 @@ class DeviceGroups:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.create_device_group(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.create_device_group(body, request_options=request_options))
 
     def delete_device_group(
         self, aname: str, gname: str, *, request_options: RequestOptionsOrDict | None = None
@@ -74,7 +75,7 @@ class DeviceGroups:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.delete_device_group(aname, gname, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_device_group(aname, gname, request_options=request_options))
 
     def get_device_group_information(
         self, aname: str, gname: str, *, next_: int | None = None, request_options: RequestOptionsOrDict | None = None
@@ -94,9 +95,11 @@ class DeviceGroups:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.get_device_group_information(
-            aname, gname, next_=next_, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_device_group_information(
+                aname, gname, next_=next_, request_options=request_options
+            ),
+        )
 
     def list_device_groups(
         self, aname: str, *, request_options: RequestOptionsOrDict | None = None
@@ -113,7 +116,7 @@ class DeviceGroups:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.list_device_groups(aname, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.list_device_groups(aname, request_options=request_options))
 
     def update_device_group(
         self,
@@ -137,7 +140,7 @@ class DeviceGroups:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.update_device_group(aname, gname, body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.update_device_group(aname, gname, body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> DeviceGroupsWithRawResponse:
@@ -167,7 +170,7 @@ class AsyncDeviceGroups:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (await self._with_raw_response.create_device_group(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.create_device_group(body, request_options=request_options))
 
     async def delete_device_group(
         self, aname: str, gname: str, *, request_options: RequestOptionsOrDict | None = None
@@ -186,9 +189,7 @@ class AsyncDeviceGroups:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
-            await self._with_raw_response.delete_device_group(aname, gname, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.delete_device_group(aname, gname, request_options=request_options))
 
     async def get_device_group_information(
         self, aname: str, gname: str, *, next_: int | None = None, request_options: RequestOptionsOrDict | None = None
@@ -208,11 +209,11 @@ class AsyncDeviceGroups:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_device_group_information(
                 aname, gname, next_=next_, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def list_device_groups(
         self, aname: str, *, request_options: RequestOptionsOrDict | None = None
@@ -229,7 +230,7 @@ class AsyncDeviceGroups:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (await self._with_raw_response.list_device_groups(aname, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.list_device_groups(aname, request_options=request_options))
 
     async def update_device_group(
         self,
@@ -253,9 +254,9 @@ class AsyncDeviceGroups:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.update_device_group(aname, gname, body, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncDeviceGroupsWithRawResponse:

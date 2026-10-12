@@ -17,6 +17,7 @@ from ..core import (
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..models.trigger_response import TriggerResponse
 from ..models.unions.v2_triggers_request1 import V2TriggersRequest1, V2TriggersRequest1Dict
@@ -43,7 +44,7 @@ class UpdatePricePlanTriggers:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.update_trigger_rules(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.update_trigger_rules(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> UpdatePricePlanTriggersWithRawResponse:
@@ -70,7 +71,7 @@ class AsyncUpdatePricePlanTriggers:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.update_trigger_rules(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.update_trigger_rules(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncUpdatePricePlanTriggersWithRawResponse:

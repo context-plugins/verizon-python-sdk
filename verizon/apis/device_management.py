@@ -15,6 +15,7 @@ from ..core import (
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.activate_service_for_devices_error import (
     ActivateServiceForDevicesErrorBody,
@@ -183,7 +184,7 @@ class DeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.activate_service_for_devices(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.activate_service_for_devices(body, request_options=request_options))
 
     def add_devices(
         self, body: AddDevicesRequest | AddDevicesRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -201,7 +202,7 @@ class DeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.add_devices(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.add_devices(body, request_options=request_options))
 
     def billed_usage_info(
         self,
@@ -221,7 +222,7 @@ class DeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.billed_usage_info(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.billed_usage_info(body, request_options=request_options))
 
     def change_devices_service_plan(
         self,
@@ -241,7 +242,7 @@ class DeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.change_devices_service_plan(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.change_devices_service_plan(body, request_options=request_options))
 
     def check_devices_availability_for_activation(
         self,
@@ -262,9 +263,9 @@ class DeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.check_devices_availability_for_activation(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.check_devices_availability_for_activation(body, request_options=request_options)
+        )
 
     def deactivate_service_for_devices(
         self,
@@ -286,7 +287,7 @@ class DeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.deactivate_service_for_devices(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.deactivate_service_for_devices(body, request_options=request_options))
 
     def delete_deactivated_devices(
         self,
@@ -306,7 +307,7 @@ class DeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.delete_deactivated_devices(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_deactivated_devices(body, request_options=request_options))
 
     def device_upload(
         self,
@@ -326,7 +327,7 @@ class DeviceManagement:
 
         Raises:
             ApiError: Error Response ``error`` is ``RestErrorResponse | RawError``."""
-        return self._with_raw_response.device_upload(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.device_upload(body, request_options=request_options))
 
     def device_upload_status(
         self,
@@ -346,7 +347,7 @@ class DeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.device_upload_status(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.device_upload_status(body, request_options=request_options))
 
     def get_device_extended_diagnostic_information(
         self,
@@ -367,9 +368,9 @@ class DeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.get_device_extended_diagnostic_information(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_device_extended_diagnostic_information(body, request_options=request_options)
+        )
 
     def get_device_service_suspension_status(
         self,
@@ -390,9 +391,9 @@ class DeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.get_device_service_suspension_status(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_device_service_suspension_status(body, request_options=request_options)
+        )
 
     def list_current_devices_prl_version(
         self,
@@ -412,7 +413,7 @@ class DeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.list_current_devices_prl_version(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.list_current_devices_prl_version(body, request_options=request_options))
 
     def list_devices_information(
         self,
@@ -433,7 +434,7 @@ class DeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.list_devices_information(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.list_devices_information(body, request_options=request_options))
 
     def list_devices_provisioning_history(
         self,
@@ -453,7 +454,7 @@ class DeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.list_devices_provisioning_history(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.list_devices_provisioning_history(body, request_options=request_options))
 
     def list_devices_usage_history(
         self,
@@ -473,7 +474,7 @@ class DeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.list_devices_usage_history(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.list_devices_usage_history(body, request_options=request_options))
 
     def list_devices_with_imei_iccid_mismatch(
         self,
@@ -494,9 +495,9 @@ class DeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.list_devices_with_imei_iccid_mismatch(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.list_devices_with_imei_iccid_mismatch(body, request_options=request_options)
+        )
 
     def move_devices_within_accounts_of_profile(
         self, body: MoveDeviceRequest | MoveDeviceRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -513,9 +514,9 @@ class DeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.move_devices_within_accounts_of_profile(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.move_devices_within_accounts_of_profile(body, request_options=request_options)
+        )
 
     def restore_service_for_suspended_devices(
         self,
@@ -535,9 +536,9 @@ class DeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.restore_service_for_suspended_devices(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.restore_service_for_suspended_devices(body, request_options=request_options)
+        )
 
     def retrieve_aggregate_device_usage_history(
         self,
@@ -558,9 +559,9 @@ class DeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.retrieve_aggregate_device_usage_history(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.retrieve_aggregate_device_usage_history(body, request_options=request_options)
+        )
 
     def retrieve_device_connection_history(
         self,
@@ -581,9 +582,7 @@ class DeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.retrieve_device_connection_history(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(self._with_raw_response.retrieve_device_connection_history(body, request_options=request_options))
 
     def suspend_service_for_devices(
         self,
@@ -603,7 +602,7 @@ class DeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.suspend_service_for_devices(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.suspend_service_for_devices(body, request_options=request_options))
 
     def update_device_id(
         self,
@@ -626,7 +625,7 @@ class DeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.update_device_id(service_type, body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.update_device_id(service_type, body, request_options=request_options))
 
     def update_devices_contact_information(
         self,
@@ -647,9 +646,7 @@ class DeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.update_devices_contact_information(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(self._with_raw_response.update_devices_contact_information(body, request_options=request_options))
 
     def update_devices_cost_center_code(
         self,
@@ -670,7 +667,7 @@ class DeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.update_devices_cost_center_code(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.update_devices_cost_center_code(body, request_options=request_options))
 
     def update_devices_custom_fields(
         self,
@@ -691,7 +688,7 @@ class DeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.update_devices_custom_fields(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.update_devices_custom_fields(body, request_options=request_options))
 
     def update_devices_state(
         self, body: GoToStateRequest | GoToStateRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -708,7 +705,7 @@ class DeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.update_devices_state(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.update_devices_state(body, request_options=request_options))
 
     def upload_activate_device(
         self,
@@ -728,7 +725,7 @@ class DeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.upload_activate_device(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.upload_activate_device(body, request_options=request_options))
 
     def usage_segmentation_label_association(
         self,
@@ -748,9 +745,9 @@ class DeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.usage_segmentation_label_association(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.usage_segmentation_label_association(body, request_options=request_options)
+        )
 
     def usage_segmentation_label_deletion(
         self,
@@ -772,9 +769,11 @@ class DeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.usage_segmentation_label_deletion(
-            account_name, label_list, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.usage_segmentation_label_deletion(
+                account_name, label_list, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> DeviceManagementWithRawResponse:
@@ -803,9 +802,7 @@ class AsyncDeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
-            await self._with_raw_response.activate_service_for_devices(body, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.activate_service_for_devices(body, request_options=request_options))
 
     async def add_devices(
         self, body: AddDevicesRequest | AddDevicesRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -823,7 +820,7 @@ class AsyncDeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (await self._with_raw_response.add_devices(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.add_devices(body, request_options=request_options))
 
     async def billed_usage_info(
         self,
@@ -843,7 +840,7 @@ class AsyncDeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (await self._with_raw_response.billed_usage_info(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.billed_usage_info(body, request_options=request_options))
 
     async def change_devices_service_plan(
         self,
@@ -863,9 +860,7 @@ class AsyncDeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
-            await self._with_raw_response.change_devices_service_plan(body, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.change_devices_service_plan(body, request_options=request_options))
 
     async def check_devices_availability_for_activation(
         self,
@@ -886,11 +881,11 @@ class AsyncDeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.check_devices_availability_for_activation(
                 body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def deactivate_service_for_devices(
         self,
@@ -912,9 +907,9 @@ class AsyncDeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.deactivate_service_for_devices(body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def delete_deactivated_devices(
         self,
@@ -934,9 +929,7 @@ class AsyncDeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
-            await self._with_raw_response.delete_deactivated_devices(body, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.delete_deactivated_devices(body, request_options=request_options))
 
     async def device_upload(
         self,
@@ -956,7 +949,7 @@ class AsyncDeviceManagement:
 
         Raises:
             ApiError: Error Response ``error`` is ``RestErrorResponse | RawError``."""
-        return (await self._with_raw_response.device_upload(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.device_upload(body, request_options=request_options))
 
     async def device_upload_status(
         self,
@@ -976,7 +969,7 @@ class AsyncDeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (await self._with_raw_response.device_upload_status(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.device_upload_status(body, request_options=request_options))
 
     async def get_device_extended_diagnostic_information(
         self,
@@ -997,11 +990,11 @@ class AsyncDeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_device_extended_diagnostic_information(
                 body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_device_service_suspension_status(
         self,
@@ -1022,9 +1015,9 @@ class AsyncDeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_device_service_suspension_status(body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def list_current_devices_prl_version(
         self,
@@ -1044,9 +1037,9 @@ class AsyncDeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.list_current_devices_prl_version(body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def list_devices_information(
         self,
@@ -1067,7 +1060,7 @@ class AsyncDeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (await self._with_raw_response.list_devices_information(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.list_devices_information(body, request_options=request_options))
 
     async def list_devices_provisioning_history(
         self,
@@ -1087,9 +1080,9 @@ class AsyncDeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.list_devices_provisioning_history(body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def list_devices_usage_history(
         self,
@@ -1109,9 +1102,7 @@ class AsyncDeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
-            await self._with_raw_response.list_devices_usage_history(body, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.list_devices_usage_history(body, request_options=request_options))
 
     async def list_devices_with_imei_iccid_mismatch(
         self,
@@ -1132,9 +1123,9 @@ class AsyncDeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.list_devices_with_imei_iccid_mismatch(body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def move_devices_within_accounts_of_profile(
         self, body: MoveDeviceRequest | MoveDeviceRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -1151,9 +1142,9 @@ class AsyncDeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.move_devices_within_accounts_of_profile(body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def restore_service_for_suspended_devices(
         self,
@@ -1173,9 +1164,9 @@ class AsyncDeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.restore_service_for_suspended_devices(body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def retrieve_aggregate_device_usage_history(
         self,
@@ -1196,9 +1187,9 @@ class AsyncDeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.retrieve_aggregate_device_usage_history(body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def retrieve_device_connection_history(
         self,
@@ -1219,9 +1210,9 @@ class AsyncDeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.retrieve_device_connection_history(body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def suspend_service_for_devices(
         self,
@@ -1241,9 +1232,7 @@ class AsyncDeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
-            await self._with_raw_response.suspend_service_for_devices(body, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.suspend_service_for_devices(body, request_options=request_options))
 
     async def update_device_id(
         self,
@@ -1266,9 +1255,9 @@ class AsyncDeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.update_device_id(service_type, body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def update_devices_contact_information(
         self,
@@ -1289,9 +1278,9 @@ class AsyncDeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.update_devices_contact_information(body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def update_devices_cost_center_code(
         self,
@@ -1312,9 +1301,9 @@ class AsyncDeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.update_devices_cost_center_code(body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def update_devices_custom_fields(
         self,
@@ -1335,9 +1324,7 @@ class AsyncDeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
-            await self._with_raw_response.update_devices_custom_fields(body, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.update_devices_custom_fields(body, request_options=request_options))
 
     async def update_devices_state(
         self, body: GoToStateRequest | GoToStateRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -1354,7 +1341,7 @@ class AsyncDeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (await self._with_raw_response.update_devices_state(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.update_devices_state(body, request_options=request_options))
 
     async def upload_activate_device(
         self,
@@ -1374,7 +1361,7 @@ class AsyncDeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (await self._with_raw_response.upload_activate_device(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.upload_activate_device(body, request_options=request_options))
 
     async def usage_segmentation_label_association(
         self,
@@ -1394,9 +1381,9 @@ class AsyncDeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.usage_segmentation_label_association(body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def usage_segmentation_label_deletion(
         self,
@@ -1418,11 +1405,11 @@ class AsyncDeviceManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.usage_segmentation_label_deletion(
                 account_name, label_list, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncDeviceManagementWithRawResponse:

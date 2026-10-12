@@ -15,6 +15,7 @@ from ..core import (
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.get_account_device_information_error import (
     GetAccountDeviceInformationErrorBody,
@@ -57,9 +58,11 @@ class AccountDevices:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV3Result | RawError``."""
-        return self._with_raw_response.get_account_device_information(
-            acc, last_seen_device_id=last_seen_device_id, protocol=protocol, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_account_device_information(
+                acc, last_seen_device_id=last_seen_device_id, protocol=protocol, request_options=request_options
+            ),
+        )
 
     def list_account_devices_information(
         self, acc: str, body: DeviceImei | DeviceImeiDict, *, request_options: RequestOptionsOrDict | None = None
@@ -77,9 +80,9 @@ class AccountDevices:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV3Result | RawError``."""
-        return self._with_raw_response.list_account_devices_information(
-            acc, body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.list_account_devices_information(acc, body, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> AccountDevicesWithRawResponse:
@@ -112,11 +115,11 @@ class AsyncAccountDevices:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV3Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_account_device_information(
                 acc, last_seen_device_id=last_seen_device_id, protocol=protocol, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def list_account_devices_information(
         self, acc: str, body: DeviceImei | DeviceImeiDict, *, request_options: RequestOptionsOrDict | None = None
@@ -134,9 +137,9 @@ class AsyncAccountDevices:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV3Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.list_account_devices_information(acc, body, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncAccountDevicesWithRawResponse:

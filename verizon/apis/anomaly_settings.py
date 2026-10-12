@@ -17,6 +17,7 @@ from ..core import (
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..models.anomaly_detection_request import AnomalyDetectionRequest, AnomalyDetectionRequestDict
 from ..models.anomaly_detection_settings import AnomalyDetectionSettings
@@ -46,7 +47,7 @@ class AnomalySettings:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.activate_anomaly_detection(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.activate_anomaly_detection(body, request_options=request_options))
 
     def list_anomaly_detection_settings(
         self, account_name: str, *, request_options: RequestOptionsOrDict | None = None
@@ -63,9 +64,9 @@ class AnomalySettings:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.list_anomaly_detection_settings(
-            account_name, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.list_anomaly_detection_settings(account_name, request_options=request_options)
+        )
 
     def reset_anomaly_detection_parameters(
         self, account_name: str, *, request_options: RequestOptionsOrDict | None = None
@@ -82,9 +83,9 @@ class AnomalySettings:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.reset_anomaly_detection_parameters(
-            account_name, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.reset_anomaly_detection_parameters(account_name, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> AnomalySettingsWithRawResponse:
@@ -113,9 +114,7 @@ class AsyncAnomalySettings:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
-            await self._with_raw_response.activate_anomaly_detection(body, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.activate_anomaly_detection(body, request_options=request_options))
 
     async def list_anomaly_detection_settings(
         self, account_name: str, *, request_options: RequestOptionsOrDict | None = None
@@ -132,9 +131,9 @@ class AsyncAnomalySettings:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.list_anomaly_detection_settings(account_name, request_options=request_options)
-        ).unwrap()
+        )
 
     async def reset_anomaly_detection_parameters(
         self, account_name: str, *, request_options: RequestOptionsOrDict | None = None
@@ -151,11 +150,11 @@ class AsyncAnomalySettings:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.reset_anomaly_detection_parameters(
                 account_name, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncAnomalySettingsWithRawResponse:

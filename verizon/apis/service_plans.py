@@ -12,6 +12,7 @@ from ..core import (
     async_json_decoder,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.list_account_service_plans_error import (
     ListAccountServicePlansErrorBody,
@@ -42,7 +43,7 @@ class ServicePlans:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.list_account_service_plans(aname, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.list_account_service_plans(aname, request_options=request_options))
 
     @property
     def with_raw_response(self) -> ServicePlansWithRawResponse:
@@ -70,9 +71,7 @@ class AsyncServicePlans:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
-            await self._with_raw_response.list_account_service_plans(aname, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.list_account_service_plans(aname, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncServicePlansWithRawResponse:

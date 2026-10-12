@@ -15,6 +15,7 @@ from ..core import (
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.list_devices_smsmessages_error import (
     ListDevicesSmsmessagesErrorBody,
@@ -53,9 +54,9 @@ class Sms:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.list_devices_sms_messages(
-            aname, next_=next_, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.list_devices_sms_messages(aname, next_=next_, request_options=request_options)
+        )
 
     def send_sms_to_device(
         self, body: SmssendRequest | SmssendRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -73,7 +74,7 @@ class Sms:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.send_sms_to_device(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.send_sms_to_device(body, request_options=request_options))
 
     def start_queued_sms_delivery(
         self, aname: str, *, request_options: RequestOptionsOrDict | None = None
@@ -92,7 +93,7 @@ class Sms:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.start_queued_sms_delivery(aname, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.start_queued_sms_delivery(aname, request_options=request_options))
 
     @property
     def with_raw_response(self) -> SmsWithRawResponse:
@@ -120,9 +121,9 @@ class AsyncSms:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.list_devices_sms_messages(aname, next_=next_, request_options=request_options)
-        ).unwrap()
+        )
 
     async def send_sms_to_device(
         self, body: SmssendRequest | SmssendRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -140,7 +141,7 @@ class AsyncSms:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (await self._with_raw_response.send_sms_to_device(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.send_sms_to_device(body, request_options=request_options))
 
     async def start_queued_sms_delivery(
         self, aname: str, *, request_options: RequestOptionsOrDict | None = None
@@ -159,9 +160,7 @@ class AsyncSms:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
-            await self._with_raw_response.start_queued_sms_delivery(aname, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.start_queued_sms_delivery(aname, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncSmsWithRawResponse:

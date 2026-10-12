@@ -15,6 +15,7 @@ from ..core import (
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.end_connectivity_management_session_error import (
     EndConnectivityManagementSessionErrorBody,
@@ -54,7 +55,7 @@ class SessionManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.end_connectivity_management_session(request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.end_connectivity_management_session(request_options=request_options))
 
     def reset_connectivity_management_password(
         self,
@@ -75,9 +76,9 @@ class SessionManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.reset_connectivity_management_password(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.reset_connectivity_management_password(body, request_options=request_options)
+        )
 
     def start_connectivity_management_session(
         self,
@@ -98,9 +99,9 @@ class SessionManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.start_connectivity_management_session(
-            body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.start_connectivity_management_session(body=body, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> SessionManagementWithRawResponse:
@@ -125,9 +126,9 @@ class AsyncSessionManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.end_connectivity_management_session(request_options=request_options)
-        ).unwrap()
+        )
 
     async def reset_connectivity_management_password(
         self,
@@ -148,9 +149,9 @@ class AsyncSessionManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.reset_connectivity_management_password(body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def start_connectivity_management_session(
         self,
@@ -171,11 +172,11 @@ class AsyncSessionManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.start_connectivity_management_session(
                 body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncSessionManagementWithRawResponse:

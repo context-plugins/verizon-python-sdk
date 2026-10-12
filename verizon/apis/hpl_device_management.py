@@ -15,6 +15,7 @@ from ..core import (
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.add_devices_hyper_precise_error import (
     AddDevicesHyperPreciseErrorBody,
@@ -49,7 +50,7 @@ class HplDeviceManagement:
             ApiError: Bad Request. Unauthorized Forbidden Not Found / Does not exist Method Not Allowed Format / Request
                 Unacceptable Too many requests Internal Server Error ``error`` is ``HyperPreciseLocationResult |
                 RawError``."""
-        return self._with_raw_response.add_devices_hyper_precise(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.add_devices_hyper_precise(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> HplDeviceManagementWithRawResponse:
@@ -81,7 +82,7 @@ class AsyncHplDeviceManagement:
             ApiError: Bad Request. Unauthorized Forbidden Not Found / Does not exist Method Not Allowed Format / Request
                 Unacceptable Too many requests Internal Server Error ``error`` is ``HyperPreciseLocationResult |
                 RawError``."""
-        return (await self._with_raw_response.add_devices_hyper_precise(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.add_devices_hyper_precise(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncHplDeviceManagementWithRawResponse:

@@ -15,6 +15,7 @@ from ..core import (
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.delete_local_profile_error import DeleteLocalProfileErrorBody, delete_local_profile_error_mapper
 from ..errors.disable_local_profile_error import DisableLocalProfileErrorBody, disable_local_profile_error_mapper
@@ -56,7 +57,7 @@ class EUiccDeviceProfileManagement:
 
         Raises:
             ApiError: Error Response ``error`` is ``RestErrorResponse | RawError``."""
-        return self._with_raw_response.delete_local_profile(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_local_profile(body, request_options=request_options))
 
     def disable_local_profile(
         self,
@@ -76,7 +77,7 @@ class EUiccDeviceProfileManagement:
 
         Raises:
             ApiError: Error Response ``error`` is ``RestErrorResponse | RawError``."""
-        return self._with_raw_response.disable_local_profile(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.disable_local_profile(body, request_options=request_options))
 
     def download_local_profile_to_disable(
         self,
@@ -96,7 +97,7 @@ class EUiccDeviceProfileManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.download_local_profile_to_disable(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.download_local_profile_to_disable(body, request_options=request_options))
 
     def download_local_profile_to_enable(
         self,
@@ -116,7 +117,7 @@ class EUiccDeviceProfileManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.download_local_profile_to_enable(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.download_local_profile_to_enable(body, request_options=request_options))
 
     def enable_local_profile(
         self,
@@ -136,7 +137,7 @@ class EUiccDeviceProfileManagement:
 
         Raises:
             ApiError: Error Response ``error`` is ``RestErrorResponse | RawError``."""
-        return self._with_raw_response.enable_local_profile(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.enable_local_profile(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> EUiccDeviceProfileManagementWithRawResponse:
@@ -166,7 +167,7 @@ class AsyncEUiccDeviceProfileManagement:
 
         Raises:
             ApiError: Error Response ``error`` is ``RestErrorResponse | RawError``."""
-        return (await self._with_raw_response.delete_local_profile(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.delete_local_profile(body, request_options=request_options))
 
     async def disable_local_profile(
         self,
@@ -186,7 +187,7 @@ class AsyncEUiccDeviceProfileManagement:
 
         Raises:
             ApiError: Error Response ``error`` is ``RestErrorResponse | RawError``."""
-        return (await self._with_raw_response.disable_local_profile(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.disable_local_profile(body, request_options=request_options))
 
     async def download_local_profile_to_disable(
         self,
@@ -206,9 +207,9 @@ class AsyncEUiccDeviceProfileManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.download_local_profile_to_disable(body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def download_local_profile_to_enable(
         self,
@@ -228,9 +229,9 @@ class AsyncEUiccDeviceProfileManagement:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.download_local_profile_to_enable(body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def enable_local_profile(
         self,
@@ -250,7 +251,7 @@ class AsyncEUiccDeviceProfileManagement:
 
         Raises:
             ApiError: Error Response ``error`` is ``RestErrorResponse | RawError``."""
-        return (await self._with_raw_response.enable_local_profile(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.enable_local_profile(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncEUiccDeviceProfileManagementWithRawResponse:

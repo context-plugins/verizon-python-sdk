@@ -15,6 +15,7 @@ from ..core import (
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.device_reachability_error import DeviceReachabilityErrorBody, device_reachability_error_mapper
 from ..errors.stop_device_reachability_error import (
@@ -49,7 +50,7 @@ class DeviceMonitoring:
 
         Raises:
             ApiError: Error Response ``error`` is ``RestErrorResponse | RawError``."""
-        return self._with_raw_response.device_reachability(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.device_reachability(body, request_options=request_options))
 
     def stop_device_reachability(
         self,
@@ -69,9 +70,9 @@ class DeviceMonitoring:
 
         Raises:
             ApiError: Error Response ``error`` is ``RestErrorResponse | RawError``."""
-        return self._with_raw_response.stop_device_reachability(
-            stopreachabilitypayload, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.stop_device_reachability(stopreachabilitypayload, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> DeviceMonitoringWithRawResponse:
@@ -100,7 +101,7 @@ class AsyncDeviceMonitoring:
 
         Raises:
             ApiError: Error Response ``error`` is ``RestErrorResponse | RawError``."""
-        return (await self._with_raw_response.device_reachability(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.device_reachability(body, request_options=request_options))
 
     async def stop_device_reachability(
         self,
@@ -120,11 +121,11 @@ class AsyncDeviceMonitoring:
 
         Raises:
             ApiError: Error Response ``error`` is ``RestErrorResponse | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.stop_device_reachability(
                 stopreachabilitypayload, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncDeviceMonitoringWithRawResponse:

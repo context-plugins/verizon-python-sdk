@@ -14,6 +14,7 @@ from ..core import (
     async_json_decoder,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.deregister_callback4_error import DeregisterCallback4ErrorBody, deregister_callback4_error_mapper
 from ..errors.list_registered_callbacks4_error import (
@@ -47,7 +48,7 @@ class SoftwareManagementCallbacksV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return self._with_raw_response.deregister_callback4(account, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.deregister_callback4(account, request_options=request_options))
 
     def list_registered_callbacks4(
         self, account: str, *, request_options: RequestOptionsOrDict | None = None
@@ -64,7 +65,7 @@ class SoftwareManagementCallbacksV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return self._with_raw_response.list_registered_callbacks4(account, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.list_registered_callbacks4(account, request_options=request_options))
 
     def register_callback4(
         self, account: str, *, request_options: RequestOptionsOrDict | None = None
@@ -81,7 +82,7 @@ class SoftwareManagementCallbacksV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return self._with_raw_response.register_callback4(account, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.register_callback4(account, request_options=request_options))
 
     def update_callback(
         self, account: str, *, request_options: RequestOptionsOrDict | None = None
@@ -98,7 +99,7 @@ class SoftwareManagementCallbacksV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return self._with_raw_response.update_callback(account, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.update_callback(account, request_options=request_options))
 
     @property
     def with_raw_response(self) -> SoftwareManagementCallbacksV2WithRawResponse:
@@ -124,7 +125,7 @@ class AsyncSoftwareManagementCallbacksV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return (await self._with_raw_response.deregister_callback4(account, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.deregister_callback4(account, request_options=request_options))
 
     async def list_registered_callbacks4(
         self, account: str, *, request_options: RequestOptionsOrDict | None = None
@@ -141,9 +142,9 @@ class AsyncSoftwareManagementCallbacksV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.list_registered_callbacks4(account, request_options=request_options)
-        ).unwrap()
+        )
 
     async def register_callback4(
         self, account: str, *, request_options: RequestOptionsOrDict | None = None
@@ -160,7 +161,7 @@ class AsyncSoftwareManagementCallbacksV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return (await self._with_raw_response.register_callback4(account, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.register_callback4(account, request_options=request_options))
 
     async def update_callback(
         self, account: str, *, request_options: RequestOptionsOrDict | None = None
@@ -177,7 +178,7 @@ class AsyncSoftwareManagementCallbacksV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return (await self._with_raw_response.update_callback(account, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.update_callback(account, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncSoftwareManagementCallbacksV2WithRawResponse:

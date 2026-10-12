@@ -15,6 +15,7 @@ from ..core import (
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.sensor_insights_device_action_set_request_error import (
     SensorInsightsDeviceActionSetRequestErrorBody,
@@ -87,9 +88,9 @@ class SensorInsightsDevices:
         Raises:
             ApiError: Bad Request Forbidden Not Found ``error`` is ``ManagementError400 | ManagementError403 |
                 ManagementError404 | RawError``."""
-        return self._with_raw_response.sensor_insights_device_action_set_request(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.sensor_insights_device_action_set_request(body, request_options=request_options)
+        )
 
     def sensor_insights_last_reported_time_request(
         self,
@@ -110,9 +111,9 @@ class SensorInsightsDevices:
         Raises:
             ApiError: Bad Request Forbidden Not Found ``error`` is ``ManagementError400 | ManagementError403 |
                 ManagementError404 | RawError``."""
-        return self._with_raw_response.sensor_insights_last_reported_time_request(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.sensor_insights_last_reported_time_request(body, request_options=request_options)
+        )
 
     def sensor_insights_list_device_experience_history_request(
         self,
@@ -134,9 +135,11 @@ class SensorInsightsDevices:
             ApiError: Bad Request UnAuthorized Forbidden Not Found Not Acceptable Unsupported media type Too many
                 requests Internal server error. ``error`` is ``ManagementError400 | ManagementError | ManagementError403
                 | ManagementError404 | ManagementError500 | RawError``."""
-        return self._with_raw_response.sensor_insights_list_device_experience_history_request(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.sensor_insights_list_device_experience_history_request(
+                body, request_options=request_options
+            ),
+        )
 
     def sensor_insights_list_devices_request(
         self,
@@ -157,9 +160,9 @@ class SensorInsightsDevices:
         Raises:
             ApiError: Bad Request UnAuthorized Forbidden Not Found Not Acceptable Unsupported media type Too many
                 requests Internal server error. ``error`` is ``ManagementError | RawError``."""
-        return self._with_raw_response.sensor_insights_list_devices_request(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.sensor_insights_list_devices_request(body, request_options=request_options)
+        )
 
     def sensor_insights_list_network_experience_history_request(
         self,
@@ -181,9 +184,11 @@ class SensorInsightsDevices:
             ApiError: Bad Request UnAuthorized Forbidden Not Found Not Acceptable Unsupported media type Too many
                 requests Internal server error. ``error`` is ``ManagementError400 | ManagementError | ManagementError403
                 | ManagementError404 | ManagementError500 | RawError``."""
-        return self._with_raw_response.sensor_insights_list_network_experience_history_request(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.sensor_insights_list_network_experience_history_request(
+                body, request_options=request_options
+            ),
+        )
 
     def sensor_insights_patch_device_request(
         self,
@@ -205,9 +210,9 @@ class SensorInsightsDevices:
             ApiError: Bad Request UnAuthorized Forbidden Not Found Not Acceptable Unsupported media type Too many
                 requests Internal server error. ``error`` is ``ManagementError400 | ManagementError | ManagementError403
                 | ManagementError404 | ManagementError500 | RawError``."""
-        return self._with_raw_response.sensor_insights_patch_device_request(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.sensor_insights_patch_device_request(body, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> SensorInsightsDevicesWithRawResponse:
@@ -237,11 +242,11 @@ class AsyncSensorInsightsDevices:
         Raises:
             ApiError: Bad Request Forbidden Not Found ``error`` is ``ManagementError400 | ManagementError403 |
                 ManagementError404 | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.sensor_insights_device_action_set_request(
                 body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def sensor_insights_last_reported_time_request(
         self,
@@ -262,11 +267,11 @@ class AsyncSensorInsightsDevices:
         Raises:
             ApiError: Bad Request Forbidden Not Found ``error`` is ``ManagementError400 | ManagementError403 |
                 ManagementError404 | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.sensor_insights_last_reported_time_request(
                 body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def sensor_insights_list_device_experience_history_request(
         self,
@@ -288,11 +293,11 @@ class AsyncSensorInsightsDevices:
             ApiError: Bad Request UnAuthorized Forbidden Not Found Not Acceptable Unsupported media type Too many
                 requests Internal server error. ``error`` is ``ManagementError400 | ManagementError | ManagementError403
                 | ManagementError404 | ManagementError500 | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.sensor_insights_list_device_experience_history_request(
                 body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def sensor_insights_list_devices_request(
         self,
@@ -313,9 +318,9 @@ class AsyncSensorInsightsDevices:
         Raises:
             ApiError: Bad Request UnAuthorized Forbidden Not Found Not Acceptable Unsupported media type Too many
                 requests Internal server error. ``error`` is ``ManagementError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.sensor_insights_list_devices_request(body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def sensor_insights_list_network_experience_history_request(
         self,
@@ -337,11 +342,11 @@ class AsyncSensorInsightsDevices:
             ApiError: Bad Request UnAuthorized Forbidden Not Found Not Acceptable Unsupported media type Too many
                 requests Internal server error. ``error`` is ``ManagementError400 | ManagementError | ManagementError403
                 | ManagementError404 | ManagementError500 | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.sensor_insights_list_network_experience_history_request(
                 body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def sensor_insights_patch_device_request(
         self,
@@ -363,9 +368,9 @@ class AsyncSensorInsightsDevices:
             ApiError: Bad Request UnAuthorized Forbidden Not Found Not Acceptable Unsupported media type Too many
                 requests Internal server error. ``error`` is ``ManagementError400 | ManagementError | ManagementError403
                 | ManagementError404 | ManagementError500 | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.sensor_insights_patch_device_request(body, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncSensorInsightsDevicesWithRawResponse:

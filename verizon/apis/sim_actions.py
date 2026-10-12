@@ -15,6 +15,7 @@ from ..core import (
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.newactivatecode_error import NewactivatecodeErrorBody, newactivatecode_error_mapper
 from ..errors.setactivate_using_post_error import SetactivateUsingPostErrorBody, setactivate_using_post_error_mapper
@@ -53,7 +54,7 @@ class SimActions:
         Raises:
             ApiError: Bad request Unauthorized Forbidden Not Found / Does not exist Format / Request Unacceptable Too
                 many requests ``error`` is ``ESimrestErrorResponse | RawError``."""
-        return self._with_raw_response.newactivatecode(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.newactivatecode(body, request_options=request_options))
 
     def setactivate_using_post(
         self, body: ESimprofileRequest | ESimprofileRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -71,7 +72,7 @@ class SimActions:
         Raises:
             ApiError: Bad request Unauthorized Forbidden Not Found / Does not exist Format / Request Unacceptable Too
                 many requests ``error`` is ``ESimrestErrorResponse | RawError``."""
-        return self._with_raw_response.setactivate_using_post(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.setactivate_using_post(body, request_options=request_options))
 
     def setdeactivate_using_post(
         self, body: ProfileRequest2 | ProfileRequest2Dict, *, request_options: RequestOptionsOrDict | None = None
@@ -89,7 +90,7 @@ class SimActions:
         Raises:
             ApiError: Bad request Unauthorized Forbidden Not Found / Does not exist Format / Request Unacceptable Too
                 many requests ``error`` is ``ESimrestErrorResponse | RawError``."""
-        return self._with_raw_response.setdeactivate_using_post(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.setdeactivate_using_post(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> SimActionsWithRawResponse:
@@ -120,7 +121,7 @@ class AsyncSimActions:
         Raises:
             ApiError: Bad request Unauthorized Forbidden Not Found / Does not exist Format / Request Unacceptable Too
                 many requests ``error`` is ``ESimrestErrorResponse | RawError``."""
-        return (await self._with_raw_response.newactivatecode(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.newactivatecode(body, request_options=request_options))
 
     async def setactivate_using_post(
         self, body: ESimprofileRequest | ESimprofileRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -138,7 +139,7 @@ class AsyncSimActions:
         Raises:
             ApiError: Bad request Unauthorized Forbidden Not Found / Does not exist Format / Request Unacceptable Too
                 many requests ``error`` is ``ESimrestErrorResponse | RawError``."""
-        return (await self._with_raw_response.setactivate_using_post(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.setactivate_using_post(body, request_options=request_options))
 
     async def setdeactivate_using_post(
         self, body: ProfileRequest2 | ProfileRequest2Dict, *, request_options: RequestOptionsOrDict | None = None
@@ -156,7 +157,7 @@ class AsyncSimActions:
         Raises:
             ApiError: Bad request Unauthorized Forbidden Not Found / Does not exist Format / Request Unacceptable Too
                 many requests ``error`` is ``ESimrestErrorResponse | RawError``."""
-        return (await self._with_raw_response.setdeactivate_using_post(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.setdeactivate_using_post(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncSimActionsWithRawResponse:

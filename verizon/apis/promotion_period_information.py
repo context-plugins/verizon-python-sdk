@@ -17,6 +17,7 @@ from ..core import (
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..models.a_request_body_for_usage import ARequestBodyForUsage, ARequestBodyForUsageDict
 from ..models.request_body_for_usage import RequestBodyForUsage, RequestBodyForUsageDict
@@ -47,9 +48,9 @@ class PromotionPeriodInformation:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_promo_device_aggregate_usage_history(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_promo_device_aggregate_usage_history(body, request_options=request_options)
+        )
 
     def get_promo_device_usage_history(
         self,
@@ -69,7 +70,7 @@ class PromotionPeriodInformation:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_promo_device_usage_history(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_promo_device_usage_history(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> PromotionPeriodInformationWithRawResponse:
@@ -98,11 +99,11 @@ class AsyncPromotionPeriodInformation:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_promo_device_aggregate_usage_history(
                 body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_promo_device_usage_history(
         self,
@@ -122,9 +123,9 @@ class AsyncPromotionPeriodInformation:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_promo_device_usage_history(body, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncPromotionPeriodInformationWithRawResponse:

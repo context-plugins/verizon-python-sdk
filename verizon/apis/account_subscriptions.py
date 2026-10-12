@@ -15,6 +15,7 @@ from ..core import (
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.list_account_subscriptions_error import (
     ListAccountSubscriptionsErrorBody,
@@ -51,9 +52,11 @@ class AccountSubscriptions:
         Raises:
             ApiError: Bad request. Unauthorized request. Request forbidden. Not Found / Does not exist. Format / Request
                 Unacceptable. Too many requests. ``error`` is ``SecurityResult | RawError``."""
-        return self._with_raw_response.list_account_subscriptions(
-            body, x_request_id=x_request_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.list_account_subscriptions(
+                body, x_request_id=x_request_id, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AccountSubscriptionsWithRawResponse:
@@ -86,11 +89,11 @@ class AsyncAccountSubscriptions:
         Raises:
             ApiError: Bad request. Unauthorized request. Request forbidden. Not Found / Does not exist. Format / Request
                 Unacceptable. Too many requests. ``error`` is ``SecurityResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.list_account_subscriptions(
                 body, x_request_id=x_request_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncAccountSubscriptionsWithRawResponse:

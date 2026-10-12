@@ -16,6 +16,7 @@ from ..core import (
     empty_response,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.disable_device_logging_error import DisableDeviceLoggingErrorBody, disable_device_logging_error_mapper
 from ..errors.disable_logging_for_devices_error import (
@@ -57,9 +58,9 @@ class ClientLogging:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return self._with_raw_response.disable_device_logging(
-            account, device_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.disable_device_logging(account, device_id, request_options=request_options)
+        )
 
     def disable_logging_for_devices(
         self, account: str, device_ids: str, *, request_options: RequestOptionsOrDict | None = None
@@ -77,9 +78,9 @@ class ClientLogging:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return self._with_raw_response.disable_logging_for_devices(
-            account, device_ids, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.disable_logging_for_devices(account, device_ids, request_options=request_options)
+        )
 
     def enable_device_logging(
         self, account: str, device_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -97,9 +98,9 @@ class ClientLogging:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return self._with_raw_response.enable_device_logging(
-            account, device_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.enable_device_logging(account, device_id, request_options=request_options)
+        )
 
     def enable_logging_for_devices(
         self, account: str, *, request_options: RequestOptionsOrDict | None = None
@@ -116,7 +117,7 @@ class ClientLogging:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return self._with_raw_response.enable_logging_for_devices(account, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.enable_logging_for_devices(account, request_options=request_options))
 
     def list_device_logs(
         self, account: str, device_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -134,7 +135,7 @@ class ClientLogging:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return self._with_raw_response.list_device_logs(account, device_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.list_device_logs(account, device_id, request_options=request_options))
 
     def list_devices_with_logging_enabled(
         self, account: str, *, request_options: RequestOptionsOrDict | None = None
@@ -151,9 +152,9 @@ class ClientLogging:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return self._with_raw_response.list_devices_with_logging_enabled(
-            account, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.list_devices_with_logging_enabled(account, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> ClientLoggingWithRawResponse:
@@ -180,9 +181,9 @@ class AsyncClientLogging:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.disable_device_logging(account, device_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def disable_logging_for_devices(
         self, account: str, device_ids: str, *, request_options: RequestOptionsOrDict | None = None
@@ -200,11 +201,11 @@ class AsyncClientLogging:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.disable_logging_for_devices(
                 account, device_ids, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def enable_device_logging(
         self, account: str, device_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -222,9 +223,9 @@ class AsyncClientLogging:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.enable_device_logging(account, device_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def enable_logging_for_devices(
         self, account: str, *, request_options: RequestOptionsOrDict | None = None
@@ -241,9 +242,9 @@ class AsyncClientLogging:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.enable_logging_for_devices(account, request_options=request_options)
-        ).unwrap()
+        )
 
     async def list_device_logs(
         self, account: str, device_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -261,9 +262,9 @@ class AsyncClientLogging:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.list_device_logs(account, device_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def list_devices_with_logging_enabled(
         self, account: str, *, request_options: RequestOptionsOrDict | None = None
@@ -280,9 +281,9 @@ class AsyncClientLogging:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.list_devices_with_logging_enabled(account, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncClientLoggingWithRawResponse:

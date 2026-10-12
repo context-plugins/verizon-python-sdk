@@ -15,6 +15,7 @@ from ..core import (
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.sensorinsightsmetricsquery_error import (
     SensorinsightsmetricsqueryErrorBody,
@@ -45,7 +46,7 @@ class SensorInsightsSmartAlertMetrics:
         Raises:
             ApiError: Bad Request UnAuthorized Forbidden Internal server error. ``error`` is ``ManagementError400 |
                 ManagementError | ManagementError403 | ManagementError500 | RawError``."""
-        return self._with_raw_response.sensorinsightsmetricsquery(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.sensorinsightsmetricsquery(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> SensorInsightsSmartAlertMetricsWithRawResponse:
@@ -72,9 +73,7 @@ class AsyncSensorInsightsSmartAlertMetrics:
         Raises:
             ApiError: Bad Request UnAuthorized Forbidden Internal server error. ``error`` is ``ManagementError400 |
                 ManagementError | ManagementError403 | ManagementError500 | RawError``."""
-        return (
-            await self._with_raw_response.sensorinsightsmetricsquery(body, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.sensorinsightsmetricsquery(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncSensorInsightsSmartAlertMetricsWithRawResponse:

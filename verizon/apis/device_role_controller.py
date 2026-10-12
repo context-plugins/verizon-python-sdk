@@ -12,6 +12,7 @@ from ..core import (
     async_json_decoder,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.get_aclrules_by_vendor_id_error import (
     GetAclrulesByVendorIdErrorBody,
@@ -41,7 +42,7 @@ class DeviceRoleController:
         Raises:
             ApiError: Unauthorized Bad Request Forbidden Not Acceptable Too many requests ``error`` is ``str |
                 RawError``."""
-        return self._with_raw_response.get_acl_rules_by_vendor_id(vendor_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_acl_rules_by_vendor_id(vendor_id, request_options=request_options))
 
     @property
     def with_raw_response(self) -> DeviceRoleControllerWithRawResponse:
@@ -68,9 +69,9 @@ class AsyncDeviceRoleController:
         Raises:
             ApiError: Unauthorized Bad Request Forbidden Not Acceptable Too many requests ``error`` is ``str |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_acl_rules_by_vendor_id(vendor_id, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncDeviceRoleControllerWithRawResponse:

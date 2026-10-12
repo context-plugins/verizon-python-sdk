@@ -15,6 +15,7 @@ from ..core import (
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.assign_license_to_devices_error import (
     AssignLicenseToDevicesErrorBody,
@@ -54,9 +55,11 @@ class SimSecureForIoTLicenses:
         Raises:
             ApiError: Bad request. Unauthorized request. Request Forbidden. Not Found / Does not exist. Format / Request
                 Unacceptable. Too many requests. ``error`` is ``SecurityResult | RawError``."""
-        return self._with_raw_response.assign_license_to_devices(
-            body, x_request_id=x_request_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.assign_license_to_devices(
+                body, x_request_id=x_request_id, request_options=request_options
+            ),
+        )
 
     def unassign_license_to_devices(
         self, x_request_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -74,9 +77,9 @@ class SimSecureForIoTLicenses:
         Raises:
             ApiError: Bad request. Unauthorized request. Request forbidden. Not Found / Does not exist. Format / Request
                 Unacceptable. Too many requests. ``error`` is ``SecurityResult | RawError``."""
-        return self._with_raw_response.unassign_license_to_devices(
-            x_request_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.unassign_license_to_devices(x_request_id, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> SimSecureForIoTLicensesWithRawResponse:
@@ -108,11 +111,11 @@ class AsyncSimSecureForIoTLicenses:
         Raises:
             ApiError: Bad request. Unauthorized request. Request Forbidden. Not Found / Does not exist. Format / Request
                 Unacceptable. Too many requests. ``error`` is ``SecurityResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.assign_license_to_devices(
                 body, x_request_id=x_request_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def unassign_license_to_devices(
         self, x_request_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -130,9 +133,9 @@ class AsyncSimSecureForIoTLicenses:
         Raises:
             ApiError: Bad request. Unauthorized request. Request forbidden. Not Found / Does not exist. Format / Request
                 Unacceptable. Too many requests. ``error`` is ``SecurityResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.unassign_license_to_devices(x_request_id, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncSimSecureForIoTLicensesWithRawResponse:

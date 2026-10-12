@@ -17,6 +17,7 @@ from ..core import (
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..models.giorequest_response import GiorequestResponse
 from ..models.giosmssend_request import GiosmssendRequest, GiosmssendRequestDict
@@ -46,9 +47,9 @@ class DeviceSmsMessaging:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_sms_messages(
-            account_name, next_=next_, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_sms_messages(account_name, next_=next_, request_options=request_options)
+        )
 
     def list_sms_message_history(
         self,
@@ -68,7 +69,7 @@ class DeviceSmsMessaging:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.list_sms_message_history(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.list_sms_message_history(body, request_options=request_options))
 
     def send_an_sms_message(
         self, body: GiosmssendRequest | GiosmssendRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -86,7 +87,7 @@ class DeviceSmsMessaging:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.send_an_sms_message(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.send_an_sms_message(body, request_options=request_options))
 
     def start_sms_message_delivery(
         self, account_name: str, *, request_options: RequestOptionsOrDict | None = None
@@ -103,9 +104,7 @@ class DeviceSmsMessaging:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.start_sms_message_delivery(
-            account_name, request_options=request_options
-        ).unwrap()
+        return unwrap(self._with_raw_response.start_sms_message_delivery(account_name, request_options=request_options))
 
     @property
     def with_raw_response(self) -> DeviceSmsMessagingWithRawResponse:
@@ -132,9 +131,9 @@ class AsyncDeviceSmsMessaging:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_sms_messages(account_name, next_=next_, request_options=request_options)
-        ).unwrap()
+        )
 
     async def list_sms_message_history(
         self,
@@ -154,7 +153,7 @@ class AsyncDeviceSmsMessaging:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.list_sms_message_history(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.list_sms_message_history(body, request_options=request_options))
 
     async def send_an_sms_message(
         self, body: GiosmssendRequest | GiosmssendRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -172,7 +171,7 @@ class AsyncDeviceSmsMessaging:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.send_an_sms_message(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.send_an_sms_message(body, request_options=request_options))
 
     async def start_sms_message_delivery(
         self, account_name: str, *, request_options: RequestOptionsOrDict | None = None
@@ -189,9 +188,9 @@ class AsyncDeviceSmsMessaging:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.start_sms_message_delivery(account_name, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncDeviceSmsMessagingWithRawResponse:

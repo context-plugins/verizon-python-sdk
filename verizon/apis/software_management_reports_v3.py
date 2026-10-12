@@ -12,6 +12,7 @@ from ..core import (
     async_json_decoder,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.get_campaign_device_status2_error import (
     GetCampaignDeviceStatus2ErrorBody,
@@ -58,9 +59,11 @@ class SoftwareManagementReportsV3:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV3Result | RawError``."""
-        return self._with_raw_response.get_campaign_device_status2(
-            acc, campaign_id, last_seen_device_id=last_seen_device_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_campaign_device_status2(
+                acc, campaign_id, last_seen_device_id=last_seen_device_id, request_options=request_options
+            ),
+        )
 
     def get_campaign_history_by_status2(
         self,
@@ -84,9 +87,11 @@ class SoftwareManagementReportsV3:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV3Result | RawError``."""
-        return self._with_raw_response.get_campaign_history_by_status2(
-            acc, campaign_status, last_seen_campaign_id=last_seen_campaign_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_campaign_history_by_status2(
+                acc, campaign_status, last_seen_campaign_id=last_seen_campaign_id, request_options=request_options
+            ),
+        )
 
     def get_device_firmware_upgrade_history3(
         self, acc: str, device_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -104,9 +109,11 @@ class SoftwareManagementReportsV3:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV3Result | RawError``."""
-        return self._with_raw_response.get_device_firmware_upgrade_history3(
-            acc, device_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_device_firmware_upgrade_history3(
+                acc, device_id, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> SoftwareManagementReportsV3WithRawResponse:
@@ -139,11 +146,11 @@ class AsyncSoftwareManagementReportsV3:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV3Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_campaign_device_status2(
                 acc, campaign_id, last_seen_device_id=last_seen_device_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_campaign_history_by_status2(
         self,
@@ -167,11 +174,11 @@ class AsyncSoftwareManagementReportsV3:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV3Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_campaign_history_by_status2(
                 acc, campaign_status, last_seen_campaign_id=last_seen_campaign_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_device_firmware_upgrade_history3(
         self, acc: str, device_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -189,11 +196,11 @@ class AsyncSoftwareManagementReportsV3:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV3Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_device_firmware_upgrade_history3(
                 acc, device_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncSoftwareManagementReportsV3WithRawResponse:

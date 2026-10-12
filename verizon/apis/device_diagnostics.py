@@ -15,6 +15,7 @@ from ..core import (
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.device_reachability_status_using_post_error import (
     DeviceReachabilityStatusUsingPostErrorBody,
@@ -55,9 +56,9 @@ class DeviceDiagnostics:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.device_reachability_status_using_post(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.device_reachability_status_using_post(body, request_options=request_options)
+        )
 
     def retrieve_active_monitors_using_post(
         self,
@@ -77,9 +78,9 @@ class DeviceDiagnostics:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.retrieve_active_monitors_using_post(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.retrieve_active_monitors_using_post(body, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> DeviceDiagnosticsWithRawResponse:
@@ -108,9 +109,9 @@ class AsyncDeviceDiagnostics:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.device_reachability_status_using_post(body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def retrieve_active_monitors_using_post(
         self,
@@ -130,9 +131,9 @@ class AsyncDeviceDiagnostics:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.retrieve_active_monitors_using_post(body, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncDeviceDiagnosticsWithRawResponse:

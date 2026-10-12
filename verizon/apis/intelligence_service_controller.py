@@ -15,6 +15,7 @@ from ..core import (
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.set_connection_planner_error import SetConnectionPlannerErrorBody, set_connection_planner_error_mapper
 from ..errors.status_connection_planner_error import (
@@ -58,7 +59,7 @@ class IntelligenceServiceController:
             ApiError: Bad request Unauthorized Forbidden Not Found / Does not exist Format / Request Unacceptable Too
                 many requests ``error`` is ``RestErrorResponseforplanner | AuthRestErrorResponseforplanner |
                 RawError``."""
-        return self._with_raw_response.set_connection_planner(body=body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.set_connection_planner(body=body, request_options=request_options))
 
     def status_connection_planner(
         self,
@@ -80,7 +81,7 @@ class IntelligenceServiceController:
             ApiError: Bad request Unauthorized Forbidden Not Found / Does not exist Format / Request Unacceptable Too
                 many requests ``error`` is ``RestErrorResponseforplanner | AuthRestErrorResponseforplanner |
                 RawError``."""
-        return self._with_raw_response.status_connection_planner(body=body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.status_connection_planner(body=body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> IntelligenceServiceControllerWithRawResponse:
@@ -111,9 +112,7 @@ class AsyncIntelligenceServiceController:
             ApiError: Bad request Unauthorized Forbidden Not Found / Does not exist Format / Request Unacceptable Too
                 many requests ``error`` is ``RestErrorResponseforplanner | AuthRestErrorResponseforplanner |
                 RawError``."""
-        return (
-            await self._with_raw_response.set_connection_planner(body=body, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.set_connection_planner(body=body, request_options=request_options))
 
     async def status_connection_planner(
         self,
@@ -135,9 +134,9 @@ class AsyncIntelligenceServiceController:
             ApiError: Bad request Unauthorized Forbidden Not Found / Does not exist Format / Request Unacceptable Too
                 many requests ``error`` is ``RestErrorResponseforplanner | AuthRestErrorResponseforplanner |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.status_connection_planner(body=body, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncIntelligenceServiceControllerWithRawResponse:

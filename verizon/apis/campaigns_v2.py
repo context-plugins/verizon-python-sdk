@@ -15,6 +15,7 @@ from ..core import (
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.cancel_campaign_error import CancelCampaignErrorBody, cancel_campaign_error_mapper
 from ..errors.get_campaign_information_error import (
@@ -68,7 +69,7 @@ class CampaignsV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return self._with_raw_response.cancel_campaign(account, campaign_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.cancel_campaign(account, campaign_id, request_options=request_options))
 
     def get_campaign_information(
         self, account: str, campaign_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -86,9 +87,9 @@ class CampaignsV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return self._with_raw_response.get_campaign_information(
-            account, campaign_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_campaign_information(account, campaign_id, request_options=request_options)
+        )
 
     def schedule_campaign_firmware_upgrade(
         self, account: str, *, request_options: RequestOptionsOrDict | None = None
@@ -105,9 +106,9 @@ class CampaignsV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return self._with_raw_response.schedule_campaign_firmware_upgrade(
-            account, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.schedule_campaign_firmware_upgrade(account, request_options=request_options)
+        )
 
     def schedule_file_upgrade(
         self,
@@ -129,7 +130,7 @@ class CampaignsV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return self._with_raw_response.schedule_file_upgrade(acc, body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.schedule_file_upgrade(acc, body, request_options=request_options))
 
     def schedule_sw_upgrade_http_devices(
         self,
@@ -152,9 +153,9 @@ class CampaignsV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return self._with_raw_response.schedule_sw_upgrade_http_devices(
-            acc, body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.schedule_sw_upgrade_http_devices(acc, body, request_options=request_options)
+        )
 
     def update_campaign_dates(
         self, account: str, campaign_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -173,9 +174,9 @@ class CampaignsV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return self._with_raw_response.update_campaign_dates(
-            account, campaign_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.update_campaign_dates(account, campaign_id, request_options=request_options)
+        )
 
     def update_campaign_firmware_devices(
         self, account: str, campaign_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -193,9 +194,11 @@ class CampaignsV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return self._with_raw_response.update_campaign_firmware_devices(
-            account, campaign_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.update_campaign_firmware_devices(
+                account, campaign_id, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> CampaignsV2WithRawResponse:
@@ -223,9 +226,9 @@ class AsyncCampaignsV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.cancel_campaign(account, campaign_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_campaign_information(
         self, account: str, campaign_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -243,11 +246,11 @@ class AsyncCampaignsV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_campaign_information(
                 account, campaign_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def schedule_campaign_firmware_upgrade(
         self, account: str, *, request_options: RequestOptionsOrDict | None = None
@@ -264,9 +267,9 @@ class AsyncCampaignsV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.schedule_campaign_firmware_upgrade(account, request_options=request_options)
-        ).unwrap()
+        )
 
     async def schedule_file_upgrade(
         self,
@@ -288,9 +291,7 @@ class AsyncCampaignsV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return (
-            await self._with_raw_response.schedule_file_upgrade(acc, body, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.schedule_file_upgrade(acc, body, request_options=request_options))
 
     async def schedule_sw_upgrade_http_devices(
         self,
@@ -313,9 +314,9 @@ class AsyncCampaignsV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.schedule_sw_upgrade_http_devices(acc, body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def update_campaign_dates(
         self, account: str, campaign_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -334,9 +335,9 @@ class AsyncCampaignsV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.update_campaign_dates(account, campaign_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def update_campaign_firmware_devices(
         self, account: str, campaign_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -354,11 +355,11 @@ class AsyncCampaignsV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.update_campaign_firmware_devices(
                 account, campaign_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncCampaignsV2WithRawResponse:

@@ -18,6 +18,7 @@ from ..core import (
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.get_etxclient_certificate_error import (
     GetEtxclientCertificateErrorBody,
@@ -81,9 +82,11 @@ class Etxregistration:
         Raises:
             ApiError: Invalid request Unauthorized Forbidden Request Not Found Too Many Requests Internal server Error
                 ``error`` is ``EtxrespondingError | RawError``."""
-        return self._with_raw_response.get_etx_client_certificate(
-            id_, vendor_id, x_transaction_id=x_transaction_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_etx_client_certificate(
+                id_, vendor_id, x_transaction_id=x_transaction_id, request_options=request_options
+            ),
+        )
 
     def get_etx_connection_url(
         self,
@@ -115,9 +118,11 @@ class Etxregistration:
         Raises:
             ApiError: Invalid request Unauthorized Forbidden Request Too Many Requests Internal server Error ``error``
                 is ``EtxrespondingError | RawError``."""
-        return self._with_raw_response.get_etx_connection_url(
-            vendor_id, body, x_transaction_id=x_transaction_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_etx_connection_url(
+                vendor_id, body, x_transaction_id=x_transaction_id, request_options=request_options
+            ),
+        )
 
     def get_etx_connection_url_multi_mec(
         self,
@@ -152,9 +157,11 @@ class Etxregistration:
         Raises:
             ApiError: Invalid request Unauthorized Forbidden Request Too Many Requests Internal server Error ``error``
                 is ``EtxrespondingError | RawError``."""
-        return self._with_raw_response.get_etx_connection_url_multi_mec(
-            vendor_id, body, x_transaction_id=x_transaction_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_etx_connection_url_multi_mec(
+                vendor_id, body, x_transaction_id=x_transaction_id, request_options=request_options
+            ),
+        )
 
     def query_etx_devices(
         self,
@@ -179,9 +186,11 @@ class Etxregistration:
         Raises:
             ApiError: Invalid Request Unauthorized Request Internal Server Error ``error`` is ``EtxrespondingError |
                 RawError``."""
-        return self._with_raw_response.query_etx_devices(
-            body, x_transaction_id=x_transaction_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.query_etx_devices(
+                body, x_transaction_id=x_transaction_id, request_options=request_options
+            ),
+        )
 
     def register_etx_client(
         self,
@@ -216,9 +225,11 @@ class Etxregistration:
         Raises:
             ApiError: Invalid Request Unauthorized Request Forbidden Request Too Many Requests Internal Server Error
                 ``error`` is ``EtxrespondingError | RawError``."""
-        return self._with_raw_response.register_etx_client(
-            body, x_transaction_id=x_transaction_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.register_etx_client(
+                body, x_transaction_id=x_transaction_id, request_options=request_options
+            ),
+        )
 
     def renew_etx_client_certificate(
         self,
@@ -257,9 +268,11 @@ class Etxregistration:
         Raises:
             ApiError: Invalid Request Unauthorized Request Forbidden Request Too Many Requests Internal Server Error
                 ``error`` is ``EtxrespondingError | RawError``."""
-        return self._with_raw_response.renew_etx_client_certificate(
-            device_id, vendor_id, x_transaction_id=x_transaction_id, body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.renew_etx_client_certificate(
+                device_id, vendor_id, x_transaction_id=x_transaction_id, body=body, request_options=request_options
+            ),
+        )
 
     def unregister_etx_clients(
         self,
@@ -289,9 +302,11 @@ class Etxregistration:
         Raises:
             ApiError: Invalid Request Unauthorized Request Forbidden Request Too Many Requests Internal Server Error
                 ``error`` is ``EtxrespondingError | RawError``."""
-        return self._with_raw_response.unregister_etx_clients(
-            device_ids, vendor_id, x_transaction_id=x_transaction_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.unregister_etx_clients(
+                device_ids, vendor_id, x_transaction_id=x_transaction_id, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> EtxregistrationWithRawResponse:
@@ -332,11 +347,11 @@ class AsyncEtxregistration:
         Raises:
             ApiError: Invalid request Unauthorized Forbidden Request Not Found Too Many Requests Internal server Error
                 ``error`` is ``EtxrespondingError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_etx_client_certificate(
                 id_, vendor_id, x_transaction_id=x_transaction_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_etx_connection_url(
         self,
@@ -368,11 +383,11 @@ class AsyncEtxregistration:
         Raises:
             ApiError: Invalid request Unauthorized Forbidden Request Too Many Requests Internal server Error ``error``
                 is ``EtxrespondingError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_etx_connection_url(
                 vendor_id, body, x_transaction_id=x_transaction_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def get_etx_connection_url_multi_mec(
         self,
@@ -407,11 +422,11 @@ class AsyncEtxregistration:
         Raises:
             ApiError: Invalid request Unauthorized Forbidden Request Too Many Requests Internal server Error ``error``
                 is ``EtxrespondingError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_etx_connection_url_multi_mec(
                 vendor_id, body, x_transaction_id=x_transaction_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def query_etx_devices(
         self,
@@ -436,11 +451,11 @@ class AsyncEtxregistration:
         Raises:
             ApiError: Invalid Request Unauthorized Request Internal Server Error ``error`` is ``EtxrespondingError |
                 RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.query_etx_devices(
                 body, x_transaction_id=x_transaction_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def register_etx_client(
         self,
@@ -475,11 +490,11 @@ class AsyncEtxregistration:
         Raises:
             ApiError: Invalid Request Unauthorized Request Forbidden Request Too Many Requests Internal Server Error
                 ``error`` is ``EtxrespondingError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.register_etx_client(
                 body, x_transaction_id=x_transaction_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def renew_etx_client_certificate(
         self,
@@ -518,11 +533,11 @@ class AsyncEtxregistration:
         Raises:
             ApiError: Invalid Request Unauthorized Request Forbidden Request Too Many Requests Internal Server Error
                 ``error`` is ``EtxrespondingError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.renew_etx_client_certificate(
                 device_id, vendor_id, x_transaction_id=x_transaction_id, body=body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def unregister_etx_clients(
         self,
@@ -552,11 +567,11 @@ class AsyncEtxregistration:
         Raises:
             ApiError: Invalid Request Unauthorized Request Forbidden Request Too Many Requests Internal Server Error
                 ``error`` is ``EtxrespondingError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.unregister_etx_clients(
                 device_ids, vendor_id, x_transaction_id=x_transaction_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncEtxregistrationWithRawResponse:

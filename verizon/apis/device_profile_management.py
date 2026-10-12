@@ -15,6 +15,7 @@ from ..core import (
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.activate_device_through_profile_error import (
     ActivateDeviceThroughProfileErrorBody,
@@ -65,7 +66,7 @@ class DeviceProfileManagement:
 
         Raises:
             ApiError: Bad request ``error`` is ``RestErrorResponse | RawError``."""
-        return self._with_raw_response.activate_device_through_profile(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.activate_device_through_profile(body, request_options=request_options))
 
     def profile_to_activate_device(
         self, body: ProfileRequest | ProfileRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -82,7 +83,7 @@ class DeviceProfileManagement:
 
         Raises:
             ApiError: Bad request ``error`` is ``RestErrorResponse | RawError``."""
-        return self._with_raw_response.profile_to_activate_device(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.profile_to_activate_device(body, request_options=request_options))
 
     def profile_to_deactivate_device(
         self,
@@ -102,7 +103,7 @@ class DeviceProfileManagement:
 
         Raises:
             ApiError: Bad request ``error`` is ``RestErrorResponse | RawError``."""
-        return self._with_raw_response.profile_to_deactivate_device(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.profile_to_deactivate_device(body, request_options=request_options))
 
     def profile_to_set_fallback_attribute(
         self,
@@ -122,7 +123,7 @@ class DeviceProfileManagement:
 
         Raises:
             ApiError: Bad request ``error`` is ``RestErrorResponse | RawError``."""
-        return self._with_raw_response.profile_to_set_fallback_attribute(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.profile_to_set_fallback_attribute(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> DeviceProfileManagementWithRawResponse:
@@ -151,9 +152,9 @@ class AsyncDeviceProfileManagement:
 
         Raises:
             ApiError: Bad request ``error`` is ``RestErrorResponse | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.activate_device_through_profile(body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def profile_to_activate_device(
         self, body: ProfileRequest | ProfileRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -170,9 +171,7 @@ class AsyncDeviceProfileManagement:
 
         Raises:
             ApiError: Bad request ``error`` is ``RestErrorResponse | RawError``."""
-        return (
-            await self._with_raw_response.profile_to_activate_device(body, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.profile_to_activate_device(body, request_options=request_options))
 
     async def profile_to_deactivate_device(
         self,
@@ -192,9 +191,7 @@ class AsyncDeviceProfileManagement:
 
         Raises:
             ApiError: Bad request ``error`` is ``RestErrorResponse | RawError``."""
-        return (
-            await self._with_raw_response.profile_to_deactivate_device(body, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.profile_to_deactivate_device(body, request_options=request_options))
 
     async def profile_to_set_fallback_attribute(
         self,
@@ -214,9 +211,9 @@ class AsyncDeviceProfileManagement:
 
         Raises:
             ApiError: Bad request ``error`` is ``RestErrorResponse | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.profile_to_set_fallback_attribute(body, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncDeviceProfileManagementWithRawResponse:

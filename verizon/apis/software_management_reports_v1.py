@@ -12,6 +12,7 @@ from ..core import (
     async_json_decoder,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.get_device_firmware_upgrade_history_error import (
     GetDeviceFirmwareUpgradeHistoryErrorBody,
@@ -49,9 +50,11 @@ class SoftwareManagementReportsV1:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV1Result | RawError``."""
-        return self._with_raw_response.get_device_firmware_upgrade_history(
-            account, device_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_device_firmware_upgrade_history(
+                account, device_id, request_options=request_options
+            ),
+        )
 
     def list_account_devices(
         self, account: str, start_index: str, *, request_options: RequestOptionsOrDict | None = None
@@ -72,9 +75,9 @@ class SoftwareManagementReportsV1:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV1Result | RawError``."""
-        return self._with_raw_response.list_account_devices(
-            account, start_index, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.list_account_devices(account, start_index, request_options=request_options)
+        )
 
     def list_upgrades_for_specified_status(
         self,
@@ -100,9 +103,11 @@ class SoftwareManagementReportsV1:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV1Result | RawError``."""
-        return self._with_raw_response.list_upgrades_for_specified_status(
-            account, upgrade_status, start_index, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.list_upgrades_for_specified_status(
+                account, upgrade_status, start_index, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> SoftwareManagementReportsV1WithRawResponse:
@@ -129,11 +134,11 @@ class AsyncSoftwareManagementReportsV1:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV1Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_device_firmware_upgrade_history(
                 account, device_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def list_account_devices(
         self, account: str, start_index: str, *, request_options: RequestOptionsOrDict | None = None
@@ -154,9 +159,9 @@ class AsyncSoftwareManagementReportsV1:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV1Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.list_account_devices(account, start_index, request_options=request_options)
-        ).unwrap()
+        )
 
     async def list_upgrades_for_specified_status(
         self,
@@ -182,11 +187,11 @@ class AsyncSoftwareManagementReportsV1:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV1Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.list_upgrades_for_specified_status(
                 account, upgrade_status, start_index, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncSoftwareManagementReportsV1WithRawResponse:

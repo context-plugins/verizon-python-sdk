@@ -17,6 +17,7 @@ from ..core import (
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..models.account_details import AccountDetails
 from ..models.aggregate_usage import AggregateUsage, AggregateUsageDict
@@ -52,7 +53,7 @@ class DeviceActions:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.account_information(account_name, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.account_information(account_name, request_options=request_options))
 
     def aggregate_usage(
         self, body: AggregateUsage | AggregateUsageDict, *, request_options: RequestOptionsOrDict | None = None
@@ -69,7 +70,7 @@ class DeviceActions:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.aggregate_usage(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.aggregate_usage(body, request_options=request_options))
 
     def daily_usage(
         self, body: DailyUsage | DailyUsageDict, *, request_options: RequestOptionsOrDict | None = None
@@ -86,7 +87,7 @@ class DeviceActions:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.daily_usage(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.daily_usage(body, request_options=request_options))
 
     def get_asynchronous_request_status(
         self, account_name: str, request_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -104,9 +105,11 @@ class DeviceActions:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_asynchronous_request_status(
-            account_name, request_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_asynchronous_request_status(
+                account_name, request_id, request_options=request_options
+            ),
+        )
 
     def retrieve_device_provisioning_history(
         self, body: ProvhistoryRequest | ProvhistoryRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -123,9 +126,9 @@ class DeviceActions:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.retrieve_device_provisioning_history(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.retrieve_device_provisioning_history(body, request_options=request_options)
+        )
 
     def retrieve_the_global_device_list(
         self,
@@ -145,7 +148,7 @@ class DeviceActions:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.retrieve_the_global_device_list(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.retrieve_the_global_device_list(body, request_options=request_options))
 
     def service_plan_list(
         self, account_name: str, *, request_options: RequestOptionsOrDict | None = None
@@ -163,7 +166,7 @@ class DeviceActions:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.service_plan_list(account_name, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.service_plan_list(account_name, request_options=request_options))
 
     @property
     def with_raw_response(self) -> DeviceActionsWithRawResponse:
@@ -190,9 +193,7 @@ class AsyncDeviceActions:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
-            await self._with_raw_response.account_information(account_name, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.account_information(account_name, request_options=request_options))
 
     async def aggregate_usage(
         self, body: AggregateUsage | AggregateUsageDict, *, request_options: RequestOptionsOrDict | None = None
@@ -209,7 +210,7 @@ class AsyncDeviceActions:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.aggregate_usage(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.aggregate_usage(body, request_options=request_options))
 
     async def daily_usage(
         self, body: DailyUsage | DailyUsageDict, *, request_options: RequestOptionsOrDict | None = None
@@ -226,7 +227,7 @@ class AsyncDeviceActions:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.daily_usage(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.daily_usage(body, request_options=request_options))
 
     async def get_asynchronous_request_status(
         self, account_name: str, request_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -244,11 +245,11 @@ class AsyncDeviceActions:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_asynchronous_request_status(
                 account_name, request_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def retrieve_device_provisioning_history(
         self, body: ProvhistoryRequest | ProvhistoryRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -265,9 +266,9 @@ class AsyncDeviceActions:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.retrieve_device_provisioning_history(body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def retrieve_the_global_device_list(
         self,
@@ -287,9 +288,9 @@ class AsyncDeviceActions:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.retrieve_the_global_device_list(body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def service_plan_list(
         self, account_name: str, *, request_options: RequestOptionsOrDict | None = None
@@ -307,7 +308,7 @@ class AsyncDeviceActions:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.service_plan_list(account_name, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.service_plan_list(account_name, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncDeviceActionsWithRawResponse:

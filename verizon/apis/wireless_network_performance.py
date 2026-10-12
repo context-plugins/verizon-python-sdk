@@ -17,6 +17,7 @@ from ..core import (
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..models.get_device_experience_score_bulk_request import (
     GetDeviceExperienceScoreBulkRequest,
@@ -57,7 +58,7 @@ class WirelessNetworkPerformance:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.device_experience30days_history(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.device_experience30days_history(body, request_options=request_options))
 
     def device_experience_bulk_latest(
         self,
@@ -77,7 +78,7 @@ class WirelessNetworkPerformance:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.device_experience_bulk_latest(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.device_experience_bulk_latest(body, request_options=request_options))
 
     def domestic4_g_and5_g_nationwide_network_coverage(
         self,
@@ -98,9 +99,11 @@ class WirelessNetworkPerformance:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.domestic4_g_and5_g_nationwide_network_coverage(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.domestic4_g_and5_g_nationwide_network_coverage(
+                body, request_options=request_options
+            ),
+        )
 
     def near_real_time_network_conditions(
         self,
@@ -120,7 +123,7 @@ class WirelessNetworkPerformance:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.near_real_time_network_conditions(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.near_real_time_network_conditions(body, request_options=request_options))
 
     def site_proximity(
         self,
@@ -141,7 +144,7 @@ class WirelessNetworkPerformance:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.site_proximity(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.site_proximity(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> WirelessNetworkPerformanceWithRawResponse:
@@ -170,9 +173,9 @@ class AsyncWirelessNetworkPerformance:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.device_experience30days_history(body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def device_experience_bulk_latest(
         self,
@@ -192,9 +195,9 @@ class AsyncWirelessNetworkPerformance:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.device_experience_bulk_latest(body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def domestic4_g_and5_g_nationwide_network_coverage(
         self,
@@ -215,11 +218,11 @@ class AsyncWirelessNetworkPerformance:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.domestic4_g_and5_g_nationwide_network_coverage(
                 body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def near_real_time_network_conditions(
         self,
@@ -239,9 +242,9 @@ class AsyncWirelessNetworkPerformance:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.near_real_time_network_conditions(body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def site_proximity(
         self,
@@ -262,7 +265,7 @@ class AsyncWirelessNetworkPerformance:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.site_proximity(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.site_proximity(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncWirelessNetworkPerformanceWithRawResponse:

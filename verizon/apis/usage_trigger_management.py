@@ -15,6 +15,7 @@ from ..core import (
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.create_new_trigger_error import CreateNewTriggerErrorBody, create_new_trigger_error_mapper
 from ..errors.delete_trigger_error import DeleteTriggerErrorBody, delete_trigger_error_mapper
@@ -49,7 +50,7 @@ class UsageTriggerManagement:
 
         Raises:
             ApiError: Unexpected error ``error`` is ``DeviceLocationResult | RawError``."""
-        return self._with_raw_response.create_new_trigger(body=body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.create_new_trigger(body=body, request_options=request_options))
 
     def delete_trigger(
         self, account_name: str, trigger_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -67,9 +68,7 @@ class UsageTriggerManagement:
 
         Raises:
             ApiError: Unexpected error ``error`` is ``DeviceLocationResult | RawError``."""
-        return self._with_raw_response.delete_trigger(
-            account_name, trigger_id, request_options=request_options
-        ).unwrap()
+        return unwrap(self._with_raw_response.delete_trigger(account_name, trigger_id, request_options=request_options))
 
     def update_trigger(
         self,
@@ -91,7 +90,7 @@ class UsageTriggerManagement:
 
         Raises:
             ApiError: Unexpected error ``error`` is ``DeviceLocationResult | RawError``."""
-        return self._with_raw_response.update_trigger(trigger_id, body=body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.update_trigger(trigger_id, body=body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> UsageTriggerManagementWithRawResponse:
@@ -121,7 +120,7 @@ class AsyncUsageTriggerManagement:
 
         Raises:
             ApiError: Unexpected error ``error`` is ``DeviceLocationResult | RawError``."""
-        return (await self._with_raw_response.create_new_trigger(body=body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.create_new_trigger(body=body, request_options=request_options))
 
     async def delete_trigger(
         self, account_name: str, trigger_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -139,9 +138,9 @@ class AsyncUsageTriggerManagement:
 
         Raises:
             ApiError: Unexpected error ``error`` is ``DeviceLocationResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_trigger(account_name, trigger_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def update_trigger(
         self,
@@ -163,9 +162,9 @@ class AsyncUsageTriggerManagement:
 
         Raises:
             ApiError: Unexpected error ``error`` is ``DeviceLocationResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.update_trigger(trigger_id, body=body, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncUsageTriggerManagementWithRawResponse:

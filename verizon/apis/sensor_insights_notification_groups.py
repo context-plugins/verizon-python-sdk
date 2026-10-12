@@ -17,6 +17,7 @@ from ..core import (
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.sensor_insights_add_users_to_notification_group_request_error import (
     SensorInsightsAddUsersToNotificationGroupRequestErrorBody,
@@ -94,9 +95,11 @@ class SensorInsightsNotificationGroups:
             ApiError: Bad Request UnAuthorized Forbidden Not Found Not Acceptable Unsupported media type Too many
                 requests Internal server error. ``error`` is ``ManagementError400 | ManagementError | ManagementError403
                 | ManagementError404 | ManagementError500 | RawError``."""
-        return self._with_raw_response.sensor_insights_add_users_to_notification_group_request(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.sensor_insights_add_users_to_notification_group_request(
+                body, request_options=request_options
+            ),
+        )
 
     def sensor_insights_create_notification_group_request(
         self,
@@ -118,9 +121,11 @@ class SensorInsightsNotificationGroups:
             ApiError: Bad Request UnAuthorized Forbidden Not Acceptable Unsupported media type Too many requests
                 Internal server error. ``error`` is ``ManagementError400 | ManagementError | ManagementError403 |
                 ManagementError500 | RawError``."""
-        return self._with_raw_response.sensor_insights_create_notification_group_request(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.sensor_insights_create_notification_group_request(
+                body, request_options=request_options
+            ),
+        )
 
     def sensor_insights_delete_notification_group(
         self,
@@ -141,9 +146,9 @@ class SensorInsightsNotificationGroups:
         Raises:
             ApiError: Bad Request UnAuthorized Forbidden Not Found ``error`` is ``ManagementError400 | ManagementError |
                 ManagementError403 | ManagementError404 | RawError``."""
-        return self._with_raw_response.sensor_insights_delete_notification_group(
-            payload, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.sensor_insights_delete_notification_group(payload, request_options=request_options)
+        )
 
     def sensor_insights_list_notification_group_request(
         self,
@@ -165,9 +170,11 @@ class SensorInsightsNotificationGroups:
             ApiError: Bad Request UnAuthorized Forbidden Not Found Not Acceptable Unsupported media type Too many
                 requests Internal server error. ``error`` is ``ManagementError400 | ManagementError | ManagementError403
                 | ManagementError404 | ManagementError500 | RawError``."""
-        return self._with_raw_response.sensor_insights_list_notification_group_request(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.sensor_insights_list_notification_group_request(
+                body, request_options=request_options
+            ),
+        )
 
     def sensor_insights_remove_users_from_notification_group_request(
         self,
@@ -189,9 +196,11 @@ class SensorInsightsNotificationGroups:
             ApiError: Bad Request UnAuthorized Forbidden Not Found Not Acceptable Unsupported media type Too many
                 requests Internal server error. ``error`` is ``ManagementError400 | ManagementError | ManagementError403
                 | ManagementError404 | ManagementError500 | RawError``."""
-        return self._with_raw_response.sensor_insights_remove_users_from_notification_group_request(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.sensor_insights_remove_users_from_notification_group_request(
+                body, request_options=request_options
+            ),
+        )
 
     def sensor_insights_update_notification_group_request(
         self,
@@ -213,9 +222,11 @@ class SensorInsightsNotificationGroups:
             ApiError: Bad Request UnAuthorized Forbidden Not Found Not Acceptable Unsupported media type Too many
                 requests Internal server error. ``error`` is ``ManagementError400 | ManagementError | ManagementError403
                 | ManagementError404 | ManagementError500 | RawError``."""
-        return self._with_raw_response.sensor_insights_update_notification_group_request(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.sensor_insights_update_notification_group_request(
+                body, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> SensorInsightsNotificationGroupsWithRawResponse:
@@ -246,11 +257,11 @@ class AsyncSensorInsightsNotificationGroups:
             ApiError: Bad Request UnAuthorized Forbidden Not Found Not Acceptable Unsupported media type Too many
                 requests Internal server error. ``error`` is ``ManagementError400 | ManagementError | ManagementError403
                 | ManagementError404 | ManagementError500 | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.sensor_insights_add_users_to_notification_group_request(
                 body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def sensor_insights_create_notification_group_request(
         self,
@@ -272,11 +283,11 @@ class AsyncSensorInsightsNotificationGroups:
             ApiError: Bad Request UnAuthorized Forbidden Not Acceptable Unsupported media type Too many requests
                 Internal server error. ``error`` is ``ManagementError400 | ManagementError | ManagementError403 |
                 ManagementError500 | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.sensor_insights_create_notification_group_request(
                 body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def sensor_insights_delete_notification_group(
         self,
@@ -297,11 +308,11 @@ class AsyncSensorInsightsNotificationGroups:
         Raises:
             ApiError: Bad Request UnAuthorized Forbidden Not Found ``error`` is ``ManagementError400 | ManagementError |
                 ManagementError403 | ManagementError404 | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.sensor_insights_delete_notification_group(
                 payload, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def sensor_insights_list_notification_group_request(
         self,
@@ -323,11 +334,11 @@ class AsyncSensorInsightsNotificationGroups:
             ApiError: Bad Request UnAuthorized Forbidden Not Found Not Acceptable Unsupported media type Too many
                 requests Internal server error. ``error`` is ``ManagementError400 | ManagementError | ManagementError403
                 | ManagementError404 | ManagementError500 | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.sensor_insights_list_notification_group_request(
                 body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def sensor_insights_remove_users_from_notification_group_request(
         self,
@@ -349,11 +360,11 @@ class AsyncSensorInsightsNotificationGroups:
             ApiError: Bad Request UnAuthorized Forbidden Not Found Not Acceptable Unsupported media type Too many
                 requests Internal server error. ``error`` is ``ManagementError400 | ManagementError | ManagementError403
                 | ManagementError404 | ManagementError500 | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.sensor_insights_remove_users_from_notification_group_request(
                 body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def sensor_insights_update_notification_group_request(
         self,
@@ -375,11 +386,11 @@ class AsyncSensorInsightsNotificationGroups:
             ApiError: Bad Request UnAuthorized Forbidden Not Found Not Acceptable Unsupported media type Too many
                 requests Internal server error. ``error`` is ``ManagementError400 | ManagementError | ManagementError403
                 | ManagementError404 | ManagementError500 | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.sensor_insights_update_notification_group_request(
                 body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncSensorInsightsNotificationGroupsWithRawResponse:

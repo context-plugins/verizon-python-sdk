@@ -17,6 +17,7 @@ from ..core import (
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..models.gbi_request_response5 import GbiRequestResponse5
 from ..models.gbiactivate_request5 import GbiactivateRequest5, GbiactivateRequest5Dict
@@ -48,9 +49,9 @@ class GbiDeviceActions5:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.business_internet_serviceplanchange(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.business_internet_serviceplanchange(body, request_options=request_options)
+        )
 
     def business_internetactivate_using_post(
         self,
@@ -74,9 +75,9 @@ class GbiDeviceActions5:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.business_internetactivate_using_post(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.business_internetactivate_using_post(body, request_options=request_options)
+        )
 
     def business_internetlist_device_information(
         self, body: GbideviceId5 | GbideviceId5Dict, *, request_options: RequestOptionsOrDict | None = None
@@ -94,9 +95,9 @@ class GbiDeviceActions5:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.business_internetlist_device_information(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.business_internetlist_device_information(body, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> GbiDeviceActions5WithRawResponse:
@@ -125,9 +126,9 @@ class AsyncGbiDeviceActions5:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.business_internet_serviceplanchange(body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def business_internetactivate_using_post(
         self,
@@ -151,9 +152,9 @@ class AsyncGbiDeviceActions5:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.business_internetactivate_using_post(body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def business_internetlist_device_information(
         self, body: GbideviceId5 | GbideviceId5Dict, *, request_options: RequestOptionsOrDict | None = None
@@ -171,11 +172,11 @@ class AsyncGbiDeviceActions5:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.business_internetlist_device_information(
                 body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncGbiDeviceActions5WithRawResponse:

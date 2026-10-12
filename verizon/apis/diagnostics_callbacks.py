@@ -14,6 +14,7 @@ from ..core import (
     async_json_decoder,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.get_diagnostics_subscription_callback_info_error import (
     GetDiagnosticsSubscriptionCallbackInfoErrorBody,
@@ -50,9 +51,11 @@ class DiagnosticsCallbacks:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``DeviceDiagnosticsResult | RawError``."""
-        return self._with_raw_response.get_diagnostics_subscription_callback_info(
-            account_name, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_diagnostics_subscription_callback_info(
+                account_name, request_options=request_options
+            ),
+        )
 
     def register_diagnostics_callback_url(
         self, *, request_options: RequestOptionsOrDict | None = None
@@ -68,7 +71,7 @@ class DiagnosticsCallbacks:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``DeviceDiagnosticsResult | RawError``."""
-        return self._with_raw_response.register_diagnostics_callback_url(request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.register_diagnostics_callback_url(request_options=request_options))
 
     def unregister_diagnostics_callback(
         self, account_name: str, service_name: str, *, request_options: RequestOptionsOrDict | None = None
@@ -86,9 +89,11 @@ class DiagnosticsCallbacks:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``DeviceDiagnosticsResult | RawError``."""
-        return self._with_raw_response.unregister_diagnostics_callback(
-            account_name, service_name, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.unregister_diagnostics_callback(
+                account_name, service_name, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> DiagnosticsCallbacksWithRawResponse:
@@ -114,11 +119,11 @@ class AsyncDiagnosticsCallbacks:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``DeviceDiagnosticsResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_diagnostics_subscription_callback_info(
                 account_name, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def register_diagnostics_callback_url(
         self, *, request_options: RequestOptionsOrDict | None = None
@@ -134,9 +139,7 @@ class AsyncDiagnosticsCallbacks:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``DeviceDiagnosticsResult | RawError``."""
-        return (
-            await self._with_raw_response.register_diagnostics_callback_url(request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.register_diagnostics_callback_url(request_options=request_options))
 
     async def unregister_diagnostics_callback(
         self, account_name: str, service_name: str, *, request_options: RequestOptionsOrDict | None = None
@@ -154,11 +157,11 @@ class AsyncDiagnosticsCallbacks:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``DeviceDiagnosticsResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.unregister_diagnostics_callback(
                 account_name, service_name, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncDiagnosticsCallbacksWithRawResponse:

@@ -15,6 +15,7 @@ from ..core import (
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.deregister_callback5_error import DeregisterCallback5ErrorBody, deregister_callback5_error_mapper
 from ..errors.list_registered_callbacks5_error import (
@@ -52,7 +53,7 @@ class SoftwareManagementCallbacksV3:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV3Result | RawError``."""
-        return self._with_raw_response.deregister_callback5(acc, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.deregister_callback5(acc, request_options=request_options))
 
     def list_registered_callbacks5(
         self, acc: str, *, request_options: RequestOptionsOrDict | None = None
@@ -69,7 +70,7 @@ class SoftwareManagementCallbacksV3:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV3Result | RawError``."""
-        return self._with_raw_response.list_registered_callbacks5(acc, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.list_registered_callbacks5(acc, request_options=request_options))
 
     def register_callback5(
         self,
@@ -91,7 +92,7 @@ class SoftwareManagementCallbacksV3:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV3Result | RawError``."""
-        return self._with_raw_response.register_callback5(acc, body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.register_callback5(acc, body, request_options=request_options))
 
     def update_callback2(
         self,
@@ -113,7 +114,7 @@ class SoftwareManagementCallbacksV3:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV3Result | RawError``."""
-        return self._with_raw_response.update_callback2(acc, body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.update_callback2(acc, body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> SoftwareManagementCallbacksV3WithRawResponse:
@@ -139,7 +140,7 @@ class AsyncSoftwareManagementCallbacksV3:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV3Result | RawError``."""
-        return (await self._with_raw_response.deregister_callback5(acc, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.deregister_callback5(acc, request_options=request_options))
 
     async def list_registered_callbacks5(
         self, acc: str, *, request_options: RequestOptionsOrDict | None = None
@@ -156,7 +157,7 @@ class AsyncSoftwareManagementCallbacksV3:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV3Result | RawError``."""
-        return (await self._with_raw_response.list_registered_callbacks5(acc, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.list_registered_callbacks5(acc, request_options=request_options))
 
     async def register_callback5(
         self,
@@ -178,7 +179,7 @@ class AsyncSoftwareManagementCallbacksV3:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV3Result | RawError``."""
-        return (await self._with_raw_response.register_callback5(acc, body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.register_callback5(acc, body, request_options=request_options))
 
     async def update_callback2(
         self,
@@ -200,7 +201,7 @@ class AsyncSoftwareManagementCallbacksV3:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV3Result | RawError``."""
-        return (await self._with_raw_response.update_callback2(acc, body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.update_callback2(acc, body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncSoftwareManagementCallbacksV3WithRawResponse:

@@ -14,6 +14,7 @@ from ..core import (
     async_json_decoder,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.assign_licenses_to_devices2_error import (
     AssignLicensesToDevices2ErrorBody,
@@ -66,7 +67,7 @@ class SoftwareManagementLicensesV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return self._with_raw_response.assign_licenses_to_devices2(account, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.assign_licenses_to_devices2(account, request_options=request_options))
 
     def create_list_of_licenses_to_remove2(
         self, account: str, *, request_options: RequestOptionsOrDict | None = None
@@ -83,9 +84,9 @@ class SoftwareManagementLicensesV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return self._with_raw_response.create_list_of_licenses_to_remove2(
-            account, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.create_list_of_licenses_to_remove2(account, request_options=request_options)
+        )
 
     def delete_list_of_licenses_to_remove2(
         self, account: str, *, request_options: RequestOptionsOrDict | None = None
@@ -102,9 +103,9 @@ class SoftwareManagementLicensesV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return self._with_raw_response.delete_list_of_licenses_to_remove2(
-            account, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.delete_list_of_licenses_to_remove2(account, request_options=request_options)
+        )
 
     def get_account_license_status2(
         self,
@@ -126,9 +127,11 @@ class SoftwareManagementLicensesV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return self._with_raw_response.get_account_license_status2(
-            account, last_seen_device_id=last_seen_device_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_account_license_status2(
+                account, last_seen_device_id=last_seen_device_id, request_options=request_options
+            ),
+        )
 
     def list_licenses_to_remove2(
         self, account: str, *, start_index: str | None = None, request_options: RequestOptionsOrDict | None = None
@@ -146,9 +149,11 @@ class SoftwareManagementLicensesV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return self._with_raw_response.list_licenses_to_remove2(
-            account, start_index=start_index, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.list_licenses_to_remove2(
+                account, start_index=start_index, request_options=request_options
+            ),
+        )
 
     def remove_licenses_from_devices2(
         self, account: str, *, request_options: RequestOptionsOrDict | None = None
@@ -165,7 +170,7 @@ class SoftwareManagementLicensesV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return self._with_raw_response.remove_licenses_from_devices2(account, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.remove_licenses_from_devices2(account, request_options=request_options))
 
     @property
     def with_raw_response(self) -> SoftwareManagementLicensesV2WithRawResponse:
@@ -191,9 +196,9 @@ class AsyncSoftwareManagementLicensesV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.assign_licenses_to_devices2(account, request_options=request_options)
-        ).unwrap()
+        )
 
     async def create_list_of_licenses_to_remove2(
         self, account: str, *, request_options: RequestOptionsOrDict | None = None
@@ -210,9 +215,9 @@ class AsyncSoftwareManagementLicensesV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.create_list_of_licenses_to_remove2(account, request_options=request_options)
-        ).unwrap()
+        )
 
     async def delete_list_of_licenses_to_remove2(
         self, account: str, *, request_options: RequestOptionsOrDict | None = None
@@ -229,9 +234,9 @@ class AsyncSoftwareManagementLicensesV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_list_of_licenses_to_remove2(account, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_account_license_status2(
         self,
@@ -253,11 +258,11 @@ class AsyncSoftwareManagementLicensesV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_account_license_status2(
                 account, last_seen_device_id=last_seen_device_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def list_licenses_to_remove2(
         self, account: str, *, start_index: str | None = None, request_options: RequestOptionsOrDict | None = None
@@ -275,11 +280,11 @@ class AsyncSoftwareManagementLicensesV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.list_licenses_to_remove2(
                 account, start_index=start_index, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def remove_licenses_from_devices2(
         self, account: str, *, request_options: RequestOptionsOrDict | None = None
@@ -296,9 +301,9 @@ class AsyncSoftwareManagementLicensesV2:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.remove_licenses_from_devices2(account, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncSoftwareManagementLicensesV2WithRawResponse:

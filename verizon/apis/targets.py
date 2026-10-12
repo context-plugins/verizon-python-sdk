@@ -19,6 +19,7 @@ from ..core import (
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..models.create_io_tapplication_request import CreateIoTapplicationRequest, CreateIoTapplicationRequestDict
 from ..models.create_io_tapplication_response import CreateIoTapplicationResponse
@@ -57,9 +58,11 @@ class Targets:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.create_azure_central_io_t_application(
-            billingaccount_id, body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.create_azure_central_io_t_application(
+                billingaccount_id, body, request_options=request_options
+            ),
+        )
 
     def create_target(
         self,
@@ -80,7 +83,7 @@ class Targets:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.create_target(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.create_target(body, request_options=request_options))
 
     def delete_target(
         self,
@@ -100,7 +103,7 @@ class Targets:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.delete_target(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_target(body, request_options=request_options))
 
     def generate_target_external_id(
         self,
@@ -120,7 +123,7 @@ class Targets:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.generate_target_external_id(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.generate_target_external_id(body, request_options=request_options))
 
     def query_target(
         self, body: QueryTargetRequest | QueryTargetRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -138,7 +141,7 @@ class Targets:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.query_target(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.query_target(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> TargetsWithRawResponse:
@@ -171,11 +174,11 @@ class AsyncTargets:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.create_azure_central_io_t_application(
                 billingaccount_id, body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def create_target(
         self,
@@ -196,7 +199,7 @@ class AsyncTargets:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.create_target(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.create_target(body, request_options=request_options))
 
     async def delete_target(
         self,
@@ -216,7 +219,7 @@ class AsyncTargets:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.delete_target(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.delete_target(body, request_options=request_options))
 
     async def generate_target_external_id(
         self,
@@ -236,9 +239,7 @@ class AsyncTargets:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
-            await self._with_raw_response.generate_target_external_id(body, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.generate_target_external_id(body, request_options=request_options))
 
     async def query_target(
         self, body: QueryTargetRequest | QueryTargetRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -256,7 +257,7 @@ class AsyncTargets:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.query_target(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.query_target(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncTargetsWithRawResponse:

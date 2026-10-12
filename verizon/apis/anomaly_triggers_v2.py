@@ -17,6 +17,7 @@ from ..core import (
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..models.anomaly_detection_trigger import AnomalyDetectionTrigger
 from ..models.anomaly_trigger_result import AnomalyTriggerResult
@@ -48,9 +49,9 @@ class AnomalyTriggersV2:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.create_anomaly_detection_trigger_v2(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.create_anomaly_detection_trigger_v2(body, request_options=request_options)
+        )
 
     def list_anomaly_detection_trigger_settings_v2(
         self, trigger_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -67,9 +68,11 @@ class AnomalyTriggersV2:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.list_anomaly_detection_trigger_settings_v2(
-            trigger_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.list_anomaly_detection_trigger_settings_v2(
+                trigger_id, request_options=request_options
+            ),
+        )
 
     def update_anomaly_detection_trigger_v2(
         self,
@@ -89,9 +92,9 @@ class AnomalyTriggersV2:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.update_anomaly_detection_trigger_v2(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.update_anomaly_detection_trigger_v2(body, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> AnomalyTriggersV2WithRawResponse:
@@ -120,9 +123,9 @@ class AsyncAnomalyTriggersV2:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.create_anomaly_detection_trigger_v2(body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def list_anomaly_detection_trigger_settings_v2(
         self, trigger_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -139,11 +142,11 @@ class AsyncAnomalyTriggersV2:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.list_anomaly_detection_trigger_settings_v2(
                 trigger_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def update_anomaly_detection_trigger_v2(
         self,
@@ -163,9 +166,9 @@ class AsyncAnomalyTriggersV2:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.update_anomaly_detection_trigger_v2(body, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncAnomalyTriggersV2WithRawResponse:

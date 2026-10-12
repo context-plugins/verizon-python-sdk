@@ -17,6 +17,7 @@ from ..core import (
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..models.request_trigger import RequestTrigger, RequestTriggerDict
 from ..models.success_model import SuccessModel
@@ -45,9 +46,7 @@ class UpdateTriggers:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.update_all_available_triggers(
-            body=body, request_options=request_options
-        ).unwrap()
+        return unwrap(self._with_raw_response.update_all_available_triggers(body=body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> UpdateTriggersWithRawResponse:
@@ -76,9 +75,9 @@ class AsyncUpdateTriggers:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.update_all_available_triggers(body=body, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncUpdateTriggersWithRawResponse:

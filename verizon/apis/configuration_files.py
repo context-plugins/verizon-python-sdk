@@ -18,6 +18,7 @@ from ..core import (
     json_decoder,
     multipart_body,
     param,
+    unwrap,
 )
 from ..errors.get_list_of_files_error import GetListOfFilesErrorBody, get_list_of_files_error_mapper
 from ..errors.upload_config_file_error import UploadConfigFileErrorBody, upload_config_file_error_mapper
@@ -46,9 +47,9 @@ class ConfigurationFiles:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return self._with_raw_response.get_list_of_files(
-            acc, distribution_type, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_list_of_files(acc, distribution_type, request_options=request_options)
+        )
 
     def upload_config_file(
         self,
@@ -79,15 +80,17 @@ class ConfigurationFiles:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return self._with_raw_response.upload_config_file(
-            acc,
-            fileupload=fileupload,
-            file_version=file_version,
-            make=make,
-            model=model,
-            local_target_path=local_target_path,
-            request_options=request_options,
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.upload_config_file(
+                acc,
+                fileupload=fileupload,
+                file_version=file_version,
+                make=make,
+                model=model,
+                local_target_path=local_target_path,
+                request_options=request_options,
+            ),
+        )
 
     @property
     def with_raw_response(self) -> ConfigurationFilesWithRawResponse:
@@ -114,9 +117,9 @@ class AsyncConfigurationFiles:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_list_of_files(acc, distribution_type, request_options=request_options)
-        ).unwrap()
+        )
 
     async def upload_config_file(
         self,
@@ -147,7 +150,7 @@ class AsyncConfigurationFiles:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV2Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.upload_config_file(
                 acc,
                 fileupload=fileupload,
@@ -156,8 +159,8 @@ class AsyncConfigurationFiles:
                 model=model,
                 local_target_path=local_target_path,
                 request_options=request_options,
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncConfigurationFilesWithRawResponse:

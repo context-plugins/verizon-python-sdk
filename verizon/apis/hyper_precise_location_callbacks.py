@@ -17,6 +17,7 @@ from ..core import (
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.deregister_callback6_error import DeregisterCallback6ErrorBody, deregister_callback6_error_mapper
 from ..errors.list_registered_callbacks6_error import (
@@ -53,9 +54,9 @@ class HyperPreciseLocationCallbacks:
             ApiError: Bad request. Unauthorized request. Access token is missing or invalid. Forbidden request. Bad
                 request. Not found. Bad request. Conflict state. Internal Server Error. ``error`` is
                 ``HyperPreciseLocationResult | RawError``."""
-        return self._with_raw_response.deregister_callback6(
-            account_number, service, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.deregister_callback6(account_number, service, request_options=request_options)
+        )
 
     def list_registered_callbacks6(
         self, account_number: str, *, request_options: RequestOptionsOrDict | None = None
@@ -76,9 +77,9 @@ class HyperPreciseLocationCallbacks:
             ApiError: Bad request. Unauthorized request. Access token is missing or invalid. Forbidden request. Bad
                 request. Not found. Bad request. Conflict state. Internal Server Error. ``error`` is
                 ``HyperPreciseLocationResult | RawError``."""
-        return self._with_raw_response.list_registered_callbacks6(
-            account_number, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.list_registered_callbacks6(account_number, request_options=request_options)
+        )
 
     def register_callback6(
         self,
@@ -105,9 +106,7 @@ class HyperPreciseLocationCallbacks:
             ApiError: Bad request. Unauthorized request. Access token is missing or invalid. Forbidden request. Bad
                 request. Not found. Bad request. Conflict state. Internal Server Error. ``error`` is
                 ``HyperPreciseLocationResult | RawError``."""
-        return self._with_raw_response.register_callback6(
-            account_number, body, request_options=request_options
-        ).unwrap()
+        return unwrap(self._with_raw_response.register_callback6(account_number, body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> HyperPreciseLocationCallbacksWithRawResponse:
@@ -137,9 +136,9 @@ class AsyncHyperPreciseLocationCallbacks:
             ApiError: Bad request. Unauthorized request. Access token is missing or invalid. Forbidden request. Bad
                 request. Not found. Bad request. Conflict state. Internal Server Error. ``error`` is
                 ``HyperPreciseLocationResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.deregister_callback6(account_number, service, request_options=request_options)
-        ).unwrap()
+        )
 
     async def list_registered_callbacks6(
         self, account_number: str, *, request_options: RequestOptionsOrDict | None = None
@@ -160,9 +159,9 @@ class AsyncHyperPreciseLocationCallbacks:
             ApiError: Bad request. Unauthorized request. Access token is missing or invalid. Forbidden request. Bad
                 request. Not found. Bad request. Conflict state. Internal Server Error. ``error`` is
                 ``HyperPreciseLocationResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.list_registered_callbacks6(account_number, request_options=request_options)
-        ).unwrap()
+        )
 
     async def register_callback6(
         self,
@@ -189,9 +188,9 @@ class AsyncHyperPreciseLocationCallbacks:
             ApiError: Bad request. Unauthorized request. Access token is missing or invalid. Forbidden request. Bad
                 request. Not found. Bad request. Conflict state. Internal Server Error. ``error`` is
                 ``HyperPreciseLocationResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.register_callback6(account_number, body, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncHyperPreciseLocationCallbacksWithRawResponse:

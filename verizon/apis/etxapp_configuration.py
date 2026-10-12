@@ -17,6 +17,7 @@ from ..core import (
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.create_configuration_error import CreateConfigurationErrorBody, create_configuration_error_mapper
 from ..errors.delete_configuration_error import DeleteConfigurationErrorBody, delete_configuration_error_mapper
@@ -62,7 +63,7 @@ class EtxappConfiguration:
 
         Raises:
             ApiError: Invalid configuration Forbidden Too many requests ``error`` is ``ResponseError | RawError``."""
-        return self._with_raw_response.create_configuration(vendor_id, body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.create_configuration(vendor_id, body, request_options=request_options))
 
     def delete_configuration(
         self, id_: str, vendor_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -84,7 +85,7 @@ class EtxappConfiguration:
 
         Raises:
             ApiError: Forbidden Too many requests ``error`` is ``ResponseError | RawError``."""
-        return self._with_raw_response.delete_configuration(id_, vendor_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_configuration(id_, vendor_id, request_options=request_options))
 
     def get_configuration(
         self, id_: str, vendor_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -107,7 +108,7 @@ class EtxappConfiguration:
 
         Raises:
             ApiError: Forbidden Configuration not found Too many requests ``error`` is ``ResponseError | RawError``."""
-        return self._with_raw_response.get_configuration(id_, vendor_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_configuration(id_, vendor_id, request_options=request_options))
 
     def get_configuration_list(
         self, vendor_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -129,7 +130,7 @@ class EtxappConfiguration:
 
         Raises:
             ApiError: Forbidden Configuration not found Too many requests ``error`` is ``ResponseError | RawError``."""
-        return self._with_raw_response.get_configuration_list(vendor_id, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_configuration_list(vendor_id, request_options=request_options))
 
     def update_configuration(
         self,
@@ -159,9 +160,9 @@ class EtxappConfiguration:
         Raises:
             ApiError: Invalid configuration Forbidden Configuration not found Too many requests ``error`` is
                 ``ResponseError | RawError``."""
-        return self._with_raw_response.update_configuration(
-            id_, vendor_id, body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.update_configuration(id_, vendor_id, body, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> EtxappConfigurationWithRawResponse:
@@ -197,9 +198,9 @@ class AsyncEtxappConfiguration:
 
         Raises:
             ApiError: Invalid configuration Forbidden Too many requests ``error`` is ``ResponseError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.create_configuration(vendor_id, body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def delete_configuration(
         self, id_: str, vendor_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -221,9 +222,9 @@ class AsyncEtxappConfiguration:
 
         Raises:
             ApiError: Forbidden Too many requests ``error`` is ``ResponseError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.delete_configuration(id_, vendor_id, request_options=request_options)
-        ).unwrap()
+        )
 
     async def get_configuration(
         self, id_: str, vendor_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -246,9 +247,7 @@ class AsyncEtxappConfiguration:
 
         Raises:
             ApiError: Forbidden Configuration not found Too many requests ``error`` is ``ResponseError | RawError``."""
-        return (
-            await self._with_raw_response.get_configuration(id_, vendor_id, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.get_configuration(id_, vendor_id, request_options=request_options))
 
     async def get_configuration_list(
         self, vendor_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -270,9 +269,7 @@ class AsyncEtxappConfiguration:
 
         Raises:
             ApiError: Forbidden Configuration not found Too many requests ``error`` is ``ResponseError | RawError``."""
-        return (
-            await self._with_raw_response.get_configuration_list(vendor_id, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.get_configuration_list(vendor_id, request_options=request_options))
 
     async def update_configuration(
         self,
@@ -302,9 +299,9 @@ class AsyncEtxappConfiguration:
         Raises:
             ApiError: Invalid configuration Forbidden Configuration not found Too many requests ``error`` is
                 ``ResponseError | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.update_configuration(id_, vendor_id, body, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncEtxappConfigurationWithRawResponse:

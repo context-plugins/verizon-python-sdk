@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from typing_extensions import TypedDict
+from typing_extensions import NotRequired, TypedDict
 
-from ..core import SdkBaseModel
+from ..core import UNSET, Optional, SdkBaseModel
 
 
 class CustomFields(SdkBaseModel):
@@ -11,10 +11,10 @@ class CustomFields(SdkBaseModel):
     key: str
     """The key for an extended attribute."""
 
-    value: str
+    value: Optional[str] = UNSET
     """The value of an extended attribute."""
 
 
 class CustomFieldsDict(TypedDict):
     key: str
-    value: str
+    value: NotRequired[str]

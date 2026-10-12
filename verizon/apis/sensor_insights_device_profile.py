@@ -15,6 +15,7 @@ from ..core import (
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.create_aprofile_error import CreateAprofileErrorBody, create_aprofile_error_mapper
 from ..errors.delete_aprofile_error import DeleteAprofileErrorBody, delete_aprofile_error_mapper
@@ -51,7 +52,7 @@ class SensorInsightsDeviceProfile:
         Raises:
             ApiError: Bad Request UnAuthorized Forbidden Internal server error. ``error`` is ``ManagementError400 |
                 ManagementError | ManagementError403 | ManagementError500 | RawError``."""
-        return self._with_raw_response.create_a_profile(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.create_a_profile(body, request_options=request_options))
 
     def delete_a_profile(
         self,
@@ -72,7 +73,7 @@ class SensorInsightsDeviceProfile:
         Raises:
             ApiError: Bad Request UnAuthorized Forbidden Internal server error. ``error`` is ``ManagementError400 |
                 ManagementError | ManagementError403 | ManagementError500 | RawError``."""
-        return self._with_raw_response.delete_a_profile(deleterequest, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.delete_a_profile(deleterequest, request_options=request_options))
 
     def query_a_profile(
         self,
@@ -93,7 +94,7 @@ class SensorInsightsDeviceProfile:
         Raises:
             ApiError: Bad Request UnAuthorized Forbidden Internal server error. ``error`` is ``ManagementError400 |
                 ManagementError | ManagementError403 | ManagementError500 | RawError``."""
-        return self._with_raw_response.query_a_profile(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.query_a_profile(body, request_options=request_options))
 
     def update_a_profile(
         self,
@@ -114,7 +115,7 @@ class SensorInsightsDeviceProfile:
         Raises:
             ApiError: Bad Request UnAuthorized Forbidden Internal server error. ``error`` is ``ManagementError400 |
                 ManagementError | ManagementError403 | ManagementError500 | RawError``."""
-        return self._with_raw_response.update_a_profile(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.update_a_profile(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> SensorInsightsDeviceProfileWithRawResponse:
@@ -144,7 +145,7 @@ class AsyncSensorInsightsDeviceProfile:
         Raises:
             ApiError: Bad Request UnAuthorized Forbidden Internal server error. ``error`` is ``ManagementError400 |
                 ManagementError | ManagementError403 | ManagementError500 | RawError``."""
-        return (await self._with_raw_response.create_a_profile(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.create_a_profile(body, request_options=request_options))
 
     async def delete_a_profile(
         self,
@@ -165,7 +166,7 @@ class AsyncSensorInsightsDeviceProfile:
         Raises:
             ApiError: Bad Request UnAuthorized Forbidden Internal server error. ``error`` is ``ManagementError400 |
                 ManagementError | ManagementError403 | ManagementError500 | RawError``."""
-        return (await self._with_raw_response.delete_a_profile(deleterequest, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.delete_a_profile(deleterequest, request_options=request_options))
 
     async def query_a_profile(
         self,
@@ -186,7 +187,7 @@ class AsyncSensorInsightsDeviceProfile:
         Raises:
             ApiError: Bad Request UnAuthorized Forbidden Internal server error. ``error`` is ``ManagementError400 |
                 ManagementError | ManagementError403 | ManagementError500 | RawError``."""
-        return (await self._with_raw_response.query_a_profile(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.query_a_profile(body, request_options=request_options))
 
     async def update_a_profile(
         self,
@@ -207,7 +208,7 @@ class AsyncSensorInsightsDeviceProfile:
         Raises:
             ApiError: Bad Request UnAuthorized Forbidden Internal server error. ``error`` is ``ManagementError400 |
                 ManagementError | ManagementError403 | ManagementError500 | RawError``."""
-        return (await self._with_raw_response.update_a_profile(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.update_a_profile(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncSensorInsightsDeviceProfileWithRawResponse:

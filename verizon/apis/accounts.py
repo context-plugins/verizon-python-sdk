@@ -12,6 +12,7 @@ from ..core import (
     async_json_decoder,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.get_account_information_error import GetAccountInformationErrorBody, get_account_information_error_mapper
 from ..errors.list_account_leads_error import ListAccountLeadsErrorBody, list_account_leads_error_mapper
@@ -42,7 +43,7 @@ class Accounts:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.get_account_information(aname, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.get_account_information(aname, request_options=request_options))
 
     def list_account_leads(
         self, aname: str, *, next_: int | None = None, request_options: RequestOptionsOrDict | None = None
@@ -61,7 +62,7 @@ class Accounts:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.list_account_leads(aname, next_=next_, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.list_account_leads(aname, next_=next_, request_options=request_options))
 
     def list_account_states_and_services(
         self, aname: str, *, request_options: RequestOptionsOrDict | None = None
@@ -78,7 +79,7 @@ class Accounts:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return self._with_raw_response.list_account_states_and_services(aname, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.list_account_states_and_services(aname, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AccountsWithRawResponse:
@@ -104,7 +105,7 @@ class AsyncAccounts:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (await self._with_raw_response.get_account_information(aname, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.get_account_information(aname, request_options=request_options))
 
     async def list_account_leads(
         self, aname: str, *, next_: int | None = None, request_options: RequestOptionsOrDict | None = None
@@ -123,9 +124,9 @@ class AsyncAccounts:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.list_account_leads(aname, next_=next_, request_options=request_options)
-        ).unwrap()
+        )
 
     async def list_account_states_and_services(
         self, aname: str, *, request_options: RequestOptionsOrDict | None = None
@@ -142,9 +143,9 @@ class AsyncAccounts:
 
         Raises:
             ApiError: Error response. ``error`` is ``ConnectivityManagementResult | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.list_account_states_and_services(aname, request_options=request_options)
-        ).unwrap()
+        )
 
     @property
     def with_raw_response(self) -> AsyncAccountsWithRawResponse:

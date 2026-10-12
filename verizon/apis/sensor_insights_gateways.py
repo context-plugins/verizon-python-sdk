@@ -15,6 +15,7 @@ from ..core import (
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.sensor_insights_list_gateway_devices_request_error import (
     SensorInsightsListGatewayDevicesRequestErrorBody,
@@ -49,9 +50,9 @@ class SensorInsightsGateways:
             ApiError: Bad Request UnAuthorized Forbidden Not Found Not Acceptable Unsupported media type Too many
                 requests Internal server error. ``error`` is ``ManagementError400 | ManagementError | ManagementError403
                 | ManagementError404 | ManagementError500 | RawError``."""
-        return self._with_raw_response.sensor_insights_list_gateway_devices_request(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.sensor_insights_list_gateway_devices_request(body, request_options=request_options)
+        )
 
     @property
     def with_raw_response(self) -> SensorInsightsGatewaysWithRawResponse:
@@ -82,11 +83,11 @@ class AsyncSensorInsightsGateways:
             ApiError: Bad Request UnAuthorized Forbidden Not Found Not Acceptable Unsupported media type Too many
                 requests Internal server error. ``error`` is ``ManagementError400 | ManagementError | ManagementError403
                 | ManagementError404 | ManagementError500 | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.sensor_insights_list_gateway_devices_request(
                 body, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncSensorInsightsGatewaysWithRawResponse:

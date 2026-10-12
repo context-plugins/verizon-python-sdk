@@ -15,6 +15,7 @@ from ..core import (
     json_body,
     json_decoder,
     param,
+    unwrap,
 )
 from ..errors.cancel_scheduled_firmware_upgrade_error import (
     CancelScheduledFirmwareUpgradeErrorBody,
@@ -61,9 +62,11 @@ class FirmwareV1:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV1Result | RawError``."""
-        return self._with_raw_response.cancel_scheduled_firmware_upgrade(
-            account_name, upgrade_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.cancel_scheduled_firmware_upgrade(
+                account_name, upgrade_id, request_options=request_options
+            ),
+        )
 
     def list_available_firmware(
         self, account: str, *, request_options: RequestOptionsOrDict | None = None
@@ -80,7 +83,7 @@ class FirmwareV1:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV1Result | RawError``."""
-        return self._with_raw_response.list_available_firmware(account, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.list_available_firmware(account, request_options=request_options))
 
     def list_firmware_upgrade_details(
         self, account_name: str, upgrade_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -99,9 +102,11 @@ class FirmwareV1:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV1Result | RawError``."""
-        return self._with_raw_response.list_firmware_upgrade_details(
-            account_name, upgrade_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.list_firmware_upgrade_details(
+                account_name, upgrade_id, request_options=request_options
+            ),
+        )
 
     def schedule_firmware_upgrade(
         self,
@@ -121,7 +126,7 @@ class FirmwareV1:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV1Result | RawError``."""
-        return self._with_raw_response.schedule_firmware_upgrade(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.schedule_firmware_upgrade(body, request_options=request_options))
 
     def update_firmware_upgrade_devices(
         self, account_name: str, upgrade_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -139,9 +144,11 @@ class FirmwareV1:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV1Result | RawError``."""
-        return self._with_raw_response.update_firmware_upgrade_devices(
-            account_name, upgrade_id, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.update_firmware_upgrade_devices(
+                account_name, upgrade_id, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> FirmwareV1WithRawResponse:
@@ -168,11 +175,11 @@ class AsyncFirmwareV1:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV1Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.cancel_scheduled_firmware_upgrade(
                 account_name, upgrade_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def list_available_firmware(
         self, account: str, *, request_options: RequestOptionsOrDict | None = None
@@ -189,9 +196,7 @@ class AsyncFirmwareV1:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV1Result | RawError``."""
-        return (
-            await self._with_raw_response.list_available_firmware(account, request_options=request_options)
-        ).unwrap()
+        return unwrap(await self._with_raw_response.list_available_firmware(account, request_options=request_options))
 
     async def list_firmware_upgrade_details(
         self, account_name: str, upgrade_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -210,11 +215,11 @@ class AsyncFirmwareV1:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV1Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.list_firmware_upgrade_details(
                 account_name, upgrade_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def schedule_firmware_upgrade(
         self,
@@ -234,7 +239,7 @@ class AsyncFirmwareV1:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV1Result | RawError``."""
-        return (await self._with_raw_response.schedule_firmware_upgrade(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.schedule_firmware_upgrade(body, request_options=request_options))
 
     async def update_firmware_upgrade_devices(
         self, account_name: str, upgrade_id: str, *, request_options: RequestOptionsOrDict | None = None
@@ -252,11 +257,11 @@ class AsyncFirmwareV1:
 
         Raises:
             ApiError: Unexpected error. ``error`` is ``FotaV1Result | RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.update_firmware_upgrade_devices(
                 account_name, upgrade_id, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncFirmwareV1WithRawResponse:

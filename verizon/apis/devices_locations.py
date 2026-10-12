@@ -17,6 +17,7 @@ from ..core import (
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..models.asynchronous_location_request_result import AsynchronousLocationRequestResult
 from ..models.location import Location
@@ -48,9 +49,11 @@ class DevicesLocations:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.cancel_queued_location_report_generation(
-            account_name, txid, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.cancel_queued_location_report_generation(
+                account_name, txid, request_options=request_options
+            ),
+        )
 
     def create_location_report(
         self, *, request_options: RequestOptionsOrDict | None = None
@@ -66,7 +69,7 @@ class DevicesLocations:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.create_location_report(request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.create_location_report(request_options=request_options))
 
     def get_location_report_status(
         self, account_name: str, txid: str, *, request_options: RequestOptionsOrDict | None = None
@@ -84,9 +87,9 @@ class DevicesLocations:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.get_location_report_status(
-            account_name, txid, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.get_location_report_status(account_name, txid, request_options=request_options)
+        )
 
     def list_devices_locations_asynchronous(
         self, *, request_options: RequestOptionsOrDict | None = None
@@ -104,7 +107,7 @@ class DevicesLocations:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.list_devices_locations_asynchronous(request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.list_devices_locations_asynchronous(request_options=request_options))
 
     def list_devices_locations_synchronous(
         self, body: LocationRequest | LocationRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -121,9 +124,7 @@ class DevicesLocations:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.list_devices_locations_synchronous(
-            body, request_options=request_options
-        ).unwrap()
+        return unwrap(self._with_raw_response.list_devices_locations_synchronous(body, request_options=request_options))
 
     def retrieve_location_report(
         self, account_name: str, txid: str, startindex: int, *, request_options: RequestOptionsOrDict | None = None
@@ -142,9 +143,11 @@ class DevicesLocations:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.retrieve_location_report(
-            account_name, txid, startindex, request_options=request_options
-        ).unwrap()
+        return unwrap(
+            self._with_raw_response.retrieve_location_report(
+                account_name, txid, startindex, request_options=request_options
+            ),
+        )
 
     @property
     def with_raw_response(self) -> DevicesLocationsWithRawResponse:
@@ -171,11 +174,11 @@ class AsyncDevicesLocations:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.cancel_queued_location_report_generation(
                 account_name, txid, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def create_location_report(
         self, *, request_options: RequestOptionsOrDict | None = None
@@ -191,7 +194,7 @@ class AsyncDevicesLocations:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.create_location_report(request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.create_location_report(request_options=request_options))
 
     async def get_location_report_status(
         self, account_name: str, txid: str, *, request_options: RequestOptionsOrDict | None = None
@@ -209,11 +212,11 @@ class AsyncDevicesLocations:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.get_location_report_status(
                 account_name, txid, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     async def list_devices_locations_asynchronous(
         self, *, request_options: RequestOptionsOrDict | None = None
@@ -231,9 +234,9 @@ class AsyncDevicesLocations:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.list_devices_locations_asynchronous(request_options=request_options)
-        ).unwrap()
+        )
 
     async def list_devices_locations_synchronous(
         self, body: LocationRequest | LocationRequestDict, *, request_options: RequestOptionsOrDict | None = None
@@ -250,9 +253,9 @@ class AsyncDevicesLocations:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.list_devices_locations_synchronous(body, request_options=request_options)
-        ).unwrap()
+        )
 
     async def retrieve_location_report(
         self, account_name: str, txid: str, startindex: int, *, request_options: RequestOptionsOrDict | None = None
@@ -271,11 +274,11 @@ class AsyncDevicesLocations:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (
+        return unwrap(
             await self._with_raw_response.retrieve_location_report(
                 account_name, txid, startindex, request_options=request_options
-            )
-        ).unwrap()
+            ),
+        )
 
     @property
     def with_raw_response(self) -> AsyncDevicesLocationsWithRawResponse:

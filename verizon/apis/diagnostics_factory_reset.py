@@ -17,6 +17,7 @@ from ..core import (
     json_decoder,
     param,
     raw_error_response,
+    unwrap,
 )
 from ..models.device_reset_request import DeviceResetRequest, DeviceResetRequestDict
 from ..models.diagnostics_observation_result import DiagnosticsObservationResult
@@ -42,7 +43,7 @@ class DiagnosticsFactoryReset:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return self._with_raw_response.decives_restart(body, request_options=request_options).unwrap()
+        return unwrap(self._with_raw_response.decives_restart(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> DiagnosticsFactoryResetWithRawResponse:
@@ -68,7 +69,7 @@ class AsyncDiagnosticsFactoryReset:
 
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
-        return (await self._with_raw_response.decives_restart(body, request_options=request_options)).unwrap()
+        return unwrap(await self._with_raw_response.decives_restart(body, request_options=request_options))
 
     @property
     def with_raw_response(self) -> AsyncDiagnosticsFactoryResetWithRawResponse:
